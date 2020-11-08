@@ -1,0 +1,48 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TabsPage } from './tabs.page';
+
+const routes: Routes = [
+  {
+    path: 'tabs',
+    component: TabsPage,
+    children: [
+      {
+        path: 'nearby',
+        loadChildren: () => import('./../../pages/nearby/nearby.module').then(m => m.NearbyPageModule)
+      },
+      {
+        path: 'friends',
+        loadChildren: () => import('./../../pages/friends/friends.module').then(m => m.FriendsPageModule)
+      },
+      {
+        path: 'user/add',
+        loadChildren: () => import('./../../pages/user/add/add.module').then(m => m.UserAddPageModule)
+      },
+      {
+        path: 'user/detail/{:id}',
+        loadChildren: () => import('./../../pages/user/listing/listing.module').then(m => m.UsersPageModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./../../pages/user/detail/detail.module').then(m => m.UserPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/nearby',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: '',
+    redirectTo: '/tabs/nearby',
+    pathMatch: 'full'
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class TabsPageRoutingModule {}

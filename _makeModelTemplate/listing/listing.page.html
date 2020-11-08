@@ -1,0 +1,17 @@
+<h1>
+    __template__s 
+    <a class="button-action" mat-flat-button color="primary" routerLink="/__lc_template__"><mat-icon>add_circle</mat-icon> New __template__</a>
+</h1>
+<div *ngIf="this.__lc_template__s == null; else pageContent;" class="awaitLoading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<ng-template #pageContent>
+    <mat-list>
+        <span *ngFor="let __lc_template__ of this.__lc_template__s; last as last">
+            <mat-list-item matLine routerLink="/__lc_template__/{{ __lc_template__.id }}">
+                {{__lc_template__.name}}
+                <mat-divider *ngIf="!last"></mat-divider>
+            </mat-list-item>
+        </span>
+    </mat-list>
+</ng-template>

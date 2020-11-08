@@ -1,0 +1,41 @@
+echo "What is the Name of the model/object (use PascalCase and make it singular)";
+read obj
+lc_obj=$(echo "$obj" | tr '[:upper:]' '[:lower:]')
+echo "Making New Object: proper: $obj, small: $lc_obj";
+working_dir=$PWD;
+cd ./src/app/pages/
+mkdir $lc_obj
+cd ./$lc_obj
+dest_path="$PWD"
+echo "Destination Path: $dest_path";
+mkdir add
+mkdir detail
+mkdir listing
+cd ..  
+cd $working_dir
+cd ./_makeModelTemplate
+for folder in $PWD/*
+do
+    cd $folder
+    for file in $PWD/*
+    do
+        file_out="$(basename $file)"
+        folder_out="$(basename $folder)"
+        dest_file="$dest_path/$folder_out/$file_out"
+        echo "Creating $dest_file";
+        cp $file $dest_file
+    done 
+    cd ..  
+done
+cd $dest_path
+for folder in $PWD/*
+do
+    cd $folder
+    for file in $PWD/*
+    do
+        #copy paste here
+        sed -i '' "s/__template__/$obj/g" $file
+        sed -i '' "s/__lc_template__/$lc_obj/g" $file
+    done 
+    cd ..  
+done

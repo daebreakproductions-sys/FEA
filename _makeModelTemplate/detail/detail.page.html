@@ -1,0 +1,24 @@
+<form class="default-form" #form="ngForm" (ngSubmit)="update__template__(form)">
+    <h1>
+        <a mat-icon-button class="button-back" color="accent" (click)="goBack()"><mat-icon>arrow_back_ios</mat-icon></a>
+        <span>
+            __template__
+        </span>
+        <button class="button-action" mat-flat-button color="primary" type="submit" [disabled]="form.invalid || this.loading" expand="block" routerDirection="forward"><mat-icon>save</mat-icon> Save</button>
+    </h1>
+
+    <div *ngIf="this.__lc_template__== null; else pageContent;" class="awaitLoading">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <ng-template #pageContent>
+        <div *ngIf="this.loading" class="awaitLoading">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div class="form-contents">
+            <mat-form-field appearance="outline" class="form-full-width form-spacing">
+                <mat-label>Name</mat-label>
+                <input matInput value="{{ this.__lc_template__.name }}" name="name" [(ngModel)]="this.__lc_template__.name" ngModel required>
+            </mat-form-field>
+        </div>
+    </ng-template>
+</form>
