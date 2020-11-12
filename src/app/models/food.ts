@@ -1,6 +1,6 @@
 import { FoodProperty } from "./food-property";
 
-export class Food {
+export interface Food {
     name: string;
     properties: FoodProperty[];
 }

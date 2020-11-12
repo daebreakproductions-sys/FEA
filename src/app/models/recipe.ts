@@ -1,6 +1,6 @@
 import { UGC } from "./ugc";
 
-export class Recipe extends UGC {
+export interface Recipe extends UGC {
     servings: bigint;
     directions: string;
 }

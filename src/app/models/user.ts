@@ -1,7 +1,7 @@
 import { Entity } from './entity'
 import { NotificationFrequency } from './notification-frequency.enum';
 
-export class User extends Entity {
+export interface User extends Entity {
     avatar: object;
     email: string;
     firstName: string;

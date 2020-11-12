@@ -1,7 +1,7 @@
 import { IonDatetime } from "@ionic/angular";
 import { Status } from "./status.enum";
 
-export class Entity {
+export interface Entity {
     id: bigint;
     created: Date;
     modified: Date;

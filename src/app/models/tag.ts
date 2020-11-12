@@ -1,5 +1,5 @@
 import { UGC } from "./ugc";
 
-export class Tag extends UGC {
+export interface Tag extends UGC {
     name: string;
 }

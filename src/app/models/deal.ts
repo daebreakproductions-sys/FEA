@@ -1,7 +1,7 @@
 import { Market } from "./market";
 import { UGC } from "./ugc";
 
-export class Deal extends UGC {
+export interface Deal extends UGC {
     market: Market;
     startDate: Date;
     endDate: Date;
