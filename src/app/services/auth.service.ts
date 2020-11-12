@@ -7,7 +7,7 @@ export class AuthService {
   private accessToken: String = null;
   private authenticated: boolean = false;
   private redirectUrl: String = '';
-  private cache_key = 'v1_';
+  private cache_key = '_v1';
   
   constructor () {
     this.getAccessTokenPromise();
@@ -15,11 +15,21 @@ export class AuthService {
 
   public getAccessTokenPromise(){
     return new Promise((resolve) => {
-      if (JSON.parse(localStorage.getItem('simplify_token'+this.cache_key)) !== null) {
-        this.accessToken = JSON.parse(localStorage.getItem('simplify_token'+this.cache_key));
+      if (localStorage.getItem('basic_token'+this.cache_key) !== null) {
+        this.accessToken = localStorage.getItem('basic_token'+this.cache_key);
       }
       resolve(this.accessToken);
     });
+  }
+
+  public setAccessToken(token: string) {
+    this.accessToken = token;
+    localStorage.setItem('basic_token'+this.cache_key, token);
+  }
+
+  public clearAccessToken() {
+    this.accessToken = null;
+    localStorage.removeItem('basic_token'+this.cache_key);
   }
 
   public setRedirectUrl(value:String){

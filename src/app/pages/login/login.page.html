@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating" [color]="loginFailed ? 'danger' : ''">Username</ion-label>
+    <ion-input [(ngModel)]="username" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating" [color]="loginFailed ? 'danger' : ''">Password <ion-icon color="red" name="alert-circle-outline" *ngIf="loginFailed"></ion-icon></ion-label>
+    <ion-input [(ngModel)]="password" type="password"></ion-input>
+  </ion-item>
+  <ion-button color="primary" (click)="login()">Login</ion-button>
+</ion-content>

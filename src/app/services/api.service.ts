@@ -59,7 +59,7 @@ export class ApiService {
         if (this.accessToken === null || this.accessToken === '') {
           throw new Error('Cannot make api call ' + apiMethod + '. No access.');
         } else {
-          headers = {"Authorization": "Bearer "+ this.accessToken};
+          headers = {"Authorization": "Basic "+ this.accessToken};
           this.http.get(this.url+apiMethod,{
             headers: headers,
             params: params
@@ -81,7 +81,7 @@ export class ApiService {
         if (this.accessToken === null || this.accessToken === '') {
           throw new Error('Cannot make api call ' + apiMethod + '. No access.');
         } else {
-          headers = {"Authorization": "Bearer "+ this.accessToken};
+          headers = {"Authorization": "Basic "+ this.accessToken};
           this.http.post(this.url+apiMethod, postData, {
             headers: headers,
             params: params
@@ -103,7 +103,7 @@ export class ApiService {
         if (this.accessToken === null || this.accessToken === '') {
           throw new Error('Cannot make api call ' + apiMethod + '. No access.');
         } else {
-          headers = {"Authorization": "Bearer "+ this.accessToken};
+          headers = {"Authorization": "Basic "+ this.accessToken};
           this.http.patch(this.url+apiMethod, patchData, {
             headers: headers,
             params: params
@@ -125,7 +125,7 @@ export class ApiService {
         if (this.accessToken === null || this.accessToken === '') {
           throw new Error('Cannot make api call ' + apiMethod + '. No access.');
         } else {
-          headers = {"Authorization": "Bearer "+ this.accessToken};
+          headers = {"Authorization": "Basic "+ this.accessToken};
           this.http.delete(this.url+apiMethod, {
             headers: headers
           }).subscribe((data: any) => {
@@ -156,8 +156,21 @@ export class ApiService {
   }
 
   // auth
-  public login(postData){
-    return this.apiPublicPost('api/auth/login', postData);
+  public login(username: string, password: string){
+    let token = btoa(username + ':' + password);
+    let headers = {"Authorization": "Basic "+ token};
+    return new Promise<boolean>((resolve, reject) => {
+      this.http.get(this.url+'users/me',{
+        headers: headers
+      }).subscribe((data: any) => {
+        this.auth.setAccessToken(token);
+        resolve(true);
+      }, err => {
+        this.auth.clearAccessToken();
+        resolve(false);
+      });
+    });
+//    return this.apiPublicGet('users/me', postData);
   }
   public logout(){
     this.apiTokenGet('api/users/logout');

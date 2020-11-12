@@ -19,12 +19,12 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     // Store the attempted URL for redirecting later
-    //this.auth.setRedirectUrl(state.url);
-    //this.router.navigate(['/login']);
-    //return false;
+    this.auth.setRedirectUrl(state.url);
+    this.router.navigate(['/tabs/login']);
+    return false;
 
     
-    return true; // TEMP - remove this after implemented
+    // return true; // TEMP - remove this after implemented
   }
 
 }

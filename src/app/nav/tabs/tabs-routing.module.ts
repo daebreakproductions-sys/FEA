@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('./../../pages/friends/friends.module').then(m => m.FriendsPageModule)
       },
       {
+        path: 'login',
+        loadChildren: () => import('./../../pages/login/login.module').then(m => m.LoginPageModule)
+      },
+      {
         path: 'user/add',
         loadChildren: () => import('./../../pages/user/add/add.module').then(m => m.UserAddPageModule)
       },
