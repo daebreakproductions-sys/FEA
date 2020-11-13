@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
 import { AuthService } from '@app/services/auth.service';
+import { User } from '@app/models/user';
+//import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -154,6 +156,10 @@ export class ApiService {
   public deleteUser(id: number) {
     return this.apiTokenDelete('api/users/'+id);
   }
+  public getCurrentUser(): Promise<any> {
+    return this.apiTokenGet('users/me');
+  };
+
 
   // auth
   public login(username: string, password: string){
@@ -177,5 +183,6 @@ export class ApiService {
     //localStorage.clear();
     this.router.navigate(['login']);
   }
+
 
 }

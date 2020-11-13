@@ -1,6 +1,6 @@
 import { Entity } from "./entity";
 
-export class Market extends Entity {
+export interface Market extends Entity {
     name: string;
     email: string;
     address: string;

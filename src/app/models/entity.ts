@@ -1,10 +1,11 @@
 import { IonDatetime } from "@ionic/angular";
+import { EatsDate } from "./eats-date";
 import { Status } from "./status.enum";
 
 export interface Entity {
     id: bigint;
-    created: Date;
-    modified: Date;
+    created: EatsDate;
+    modified: EatsDate;
     status: Status;
     version: bigint;
     commentCount: bigint;
