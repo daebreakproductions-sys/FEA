@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { ApiService } from '@app/services/api.service';
 import { User } from '@app/models/user';
 import { HelperService } from '@app/services/helper-service.service';
+import { EatsDate } from '@app/models/eats-date';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginPage implements OnInit {
       if(success) {
         this.loginFailed = false;
         this.api.getCurrentUser().then((value) => {
-          this.user = <User>value;
+          this.user = this.helper.PopulateUser(value);
           console.log(this.user);
         });
       } else {
@@ -34,7 +35,7 @@ export class LoginPage implements OnInit {
         const toast = await this.toastController.create({
           message: 'Incorrect Username/Password. Try again.',
           duration: 3000,
-          position: 'middle'
+          position: 'bottom'
         });
         toast.present();
       }

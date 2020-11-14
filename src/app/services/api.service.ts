@@ -156,8 +156,8 @@ export class ApiService {
   public deleteUser(id: number) {
     return this.apiTokenDelete('api/users/'+id);
   }
-  public getCurrentUser(): Promise<any> {
-    return this.apiTokenGet('users/me');
+  public getCurrentUser() {
+    return this.apiTokenGet('users/me') as Promise<User>;
   };
 
 
