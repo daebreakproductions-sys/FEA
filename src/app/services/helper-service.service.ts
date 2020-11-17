@@ -10,17 +10,23 @@ export class HelperService {
 
   constructor() { }
 
-  public PopulateEntity(entity: Entity) : Entity {
+  public static PopulateEntity(entity: Entity) : Entity {
     entity.created = new EatsDate(entity.created);
     entity.modified = new EatsDate(entity.modified);
     return entity;
   }
-  public PopulateUser(entity: User) : User {
+  public static PopulateUser(entity: User) : User {
     entity.created = new EatsDate(entity.created);
     entity.modified = new EatsDate(entity.modified);
     return entity;
   }
   public EatsDateToDate(input: EatsDate) : Date {
     return new Date(Number(input.epochSecond) * 1000);
+  }
+  public static isNumber(value: string | number): boolean
+  {
+     return ((value != null) &&
+             (value !== '') &&
+             !isNaN(Number(value.toString())));
   }
 }

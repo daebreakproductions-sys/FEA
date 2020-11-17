@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col size="8">
+        <ion-img src="assets/images/cute_grocery.png"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="signup_form">
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input formControlName="username" type="text"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.username">
+            <ion-item *ngIf="signup_form.get('username').hasError(validation.type) && (signup_form.get('username').dirty || signup_form.get('username').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">First Name</ion-label>
+            <ion-input formControlName="firstName" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Last Name</ion-label>
+            <ion-input formControlName="lastName" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.email">
+            <ion-item *ngIf="signup_form.get('email').hasError(validation.type) && (signup_form.get('email').dirty || signup_form.get('email').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Phone Number</ion-label>
+            <ion-input formControlName="phone" type="tel"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.phone">
+            <ion-item *ngIf="signup_form.get('phone').hasError(validation.type) && (signup_form.get('phone').dirty || signup_form.get('phone').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.password">
+            <ion-item *ngIf="signup_form.get('password').hasError(validation.type) && (signup_form.get('password').dirty || signup_form.get('password').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input formControlName="passwordConfirm" type="password"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.passwordConfirm">
+            <ion-item *ngIf="signup_form.hasError(validation.type) && (signup_form.get('passwordConfirm').dirty || signup_form.get('passwordConfirm').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="primary" (click)="save()" [disabled]="signup_form.invalid">Create a new account</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

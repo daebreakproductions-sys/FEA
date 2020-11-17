@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
 import { AuthService } from '@app/services/auth.service';
 import { User } from '@app/models/user';
+import { NewUser } from '@app/models/new-user';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -159,6 +160,9 @@ export class ApiService {
   public getCurrentUser() {
     return this.apiTokenGet('users/me') as Promise<User>;
   };
+  public newUser(user: NewUser) {
+    return this.apiPublicPost('auth/create', user) as Promise<string>;
+  }
 
 
   // auth

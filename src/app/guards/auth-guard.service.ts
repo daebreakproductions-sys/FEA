@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     }
     // Store the attempted URL for redirecting later
     this.auth.setRedirectUrl(state.url);
-    this.router.navigate(['/tabs/login']);
+    this.router.navigate(['/login']);
     return false;
 
     

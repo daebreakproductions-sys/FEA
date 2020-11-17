@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
   },
+
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },
   //{ path: '**', loadChildren: () => import('./pages/common/not-found/not-found.module').then(m => m.NotFoundPageModule) }

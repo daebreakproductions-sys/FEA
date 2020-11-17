@@ -18,15 +18,14 @@ export class LoginPage implements OnInit {
   user: User;
 
   constructor(public api: ApiService,
-    public toastController: ToastController,
-    public helper: HelperService) { }
+    public toastController: ToastController) { }
 
   login(){
     this.api.login(this.username, this.password).then(async success => {
       if(success) {
         this.loginFailed = false;
         this.api.getCurrentUser().then((value) => {
-          this.user = this.helper.PopulateUser(value);
+          this.user = HelperService.PopulateUser(value);
           console.log(this.user);
         });
       } else {

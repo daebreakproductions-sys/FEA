@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PrimaryPageRoutingModule } from './primary-routing.module';
 
@@ -12,6 +12,7 @@ import { PrimaryPage } from './primary.page';
     IonicModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     PrimaryPageRoutingModule
   ],
   declarations: [PrimaryPage]
