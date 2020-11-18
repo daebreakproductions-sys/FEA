@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'me',
     loadChildren: () => import('./pages/me/me.module').then( m => m.MePageModule)
   },
+  {
+    path: 'add',
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
+  },
 
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },

@@ -1,0 +1,55 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="10" class="ion-text-center ion-padding-bottom">
+        <h2 style="color: white">Choose which type of content you would like to share</h2>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col size="4" [routerLink]="['/add/recipes']">
+        <div class="ion-text-center">
+          <ion-icon name="restaurant" size="large" class="icon-circle"></ion-icon>
+        </div>
+        <div class="ion-text-center">Recipes</div>
+      </ion-col>
+      <ion-col size="4" [routerLink]="['/add/reviews']">
+        <div class="ion-text-center">
+          <ion-icon name="chatbubble" size="large" class="icon-circle"></ion-icon>
+        </div>
+        <div class="ion-text-center">Reviews</div>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="1"></ion-col>
+      <ion-col size="3" [routerLink]="['/add/deals']">
+        <div class="ion-text-center">
+          <ion-icon name="pricetag" size="large" class="icon-circle"></ion-icon>
+        </div>
+        <div class="ion-text-center">Deals</div>
+      </ion-col>
+      <ion-col size="4"></ion-col>
+      <ion-col size="3" [routerLink]="['/add/tips']">
+        <div class="ion-text-center">
+          <ion-icon name="bulb" size="large" class="icon-circle"></ion-icon>
+        </div>
+        <div class="ion-text-center">Tips</div>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4"></ion-col>
+      <ion-col size="4" (click)="back()">
+        <div class="ion-text-center">
+          <ion-icon name="close" class="icon-circle-small"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col size="4"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
