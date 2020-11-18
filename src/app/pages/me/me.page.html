@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="user">{{ user.name }}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-icon size="large" name="options-outline" [routerLink]="['/tabs/me/user-options']"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top">
+      <ion-tab-button (click)="clickTab($event, 'recipes')" tab="recipes">
+        <ion-icon name="restaurant"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="clickTab($event, 'tips')" tab="tips">
+        <ion-icon name="bulb"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="clickTab($event, 'deals')" tab="deals">
+        <ion-icon name="pricetag"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="clickTab($event, 'reviews')" tab="reviews">
+        <ion-icon name="chatbubble"></ion-icon>
+      </ion-tab-button>
+        
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

@@ -98,6 +98,28 @@ export class ApiService {
     });
   }
 
+  private apiTokenPut(apiMethod, putData, params = null){
+    return new Promise((resolve, reject) => {
+      let headers = null;
+      this.auth.getAccessTokenPromise().then((data: any) => {
+        this.accessToken = data;
+        if (this.accessToken === null || this.accessToken === '') {
+          throw new Error('Cannot make api call ' + apiMethod + '. No access.');
+        } else {
+          headers = {"Authorization": "Basic "+ this.accessToken};
+          this.http.put(this.url+apiMethod, putData, {
+            headers: headers,
+            params: params
+          }).subscribe((data: any) => {
+            resolve(data);
+          }, err => {
+            reject(err);
+          });
+        }
+      });
+    });
+  }
+
   private apiTokenPatch(apiMethod, patchData, params = null){
     return new Promise((resolve, reject) => {
       let headers = null;
@@ -162,6 +184,12 @@ export class ApiService {
   };
   public newUser(user: NewUser) {
     return this.apiPublicPost('auth/create', user) as Promise<string>;
+  }
+  public uploadAvatar(file: string) {
+    return this.apiTokenPut('users/me/avatar', file) as Promise<number>;
+  }
+  public updatePassword(pass: string) {
+    return this.apiTokenPost('users/me/password', pass) as Promise<string>;
   }
 
 

@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/me"></ion-back-button>
+    </ion-buttons>
+    <ion-title>User Options</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user">
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-justify-content-center ion-align-items-center">
+      <ion-toolbar>
+        <ion-title color="primary">Avatar</ion-title>
+      </ion-toolbar>
+      <ion-col size="4">
+        <ion-list lines="none">
+          <ion-item>
+            <ion-avatar>
+              <ion-img *ngIf="user.avatar64" [src]="'data:image/jpg;base64,' + user.avatar64"></ion-img>
+              <ion-img *ngIf="user.avatar64 === null" src="assets/images/empty_avatar.png"></ion-img>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col align-items-center size="8">
+        <ion-list lines="none" *ngIf="fileToUpload == null">
+          <ion-item>
+            <label for="photoInput"><ion-icon name="create-outline" color="primary"></ion-icon> Change Avatar</label>
+            <input id="photoInput" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" width="0px"/>
+          </ion-item>
+        </ion-list>
+        <ion-list lines="none" *ngIf="fileToUpload">
+          <ion-item>
+            <ion-spinner></ion-spinner>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-toolbar>
+        <ion-title color="primary">Update Password</ion-title>
+      </ion-toolbar>
+      <ion-col>
+        <form [formGroup]="password_change_form">
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.password">
+            <ion-item *ngIf="password_change_form.get('password').hasError(validation.type) && (password_change_form.get('password').dirty || password_change_form.get('password').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+
+          <ion-item>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input formControlName="passwordConfirm" type="password"></ion-input>
+          </ion-item>
+          <div *ngFor="let validation of validation_messages.passwordConfirm">
+            <ion-item *ngIf="password_change_form.hasError(validation.type) && (password_change_form.get('passwordConfirm').dirty || password_change_form.get('passwordConfirm').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </div>
+          <ion-button (click)="updatePassword()" [disabled]="password_change_form.invalid">Update Password</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

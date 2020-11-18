@@ -2,7 +2,7 @@ import { Entity } from './entity'
 import { NotificationFrequency } from './notification-frequency.enum';
 
 export interface User extends Entity {
-    avatar: object;
+    avatar64: object;
     email: string;
     firstName: string;
     lastName: string;
@@ -12,4 +12,5 @@ export interface User extends Entity {
     username: string;
     termsAccept: Date;
     irbAccept: Date;
+    name: string;
 }
