@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from './lib/usda/api.module'
+import { Configuration } from './lib/usda/configuration';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
+    ApiModule.forRoot(() => new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC"} })),
     BrowserAnimationsModule,
     HttpClientModule
   ],
