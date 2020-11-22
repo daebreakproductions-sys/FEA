@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { User } from '@app/models/user';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -6,10 +8,11 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private accessToken: String = null;
   private authenticated: boolean = false;
-  private redirectUrl: String = '';
+  private redirectUrl: string = '/tabs/nearby';
   private cache_key = '_v1';
+  private currentUser: User = null;
   
-  constructor () {
+  constructor ( ) {
     this.getAccessTokenPromise();
   }
 
@@ -32,7 +35,7 @@ export class AuthService {
     localStorage.removeItem('basic_token'+this.cache_key);
   }
 
-  public setRedirectUrl(value:String){
+  public setRedirectUrl(value:string){
     this.redirectUrl = value;
   }
 

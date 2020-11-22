@@ -8,18 +8,46 @@ import { AbridgedFoodItem, FDCService, FoodListCriteria } from '@app/lib/usda';
 })
 export class LibraryPage implements OnInit {
   foods: AbridgedFoodItem[] = new Array<AbridgedFoodItem>();
+  groupedFoods: { 
+    [key: string]: [ 
+      {
+        shortDesc: string, 
+        food: AbridgedFoodItem 
+      }
+    ]
+  } = {};
+  
 
   constructor(
     public usda: FDCService
-    ) { 
-      // usda.configuration.apiKeys = {key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC"};
-    }
+    ) { }
 
+  getSubDesc(food: AbridgedFoodItem) {
+    return {
+      shortDesc: food.description.substr(food.description.indexOf(',') + 1).trim(),
+      food: food
+    };
+  }
+  groupFoods() {
+    this.foods.forEach(food => {
+      let group: string = food.description.split(',')[0].trim().toLowerCase();
+      if(!this.groupedFoods.hasOwnProperty(group)) {
+        this.groupedFoods[group] = [this.getSubDesc(food)];
+      } else {
+        this.groupedFoods[group].push(this.getSubDesc(food));
+      }
+    });
+    console.log(this.groupedFoods);
+  }
   ngOnInit() {
     const myObserver = {
-      next: x => this.foods.push(x),
+      next: x => {
+        x.forEach(item => {
+          this.foods.push(item);
+        })
+      },
       error: err => console.error('Observer got an error: ' + err),
-      complete: () => console.log(this.foods),
+      complete: () => this.groupFoods(),
     };
     let criteria: FoodListCriteria = {};
 

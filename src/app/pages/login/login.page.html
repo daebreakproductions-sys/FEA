@@ -21,11 +21,11 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating" [color]="loginFailed ? 'danger' : ''">Username</ion-label>
-          <ion-input [(ngModel)]="username" type="text"></ion-input>
+          <ion-input (keyup.enter)="gotoPasswordField()" [(ngModel)]="username" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating" [color]="loginFailed ? 'danger' : ''">Password <ion-icon color="red" name="alert-circle-outline" *ngIf="loginFailed"></ion-icon></ion-label>
-          <ion-input [(ngModel)]="password" type="password"></ion-input>
+          <ion-input #inputToFocus (keyup.enter)="login()" [(ngModel)]="password" type="password"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -40,26 +40,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list *ngIf="user">
-    <ion-item>
-      <ion-label>Username</ion-label>
-      <ion-label>{{user.username}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-label>{{user.email}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Phone</ion-label>
-      <ion-label>{{user.phone}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Created On</ion-label>
-      <ion-label>{{user.created.toDate()}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Status</ion-label>
-      <ion-label>{{user.status}}</ion-label>
-    </ion-item>
-  </ion-list>
 </ion-content>

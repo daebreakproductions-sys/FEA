@@ -5,6 +5,7 @@ import { environment } from './../../environments/environment';
 import { AuthService } from '@app/services/auth.service';
 import { User } from '@app/models/user';
 import { NewUser } from '@app/models/new-user';
+import { HelperService } from './helper-service.service';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -13,6 +14,7 @@ import { NewUser } from '@app/models/new-user';
 export class ApiService {
   public url = environment.api_url;
   private accessToken = null;
+  private currentUser: User;
 
   constructor(
     private http: HttpClient,
@@ -179,7 +181,7 @@ export class ApiService {
   public deleteUser(id: number) {
     return this.apiTokenDelete('api/users/'+id);
   }
-  public getCurrentUser() {
+  public retrieveCurrentUser() {
     return this.apiTokenGet('users/me') as Promise<User>;
   };
   public newUser(user: NewUser) {
@@ -191,6 +193,22 @@ export class ApiService {
   public updatePassword(pass: string) {
     return this.apiTokenPost('users/me/password', pass) as Promise<string>;
   }
+  public setCurrentUser(user: User) {
+    this.currentUser = user;
+  }
+  public async getCurrentUser(force: boolean = false): Promise<User> {
+    return new Promise<User>((resolve, reject) =>  {
+      if(force || (this.currentUser == null && this.auth.isAuthenticated())) {
+        this.retrieveCurrentUser().then(user => {
+          this.currentUser = HelperService.PopulateUser(user);
+          resolve(this.currentUser);
+        });
+      } else {
+        resolve(this.currentUser);
+      }
+    });
+  }
+
 
 
   // auth

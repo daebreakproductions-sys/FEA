@@ -14,8 +14,13 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './lib/usda/api.module'
 import { Configuration } from './lib/usda/configuration';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { AuthGuard } from './guards/auth-guard.service';
 
-
+export function apiKeyGetter():Configuration {
+  return new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC" } });
+}
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,15 +28,17 @@ import { Configuration } from './lib/usda/configuration';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    ApiModule.forRoot(() => new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC"} })),
+    ApiModule.forRoot(apiKeyGetter),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('/assets/js/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
     SplashScreen,
     ApiService,
     AuthService,
+    AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

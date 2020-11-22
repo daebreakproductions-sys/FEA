@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: 'https://api.example.com/',
+  api_url: 'https://fea.swiftlet.dev/eats/',
 };

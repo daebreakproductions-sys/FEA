@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
+import { AuthService } from '@app/services/auth.service';
 import { PasswordValidator } from '@app/validators/password.validator';
 import { ToastController } from '@ionic/angular';
 
@@ -15,9 +17,13 @@ export class UserOptionsPage implements OnInit {
   fileToUpload: File;
   password_change_form: FormGroup;
   
-  constructor(public api: ApiService,
+  constructor(
+    public api: ApiService,
     public formBuilder: FormBuilder,
-    public toastController: ToastController) { 
+    public toastController: ToastController,
+    public auth: AuthService,
+    public router: Router,
+    ) { 
       this.password_change_form = new FormGroup({
         password: new FormControl('', Validators.compose([
           Validators.minLength(5),
@@ -42,12 +48,10 @@ export class UserOptionsPage implements OnInit {
         ],
       };
 
-      ngOnInit() {
-    this.api.getCurrentUser().then(user => {
-      this.user = user;
-      console.log(user);
-    });
+  async ngOnInit() {
+    this.user = await this.api.getCurrentUser();
   }
+
   readFileContent(file: File): Promise<string> {
     return new Promise<string>((resolve, reject) => {
         if (!file) {
@@ -74,11 +78,8 @@ export class UserOptionsPage implements OnInit {
     let file: File = e.target.files[0];
     this.fileToUpload = file;
     this.readFileContent(file).then(contents => {
-      this.api.uploadAvatar(contents.split(',')[1]).then(id => {
-        this.api.getCurrentUser().then(user => {
-          this.user = user;
-          this.fileToUpload = null;
-        });
+      this.api.uploadAvatar(contents.split(',')[1]).then(async id => {
+        this.user = await this.api.getCurrentUser(true);
       });
     });
   }
@@ -100,5 +101,10 @@ export class UserOptionsPage implements OnInit {
       });
       toast.present();
     });
+  }
+
+  logout() {
+    this.auth.clearAccessToken();
+    this.router.navigateByUrl('/login');
   }
 }
