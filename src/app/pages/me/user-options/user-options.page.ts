@@ -80,6 +80,7 @@ export class UserOptionsPage implements OnInit {
     this.readFileContent(file).then(contents => {
       this.api.uploadAvatar(contents.split(',')[1]).then(async id => {
         this.user = await this.api.getCurrentUser(true);
+        this.fileToUpload = null;
       });
     });
   }

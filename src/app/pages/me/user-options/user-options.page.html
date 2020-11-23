@@ -84,24 +84,24 @@
       </ion-toolbar>
       <ion-list>
         <ion-item>
-          <ion-label>Username</ion-label>
-          <ion-label>{{user.username}}</ion-label>
+          <ion-label position="stacked">Username</ion-label>
+          <ion-input (disabled)="true" >{{user.username}}</ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-label>{{user.email}}</ion-label>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input (disabled)="true">{{user.email}}</ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Phone</ion-label>
-          <ion-label>{{user.phone}}</ion-label>
+          <ion-label position="stacked">Phone</ion-label>
+          <ion-input (disabled)="true">{{user.phone}}</ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Created On</ion-label>
-          <ion-label>{{user.created.toDate()}}</ion-label>
+          <ion-label position="stacked">Created On</ion-label>
+          <ion-input (disabled)="true">{{user.created.toDate().toDateString()}}</ion-input>
         </ion-item>
         <ion-item>
-          <ion-label>Status</ion-label>
-          <ion-label>{{user.status}}</ion-label>
+          <ion-label position="stacked">Status</ion-label>
+          <ion-input (disabled)="true">{{user.status}}</ion-input>
         </ion-item>
       </ion-list>
     </ion-row>
