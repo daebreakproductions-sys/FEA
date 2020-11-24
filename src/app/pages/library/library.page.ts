@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbridgedFoodItem, FDCService, FoodListCriteria } from '@app/lib/usda';
-import { Animation, AnimationController } from '@ionic/angular';
+import { Animation, AnimationController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-library',
@@ -66,15 +66,13 @@ export class LibraryPage implements OnInit {
     console.log(this.groupedFoods);
   }
 
-
   groupClicked(key: string) {
     this.groupedFoods[key].show = !this.groupedFoods[key].show;
-    console.log(document.querySelector('#'+key+'Arrow'))
-    const animation: Animation = this.animationCtrl.create()
-    .addElement(document.querySelector('#'+key+'Arrow'))
-    .fill('none')
-    .duration(1000)
-    .fromTo('rotate', 0, 180);
-    animation.play();
+    // const animation: Animation = this.animationCtrl.create()
+    // .addElement(document.querySelector('#'+key+'Arrow'))
+    // .fill('none')
+    // .duration(1000)
+    // .fromTo('rotate', 0, 180);
+    // animation.play();
   }
 }

@@ -7,9 +7,9 @@ import { DetailPage } from './detail.page';
 const routes: Routes = [
   {
     path: ':id',
-    resolve: {
-      special: DataResolverService
-    },
+    // resolve: {
+    //   special: DataResolverService
+    // },
     component: DetailPage
   }
 ];

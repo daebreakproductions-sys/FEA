@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FDCService, FoodNutrient, FoundationFoodItem } from '@app/lib/usda';
+import { LoadingController } from '@ionic/angular';
+import { OverlayBaseController } from '@ionic/angular/util/overlay';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,30 +18,46 @@ export class DetailPage implements OnInit {
     value: string,
     unit: string
   }[];
+  loading: HTMLIonLoadingElement
 
   constructor(
     public usda: FDCService,
-    public router: Router,
     private route: ActivatedRoute,
+    public loadingController: LoadingController,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     const myObserver = {
       next: x => {
-        x.forEach(item => {
-          this.food = item;
-        })
+        this.food = x;
       },
       error: err => console.error('Observer got an error: ' + err),
-      complete: () => console.log('API Call complete'),
+      complete: () => {
+        this.title = this.food.description.split(',').map(value => { return value.trim()}).join(' / ');
+        this.digestNutrients(this.food.foodNutrients);
+        this.loading.dismiss(); 
+        console.log(this.food)
+      }
     };
 
-    if (this.route.snapshot.data['special']) {
-      this.food = this.route.snapshot.data['special'];
-      this.title = this.food.description.split(',').map(value => { return value.trim()}).join(' / ');
-      console.log(this.food)
-      this.digestNutrients(this.food.foodNutrients);
-    }
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Loading food detail...',
+      duration: 10000
+    });
+    this.loading.present()
+
+    let id = this.route.snapshot.params.id;
+    this.usda.getFood(id).subscribe(myObserver);
+
+    // console.log(this.route)
+    // if (this.route.snapshot.data['special']) {
+    //   this.food = this.route.snapshot.data['special'];
+    //   this.title = this.food.description.split(',').map(value => { return value.trim()}).join(' / ');
+    //   console.log(this.food)
+    //   this.digestNutrients(this.food.foodNutrients);
+    // }
+    // this.loadingController.dismiss();
   }
 
   digestNutrients(nutrients: FoodNutrient[]) {
