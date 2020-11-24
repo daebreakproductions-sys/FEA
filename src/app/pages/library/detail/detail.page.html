@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/tabs/library"></ion-back-button>
+    <ion-title>Food Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h2 class="ion-text-capitalize ion-text-wrap">{{title}}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-toolbar>
+          <ion-title color="primary">Nutrients</ion-title>
+        </ion-toolbar>
+        <ion-list *ngIf="displayNutrients">
+          <ion-item *ngFor="let each of displayNutrients">
+            <ion-label position="stacked">{{each.name}}</ion-label>
+            <ion-input (disabled)="true" >{{each.value}}{{each.unit}}</ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

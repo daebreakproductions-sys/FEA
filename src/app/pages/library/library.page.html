@@ -6,8 +6,16 @@
 
 <ion-content>
   <ion-list *ngFor=" let group of groupedFoods | keyvalue">
-    <ion-item class="ion-text-capitalize">
+    <ion-item class="ion-text-capitalize" (click)="groupClicked(group.key)">
       {{ group.key }}
-    </ion-item>    
+      <ion-icon slot="end" name="chevron-down" id="{{group.key}}Arrow" *ngIf="!group.value.show"></ion-icon>
+      <ion-icon slot="end" name="chevron-up" id="{{group.key}}Arrow" *ngIf="group.value.show"></ion-icon>
+    </ion-item>
+    <ng-container *ngIf="group.value.show">
+      <ion-item *ngFor="let sub of group.value.list">
+        <ion-item class="ion-text-capitalize">{{sub.shortDesc}}</ion-item>
+        <ion-icon name="arrow-forward" slot="end" [routerLink]="['detail', sub.food.fdcId]"></ion-icon>
+      </ion-item>
+    </ng-container>
   </ion-list>
 </ion-content>
