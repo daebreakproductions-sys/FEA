@@ -19,6 +19,7 @@ export class DetailPage implements OnInit {
     unit: string
   }[];
   loading: HTMLIonLoadingElement
+  readonly dismissTime: number = 10000;
 
   constructor(
     public usda: FDCService,
@@ -43,9 +44,14 @@ export class DetailPage implements OnInit {
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Loading food detail...',
-      duration: 10000
+      duration: this.dismissTime
     });
-    this.loading.present()
+    setTimeout(() => {
+      if(this.food == null) {
+        this.title = "Error Occurred. Please try again."
+      }
+    }, this.dismissTime);
+    this.loading.present();
 
     let id = this.route.snapshot.params.id;
     this.usda.getFood(id).subscribe(myObserver);
