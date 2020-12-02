@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'add',
     loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
   },
+  {
+    path: 'market-modal',
+    loadChildren: () => import('./pages/modals/market-modal/market-modal.module').then( m => m.MarketModalPageModule)
+  },
 
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },

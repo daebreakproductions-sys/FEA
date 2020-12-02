@@ -29,4 +29,22 @@ export class HelperService {
              (value !== '') &&
              !isNaN(Number(value.toString())));
   }
+  public static readFileContent(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+        if (!file) {
+            resolve('');
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const text = reader.result.toString();
+            resolve(text);
+
+        };
+
+        reader.readAsDataURL(file);
+    });
+  }
+
 }

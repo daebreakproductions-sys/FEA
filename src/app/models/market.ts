@@ -8,7 +8,7 @@ export interface Market extends Entity {
     phone: string;
     url: string;
     lat: number;
-    lon: number;
+    lng: number;
     image: object;
     dealsCount: bigint;
     image64: string;

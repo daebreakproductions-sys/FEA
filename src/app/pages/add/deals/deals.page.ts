@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Deal } from '@app/models/deal';
+import { Market } from '@app/models/market';
+import { StartEndDatesValidator } from '@app/validators/start-end-dates';
+import { IonSlides, ModalController } from '@ionic/angular';
+import { MarketModalPage } from '../../modals/market-modal/market-modal.page'
+import { debounceTime, filter, map } from 'rxjs/operators';
+import { Tag } from '@app/models/tag';
+import * as keyword_extractor from 'keyword-extractor'
+import { TagService } from '@app/services/tag.service';
 
 @Component({
   selector: 'app-deals',
@@ -6,10 +16,263 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deals.page.scss'],
 })
 export class DealsPage implements OnInit {
+  @ViewChild(IonSlides) slider: IonSlides;
+  public dealForm: FormGroup;
 
-  constructor() { }
+  public deal: Deal;
+  public associatedTags: {
+    selected: boolean,
+    tag: Tag
+  }[];
+
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    autoHeight: true
+  };
+  public nextButton = {
+    text: 'Location',
+    show: true,
+    disabled: true
+  }
+  public prevButton = {
+    text: 'Title',
+    show: false,
+    disabled: false
+  }
+
+  constructor(
+    public modalController: ModalController,
+    public formBuilder: FormBuilder,
+    public tagService: TagService,
+  ) { 
+    this.dealForm = new FormGroup({
+      title: new FormControl('', Validators.compose([
+        Validators.maxLength(50),
+        Validators.minLength(3),
+        Validators.required
+      ])),
+      description: new FormControl(''),
+      startDate: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      endDate: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      price: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+    }, (formGroup: FormGroup) => {
+      return StartEndDatesValidator.checkDates(formGroup);
+   });
+  }
+
+  public validation_messages = {
+    'title': [
+        { type: 'required', message: 'Title is required.' },
+        { type: 'minlength', message: 'Title must be at least 3 characters long.' },
+        { type: 'maxlength', message: 'Title cannot be more than 50 characters long.' },
+      ],
+      'description': [],
+      'startDate': [
+        { type: 'required', message: 'A Start Date is required.' },
+      ],
+      'endDate': [
+        { type: 'required', message: 'An End date is required.' },
+      ],
+      'price': [
+        { type: 'required', message: 'A Price is required.' },
+      ],
+      'dates': [
+        { type: 'startLater', message: 'The End date cannot be earlier than the Start date' }
+      ],
+    };
 
   ngOnInit() {
+    this.deal = {
+      market: null,
+      startDate: null,
+      endDate: null,
+      image: null,
+      title: '',
+      text: '',
+      price: '',
+      tags: [],
+    }
+  }
+  ngAfterViewInit() {
+    for(let control in this.dealForm.controls) {
+      let form: AbstractControl = this.dealForm.controls[control];
+      form.statusChanges
+        .pipe(debounceTime(400))
+        .subscribe(() => {
+          setTimeout(() => {
+            this.slider.updateAutoHeight(225);
+            this.updateSlideUI();
+          }, 25);
+        });
+    }
+    this.updateSlideUI();
+  }
+
+  updateHeight() {
+    setTimeout(() => {
+      this.slider.updateAutoHeight(225);
+      this.updateSlideUI();
+    }, 25);
+  }
+  updateSlideUI() {
+    this.slider.getActiveIndex().then(slideNumber => {
+      console.log("Page Slide Changed to " + slideNumber);
+      // Determine lock/unlock for slides
+      let locked = false;
+      switch(slideNumber) {
+        case 0:
+          // Title
+          locked = !this.checkStep1();
+          this.nextButton.text = 'Location';
+          break;
+        case 1:
+          // Location
+          locked = !this.checkStep2();
+          this.prevButton.text = 'Title';
+          this.nextButton.text = 'Description';
+          break;
+        case 2:
+          // Description
+          locked = !this.checkStep3();
+          this.prevButton.text = 'Location';
+          this.nextButton.text = 'Details';
+          break;
+        case 3:
+          // Details
+          locked = !this.checkStep4();
+          this.prevButton.text = 'Description';
+          this.nextButton.text = 'Tags';
+          break;
+        case 4:
+          // Tags
+          this.loadTags();
+          setTimeout(() => {
+            this.slider.updateAutoHeight(225);
+          }, 25);
+          locked = !this.checkStep5();
+          this.prevButton.text = 'Details';
+          this.nextButton.text = 'Picture';
+          break;
+        case 5:
+          // Picture
+          locked = !this.checkStep6();
+          this.prevButton.text = 'Tags';
+          break;
+      }
+      this.slider.lockSwipeToNext(locked);
+      this.nextButton.disabled = locked;
+      this.prevButtonVisible(slideNumber);
+      this.nextButtonVisible(slideNumber);
+    });
+  }
+
+  async presentMarketModal() {
+    const modal = await this.modalController.create({
+      component: MarketModalPage,
+      cssClass: 'my-custom-class'
+    });
+    modal.present();
+    await modal.onWillDismiss().then(market => {
+      this.deal.market = market.data;
+      this.updateSlideUI();
+      setTimeout(() => {
+        this.nextClick();
+      }, 500);
+    });
+  }
+
+  readonly extractorOpts = {
+    language:"english",
+    remove_digits: true,
+    return_changed_case:true,
+    remove_duplicates: false
+  };
+  loadTags() {
+    this.associatedTags = [];
+    let titleKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['title'].value,this.extractorOpts);
+    let descKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['description'].value,this.extractorOpts);
+    titleKeywords.forEach(keyword => {
+      this.tagService.search(keyword).forEach(tag => {
+        this.associatedTags.push({
+          selected: false,
+          tag: tag
+        });
+      });
+    });
+    console.log(titleKeywords);
+    console.log(this.associatedTags);
+  }
+  toggleTag(id: number) {
+    this.associatedTags.forEach(entry => {
+      if(Number(entry.tag.id) == id) {
+        entry.selected = !entry.selected;
+      }
+    })
+  }
+
+  prevButtonVisible(slideNumber: number) {
+    switch(slideNumber) {
+      case 0:
+        this.prevButton.show = false;
+        break;
+      default:
+        this.prevButton.show = true;
+    }
+  }
+  nextButtonVisible(slideNumber: number) {
+    switch(slideNumber) {
+      case 5:
+        this.nextButton.show = false;
+        break;
+      default:
+        this.nextButton.show = true;
+    }
+  }
+
+  nextClick() {
+    if(!this.nextButton.disabled) {
+      this.slider.slideNext();
+    }
+  }
+  prevClick() {
+    if(!this.prevButton.disabled) {
+      this.slider.slidePrev();
+    }
+  }
+
+  // These all return true if they are valid
+  checkStep1(): boolean {
+    // Title
+    return this.dealForm.controls['title'].valid;// (this.deal.title != '') && (this.deal.title != null);
+  }
+  checkStep2(): boolean {
+    // Location
+    return (this.deal.market != null);
+  }
+  checkStep3(): boolean {
+    // Description
+    return true;
+  }
+  checkStep4(): boolean {
+    // Start/End Date and Price
+    return (this.dealForm.controls['startDate'].valid &&
+      this.dealForm.controls['endDate'].valid &&
+      this.dealForm.controls['price'].valid);
+  }
+  checkStep5(): boolean {
+    // Tags
+    return true;
+  }
+  checkStep6(): boolean {
+    // Picture
+    return true;
   }
 
 }

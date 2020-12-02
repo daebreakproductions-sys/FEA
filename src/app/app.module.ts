@@ -17,6 +17,7 @@ import { Configuration } from './lib/usda/configuration';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './guards/auth-guard.service';
+import { MarketService } from './services/market.service';
 
 export function apiKeyGetter():Configuration {
   return new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC" } });
@@ -39,7 +40,9 @@ export function apiKeyGetter():Configuration {
     ApiService,
     AuthService,
     AuthGuard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    MarketService,
+    ApiService,
   ],
   bootstrap: [AppComponent]
 })

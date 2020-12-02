@@ -6,6 +6,9 @@ import { AuthService } from '@app/services/auth.service';
 import { User } from '@app/models/user';
 import { NewUser } from '@app/models/new-user';
 import { HelperService } from './helper-service.service';
+import { Market } from '@app/models/market';
+import { APIListOptions } from '@app/models/list-options';
+import { Tag } from '@app/models/tag';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -209,6 +212,18 @@ export class ApiService {
     });
   }
 
+  // Markets
+  public getMarkets(params: APIListOptions) {
+    return this.apiTokenGet('markets/list', params) as Promise<Market[]>;
+  }
+  public searchMarkets(searchTerm: string) {
+    return this.apiTokenGet('markets/search', {q: searchTerm}) as Promise<Market[]>;
+  }
+
+  // Tags
+  public getTags(params: APIListOptions) {
+    return this.apiTokenGet('tags/list', params) as Promise<Tag[]>;
+  }
 
 
   // auth

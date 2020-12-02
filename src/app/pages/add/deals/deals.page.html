@@ -1,9 +1,204 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>deals</ion-title>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
+    <ion-title>Add a new Deal</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-justify-content-center" size="4">
+        <ion-img src="/assets/images/tag.svg"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form [formGroup]="dealForm">
+    <ion-slides 
+      #slider 
+      pager="true" 
+      [options]="slideOpts"
+      (ionSlideDidChange)="updateSlideUI()">
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Give this deal a Title</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Title</ion-label>
+                <ion-input formControlName="title" type="text" (keyup.enter)="nextClick()"></ion-input>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.title">
+                <ion-item *ngIf="dealForm.get('title').hasError(validation.type) && (dealForm.get('title').dirty || dealForm.get('title').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Where can others find this deal?</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item (click)="presentMarketModal()">
+                <ion-icon name="location-outline" color="primary" size="large" class="ion-padding-end"></ion-icon>
+                <ion-label *ngIf="deal.market == null">Add Location</ion-label>
+                <ion-label *ngIf="deal.market" color="primary">{{ deal.market.name }}</ion-label>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.title">
+                <ion-item *ngIf="dealForm.get('title').hasError(validation.type) && (dealForm.get('title').dirty || dealForm.get('title').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Add a Description</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Description</ion-label>
+                <ion-textarea formControlName="description"></ion-textarea>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.description">
+                <ion-item *ngIf="dealForm.get('description').hasError(validation.type) && (dealForm.get('description').dirty || dealForm.get('description').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Add additional details</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">Start Date</ion-label>
+                <ion-datetime formControlName="startDate"></ion-datetime>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.startDate">
+                <ion-item *ngIf="dealForm.get('startDate').hasError(validation.type) && (dealForm.get('startDate').dirty || dealForm.get('startDate').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="floating">End Date</ion-label>
+                <ion-datetime formControlName="endDate"></ion-datetime>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.endDate">
+                <ion-item *ngIf="dealForm.get('endDate').hasError(validation.type) && (dealForm.get('endDate').dirty || dealForm.get('endDate').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ng-container *ngFor="let validation of validation_messages.dates">
+                <ion-item *ngIf="dealForm.hasError(validation.type) &&
+                  ((dealForm.get('startDate').dirty && dealForm.get('endDate').dirty) || 
+                  (dealForm.get('startDate').touched && dealForm.get('endDate').touched))">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Price</ion-label>
+                <ion-input formControlName="price" type="number"></ion-input>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.price">
+                <ion-item *ngIf="dealForm.get('price').hasError(validation.type) && (dealForm.get('price').dirty || dealForm.get('price').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Tag this deal to help others find it</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngIf="associatedTags">
+              <ng-container *ngFor="let tag of associatedTags">
+                <ion-button [fill]="tag.selected ? 'solid' : 'outline'" size="small" (click)="toggleTag(tag.tag.id)">#{{tag.tag.name}}</ion-button>
+              </ng-container>
+            </ion-col>
+            <ion-col *ngIf="associatedTags == null" class="ion-justify-content-center">
+              <ion-spinner></ion-spinner>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide>
+        <h1>Picture</h1>
+      </ion-slide>
+    </ion-slides>
+  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-left ion-padding-start">
+        <ion-label 
+          *ngIf="prevButton.show" 
+          (click)="prevClick()"
+          [color]="prevButton.disabled ? 'light' : 'primary'">
+          {{ prevButton.text }}
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-padding-end">
+        <ion-label 
+          *ngIf="nextButton.show" 
+          (click)="nextClick()"
+          [color]="nextButton.disabled ? 'light' : 'primary'">
+          {{ nextButton.text }}
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

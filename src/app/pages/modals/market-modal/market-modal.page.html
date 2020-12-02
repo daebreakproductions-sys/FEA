@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Choose a Market</ion-title>
+    <ion-label slot="end" color="primary" (click)="dismiss()" class="ion-padding-end">Cancel</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar showCancelButton="focus" debounce="500" animated (ionChange)="search($event)"></ion-searchbar>
+  <ng-container *ngIf="searchResults">
+    <ion-toolbar>
+      <ion-title color="primary">Search Results</ion-title>
+    </ion-toolbar>
+    <ion-list>
+      <ion-item *ngIf="searchResults == []">
+        <ion-spinner></ion-spinner>
+      </ion-item>
+      <ion-item *ngFor="let market of searchResults" (click)="viewCtrl.dismiss(market)">
+        {{market.name}} ({{market.address}})
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <ion-toolbar>
+    <ion-title color="primary">Nearby</ion-title>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item *ngIf="nearby == null">
+      <ion-spinner></ion-spinner>
+    </ion-item>
+    <ion-item *ngFor="let market of nearby" (click)="viewCtrl.dismiss(market)">
+      {{market.name}}
+    </ion-item>
+  </ion-list>
+</ion-content>

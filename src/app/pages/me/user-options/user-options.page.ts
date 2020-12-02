@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
 import { AuthService } from '@app/services/auth.service';
+import { HelperService } from '@app/services/helper-service.service';
 import { PasswordValidator } from '@app/validators/password.validator';
 import { ToastController } from '@ionic/angular';
 
@@ -52,32 +53,14 @@ export class UserOptionsPage implements OnInit {
     this.user = await this.api.getCurrentUser();
   }
 
-  readFileContent(file: File): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-        if (!file) {
-            resolve('');
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-            const text = reader.result.toString();
-            resolve(text);
-
-        };
-
-        reader.readAsDataURL(file);
-    });
-  }
-  
-  attachFile(e){
+  attachFile(e) {
     if (e.target.files.length == 0) {
       console.log("No file selected!");
       return
     }
     let file: File = e.target.files[0];
     this.fileToUpload = file;
-    this.readFileContent(file).then(contents => {
+    HelperService.readFileContent(file).then(contents => {
       this.api.uploadAvatar(contents.split(',')[1]).then(async id => {
         this.user = await this.api.getCurrentUser(true);
         this.fileToUpload = null;

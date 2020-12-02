@@ -1,4 +1,5 @@
 import { Market } from "./market";
+import { Tag } from "./tag";
 import { UGC } from "./ugc";
 
 export interface Deal extends UGC {
@@ -9,4 +10,5 @@ export interface Deal extends UGC {
     title: string;
     price: string;
     text: string;
+    tags: Tag[];
 }
