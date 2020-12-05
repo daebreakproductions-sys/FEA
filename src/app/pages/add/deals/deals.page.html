@@ -102,8 +102,8 @@
           <ion-row>
             <ion-col size="6">
               <ion-item>
-                <ion-label position="floating">Start Date</ion-label>
-                <ion-datetime formControlName="startDate"></ion-datetime>
+                <ion-label position="floating">Discovery Date</ion-label>
+                <ion-datetime formControlName="startDate" [value]="now" [min]="minDate" [max]="maxDate"></ion-datetime>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.startDate">
                 <ion-item *ngIf="dealForm.get('startDate').hasError(validation.type) && (dealForm.get('startDate').dirty || dealForm.get('startDate').touched)">
@@ -116,7 +116,7 @@
             <ion-col size="6">
               <ion-item>
                 <ion-label position="floating">End Date</ion-label>
-                <ion-datetime formControlName="endDate"></ion-datetime>
+                <ion-datetime formControlName="endDate" [min]="minDate" [max]="maxDate"></ion-datetime>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.endDate">
                 <ion-item *ngIf="dealForm.get('endDate').hasError(validation.type) && (dealForm.get('endDate').dirty || dealForm.get('endDate').touched)">
@@ -144,7 +144,7 @@
             <ion-col>
               <ion-item>
                 <ion-label position="floating">Price</ion-label>
-                <ion-input formControlName="price" type="number"></ion-input>
+                <ion-input formControlName="price" type="text" (keyup.enter)="nextClick()"></ion-input>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.price">
                 <ion-item *ngIf="dealForm.get('price').hasError(validation.type) && (dealForm.get('price').dirty || dealForm.get('price').touched)">
@@ -174,10 +174,46 @@
               <ion-spinner></ion-spinner>
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-searchbar showCancelButton="focus" debounce="500" animated (ionChange)="searchTag($event)"></ion-searchbar>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col *ngIf="searchTags && searchTags.length > 0">
+              <ng-container *ngFor="let tag of searchTags">
+                <ion-button fill="outline" size="small" (click)="chooseSearchTag(tag.tag.id)">#{{tag.tag.name}}</ion-button>
+              </ng-container>
+            </ion-col>
+            <ion-col *ngIf="searchTags && searchTags.length == 0">
+              <ion-button (click)="newTag(tagSearchTerm)">Create new tag #{{ tagSearchTerm }}</ion-button>
+            </ion-col>
+          </ion-row>
         </ion-grid>
       </ion-slide>
       <ion-slide>
-        <h1>Picture</h1>
+        <ion-grid class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <h1>Add a photo</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-img *ngIf="deal.image64" [src]="'data:image/jpg;base64,' + deal.image64"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-list lines="none" *ngIf="imageToUpload == null">
+                <ion-item>
+                  <ion-label for="photoInput"><ion-icon name="image-outline" color="primary" size="large" slot="start"></ion-icon>Add a Photo</ion-label>
+                  <input id="photoInput" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" width="0px"/>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-slide>
     </ion-slides>
   </form>
@@ -198,6 +234,7 @@
           [color]="nextButton.disabled ? 'light' : 'primary'">
           {{ nextButton.text }}
         </ion-label>
+        <ion-button *ngIf="showSaveButton" (click)="saveDeal()">Save Deal</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

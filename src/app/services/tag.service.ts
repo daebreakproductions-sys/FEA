@@ -44,10 +44,41 @@ export class TagService {
     });
   }
   search(searchTerm: string) {
-    console.log(searchTerm);
     return this.tags.filter(tag => {
+      return tag.name != null;
+    }).filter(tag => {
       return tag.name.toLowerCase().includes(searchTerm.toLowerCase());
     })
+  }
+  byId(id: number) {
+    return this.tags.filter(val => {
+      return val.id == id;
+    })[0];
+  }
+  async create(name: string) {
+
+    let tag: Tag = {
+      name: name.trim().toLowerCase()
+    };
+    return new Promise<Tag>((resolve) => {
+      let exactMatch = this.tags.find(val => {
+        return tag.name === name;
+      })
+      if(exactMatch) {
+        resolve(exactMatch);
+      } else {
+        this.api.createTag(tag).then(id => {
+          this.api.getTag(id).then(tag => {
+            this.tags.push(tag);
+            resolve(tag);
+          })
+        });
+      }
+    })
+  }
+
+  tagItem(id: number, tag: Tag) {
+    this.api.addTag(tag, id);
   }
 
 }

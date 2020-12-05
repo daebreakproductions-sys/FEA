@@ -9,6 +9,7 @@ import { HelperService } from './helper-service.service';
 import { Market } from '@app/models/market';
 import { APIListOptions } from '@app/models/list-options';
 import { Tag } from '@app/models/tag';
+import { Deal } from '@app/models/deal';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -224,7 +225,26 @@ export class ApiService {
   public getTags(params: APIListOptions) {
     return this.apiTokenGet('tags/list', params) as Promise<Tag[]>;
   }
+  public createTag(tag: Tag) {
+    return this.apiTokenPost('tags/create', tag) as Promise<bigint>;
+  }
+  public getTag(id: bigint) {
+    return this.apiTokenGet('tags/' + id) as Promise<Tag>;
+  }
+  public addTag(tag: Tag, id: number) {
+    return this.apiTokenPost('tags/add/' + id, tag.id) as Promise<number>;
+  }
 
+  // Deals
+  public getDeals(params: APIListOptions) {
+    return this.apiTokenGet('ugc/deals/list', params) as Promise<Deal[]>;
+  }
+  public createDeal(deal: Deal) {
+    return this.apiTokenPost('ugc/deals/create', deal) as Promise<bigint>;
+  }
+  public getDeal(id: bigint) {
+    return this.apiTokenGet('ugc/deals/' + id) as Promise<Deal>;
+  }
 
   // auth
   public login(username: string, password: string){

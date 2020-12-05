@@ -3,12 +3,12 @@ import { EatsDate } from "./eats-date";
 import { Status } from "./status.enum";
 
 export interface Entity {
-    id?: bigint;
+    id?: number;
     created?: EatsDate;
     modified?: EatsDate;
     status?: Status;
-    version?: bigint;
-    commentCount?: bigint;
-    tagCount?: bigint;
-    viewCount?: bigint;
+    version?: number;
+    commentCount?: number;
+    tagCount?: number;
+    viewCount?: number;
 }

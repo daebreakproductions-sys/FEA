@@ -9,6 +9,9 @@ import { debounceTime, filter, map } from 'rxjs/operators';
 import { Tag } from '@app/models/tag';
 import * as keyword_extractor from 'keyword-extractor'
 import { TagService } from '@app/services/tag.service';
+import { HelperService } from '@app/services/helper-service.service';
+import { DealService } from '@app/services/deal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-deals',
@@ -24,6 +27,15 @@ export class DealsPage implements OnInit {
     selected: boolean,
     tag: Tag
   }[];
+  public searchTags: {
+    selected: boolean,
+    tag: Tag
+  }[];
+  public tagSearchTerm: string = '';
+  public imageToUpload: File;
+  public minDate: string;
+  public maxDate: string;
+  public now: string;
 
   slideOpts = {
     initialSlide: 0,
@@ -40,11 +52,14 @@ export class DealsPage implements OnInit {
     show: false,
     disabled: false
   }
+  public showSaveButton: boolean = false;
 
   constructor(
     public modalController: ModalController,
     public formBuilder: FormBuilder,
     public tagService: TagService,
+    public dealService: DealService,
+    public router: Router,
   ) { 
     this.dealForm = new FormGroup({
       title: new FormControl('', Validators.compose([
@@ -56,9 +71,7 @@ export class DealsPage implements OnInit {
       startDate: new FormControl('', Validators.compose([
         Validators.required,
       ])),
-      endDate: new FormControl('', Validators.compose([
-        Validators.required,
-      ])),
+      endDate: new FormControl(''),
       price: new FormControl('', Validators.compose([
         Validators.required,
       ])),
@@ -93,12 +106,15 @@ export class DealsPage implements OnInit {
       market: null,
       startDate: null,
       endDate: null,
-      image: null,
+      image64: null,
       title: '',
       text: '',
       price: '',
       tags: [],
     }
+    this.minDate = this._minDate();
+    this.maxDate = this._maxDate();
+    this.now = this._now();
   }
   ngAfterViewInit() {
     for(let control in this.dealForm.controls) {
@@ -123,7 +139,6 @@ export class DealsPage implements OnInit {
   }
   updateSlideUI() {
     this.slider.getActiveIndex().then(slideNumber => {
-      console.log("Page Slide Changed to " + slideNumber);
       // Determine lock/unlock for slides
       let locked = false;
       switch(slideNumber) {
@@ -162,6 +177,9 @@ export class DealsPage implements OnInit {
           break;
         case 5:
           // Picture
+          setTimeout(() => {
+            this.slider.updateAutoHeight(175);
+          }, 75);
           locked = !this.checkStep6();
           this.prevButton.text = 'Tags';
           break;
@@ -170,6 +188,7 @@ export class DealsPage implements OnInit {
       this.nextButton.disabled = locked;
       this.prevButtonVisible(slideNumber);
       this.nextButtonVisible(slideNumber);
+      this.saveButtonVisible(slideNumber);
     });
   }
 
@@ -188,6 +207,22 @@ export class DealsPage implements OnInit {
     });
   }
 
+  readonly oneMonth: number = 1000 * 60 * 60 * 24 * 30;
+  private _minDate() {
+    let now = new Date();
+    now.setTime(Date.now() - this.oneMonth);
+    return now.toISOString();
+  }
+  private _maxDate() {
+    let now = new Date();
+    now.setTime(Date.now() + this.oneMonth);
+    return now.toISOString();
+  }
+  private _now() {
+    let dt = new Date();
+    return dt.toISOString();
+  }
+
   readonly extractorOpts = {
     language:"english",
     remove_digits: true,
@@ -195,19 +230,19 @@ export class DealsPage implements OnInit {
     remove_duplicates: false
   };
   loadTags() {
-    this.associatedTags = [];
-    let titleKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['title'].value,this.extractorOpts);
-    let descKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['description'].value,this.extractorOpts);
-    titleKeywords.forEach(keyword => {
-      this.tagService.search(keyword).forEach(tag => {
-        this.associatedTags.push({
-          selected: false,
-          tag: tag
+    if(this.associatedTags == null) {
+      this.associatedTags = [];
+      let titleKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['title'].value,this.extractorOpts);
+      let descKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['description'].value,this.extractorOpts);
+      titleKeywords.forEach(keyword => {
+        this.tagService.search(keyword).forEach(tag => {
+          this.associatedTags.push({
+            selected: false,
+            tag: tag
+          });
         });
       });
-    });
-    console.log(titleKeywords);
-    console.log(this.associatedTags);
+    }
   }
   toggleTag(id: number) {
     this.associatedTags.forEach(entry => {
@@ -215,6 +250,85 @@ export class DealsPage implements OnInit {
         entry.selected = !entry.selected;
       }
     })
+  }
+  searchTag(searchEvent: any) {
+    if(searchEvent.target.value) {
+      this.tagSearchTerm = searchEvent.target.value;
+      this.searchTags = this.tagService.search(searchEvent.target.value).map( (val: Tag) => {
+        return { selected: false, tag: val };
+      });
+    } else {
+      this.tagSearchTerm = null;
+      this.searchTags = null;
+    }
+    this.updateSlideUI();
+  }
+  chooseSearchTag(id: number) {
+    let tagIndex: number = this.searchTags.findIndex(which => which.tag.id == id);
+    let tag: Tag = this.searchTags.slice(tagIndex, tagIndex + 1)[0].tag;
+    this.associatedTags.unshift({selected: true, tag: tag});
+    this.eliminateDuplicateTags();
+    this.updateSlideUI();
+  }
+  eliminateDuplicateTags() {
+    let temp: { selected: boolean, tag: Tag }[] = [];
+    this.associatedTags.forEach(item => {
+      if(!temp.some(test => {
+        return test.tag.id == item.tag.id;
+      })) {
+        temp.push(item);
+      }
+    });
+    this.associatedTags = temp;
+  }
+  newTag(term: string) {
+    this.tagService.create(term).then((tag) => {
+      this.associatedTags.push({
+        selected: true,
+        tag: tag
+      });
+      this.updateSlideUI();
+    });
+  }
+
+  attachFile(e) {
+    if (e.target.files.length == 0) {
+      console.log("No file selected!");
+      return
+    }
+    let file: File = e.target.files[0];
+    this.imageToUpload = file;
+    HelperService.readFileContent(file).then(contents => {
+      this.deal.image64 = contents.split(',')[1];
+      this.imageToUpload = null;
+      this.updateSlideUI();
+    });
+  }
+
+  saveDeal() {
+    let newDeal = {
+      title: this.dealForm.get('title').value,
+      market: { id: this.deal.market.id },
+      text: this.dealForm.get('description').value,
+      startDate: Math.round(new Date(this.dealForm.get('startDate').value).getTime()),
+      endDate: Math.round(new Date(this.dealForm.get('endDate').value).getTime()),
+      price: this.dealForm.get('price').value,
+      tags: this.associatedTags.filter(tag => {
+        return tag.selected;
+      })
+      .map(tag => {
+        return { id: tag.tag.id };
+      }),
+      image64: this.deal.image64
+    }
+    this.dealService.create(newDeal).then( deal => {
+      this.associatedTags.filter(tag => {
+        return tag.selected;
+      }).forEach(tag => {
+        this.tagService.tagItem(Number(deal.id), tag.tag);
+      });
+      this.router.navigate(['tabs/me']);
+    });
   }
 
   prevButtonVisible(slideNumber: number) {
@@ -233,6 +347,15 @@ export class DealsPage implements OnInit {
         break;
       default:
         this.nextButton.show = true;
+    }
+  }
+  saveButtonVisible(slideNumber: number) {
+    switch(slideNumber) {
+      case 5:
+        this.showSaveButton = true;
+        break;
+      default:
+        this.showSaveButton = false;
     }
   }
 

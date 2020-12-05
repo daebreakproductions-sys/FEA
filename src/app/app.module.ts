@@ -18,6 +18,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './guards/auth-guard.service';
 import { MarketService } from './services/market.service';
+import { DealService } from './services/deal.service';
 
 export function apiKeyGetter():Configuration {
   return new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC" } });
@@ -43,6 +44,7 @@ export function apiKeyGetter():Configuration {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     MarketService,
     ApiService,
+    DealService,
   ],
   bootstrap: [AppComponent]
 })
