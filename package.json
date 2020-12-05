@@ -33,6 +33,7 @@
     "@ionic/angular": "^5.0.0",
     "@ionic/pwa-elements": "^3.0.1",
     "cordova-plugin-geolocation": "^4.1.0",
+    "enum-for": "0.0.3",
     "keyword-extractor": "0.0.19",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

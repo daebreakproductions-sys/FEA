@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { Deal } from '@app/models/deal';
 import { Market } from '@app/models/market';
 import { StartEndDatesValidator } from '@app/validators/start-end-dates';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { IonSearchbar, IonSlides, ModalController } from '@ionic/angular';
 import { MarketModalPage } from '../../modals/market-modal/market-modal.page'
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { Tag } from '@app/models/tag';
@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 })
 export class DealsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
+  @ViewChild('search') searchBar: IonSearchbar;
   public dealForm: FormGroup;
 
   public deal: Deal;
@@ -102,6 +103,21 @@ export class DealsPage implements OnInit {
     };
 
   ngOnInit() {
+    this.resetDeal();
+    this.minDate = this._minDate();
+    this.maxDate = this._maxDate();
+    this.now = this._now();
+  }
+  ionViewWillEnter() {
+    // Reset the form in case it has already been used
+    this.dealForm.reset();
+    this.resetDeal();
+    this.associatedTags = null;
+    this.searchTags = null;
+    this.tagSearchTerm = null;
+    this.searchBar.value = null;
+  }
+  resetDeal() {
     this.deal = {
       market: null,
       startDate: null,
@@ -112,9 +128,6 @@ export class DealsPage implements OnInit {
       price: '',
       tags: [],
     }
-    this.minDate = this._minDate();
-    this.maxDate = this._maxDate();
-    this.now = this._now();
   }
   ngAfterViewInit() {
     for(let control in this.dealForm.controls) {

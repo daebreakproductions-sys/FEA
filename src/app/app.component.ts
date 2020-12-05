@@ -27,7 +27,6 @@ export class AppComponent {
   initializeApp() {
     this.marketService.init();
     this.tagService.init();
-    this.dealService.init();
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

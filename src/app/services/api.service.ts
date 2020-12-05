@@ -10,6 +10,7 @@ import { Market } from '@app/models/market';
 import { APIListOptions } from '@app/models/list-options';
 import { Tag } from '@app/models/tag';
 import { Deal } from '@app/models/deal';
+import { Tip } from '@app/models/tip';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -240,10 +241,21 @@ export class ApiService {
     return this.apiTokenGet('ugc/deals/list', params) as Promise<Deal[]>;
   }
   public createDeal(deal: Deal) {
-    return this.apiTokenPost('ugc/deals/create', deal) as Promise<bigint>;
+    return this.apiTokenPost('ugc/deals/create', deal) as Promise<number>;
   }
-  public getDeal(id: bigint) {
+  public getDeal(id: number) {
     return this.apiTokenGet('ugc/deals/' + id) as Promise<Deal>;
+  }
+
+  // Deals
+  public getTips(params: APIListOptions) {
+    return this.apiTokenGet('ugc/tips/list', params) as Promise<Tip[]>;
+  }
+  public createTip(tip: Tip) {
+    return this.apiTokenPost('ugc/tips/create', tip) as Promise<number>;
+  }
+  public getTip(id: number) {
+    return this.apiTokenGet('ugc/tips/' + id) as Promise<Tip>;
   }
 
   // auth
