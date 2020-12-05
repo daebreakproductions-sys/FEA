@@ -7,11 +7,13 @@ This app is the client facing platform for Flint Eats.
 - Angular 10 
 - Capacitor 2
 
+### Development Environment
+
+This project is based on Capacitor + Ionic + Angular. [Recommended Reading](https://capacitorjs.com/docs)
+
 ### Developer Notes
 
 For development/testing use ``` ionic serve --configuration="local|dev|test|prod" ```
-
-In bash/terminal run ``` ./_makeModel ``` to generate new objects quickly 
 
 ### Native Build (capacitor)
 
