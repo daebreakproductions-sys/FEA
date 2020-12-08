@@ -10,19 +10,19 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then( m => m.RecipesPageModule)
+    loadChildren: () => import('./recipes/add-recipes.module').then( m => m.AddRecipesPageModule)
   },
   {
     path: 'reviews',
-    loadChildren: () => import('./reviews/reviews.module').then( m => m.ReviewsPageModule)
+    loadChildren: () => import('./reviews/add-reviews.module').then( m => m.AddReviewsPageModule)
   },
   {
     path: 'deals',
-    loadChildren: () => import('./deals/deals.module').then( m => m.DealsPageModule)
+    loadChildren: () => import('./deals/add-deals.module').then( m => m.AddDealsPageModule)
   },
   {
     path: 'tips',
-    loadChildren: () => import('./tips/tips.module').then( m => m.TipsPageModule)
+    loadChildren: () => import('./tips/add-tips.module').then( m => m.AddTipsPageModule)
   }
 ];
 

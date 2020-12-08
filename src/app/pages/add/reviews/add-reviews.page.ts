@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-reviews',
-  templateUrl: './reviews.page.html',
-  styleUrls: ['./reviews.page.scss'],
+  templateUrl: './add-reviews.page.html',
+  styleUrls: ['./add-reviews.page.scss'],
 })
-export class ReviewsPage implements OnInit {
+export class AddReviewsPage implements OnInit {
 
   constructor() { }
 

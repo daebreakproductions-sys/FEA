@@ -12,10 +12,10 @@ import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tips',
-  templateUrl: './tips.page.html',
-  styleUrls: ['./tips.page.scss'],
+  templateUrl: './add-tips.page.html',
+  styleUrls: ['./add-tips.page.scss'],
 })
-export class TipsPage implements OnInit {
+export class AddTipsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
   @ViewChild('search') searchBar: IonSearchbar;
   public tipForm: FormGroup;

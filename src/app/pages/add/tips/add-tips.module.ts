@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TipsPageRoutingModule } from './tips-routing.module';
+import { AddTipsPageRoutingModule } from './add-tips-routing.module';
 
-import { TipsPage } from './tips.page';
+import { AddTipsPage } from './add-tips.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { TipsPage } from './tips.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    TipsPageRoutingModule
+    AddTipsPageRoutingModule
   ],
-  declarations: [TipsPage]
+  declarations: [AddTipsPage]
 })
-export class TipsPageModule {}
+export class AddTipsPageModule {}

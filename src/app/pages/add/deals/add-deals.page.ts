@@ -15,10 +15,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-deals',
-  templateUrl: './deals.page.html',
-  styleUrls: ['./deals.page.scss'],
+  templateUrl: './add-deals.page.html',
+  styleUrls: ['./add-deals.page.scss'],
 })
-export class DealsPage implements OnInit {
+export class AddDealsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
   @ViewChild('search') searchBar: IonSearchbar;
   public dealForm: FormGroup;

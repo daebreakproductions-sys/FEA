@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DealsPageRoutingModule } from './deals-routing.module';
+import { DealsPageRoutingModule } from './add-deals-routing.module';
 
-import { DealsPage } from './deals.page';
+import { AddDealsPage } from './add-deals.page';
 import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-modal.module';
 
 @NgModule({
@@ -18,6 +18,6 @@ import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-mod
     DealsPageRoutingModule,
     MarketModalPageModule
   ],
-  declarations: [DealsPage]
+  declarations: [AddDealsPage]
 })
-export class DealsPageModule {}
+export class AddDealsPageModule {}
