@@ -40,7 +40,6 @@ export class NearbyPage implements OnInit {
   }
 
   addMarkers(markets: Market[]) {
-    console.log(markets);
     markets.forEach( market => {
       if(market.lat && market.lng) {
         L.marker([market.lat, market.lng], {
@@ -84,7 +83,6 @@ export class NearbyPage implements OnInit {
     this.parser = new DOMParser;
 
     this.map.on('popupopen', (ev) => {
-      console.log(ev);
       let popup = this.parser.parseFromString(ev.sourceTarget._popup._content, "text/html");
       let lbl = popup.getElementsByTagName("ion-label")[0]
       let id = Number(lbl.id.split('-')[2]);
