@@ -24,7 +24,10 @@ const routes: Routes = [
     path: 'market-modal',
     loadChildren: () => import('./pages/modals/market-modal/market-modal.module').then( m => m.MarketModalPageModule)
   },
-
+  {
+    path: 'market',
+    loadChildren: () => import('./pages/market/market.module').then( m => m.MarketPageModule)
+  },
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },
   //{ path: '**', loadChildren: () => import('./pages/common/not-found/not-found.module').then(m => m.NotFoundPageModule) }

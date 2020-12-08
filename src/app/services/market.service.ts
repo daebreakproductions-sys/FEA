@@ -86,4 +86,10 @@ export class MarketService {
       return dist;
     }
   }
+
+  byId(id: number) {
+    return this.markets.filter(mkt => {
+      return mkt.id == id;
+    })[0];
+  }
 }
