@@ -1,9 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>tips</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ng-container *ngFor="let tip of tips">
+    <app-eats-ugc-card [ugc]="tip"></app-eats-ugc-card>
+  </ng-container>
 </ion-content>

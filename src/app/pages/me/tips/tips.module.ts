@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TipsPageRoutingModule } from './tips-routing.module';
 
 import { TipsPage } from './tips.page';
+import { EatsUgcComponentModule } from '@app/components/eats-ugc-card/eats-ugc-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TipsPageRoutingModule
+    EatsUgcComponentModule,
+    TipsPageRoutingModule,
   ],
   declarations: [TipsPage]
 })

@@ -26,14 +26,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'recipes',
+        redirectTo: 'deals',
         // pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'recipes',
+    redirectTo: 'deals',
     // pathMatch: 'full'
   },
   {

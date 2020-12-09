@@ -258,6 +258,11 @@ export class ApiService {
     return this.apiTokenGet('ugc/tips/' + id) as Promise<Tip>;
   }
 
+  // Reaction/Likes
+  public toggleLike(id: number) {
+    return this.apiTokenPost('reactions/create', {target: id, value: 1}) as Promise<number>;
+  }
+
   // auth
   public login(username: string, password: string){
     let token = btoa(username + ':' + password);

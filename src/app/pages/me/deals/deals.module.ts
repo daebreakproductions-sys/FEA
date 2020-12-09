@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { DealsPageRoutingModule } from './deals-routing.module';
 
 import { DealsPage } from './deals.page';
+import { EatsUgcComponentModule } from '@app/components/eats-ugc-card/eats-ugc-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DealsPageRoutingModule
+    EatsUgcComponentModule,
+    DealsPageRoutingModule,
   ],
-  declarations: [DealsPage]
+  declarations: [
+    DealsPage
+  ]
 })
 export class DealsPageModule {}
