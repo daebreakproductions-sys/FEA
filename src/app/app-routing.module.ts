@@ -25,8 +25,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/modals/market-modal/market-modal.module').then( m => m.MarketModalPageModule)
   },
   {
-    path: 'market',
-    loadChildren: () => import('./pages/market/market.module').then( m => m.MarketPageModule)
+    path: 'detail',
+    loadChildren: () => import('./pages/detail/detail-routing.module').then( m => m.DetailRoutingModule)
   },
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },

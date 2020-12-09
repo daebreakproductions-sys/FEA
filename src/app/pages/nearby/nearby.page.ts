@@ -66,7 +66,7 @@ export class NearbyPage implements OnInit {
   }
 
   navigate(id: number) {
-    this.router.navigate(['market', id]);
+    this.router.navigate(['detail/market', id]);
   }
 
   ngOnInit(){
