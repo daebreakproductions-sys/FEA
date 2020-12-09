@@ -20,6 +20,7 @@ export class NearbyPage implements OnInit {
   readonly iconWidth: number = 71 * this.resize;
   readonly locationResize: number = 0.7;
   private parser: DOMParser;
+  public mapInitialized: boolean = false;
 
   constructor( 
     public marketService: MarketService,
@@ -39,6 +40,14 @@ export class NearbyPage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    if(this.mapInitialized) {
+      // Only do this if the map has already loaded
+      this.geolocation.getCurrentPosition().then(locationData => {
+        this.setMapZoom(locationData);
+      });
+    }
+  }
   addMarkers(markets: Market[]) {
     markets.forEach( market => {
       if(market.lat && market.lng) {
@@ -99,13 +108,16 @@ export class NearbyPage implements OnInit {
 
       if(this.marketService.doneLoading) {
         this.addMarkers(this.marketService.markets);
-      } else {
+        this.setMapZoom(locationData);
+        this.mapInitialized = true;
+  } else {
         const myObserver = {
           next: x => { },
           error: err => console.error('Observer got an error: ' + err),
           complete: () => {
             this.addMarkers(this.marketService.markets);
             this.setMapZoom(locationData);
+            this.mapInitialized = true;
           },
         };
         this.marketService.notifier.subscribe(myObserver);
