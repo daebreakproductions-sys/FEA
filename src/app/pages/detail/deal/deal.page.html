@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/tabs/me/deals"></ion-back-button>
+    <ion-title>Deals</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="deal">
+  <!-- User Header -->
+  <ion-item lines="none">
+    <ion-avatar item-start>
+      <img *ngIf="deal.usr.avatar64" [src]="'data:image/jpg;base64,' + deal.usr.avatar64">
+      <img *ngIf="deal.usr.avatar64 === null" src="assets/images/empty_avatar.png">
+    </ion-avatar>
+    <ion-card-header>
+      <ion-card-title item-content>{{ deal.usr.name.trim() == '' ? deal.usr.username : deal.usr.name }}</ion-card-title>
+      <ion-card-subtitle item-content>Deal</ion-card-subtitle>
+    </ion-card-header>
+    <ion-button slot="end" item-end [fill]="userService.iFollow(deal.usr.id) ? 'solid' : 'outline'" (click)="userService.toggleFollow(deal.usr.id)">
+      {{ userService.iFollow(deal.usr.id) ? "Following" : "Follow" }}
+    </ion-button>
+  </ion-item>
+
+  <!-- Deal Image -->
+  <ion-img *ngIf="deal && deal.image64" [src]="'data:image/jpg;base64,' + deal.image64"></ion-img>
+
+  <!-- Title and Market -->
+  <ion-card-content lines="none">
+    <ion-card-title>
+      {{ deal.title }}
+    </ion-card-title>
+    <ion-card-subtitle size="small" color="secondary" (click)="marketDetail()">
+      {{ deal.market.name }}
+    </ion-card-subtitle>
+  </ion-card-content>
+
+  <!-- Tags -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary">Tags</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col *ngIf="tags">
+        <ng-container *ngFor="let tag of tags">
+          <ion-button fill="solid" size="small">#{{tag.name}}</ion-button>
+        </ng-container>
+      </ion-col>
+      <ion-col *ngIf="tags == null">
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Comments -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary">Comments</ion-title>
+  </ion-toolbar>
+  <ion-list *ngIf="comments" lines="none">
+    <ion-item *ngFor="let comment of comments">
+      <ion-avatar item-start>
+        <img *ngIf="comment.usr.avatar64" [src]="'data:image/jpg;base64,' + comment.usr.avatar64">
+        <img *ngIf="comment.usr.avatar64 === null" src="assets/images/empty_avatar.png">
+      </ion-avatar>
+      <ion-card-content lines="none">
+        <ion-card-title>
+          {{ comment.usr.name.trim() == "" ? comment.usr.username : comment.usr.name }}
+        </ion-card-title>
+        <p>
+          {{ comment.text }}
+        </p>
+      </ion-card-content>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-input type="text" placeholder="Leave a comment" [(ngModel)]="commentField"></ion-input>
+      <ion-button fill="outline" (click)="addComment()">Post</ion-button>
+    </ion-row>
+    <ion-row *ngIf="comments == null">
+      <ion-col>
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-grid *ngIf="deal == null" class="ion-justify-content-center">
+  <ion-row class="ion-align-items-center">
+    <ion-col>
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+</ion-grid>

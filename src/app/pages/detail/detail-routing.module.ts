@@ -12,6 +12,10 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'deal',
+    loadChildren: () => import('./deal/deal.module').then( m => m.DealPageModule)
+  },
 ];
 
 @NgModule({

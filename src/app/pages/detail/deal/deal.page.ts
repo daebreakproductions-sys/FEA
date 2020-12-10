@@ -1,0 +1,62 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Deal } from '@app/models/deal';
+import { Tag } from '@app/models/tag';
+import { Comment } from '@app/models/comment';
+import { CommentService } from '@app/services/comment.service';
+import { DealService } from '@app/services/deal.service';
+import { TagService } from '@app/services/tag.service';
+import { UserService } from '@app/services/user.service';
+
+@Component({
+  selector: 'app-deal',
+  templateUrl: './deal.page.html',
+  styleUrls: ['./deal.page.scss'],
+})
+export class DealPage implements OnInit {
+  public deal: Deal;
+  public tags: Tag[];
+  public comments: Comment[];
+  public commentField: string = "";
+
+  constructor(
+    public route: ActivatedRoute,
+    public dealService: DealService,
+    public userService: UserService,
+    public router: Router,
+    public tagService: TagService,
+    public commentService: CommentService,
+  ) { }
+
+  ngOnInit() {
+    let id = this.route.snapshot.params.id;
+    this.dealService.byId(id).then(deal => {
+      console.log(deal);
+      this.deal = deal;
+      this.loadTags();
+      this.loadComments();
+    })
+  }
+
+  loadTags() {
+    this.tagService.byEntityId(this.deal.id).then(tags => {
+      this.tags = tags;
+    });
+  }
+  loadComments() {
+    this.commentService.byEntityId(this.deal.id).then(comments => {
+      this.comments = comments;
+    });
+  }
+  marketDetail() {
+    this.router.navigate(['detail', 'market', this.deal.market.id]);
+  }
+  addComment() {
+    if(this.commentField.trim() != "") {
+      this.commentService.create(this.deal.id, this.commentField).then(() => {
+        this.loadComments();
+        this.commentField = "";
+      });
+    }
+  }
+}

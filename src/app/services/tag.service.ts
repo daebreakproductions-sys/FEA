@@ -59,6 +59,9 @@ export class TagService {
       return val.id == id;
     })[0];
   }
+  byEntityId(id: number) {
+    return this.api.getTagsByEntity(id);
+  }
   async create(name: string) {
 
     let tag: Tag = {

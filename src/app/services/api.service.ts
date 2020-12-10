@@ -12,6 +12,7 @@ import { Tag } from '@app/models/tag';
 import { Deal } from '@app/models/deal';
 import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
+import { Comment } from '@app/models/comment'
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -224,6 +225,9 @@ export class ApiService {
   public addTag(tag: Tag, id: number) {
     return this.apiTokenPost('tags/add/' + id, tag.id) as Promise<number>;
   }
+  public getTagsByEntity(entityId: number) {
+    return this.apiTokenGet('tags/list/' + entityId) as Promise<Tag[]>;
+  }
 
   // Deals
   public getDeals(params: APIListOptions) {
@@ -251,6 +255,11 @@ export class ApiService {
   public toggleLike(id: number) {
     return this.apiTokenPost('reactions/create', {target: id, value: 1}) as Promise<number>;
   }
+  public getFaves() {
+    return this.apiTokenGet('users/me/faves') as Promise<UGC[]>;
+  }
+
+  // Followers/Followees
   public toggleFollow(id: number) {
     return this.apiTokenPost('users/follow', id) as Promise<number>;
   }
@@ -263,8 +272,16 @@ export class ApiService {
   public getMine() {
     return this.apiTokenGet('users/me/mine') as Promise<UGC[]>;
   }
-  public getFaves() {
-    return this.apiTokenGet('users/me/faves') as Promise<UGC[]>;
+
+  // Comments
+  public getCommentsByEntity(entityId: number) {
+    return this.apiTokenGet('ugc/comments/list/' + entityId) as Promise<Comment[]>;
+  }
+  public getComment(id: number) {
+    return this.apiTokenGet('ugc/comments/' + id) as Promise<Comment>;
+  }
+  public createComment(comment: any) {
+    return this.apiTokenPost('ugc/comments/create', comment) as Promise<number>;
   }
 
   // auth
