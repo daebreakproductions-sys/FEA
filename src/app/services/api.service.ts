@@ -11,6 +11,7 @@ import { APIListOptions } from '@app/models/list-options';
 import { Tag } from '@app/models/tag';
 import { Deal } from '@app/models/deal';
 import { Tip } from '@app/models/tip';
+import { UGC } from '@app/models/ugc';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -171,20 +172,8 @@ export class ApiService {
   }
 
   // users
-  public getUsers() {
-    return this.apiTokenGet('api/users');
-  }
   public getUser(id: number) {
-    return this.apiTokenGet('api/users/'+id);
-  }
-  public createUser(postData: any) {
-    return this.apiTokenPost('api/users', postData);
-  }
-  public updateUser(id: number, postData: any) {
-    return this.apiTokenPatch('api/users/'+id, postData);
-  }
-  public deleteUser(id: number) {
-    return this.apiTokenDelete('api/users/'+id);
+    return this.apiTokenGet('users/'+id) as Promise<User>;
   }
   public retrieveCurrentUser() {
     return this.apiTokenGet('users/me') as Promise<User>;
@@ -261,6 +250,21 @@ export class ApiService {
   // Reaction/Likes
   public toggleLike(id: number) {
     return this.apiTokenPost('reactions/create', {target: id, value: 1}) as Promise<number>;
+  }
+  public toggleFollow(id: number) {
+    return this.apiTokenPost('users/follow', id) as Promise<number>;
+  }
+  public getFollowers() {
+    return this.apiTokenGet('users/me/followers') as Promise<User[]>;
+  }
+  public getFollowees() {
+    return this.apiTokenGet('users/me/followees') as Promise<User[]>;
+  }
+  public getMine() {
+    return this.apiTokenGet('users/me/mine') as Promise<UGC[]>;
+  }
+  public getFaves() {
+    return this.apiTokenGet('users/me/faves') as Promise<UGC[]>;
   }
 
   // auth

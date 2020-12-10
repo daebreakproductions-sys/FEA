@@ -9,7 +9,9 @@
       <ion-card-title item-content>{{ ugc.usr.name != ' ' ? ugc.usr.name : ugc.usr.username }}</ion-card-title>
       <ion-card-subtitle item-content>{{ type }}</ion-card-subtitle>
     </ion-card-header>
-    <!-- <ion-button item-end></ion-button> -->
+    <ion-button slot="end" item-end [fill]="userService.iFollow(ugc.usr.id) ? 'solid' : 'outline'" (click)="userService.toggleFollow(ugc.usr.id)">
+      {{ userService.iFollow(ugc.usr.id) ? "Following" : "Follow" }}
+    </ion-button>
   </ion-item>
 
   <!-- Card Image -->

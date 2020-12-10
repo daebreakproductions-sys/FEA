@@ -3,6 +3,7 @@ import { APIListOptions } from '@app/models/list-options';
 import { Tag } from '@app/models/tag';
 import { Subject } from 'rxjs';
 import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +16,22 @@ export class TagService {
 
   constructor(
     public api: ApiService,
+    public auth: AuthService,
   ) { 
 
   }
 
   init() {
     this.tags = [];
-    let params: APIListOptions = {
-      start: 0,
-      length: this.pageSize,
-      orderField: 'name',
-      orderDir: 'ASC'
-    };
-    this.startPaging(params);
+    if(this.auth.isAuthenticated()) {
+      let params: APIListOptions = {
+        start: 0,
+        length: this.pageSize,
+        orderField: 'name',
+        orderDir: 'ASC'
+      };
+      this.startPaging(params);
+    }
   }
   startPaging(params: APIListOptions) {
     this.api.getTags(params).then(tags => {

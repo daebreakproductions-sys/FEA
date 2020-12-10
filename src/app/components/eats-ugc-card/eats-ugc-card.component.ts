@@ -6,6 +6,7 @@ import { Review } from '@app/models/review';
 import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
 import { ApiService } from '@app/services/api.service';
+import { UserService } from '@app/services/user.service';
 
 @Component({
   selector: 'app-eats-ugc-card',
@@ -24,6 +25,7 @@ export class EatsUgcCardComponent implements OnInit {
   constructor(
     public router: Router,
     public apiService: ApiService,
+    public userService: UserService,
   ) { }
 
   ngOnInit() {

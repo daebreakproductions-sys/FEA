@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { MarketService } from './services/market.service';
 import { TagService } from './services/tag.service';
 import { DealService } from './services/deal.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +20,17 @@ export class AppComponent {
     private statusBar: StatusBar,
     private marketService: MarketService,
     private tagService: TagService,
-    private dealService: DealService,
+    private userService: UserService,
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
+    // Also init these services in login.page.ts
     this.marketService.init();
     this.tagService.init();
+    this.userService.init();
+    
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();

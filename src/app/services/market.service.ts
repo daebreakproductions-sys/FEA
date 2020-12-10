@@ -4,6 +4,7 @@ import { Market } from '@app/models/market';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { Coordinates } from '@ionic-native/geolocation';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,22 @@ export class MarketService {
 
   constructor(
     public api: ApiService,
+    public auth: AuthService,
   ) { 
 
   }
 
   init() {
     this.markets = [];
-    let params: APIListOptions = {
-      start: 0,
-      length: this.pageSize,
-      orderField: 'name',
-      orderDir: 'ASC'
-    };
-    this.startPaging(params);
-    // this.notifier = new Observable<Market[]>
+    if(this.auth.isAuthenticated()) {
+      let params: APIListOptions = {
+        start: 0,
+        length: this.pageSize,
+        orderField: 'name',
+        orderDir: 'ASC'
+      };
+      this.startPaging(params);
+    }
   }
 
   startPaging(params: APIListOptions) {
