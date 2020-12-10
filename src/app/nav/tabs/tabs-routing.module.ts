@@ -33,18 +33,6 @@ const routes: Routes = [
         loadChildren: () => import('./../../pages/me/me.module').then(m => m.MePageModule)
       },
       {
-        path: 'user/add',
-        loadChildren: () => import('./../../pages/user/add/add.module').then(m => m.UserAddPageModule)
-      },
-      {
-        path: 'user/detail/{:id}',
-        loadChildren: () => import('./../../pages/user/listing/listing.module').then(m => m.UsersPageModule)
-      },
-      {
-        path: 'users',
-        loadChildren: () => import('./../../pages/user/detail/detail.module').then(m => m.UserPageModule)
-      },
-      {
         path: '',
         redirectTo: '/tabs/nearby',
         pathMatch: 'full'
