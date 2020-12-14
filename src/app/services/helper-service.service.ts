@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Deal } from '@app/models/deal';
 import { EatsDate } from '@app/models/eats-date';
 import { Entity } from '@app/models/entity';
 import { User } from '@app/models/user';
@@ -10,6 +11,11 @@ export class HelperService {
 
   constructor() { }
 
+  public static PopulateDeal(deal: Deal): Deal {
+    deal.startDate = new EatsDate(deal.startDate);
+    deal.endDate = new EatsDate(deal.endDate);
+    return deal;
+  }
   public static PopulateEntity(entity: Entity) : Entity {
     entity.created = new EatsDate(entity.created);
     entity.modified = new EatsDate(entity.modified);

@@ -63,10 +63,10 @@ export class NearbyPage implements OnInit {
     let nearby = this.marketService.getNearby(location.coords, 5).map(result => {
       return result.market;
     });
-    let minLat = nearby.sort((a, b) => a.lat - b.lat)[0].lat;
-    let maxLat = nearby.sort((a, b) => b.lat - a.lat)[0].lat;
-    let minLng = nearby.sort((a, b) => a.lng - b.lng)[0].lng;
-    let maxLng = nearby.sort((a, b) => b.lng - a.lng)[0].lng;
+    let minLat = Math.min(nearby.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
+    let maxLat = Math.max(nearby.sort((a, b) => b.lat - a.lat)[0].lat, location.coords.latitude);
+    let minLng = Math.min(nearby.sort((a, b) => a.lng - b.lng)[0].lng, location.coords.longitude);
+    let maxLng = Math.max(nearby.sort((a, b) => b.lng - a.lng)[0].lng, location.coords.longitude);
 
     this.map.flyToBounds([
       [minLat, minLng],

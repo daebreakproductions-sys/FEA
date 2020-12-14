@@ -7,6 +7,7 @@ import { CommentService } from '@app/services/comment.service';
 import { DealService } from '@app/services/deal.service';
 import { TagService } from '@app/services/tag.service';
 import { UserService } from '@app/services/user.service';
+import { ApiService } from '@app/services/api.service';
 
 @Component({
   selector: 'app-deal',
@@ -26,6 +27,7 @@ export class DealPage implements OnInit {
     public router: Router,
     public tagService: TagService,
     public commentService: CommentService,
+    public apiService: ApiService,
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,17 @@ export class DealPage implements OnInit {
     })
   }
 
+  likeAction() {
+    if(this.deal.iLike) {
+      this.deal.reactionCount -= 1;
+      this.deal.iLike = false;
+    } else {
+      // API Action
+      this.deal.reactionCount += 1;
+      this.deal.iLike = true;
+    }
+    this.apiService.toggleLike(this.deal.id);
+  }
   loadTags() {
     this.tagService.byEntityId(this.deal.id).then(tags => {
       this.tags = tags;

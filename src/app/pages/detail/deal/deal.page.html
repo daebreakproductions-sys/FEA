@@ -13,7 +13,11 @@
       <img *ngIf="deal.usr.avatar64 === null" src="assets/images/empty_avatar.png">
     </ion-avatar>
     <ion-card-header>
-      <ion-card-title item-content>{{ deal.usr.name.trim() == '' ? deal.usr.username : deal.usr.name }}</ion-card-title>
+      <ion-card-title item-content>
+        {{ deal.usr.name.trim() == '' ? deal.usr.username : deal.usr.name }}
+        <ion-icon *ngIf="userService.iFollow(deal.usr.id)" name="star" color="primary"></ion-icon>
+        <ion-icon *ngIf="!userService.iFollow(deal.usr.id)" name="star-outline"></ion-icon>
+      </ion-card-title>
       <ion-card-subtitle item-content>Deal</ion-card-subtitle>
     </ion-card-header>
     <ion-button slot="end" item-end [fill]="userService.iFollow(deal.usr.id) ? 'solid' : 'outline'" (click)="userService.toggleFollow(deal.usr.id)">
@@ -32,7 +36,35 @@
     <ion-card-subtitle size="small" color="secondary" (click)="marketDetail()">
       {{ deal.market.name }}
     </ion-card-subtitle>
+    <ion-card-subtitle (click)="likeAction()">
+      <ion-icon *ngIf="deal.iLike" name="heart" color="danger"></ion-icon>
+      <ion-icon *ngIf="!deal.iLike" name="heart-outline"></ion-icon>
+      <ion-label> {{deal.reactionCount}} {{deal.reactionCount == 1 ? 'Like' : 'Likes'}}</ion-label>
+    </ion-card-subtitle>
   </ion-card-content>
+
+  <!-- Description, Price, start/end date -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary">Details</ion-title>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ion-item *ngIf="deal.price">
+      <ion-label position="stacked">Price</ion-label>
+      <ion-input readonly="true" >{{ deal.price }}</ion-input>
+    </ion-item>
+    <ion-item *ngIf="deal.startDate">
+      <ion-label position="stacked">Discovery Date</ion-label>
+      <ion-input readonly="true" >{{ deal.startDate.toDate().toDateString() }}</ion-input>
+    </ion-item>
+    <ion-item *ngIf="deal.endDate">
+      <ion-label position="stacked">End Date</ion-label>
+      <ion-input readonly="true" >{{ deal.endDate.toDate().toDateString() }}</ion-input>
+    </ion-item>
+    <ion-item *ngIf="deal.text">
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea autoGrow="true" readonly="true" >{{ deal.text }}</ion-textarea>
+    </ion-item>
+  </ion-list>
 
   <!-- Tags -->
   <ion-toolbar class="ion-align-items-center">
