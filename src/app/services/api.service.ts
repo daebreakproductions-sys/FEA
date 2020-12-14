@@ -263,11 +263,17 @@ export class ApiService {
   public toggleFollow(id: number) {
     return this.apiTokenPost('users/follow', id) as Promise<number>;
   }
-  public getFollowers() {
+  public getMyFollowers() {
     return this.apiTokenGet('users/me/followers') as Promise<User[]>;
   }
-  public getFollowees() {
+  public getUserFollowers(id: number) {
+    return this.apiTokenGet('users/' + id + '/followers') as Promise<User[]>;
+  }
+  public getMyFollowees() {
     return this.apiTokenGet('users/me/followees') as Promise<User[]>;
+  }
+  public getUserFollowees(id: number) {
+    return this.apiTokenGet('users/' + id + '/followees') as Promise<User[]>;
   }
   public getMine() {
     return this.apiTokenGet('users/me/mine') as Promise<UGC[]>;

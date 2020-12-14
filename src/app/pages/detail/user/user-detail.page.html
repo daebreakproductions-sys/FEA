@@ -1,16 +1,35 @@
 <ion-header *ngIf="user">
   <ion-toolbar>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
     <ion-title>{{ user.name.trim() == "" ? user.username : user.name }}</ion-title>
+    <ion-button *ngIf="userService.me && userService.followees && user.id != userService.me.id" 
+      slot="end" 
+      size="small" 
+      [fill]="userService.iFollow(user.id) ? 'solid' : 'outline'" 
+      (click)="userService.toggleFollow(user.id)"
+      class="ion-margin-end"
+    >
+      {{ userService.iFollow(user.id) ? "Following" : "Follow" }}
+    </ion-button>
   </ion-toolbar>
-  <ion-row>
-    <ion-col size="5">
-      
+  <ion-row justify-content-center>
+    <ion-col size="4" (click)="showFollowers()">
+      <p *ngIf="followers" class="followLabel">
+        {{followers.length}} {{followers.length == 1 ? 'Follower' : 'Followers'}}
+      </p>
     </ion-col>
-    <ion-col size="2">
-      
+    <ion-col size="4" class="ion-align-items-center">
+      <ion-item lines="none" text-center>
+        <ion-avatar item-start  class="ion-align-self-center">
+          <img *ngIf="user.avatar64" [src]="'data:image/jpg;base64,' + user.avatar64">
+          <img *ngIf="user.avatar64 === null" src="assets/images/empty_avatar.png">
+        </ion-avatar>
+      </ion-item>    
     </ion-col>
-    <ion-col size="5">
-      
+    <ion-col size="4" (click)="showFollowees()">
+      <p *ngIf="followees" class="followLabel">
+        {{followees.length}} Following
+      </p>
     </ion-col>
   </ion-row>
 </ion-header>

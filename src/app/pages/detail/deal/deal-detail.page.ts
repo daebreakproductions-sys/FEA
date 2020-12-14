@@ -72,4 +72,7 @@ export class DealDetailPage implements OnInit {
       });
     }
   }
+  userDetail() {
+    this.router.navigate(['detail', 'user', this.deal.usr.id]);
+  }
 }

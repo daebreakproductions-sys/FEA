@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ng-container *ngIf="user">
+      <ion-back-button [defaultHref]="'/detail/user/' + user.id" slot="start"></ion-back-button>
+      <ion-title>{{ user.name.trim() == "" ? user.username : user.name }} follows</ion-title>
+    </ng-container>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="followees">
+    <ion-item *ngFor="let followee of followees" (click)="navigateToUser(followee.id)">
+      <ion-avatar item-start  class="ion-align-self-center">
+        <img *ngIf="followee.avatar64" [src]="'data:image/jpg;base64,' + followee.avatar64">
+        <img *ngIf="followee.avatar64 === null" src="assets/images/empty_avatar.png">
+      </ion-avatar>
+      <ion-label class="ion-padding-start">
+        {{ followee.name.trim() == "" ? followee.username : followee.name }}
+        <ion-icon *ngIf="followee.id != userService.me.id && userService.iFollow(followee.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="followee.id != userService.me.id && !userService.iFollow(followee.id)" name="people-outline"></ion-icon>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -20,13 +20,17 @@ export class UserService {
     if(this.auth.isAuthenticated()) {
       this.loadFollowers();
       this.loadFollowees();
+      this.loadMe();
     }
   }
   public async loadFollowers() {
-    this.followers = await this.apiService.getFollowers();
+    this.followers = await this.apiService.getMyFollowers();
   }
   public async loadFollowees() {
-    this.followees = await this.apiService.getFollowees();
+    this.followees = await this.apiService.getMyFollowees();
+  }
+  public async loadMe() {
+    this.me = await this.apiService.getCurrentUser();
   }
   public toggleFollow(id: number) {
     this.apiService.toggleFollow(id);

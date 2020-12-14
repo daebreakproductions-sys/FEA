@@ -7,7 +7,7 @@
 
 <ion-content *ngIf="deal">
   <!-- User Header -->
-  <ion-item lines="none">
+  <ion-item lines="none" (click)="userDetail()">
     <ion-avatar item-start>
       <img *ngIf="deal.usr.avatar64" [src]="'data:image/jpg;base64,' + deal.usr.avatar64">
       <img *ngIf="deal.usr.avatar64 === null" src="assets/images/empty_avatar.png">
@@ -15,14 +15,11 @@
     <ion-card-header>
       <ion-card-title item-content>
         {{ deal.usr.name.trim() == '' ? deal.usr.username : deal.usr.name }}
-        <ion-icon *ngIf="userService.iFollow(deal.usr.id)" name="star" color="primary"></ion-icon>
-        <ion-icon *ngIf="!userService.iFollow(deal.usr.id)" name="star-outline"></ion-icon>
+        <ion-icon *ngIf="userService.iFollow(deal.usr.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="!userService.iFollow(deal.usr.id)" name="people-outline"></ion-icon>
       </ion-card-title>
       <ion-card-subtitle item-content>Deal</ion-card-subtitle>
     </ion-card-header>
-    <ion-button slot="end" item-end [fill]="userService.iFollow(deal.usr.id) ? 'solid' : 'outline'" (click)="userService.toggleFollow(deal.usr.id)">
-      {{ userService.iFollow(deal.usr.id) ? "Following" : "Follow" }}
-    </ion-button>
   </ion-item>
 
   <!-- Deal Image -->
