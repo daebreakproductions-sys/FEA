@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'detail',
     loadChildren: () => import('./pages/detail/detail-routing.module').then( m => m.DetailRoutingModule)
   },
+  {
+    path: 'feed',
+    loadChildren: () => import('./pages/feed/feed.module').then( m => m.FeedPageModule)
+  },
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },
   //{ path: '**', loadChildren: () => import('./pages/common/not-found/not-found.module').then(m => m.NotFoundPageModule) }

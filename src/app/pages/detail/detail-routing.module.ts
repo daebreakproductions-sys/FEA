@@ -8,13 +8,21 @@ const routes: Routes = [
     children: [
       {
         path: 'market',
-        loadChildren: () => import('./market/market.module').then(m => m.MarketPageModule)
+        loadChildren: () => import('./market/market-detail.module').then(m => m.MarketDetailPageModule)
       },
     ]
   },
   {
     path: 'deal',
-    loadChildren: () => import('./deal/deal.module').then( m => m.DealPageModule)
+    loadChildren: () => import('./deal/deal-detail.module').then( m => m.DealDetailPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user-detail.module').then( m => m.UserDetailPageModule)
+  },
+  {
+    path: 'tip',
+    loadChildren: () => import('./tip/tip-detail.module').then( m => m.TipDetailPageModule)
   },
 ];
 

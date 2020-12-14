@@ -11,10 +11,10 @@ import { ApiService } from '@app/services/api.service';
 
 @Component({
   selector: 'app-deal',
-  templateUrl: './deal.page.html',
-  styleUrls: ['./deal.page.scss'],
+  templateUrl: './deal-detail.page.html',
+  styleUrls: ['./deal-detail.page.scss'],
 })
-export class DealPage implements OnInit {
+export class DealDetailPage implements OnInit {
   public deal: Deal;
   public tags: Tag[];
   public comments: Comment[];

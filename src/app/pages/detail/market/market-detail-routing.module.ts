@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DataResolverService } from '@app/resolver/data-resolver.service';
 
-import { MarketPage } from './market.page';
+import { MarketDetailPage } from './market-detail.page';
 
 const routes: Routes = [
   {
     path: ':id',
-    component: MarketPage
+    component: MarketDetailPage
   }
 ];
 
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MarketPageRoutingModule {}
+export class MarketDetailPageRoutingModule {}

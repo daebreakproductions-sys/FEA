@@ -7,10 +7,10 @@ import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-market',
-  templateUrl: './market.page.html',
-  styleUrls: ['./market.page.scss'],
+  templateUrl: './market-detail.page.html',
+  styleUrls: ['./market-detail.page.scss'],
 })
-export class MarketPage implements OnInit {
+export class MarketDetailPage implements OnInit {
   public market: Market;
 
   constructor(

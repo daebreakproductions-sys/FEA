@@ -17,8 +17,8 @@ const routes: Routes = [
         loadChildren: () => import('./../../pages/friends/friends.module').then(m => m.FriendsPageModule)
       },
       {
-        path: 'login',
-        loadChildren: () => import('./../../pages/login/login.module').then(m => m.LoginPageModule)
+        path: 'feed',
+        loadChildren: () => import('./../../pages/feed/feed.module').then(m => m.FeedPageModule)
       },
       {
         path: 'signup',

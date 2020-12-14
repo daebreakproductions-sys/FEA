@@ -6,12 +6,13 @@
       <img *ngIf="ugc.usr.avatar64 === null" src="assets/images/empty_avatar.png">
     </ion-avatar>
     <ion-card-header>
-      <ion-card-title item-content>{{ ugc.usr.name != ' ' ? ugc.usr.name : ugc.usr.username }}</ion-card-title>
+      <ion-card-title item-content class="ion-align-items-center">
+        {{ ugc.usr.name != ' ' ? ugc.usr.name : ugc.usr.username }}
+        <ion-icon *ngIf="userService.iFollow(ugc.usr.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="!userService.iFollow(ugc.usr.id)" name="people-outline"></ion-icon>
+      </ion-card-title>
       <ion-card-subtitle item-content>{{ type }}</ion-card-subtitle>
     </ion-card-header>
-    <ion-button slot="end" item-end [fill]="userService.iFollow(ugc.usr.id) ? 'solid' : 'outline'" (click)="userService.toggleFollow(ugc.usr.id)">
-      {{ userService.iFollow(ugc.usr.id) ? "Following" : "Follow" }}
-    </ion-button>
   </ion-item>
 
   <!-- Card Image -->
