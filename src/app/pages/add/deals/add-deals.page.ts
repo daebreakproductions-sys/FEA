@@ -332,7 +332,7 @@ export class AddDealsPage implements OnInit {
       .map(tag => {
         return { id: tag.tag.id };
       }),
-      image64: this.deal.image64
+      image: this.deal.image64
     }
     this.dealService.create(newDeal).then( deal => {
       this.associatedTags.filter(tag => {
