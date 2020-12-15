@@ -14,6 +14,7 @@ export class HelperService {
   public static PopulateDeal(deal: Deal): Deal {
     deal.startDate = new EatsDate(deal.startDate);
     deal.endDate = new EatsDate(deal.endDate);
+    deal = <Deal>this.PopulateEntity(deal);
     return deal;
   }
   public static PopulateEntity(entity: Entity) : Entity {

@@ -7,4 +7,9 @@
       <ion-spinner style="margin: auto;"></ion-spinner>
     </ion-col>
   </ion-row>
+  <ion-row *ngIf="deals && deals.length == 0" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-label style="margin: auto;">No deals to show</ion-label>
+    </ion-col>
+  </ion-row>
 </ion-content>

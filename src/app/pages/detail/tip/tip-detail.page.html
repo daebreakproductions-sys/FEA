@@ -63,30 +63,32 @@
     <ion-title color="primary">Comments</ion-title>
   </ion-toolbar>
   <ion-list *ngIf="comments" lines="none">
-    <ion-item *ngFor="let comment of comments">
-      <ion-avatar item-start>
-        <img *ngIf="comment.usr.avatar64" [src]="'data:image/jpg;base64,' + comment.usr.avatar64">
-        <img *ngIf="comment.usr.avatar64 === null" src="assets/images/empty_avatar.png">
-      </ion-avatar>
-      <ion-card-content lines="none">
-        <ion-card-title>
-          {{ comment.usr.name.trim() == "" ? comment.usr.username : comment.usr.name }}
-        </ion-card-title>
-        <p>
-          {{ comment.text }}
-        </p>
-      </ion-card-content>
-    </ion-item>
+    <ng-container *ngFor="let comment of comments">
+      <ion-item>
+        <ion-avatar item-start>
+          <img *ngIf="comment.usr.avatar64" [src]="'data:image/jpg;base64,' + comment.usr.avatar64">
+          <img *ngIf="comment.usr.avatar64 === null" src="assets/images/empty_avatar.png">
+        </ion-avatar>
+        <ion-card-content lines="none">
+          <ion-card-title>
+            {{ comment.usr.name.trim() == "" ? comment.usr.username : comment.usr.name }}
+          </ion-card-title>
+        </ion-card-content>
+      </ion-item>
+      <ion-item>
+        {{ comment.text }}
+      </ion-item>
+    </ng-container>
   </ion-list>
   <ion-grid>
-    <ion-row>
-      <ion-input type="text" placeholder="Leave a comment" [(ngModel)]="commentField"></ion-input>
-      <ion-button fill="outline" (click)="addComment()">Post</ion-button>
-    </ion-row>
     <ion-row *ngIf="comments == null" style="height: 100%">
       <ion-col class="ion-text-center" style="margin: auto;">
         <ion-spinner style="margin: auto;"></ion-spinner>
       </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-input type="text" placeholder="Leave a comment" [(ngModel)]="commentField"></ion-input>
+      <ion-button fill="outline" (click)="addComment()">Post</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>

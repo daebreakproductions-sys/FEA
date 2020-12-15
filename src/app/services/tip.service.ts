@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Tip } from '@app/models/tip';
 import { ApiService } from './api.service';
+import { HelperService } from './helper-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,20 @@ export class TipService {
         })
       });
     })
+  }
+  async byUser(id: number) {
+    return new Promise<Tip[]>((resolve) => {
+      this.api.getUserContent(id).then(ugcs => {
+        let tips: Tip[];
+        tips = ugcs.filter(ugc => {
+          return ugc.class.endsWith('Tip');
+        })
+        .map(ugc => {
+          return <Tip>HelperService.PopulateEntity(ugc);
+        });
+        resolve(tips);
+      });
+    });
   }
 
 }

@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>user-tips</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ng-container *ngFor="let tip of tips">
+    <app-eats-ugc-card [ugc]="tip"></app-eats-ugc-card>
+  </ng-container>
+  <ion-row *ngIf="tips == null" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-spinner style="margin: auto;"></ion-spinner>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="tips && tips.length == 0" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-label style="margin: auto;">No tips to show</ion-label>
+    </ion-col>
+  </ion-row>
 </ion-content>
