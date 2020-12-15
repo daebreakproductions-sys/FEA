@@ -51,11 +51,9 @@ export class MarketService {
   }
 
   search(searchTerm: string) {
-    console.log(searchTerm);
     return this.markets.filter(mkt => {
       return mkt.name.toLowerCase().includes(searchTerm.toLowerCase());
     })
-    // return this.api.searchMarkets(searchTerm);
   }
 
   getNearby(location: Coordinates, numberOfResults: number): { distance: number, market: Market } [] {

@@ -83,18 +83,16 @@
       <ion-input type="text" placeholder="Leave a comment" [(ngModel)]="commentField"></ion-input>
       <ion-button fill="outline" (click)="addComment()">Post</ion-button>
     </ion-row>
-    <ion-row *ngIf="comments == null">
-      <ion-col>
-        <ion-spinner></ion-spinner>
+    <ion-row *ngIf="comments == null" style="height: 100%">
+      <ion-col class="ion-text-center" style="margin: auto;">
+        <ion-spinner style="margin: auto;"></ion-spinner>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-grid *ngIf="tip == null" class="ion-justify-content-center">
-  <ion-row class="ion-align-items-center">
-    <ion-col>
-      <ion-spinner></ion-spinner>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<ion-row *ngIf="tip == null" style="height: 100%">
+  <ion-col class="ion-text-center" style="margin: auto;">
+    <ion-spinner style="margin: auto;"></ion-spinner>
+  </ion-col>
+</ion-row>

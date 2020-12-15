@@ -12,9 +12,11 @@
       <ion-title color="primary">Search Results</ion-title>
     </ion-toolbar>
     <ion-list>
-      <ion-item *ngIf="searchResults == []">
-        <ion-spinner></ion-spinner>
-      </ion-item>
+      <ion-row *ngIf="searchResults == []" style="height: 100%">
+        <ion-col class="ion-text-center" style="margin: auto;">
+          <ion-spinner style="margin: auto;"></ion-spinner>
+        </ion-col>
+      </ion-row>
       <ion-item *ngFor="let market of searchResults" (click)="viewCtrl.dismiss(market)">
         {{market.name}} ({{market.address}})
       </ion-item>
@@ -24,9 +26,11 @@
     <ion-title color="primary">Nearby</ion-title>
   </ion-toolbar>
   <ion-list>
-    <ion-item *ngIf="nearby == null">
-      <ion-spinner></ion-spinner>
-    </ion-item>
+    <ion-row *ngIf="nearby == null" style="height: 100%">
+      <ion-col class="ion-text-center" style="margin: auto;">
+        <ion-spinner style="margin: auto;"></ion-spinner>
+      </ion-col>
+    </ion-row>
     <ion-item *ngFor="let market of nearby" (click)="viewCtrl.dismiss(market)">
       {{market.name}}
     </ion-item>

@@ -2,4 +2,9 @@
   <ng-container *ngFor="let deal of deals">
     <app-eats-ugc-card [ugc]="deal"></app-eats-ugc-card>
   </ng-container>
+  <ion-row *ngIf="deals == null" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-spinner style="margin: auto;"></ion-spinner>
+    </ion-col>
+  </ion-row>
 </ion-content>

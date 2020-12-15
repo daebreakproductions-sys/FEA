@@ -113,10 +113,8 @@
   </ion-grid>
 </ion-content>
 
-<ion-grid *ngIf="deal == null" class="ion-justify-content-center">
-  <ion-row class="ion-align-items-center">
-    <ion-col>
-      <ion-spinner></ion-spinner>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<ion-row *ngIf="deal == null" style="height: 100%">
+  <ion-col class="ion-text-center" style="margin: auto;">
+    <ion-spinner style="margin: auto;"></ion-spinner>
+  </ion-col>
+</ion-row>
