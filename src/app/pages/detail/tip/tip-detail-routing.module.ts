@@ -5,7 +5,7 @@ import { TipDetailPage } from './tip-detail.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: TipDetailPage
   }
 ];

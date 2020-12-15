@@ -1,9 +1,100 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tip-detail</ion-title>
+    <ion-back-button slot="start" defaultHref="/tabs/me/tips"></ion-back-button>
+    <ion-title>Tips</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="tip">
+  <!-- User Header -->
+  <ion-item lines="none" (click)="userDetail()">
+    <ion-avatar item-start>
+      <img *ngIf="tip.usr.avatar64" [src]="'data:image/jpg;base64,' + tip.usr.avatar64">
+      <img *ngIf="tip.usr.avatar64 === null" src="assets/images/empty_avatar.png">
+    </ion-avatar>
+    <ion-card-header>
+      <ion-card-title item-content>
+        {{ tip.usr.name.trim() == '' ? tip.usr.username : tip.usr.name }}
+        <ion-icon *ngIf="userService.iFollow(tip.usr.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="!userService.iFollow(tip.usr.id)" name="people-outline"></ion-icon>
+      </ion-card-title>
+      <ion-card-subtitle item-content>{{tip.tipType | titlecase}} Tip</ion-card-subtitle>
+    </ion-card-header>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-card-subtitle (click)="likeAction()">
+        <ion-icon *ngIf="tip.iLike" name="heart" color="danger"></ion-icon>
+        <ion-icon *ngIf="!tip.iLike" name="heart-outline"></ion-icon>
+        <ion-label> {{tip.reactionCount}} {{tip.reactionCount == 1 ? 'Like' : 'Likes'}}</ion-label>
+      </ion-card-subtitle>
+    </ion-col>
+  </ion-row>
 
+  <!-- Description -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary">Description</ion-title>
+  </ion-toolbar>
+  <ion-list lines="none">
+    <ion-item *ngIf="tip.text">
+      <ion-textarea autoGrow="true" readonly="true" >{{ tip.text }}</ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <!-- Tags -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary">Tags</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col *ngIf="tags">
+        <ng-container *ngFor="let tag of tags">
+          <ion-button fill="solid" size="small">#{{tag.name}}</ion-button>
+        </ng-container>
+      </ion-col>
+      <ion-col *ngIf="tags == null">
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Comments -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary">Comments</ion-title>
+  </ion-toolbar>
+  <ion-list *ngIf="comments" lines="none">
+    <ion-item *ngFor="let comment of comments">
+      <ion-avatar item-start>
+        <img *ngIf="comment.usr.avatar64" [src]="'data:image/jpg;base64,' + comment.usr.avatar64">
+        <img *ngIf="comment.usr.avatar64 === null" src="assets/images/empty_avatar.png">
+      </ion-avatar>
+      <ion-card-content lines="none">
+        <ion-card-title>
+          {{ comment.usr.name.trim() == "" ? comment.usr.username : comment.usr.name }}
+        </ion-card-title>
+        <p>
+          {{ comment.text }}
+        </p>
+      </ion-card-content>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-input type="text" placeholder="Leave a comment" [(ngModel)]="commentField"></ion-input>
+      <ion-button fill="outline" (click)="addComment()">Post</ion-button>
+    </ion-row>
+    <ion-row *ngIf="comments == null">
+      <ion-col>
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+<ion-grid *ngIf="tip == null" class="ion-justify-content-center">
+  <ion-row class="ion-align-items-center">
+    <ion-col>
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+</ion-grid>

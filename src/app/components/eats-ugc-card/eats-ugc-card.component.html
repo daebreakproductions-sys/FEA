@@ -1,6 +1,6 @@
 <ion-card *ngIf="ugc">
   <!-- User Header -->
-  <ion-item lines="none">
+  <ion-item lines="none" (click)="goToDetail()">
     <ion-avatar item-start>
       <img *ngIf="ugc.usr.avatar64" [src]="'data:image/jpg;base64,' + ugc.usr.avatar64">
       <img *ngIf="ugc.usr.avatar64 === null" src="assets/images/empty_avatar.png">
@@ -11,7 +11,7 @@
         <ion-icon *ngIf="userService.iFollow(ugc.usr.id)" name="people" color="primary"></ion-icon>
         <ion-icon *ngIf="!userService.iFollow(ugc.usr.id)" name="people-outline"></ion-icon>
       </ion-card-title>
-      <ion-card-subtitle item-content>{{ type }}</ion-card-subtitle>
+      <ion-card-subtitle item-content>{{ tip ? tip.tipType : '' | titlecase }} {{ type }}</ion-card-subtitle>
     </ion-card-header>
   </ion-item>
 
