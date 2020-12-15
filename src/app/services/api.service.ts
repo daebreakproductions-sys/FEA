@@ -286,6 +286,9 @@ export class ApiService {
   public getUserLikes(id: number) {
     return this.apiTokenGet('ugc/feed/' + id + '/true') as Promise<UGC[]>;
   }
+  public searchFeedByName(name: string) {
+    return this.apiTokenGet('ugc/feed', {q: name}) as Promise<UGC[]>;
+  }
 
   // Comments
   public getCommentsByEntity(entityId: number) {

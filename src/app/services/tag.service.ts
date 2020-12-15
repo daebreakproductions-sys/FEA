@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { APIListOptions } from '@app/models/list-options';
 import { Tag } from '@app/models/tag';
+import { UGC } from '@app/models/ugc';
 import { Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { HelperService } from './helper-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -55,9 +57,19 @@ export class TagService {
     })
   }
   byId(id: number) {
-    return this.tags.filter(val => {
-      return val.id == id;
-    })[0];
+    return new Promise<Tag>((resolve) => {
+      if(this.doneLoading) {
+        resolve(this.tags.filter(val => {
+          return val.id == id;
+        })[0]);
+      } else {
+        this.notifier.subscribe({complete: () => {
+          resolve(this.tags.filter(val => {
+            return val.id == id;
+          })[0]);
+        }})
+      }
+    });
   }
   byEntityId(id: number) {
     return this.api.getTagsByEntity(id);
@@ -86,6 +98,17 @@ export class TagService {
 
   tagItem(id: number, tag: Tag) {
     this.api.addTag(tag, id);
+  }
+  searchByTag(id: number) {
+    return new Promise<UGC[]>((resolve) => {
+      this.byId(id).then(tag => {
+        this.api.searchFeedByName(tag.name.trim()).then(ugcs => {
+          resolve(ugcs.map(ugc => {
+            return HelperService.PopulateEntity(ugc);
+          }));
+        });
+      })
+    });
   }
 
 }

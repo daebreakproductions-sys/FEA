@@ -72,4 +72,7 @@ export class TipDetailPage implements OnInit {
   userDetail() {
     this.router.navigate(['detail', 'user', this.tip.usr.id]);
   }
+  navigateToTag(id: number) {
+    this.router.navigate(['detail', 'tag-content', id]);
+  }
 }

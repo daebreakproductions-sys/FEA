@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
+    <ion-title *ngIf="tag == null">Search results</ion-title>
+    <ion-title *ngIf="tag">Search results for #{{ tag.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngFor="let item of items">
+    <app-eats-ugc-card [ugc]="item"></app-eats-ugc-card>
+  </ng-container>
+  <ion-row *ngIf="items == null" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-spinner style="margin: auto;"></ion-spinner>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="items && items.length == 0" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-label style="margin: auto;">No content to show</ion-label>
+    </ion-col>
+  </ion-row>
+</ion-content>
