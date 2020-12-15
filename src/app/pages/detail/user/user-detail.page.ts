@@ -24,7 +24,7 @@ export class UserDetailPage implements OnInit {
 
   async ngOnInit() {
     let id = this.route.snapshot.params.id;
-    this.tabPath = `${this.router.routerState.snapshot.url}/`;
+    this.tabPath = `${this.router.routerState.snapshot.url.replace('/user-deals', '').replace('/user-tips', '')}/`;
     if(id) {
       this.user = await this.api.getUser(id);
       this.api.getUserFollowers(id).then(users => {
@@ -48,12 +48,12 @@ export class UserDetailPage implements OnInit {
 
   clickTab(event: Event, tab: string) {
 		event.stopImmediatePropagation();
-		this.router.navigate([`${this.tabPath}${tab}`]);
+		this.router.navigate([this.tabPath, tab]);
   }
   showFollowers() {
-    this.router.navigate([`${this.tabPath}followers`]);
+    this.router.navigate([`${this.tabPath}../followers`]);
   }
   showFollowees() {
-    this.router.navigate([`${this.tabPath}followees`]);
+    this.router.navigate([`${this.tabPath}../followees`]);
   }
 }

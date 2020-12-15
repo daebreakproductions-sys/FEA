@@ -240,7 +240,7 @@ export class ApiService {
     return this.apiTokenGet('ugc/deals/' + id) as Promise<Deal>;
   }
 
-  // Deals
+  // Tips
   public getTips(params: APIListOptions) {
     return this.apiTokenGet('ugc/tips/list', params) as Promise<Tip[]>;
   }
@@ -275,8 +275,16 @@ export class ApiService {
   public getUserFollowees(id: number) {
     return this.apiTokenGet('users/' + id + '/followees') as Promise<User[]>;
   }
+
+  // UGC
   public getMine() {
     return this.apiTokenGet('users/me/mine') as Promise<UGC[]>;
+  }
+  public getUserContent(id: number) {
+    return this.apiTokenGet('ugc/feed/' + id + '/false') as Promise<UGC[]>;
+  }
+  public getUserLikes(id: number) {
+    return this.apiTokenGet('ugc/feed/' + id + '/true') as Promise<UGC[]>;
   }
 
   // Comments

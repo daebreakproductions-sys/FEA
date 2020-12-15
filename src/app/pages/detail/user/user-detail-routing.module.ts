@@ -10,7 +10,31 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: UserDetailPage
+    component: UserDetailPage,
+    children: [
+      {
+        path: 'user-deals',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./user-deals/user-deals.module').then( m => m.UserDealsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'user-tips',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./user-tips/user-tips.module').then( m => m.UserTipsPageModule)
+          }
+        ]
+      },
+      {
+        path: '',
+        redirectTo: 'user-deals'
+      }
+    ]
   },
   {
     path: ':id/followers',
@@ -19,14 +43,6 @@ const routes: Routes = [
   {
     path: ':id/followees',
     loadChildren: () => import('./followees/followees.module').then( m => m.FolloweesPageModule)
-  },
-  {
-    path: ':id/user-deals',
-    loadChildren: () => import('./user-deals/user-deals.module').then( m => m.UserDealsPageModule)
-  },
-  {
-    path: ':id/user-tips',
-    loadChildren: () => import('./user-tips/user-tips.module').then( m => m.UserTipsPageModule)
   },
 ];
 

@@ -29,7 +29,6 @@ export class EatsUgcCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.ugc)
     let type = this.ugc.class.split('.').pop();
     this.type = type;
     switch(type) {

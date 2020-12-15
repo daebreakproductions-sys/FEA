@@ -69,7 +69,7 @@ export class TagService {
     };
     return new Promise<Tag>((resolve) => {
       let exactMatch = this.tags.find(val => {
-        return tag.name === name;
+        return val.name == name;
       })
       if(exactMatch) {
         resolve(exactMatch);

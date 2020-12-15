@@ -35,4 +35,19 @@ export class DealService {
       });
     })
   }
+  async byUser(id: number) {
+    return new Promise<Deal[]>((resolve) => {
+      this.api.getUserContent(id).then(ugcs => {
+        let deals: Deal[];
+        deals = ugcs.filter(ugc => {
+          return ugc.class.endsWith('Deal');
+        })
+        .map(ugc => {
+          let deal = <Deal>ugc;
+          return HelperService.PopulateDeal(deal);
+        });
+        resolve(deals);
+      });
+    });
+  }
 }
