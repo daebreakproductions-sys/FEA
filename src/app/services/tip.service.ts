@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Tip } from '@app/models/tip';
 import { ApiService } from './api.service';
 import { HelperService } from './helper-service.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class TipService {
 
   constructor(
     public api: ApiService,
+    public userService: UserService,
   ) { }
 
   async byId(id: number) {
@@ -38,5 +40,22 @@ export class TipService {
       });
     });
   }
-
+  myTips() {
+    return new Promise<Tip[]>((resolve) => {
+      this.userService.getMyContent("Tip").then(tips => {
+        resolve(tips.map(ugc => {
+          return <Tip>HelperService.PopulateEntity(ugc);
+        }));
+      });
+    });
+  }
+  myFaveTips() {
+    return new Promise<Tip[]>((resolve) => {
+      this.userService.getMyFaves("Tip").then(tips => {
+        resolve(tips.map(ugc => {
+          return <Tip>HelperService.PopulateEntity(ugc);
+        }));
+      });
+    });
+  }
 }

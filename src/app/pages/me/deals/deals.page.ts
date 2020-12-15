@@ -8,17 +8,20 @@ import { DealService } from '@app/services/deal.service';
   styleUrls: ['./deals.page.scss'],
 })
 export class DealsPage implements OnInit {
-  public deals: Deal[];
+  public deals: Deal[] = [];
 
   constructor(
     public dealService: DealService,
-  ) { 
-    this.deals = [];
-  }
+
+  ) { }
 
   ngOnInit() {
-    this.dealService.byId(2899).then(deal => { //8115
-      this.deals.push(deal);
-    })
+    this.dealService.myDeals().then(mine => {
+      this.dealService.myFaveDeals().then(faves => {
+        this.deals = mine.concat(faves).sort((a,b) => {
+          return Number(a.created.epochSecond - b.created.epochSecond);
+        });
+      });
+    });
   }
 }

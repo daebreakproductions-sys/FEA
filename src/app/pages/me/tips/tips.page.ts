@@ -17,9 +17,13 @@ export class TipsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.tipService.byId(2937).then(tip => { //8115
-      this.tips.push(tip);
-    })
+    this.tipService.myTips().then(mine => {
+      this.tipService.myFaveTips().then(faves => {
+        this.tips = mine.concat(faves).sort((a,b) => {
+          return Number(a.created.epochSecond - b.created.epochSecond);
+        });
+      });
+    });
   }
 
 }

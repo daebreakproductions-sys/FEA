@@ -4,6 +4,7 @@ import { APIListOptions } from '@app/models/list-options';
 import { Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { HelperService } from './helper-service.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class DealService {
 
   constructor(
     public api: ApiService,
+    public userService: UserService,
   ) { 
 
   }
@@ -47,6 +49,24 @@ export class DealService {
           return HelperService.PopulateDeal(deal);
         });
         resolve(deals);
+      });
+    });
+  }
+  myDeals() {
+    return new Promise<Deal[]>((resolve) => {
+      this.userService.getMyContent("Deal").then(deals => {
+        resolve(deals.map(ugc => {
+          return HelperService.PopulateDeal(<Deal>ugc);
+        }));
+      });
+    });
+  }
+  myFaveDeals() {
+    return new Promise<Deal[]>((resolve) => {
+      this.userService.getMyFaves("Deal").then(deals => {
+        resolve(deals.map(ugc => {
+          return HelperService.PopulateDeal(<Deal>ugc);
+        }));
       });
     });
   }

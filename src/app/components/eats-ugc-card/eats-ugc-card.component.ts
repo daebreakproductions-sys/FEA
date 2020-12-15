@@ -5,6 +5,7 @@ import { Recipe } from '@app/models/recipe';
 import { Review } from '@app/models/review';
 import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
+import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
 import { UserService } from '@app/services/user.service';
 
@@ -16,6 +17,7 @@ import { UserService } from '@app/services/user.service';
 export class EatsUgcCardComponent implements OnInit {
   @Input() ugc: UGC;
   public type: string;
+  public user: User;
 
   public deal: Deal = null;
   public tip: Tip = null;
@@ -48,6 +50,9 @@ export class EatsUgcCardComponent implements OnInit {
         this.recipe = <Recipe>this.ugc;
         break;
     }
+    this.userService.getUser(this.ugc.usr.id).then(user => {
+      this.user = user;
+    })
   }
 
   goToDetail() {
