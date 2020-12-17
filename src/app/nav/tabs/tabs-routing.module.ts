@@ -13,10 +13,6 @@ const routes: Routes = [
         loadChildren: () => import('./../../pages/nearby/nearby.module').then(m => m.NearbyPageModule)
       },
       {
-        path: 'friends',
-        loadChildren: () => import('./../../pages/friends/friends.module').then(m => m.FriendsPageModule)
-      },
-      {
         path: 'feed',
         loadChildren: () => import('./../../pages/feed/feed.module').then(m => m.FeedPageModule)
       },
