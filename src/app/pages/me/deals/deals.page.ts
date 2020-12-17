@@ -19,7 +19,7 @@ export class DealsPage implements OnInit {
     this.dealService.myDeals().then(mine => {
       this.dealService.myFaveDeals().then(faves => {
         this.deals = mine.concat(faves).sort((a,b) => {
-          return Number(a.created.epochSecond - b.created.epochSecond);
+          return Number(b.created.epochSecond - a.created.epochSecond); // Sort by date descending
         });
       });
     });

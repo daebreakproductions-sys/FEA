@@ -47,7 +47,6 @@ export class MarketModalPage implements OnInit {
   }
 
   search(searchTerm: any) {
-    console.log(searchTerm);
     if(searchTerm.target.value) {
       this.searchResults = this.marketService.search(searchTerm.target.value);
     } else {

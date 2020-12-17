@@ -20,7 +20,7 @@ export class TipsPage implements OnInit {
     this.tipService.myTips().then(mine => {
       this.tipService.myFaveTips().then(faves => {
         this.tips = mine.concat(faves).sort((a,b) => {
-          return Number(a.created.epochSecond - b.created.epochSecond);
+          return Number(b.created.epochSecond - a.created.epochSecond); // Sort by date descending
         });
       });
     });
