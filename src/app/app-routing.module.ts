@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'feed',
     loadChildren: () => import('./pages/feed/feed.module').then( m => m.FeedPageModule)
   },
+  {
+    path: 'edit',
+    loadChildren: () => import('./pages/edit/edit-routing.module').then( m => m.EditRoutingModule)
+  },
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },
   //{ path: '**', loadChildren: () => import('./pages/common/not-found/not-found.module').then(m => m.NotFoundPageModule) }

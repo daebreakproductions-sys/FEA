@@ -22,6 +22,7 @@ export class AddDealsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
   @ViewChild('search') searchBar: IonSearchbar;
   public dealForm: FormGroup;
+  public validation_messages;
 
   public deal: Deal;
   public associatedTags: {
@@ -62,7 +63,12 @@ export class AddDealsPage implements OnInit {
     public dealService: DealService,
     public router: Router,
   ) { 
-    this.dealForm = new FormGroup({
+    this.dealForm = AddDealsPage.newDealForm();
+    this.validation_messages = AddDealsPage.validation_messages;
+  }
+
+  public static newDealForm() {
+    return new FormGroup({
       title: new FormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.minLength(3),
@@ -80,8 +86,7 @@ export class AddDealsPage implements OnInit {
       return StartEndDatesValidator.checkDates(formGroup);
    });
   }
-
-  public validation_messages = {
+  public static validation_messages = {
     'title': [
         { type: 'required', message: 'Title is required.' },
         { type: 'minlength', message: 'Title must be at least 3 characters long.' },

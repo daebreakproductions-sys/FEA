@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
+    <ion-title>Edit your Deal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="deal">
+  <form [formGroup]="dealForm">
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input formControlName="title" type="text"></ion-input>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.title">
+            <ion-item *ngIf="dealForm.get('title').hasError(validation.type) && (dealForm.get('title').dirty || dealForm.get('title').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>        
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
