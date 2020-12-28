@@ -23,6 +23,127 @@
           </ng-container>        
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item (click)="presentMarketModal()">
+            <ion-icon name="location-outline" color="primary" size="large" class="ion-padding-end"></ion-icon>
+            <ion-label *ngIf="deal.market == null">Add Location</ion-label>
+            <ion-label *ngIf="deal.market" color="primary">{{ deal.market.name }}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="deal.market == null && (locationTouched)">
+            <ion-label class="ion-text-wrap" color="danger">
+              Market is required.
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.description">
+            <ion-item *ngIf="dealForm.get('description').hasError(validation.type) && (dealForm.get('description').dirty || dealForm.get('description').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">Discovery Date</ion-label>
+            <ion-datetime formControlName="startDate" [value]="deal.startDate.toDate().toDateString()" [min]="minDate" [max]="maxDate" displayFormat="M/D/YY"></ion-datetime>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.startDate">
+            <ion-item *ngIf="dealForm.get('startDate').hasError(validation.type) && (dealForm.get('startDate').dirty || dealForm.get('startDate').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">End Date</ion-label>
+            <ion-datetime formControlName="endDate" [value]="deal.endDate.toDate().toDateString()" [min]="minDate" [max]="maxDate" displayFormat="M/D/YY"></ion-datetime>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.endDate">
+            <ion-item *ngIf="dealForm.get('endDate').hasError(validation.type) && (dealForm.get('endDate').dirty || dealForm.get('endDate').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ng-container *ngFor="let validation of validation_messages.dates">
+            <ion-item *ngIf="dealForm.hasError(validation.type) &&
+              ((dealForm.get('startDate').dirty && dealForm.get('endDate').dirty) || 
+              (dealForm.get('startDate').touched && dealForm.get('endDate').touched))">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Price</ion-label>
+            <ion-input formControlName="price" type="text"></ion-input>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.price">
+            <ion-item *ngIf="dealForm.get('price').hasError(validation.type) && (dealForm.get('price').dirty || dealForm.get('price').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="presentTagModal()">
+        <ion-title color="primary">
+          Tags
+        </ion-title>
+        <ion-icon class="ion-padding-end" name="create-outline" color ="primary" size="large"></ion-icon>
+      </ion-row>
+      <ion-row (click)="presentTagModal()">
+        <ion-col *ngIf="tags">
+          <ng-container *ngFor="let tag of tags">
+            <ion-button class="tag" fill="solid" size="small">#{{tag.name}}</ion-button>
+          </ng-container>
+        </ion-col>
+        <ion-col *ngIf="tags == null" class="ion-justify-content-center">
+          <ion-spinner></ion-spinner>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-img *ngIf="deal.image64" [src]="'data:image/jpg;base64,' + deal.image64"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-list lines="none" *ngIf="imageToUpload == null">
+            <ion-item>
+              <ion-label for="photoInput"><ion-icon name="image-outline" color="primary" size="large" slot="start"></ion-icon>{{deal.image64 ? 'Edit Photo' : 'Add a Photo'}}</ion-label>
+              <input id="photoInput" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" width="0px"/>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="saveDeal()">Save</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>

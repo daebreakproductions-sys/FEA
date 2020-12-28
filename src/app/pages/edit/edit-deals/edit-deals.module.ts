@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { EditDealsPageRoutingModule } from './edit-deals-routing.module';
 
 import { EditDealsPage } from './edit-deals.page';
+import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-modal.module';
+import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { EditDealsPage } from './edit-deals.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    EditDealsPageRoutingModule
+    EditDealsPageRoutingModule,
+    MarketModalPageModule,
+    TagModalPageModule,
   ],
   declarations: [EditDealsPage]
 })

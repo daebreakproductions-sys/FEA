@@ -10,5 +10,4 @@ export interface Deal extends UGC {
     title: string;
     price: string;
     text: string;
-    tags: Tag[];
 }

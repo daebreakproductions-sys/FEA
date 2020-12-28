@@ -13,6 +13,7 @@ import { Deal } from '@app/models/deal';
 import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
 import { Comment } from '@app/models/comment'
+import { FeedQuery } from '@app/models/feed-query';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -236,6 +237,9 @@ export class ApiService {
   public createDeal(deal: Deal) {
     return this.apiTokenPost('ugc/deals/create', deal) as Promise<number>;
   }
+  public updateDeal(deal: any) {
+    return this.apiTokenPost('ugc/deals/' + deal.id, deal) as Promise<number>;
+  }
   public getDeal(id: number) {
     return this.apiTokenGet('ugc/deals/' + id) as Promise<Deal>;
   }
@@ -288,6 +292,9 @@ export class ApiService {
   }
   public searchFeedByName(name: string) {
     return this.apiTokenGet('ugc/feed', {q: name}) as Promise<UGC[]>;
+  }
+  public queryFeed(p: FeedQuery) {
+    return this.apiTokenGet('ugc/feed', {q: p.q, tags: p.tags.join(','), markets: p.markets.join(','), kind: p.kind.join(','), page: p.page, length: p.length}) as Promise<UGC[]>;
   }
 
   // Comments

@@ -331,12 +331,6 @@ export class AddDealsPage implements OnInit {
       startDate: Math.round(new Date(this.dealForm.get('startDate').value).getTime()),
       endDate: Math.round(new Date(this.dealForm.get('endDate').value).getTime()),
       price: this.dealForm.get('price').value,
-      tags: this.associatedTags.filter(tag => {
-        return tag.selected;
-      })
-      .map(tag => {
-        return { id: tag.tag.id };
-      }),
       image: this.deal.image64
     }
     this.dealService.create(newDeal).then( deal => {

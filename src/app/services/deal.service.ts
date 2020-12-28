@@ -36,6 +36,15 @@ export class DealService {
         })
       });
     })
+  }  
+  async update(deal: any) {
+    return new Promise<Deal>((resolve) => {
+      this.api.updateDeal(deal).then(id => {
+        this.api.getDeal(id).then(newDeal => {
+          resolve(HelperService.PopulateDeal(newDeal));
+        })
+      });
+    })
   }
   async byUser(id: number) {
     return new Promise<Deal[]>((resolve) => {
