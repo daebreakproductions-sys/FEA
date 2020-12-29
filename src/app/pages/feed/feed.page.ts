@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
 import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { FeedService } from '@app/services/feed.service';
@@ -10,6 +10,7 @@ import { FeedService } from '@app/services/feed.service';
   styleUrls: ['./feed.page.scss'],
 })
 export class FeedPage implements OnInit {
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   public searchTerm: string;
   public tipSelected: boolean = true;
   public dealSelected: boolean = true;
@@ -20,13 +21,16 @@ export class FeedPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(this.feedService.results == []) {
+      this.feedService.query();
+    }
   }
 
   search(searchTerm: any) {
     if(searchTerm) {
-      this.searchTerm = searchTerm;
+      this.feedService.setSearchTerm(searchTerm);
     } else {
-      this.searchTerm = null;
+      this.feedService.clearSearchTerm();
     }
   }
   async presentMarketModal() {
@@ -60,5 +64,26 @@ export class FeedPage implements OnInit {
   }
   removeMarket(id: number) {
     this.feedService.removeMarket(id);
+  }
+  refreshFeed(event: any) {
+    this.feedService.freshQuery().then(() => {
+      this.infiniteScroll.disabled = false;
+      event.target.complete();
+    });
+  }
+  nextPage(event: any) {
+    this.feedService.nextPage().then(() => {
+      event.target.complete();
+      this.infiniteScroll.disabled = this.feedService.endOfFeed;
+    });
+  }
+  getLoadingText() {
+    return 'Loading more ' + this.feedService.getTypes()
+    .map(t => 
+      t.split(' ')
+       .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase() + 's')
+       .join(' ')
+    ).join('/')
+    + '...';
   }
 }

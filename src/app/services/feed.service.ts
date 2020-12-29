@@ -11,6 +11,7 @@ import { ApiService } from './api.service';
 export class FeedService {
   public results: UGC[];
   public endOfFeed: boolean;
+  public loading: boolean = false;
   // Parameters
   private q: string;
   private tags: Tag[];
@@ -37,9 +38,10 @@ export class FeedService {
   freshQuery() {
     this.page = 0;
     this.results = [];
-    this.query();
+    return this.query();
   }
   query() {
+    this.loading = true;
     let params: FeedQuery = {
       tags: this.tags.map(tag => tag.id).join(','),
       markets: this.markets.map(mkt => mkt.id).join(','),
@@ -50,15 +52,19 @@ export class FeedService {
     if(this.q != null) {
       params.q = this.q;
     }
-    this.api.queryFeed(params).then(ugcs => {
-      this.endOfFeed = (ugcs.length != this.length);
-      this.results = this.results.concat(ugcs);
+    return new Promise<void>((resolve) => {
+      this.api.queryFeed(params).then(ugcs => {
+        this.endOfFeed = (ugcs.length != this.length);
+        this.results = this.results.concat(ugcs);
+        this.loading = false;
+        resolve();
+      });
     });
   }
 
   nextPage() {
     this.page = this.page + 1;
-    this.query();
+    return this.query();
   }
 
   setTags(tags: Tag[]) {
@@ -100,6 +106,9 @@ export class FeedService {
     this.types = types.map(t => t.toLowerCase());
     this.freshQuery();
   }
+  getTypes() {
+    return this.types;
+  }
   toggleType(type: string) {
     if(this.typeEnabled(type)) {
       // Already in list, remove
@@ -120,5 +129,17 @@ export class FeedService {
   }
   clearType(type: string) {
     this.types = this.types.filter(t => t != type);
+  }
+
+  setSearchTerm(term: string) {
+    this.q = term;
+    this.freshQuery();
+  }
+  getSearchTerm() {
+    return this.q;
+  }
+  clearSearchTerm() {
+    this.q = null;
+    this.freshQuery();
   }
 }
