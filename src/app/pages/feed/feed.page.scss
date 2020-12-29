@@ -1,0 +1,19 @@
+.tagBar {
+    padding-right: 8px;
+    padding-left: 8px;
+}
+ion-label.hashButton {
+    font-size: x-large;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+ion-button.iconButton::part(native) {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+ion-button.tagButton {
+    --border-radius: 16px;
+}
+.selectorHeader {
+    text-align: center;
+}

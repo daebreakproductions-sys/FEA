@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>feed</ion-title>
+    <ion-searchbar showCancelButton="focus" debounce="500" animated (ionChange)="search($event.target.value)"></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar class="tagBar">
+    <ion-button *ngFor="let market of feedService.getMarkets()" size="small" fill="outline" class="tagButton" (click)="removeMarket(market.id)">{{market.name}}<ion-icon name="close-circle"></ion-icon></ion-button>
+    <ion-button *ngFor="let tag of feedService.getTags()" size="small" fill="outline" class="tagButton" (click)="removeTag(tag.id)">#{{tag.name}}<ion-icon name="close-circle"></ion-icon></ion-button>
+    <ion-button slot="end" class="iconButton" (click)="presentTagModal()"><ion-label class="hashButton"><b>#</b></ion-label></ion-button>
+    <ion-button slot="end" class="iconButton" (click)="presentMarketModal()"><ion-icon name="storefront-outline" size="large"></ion-icon></ion-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col class="ion-text-center" style="margin: auto;" (click)="feedService.toggleType('tip')">
+        <ion-label [color]="feedService.typeEnabled('tip') ? 'primary' : ''" style="margin: auto;">
+          <ion-icon size="large" [name]="feedService.typeEnabled('tip') ? 'bulb' : 'bulb-outline'"></ion-icon>
+          Tips
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" style="margin: auto;" (click)="feedService.toggleType('deal')">
+        <ion-label [color]="feedService.typeEnabled('deal') ? 'primary' : ''" style="margin: auto;">
+          <ion-icon size="large" [name]="feedService.typeEnabled('deal') ? 'pricetag' : 'pricetag-outline'"></ion-icon>
+          Deals
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ng-container *ngFor="let ugc of feedService.results">
+    <app-eats-ugc-card [ugc]="ugc"></app-eats-ugc-card>
+  </ng-container>
 </ion-content>

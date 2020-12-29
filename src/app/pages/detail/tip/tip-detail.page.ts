@@ -8,6 +8,7 @@ import { UserService } from '@app/services/user.service';
 import { ApiService } from '@app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipService } from '@app/services/tip.service';
+import { FeedService } from '@app/services/feed.service';
 
 @Component({
   selector: 'app-tip-detail',
@@ -28,6 +29,7 @@ export class TipDetailPage implements OnInit {
     public tagService: TagService,
     public commentService: CommentService,
     public apiService: ApiService,
+    public feedService: FeedService,
   ) { }
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class TipDetailPage implements OnInit {
     this.router.navigate(['detail', 'user', this.tip.usr.id]);
   }
   navigateToTag(id: number) {
-    this.router.navigate(['detail', 'tag-content', id]);
+    this.feedService.loadByTag(this.tags.find(t => t.id == id));
+    this.router.navigate(['tabs', 'feed']);
   }
 }

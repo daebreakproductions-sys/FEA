@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Market } from '@app/models/market';
+import { FeedService } from '@app/services/feed.service';
 import { MarketService } from '@app/services/market.service';
 import { Geoposition } from '@ionic-native/geolocation';
 import { Platform } from '@ionic/angular';
@@ -17,6 +18,8 @@ export class MarketDetailPage implements OnInit {
     public marketService: MarketService,
     public route: ActivatedRoute,
     public platform: Platform,
+    public feedService: FeedService,
+    public router: Router,
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,11 @@ export class MarketDetailPage implements OnInit {
     // var mapUrlType = "geo:" + mapUrl;
     // }
     window.open(mapUrlFullPath, '_system');
+  }
+
+  navigateToDeals() {
+    this.feedService.loadByMarket(this.market);
+    this.router.navigate(['tabs', 'feed']);
   }
 
 }

@@ -21,9 +21,9 @@
       <ion-icon name="time-outline" color="primary" slot="start" size="large"></ion-icon>
       <ion-label class="ion-text-wrap">{{ market.hours ? market.hours : "No Hours found" }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="navigateToDeals()">
       <ion-icon name="pricetag-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ market.dealsCount }} deals found</ion-label>
+      <ion-label class="ion-text-wrap">{{ market.dealsCount }} {{ market.dealsCount == 1 ? 'deal' : 'deals' }} found</ion-label>
     </ion-item>
     <ion-item>
       <ion-icon name="call-outline" color="primary" slot="start" size="large"></ion-icon>

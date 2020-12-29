@@ -15,8 +15,8 @@
     <ion-card-header>
       <ion-card-title item-content>
         {{ deal.usr.name.trim() == '' ? deal.usr.username : deal.usr.name }}
-        <ion-icon *ngIf="userService.iFollow(deal.usr.id)" name="people" color="primary"></ion-icon>
-        <ion-icon *ngIf="!userService.iFollow(deal.usr.id)" name="people-outline"></ion-icon>
+        <ion-icon *ngIf="deal.usr.id != userService.me.id && userService.iFollow(deal.usr.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="deal.usr.id != userService.me.id && !userService.iFollow(deal.usr.id)" name="people-outline"></ion-icon>
       </ion-card-title>
       <ion-card-subtitle item-content>Deal</ion-card-subtitle>
     </ion-card-header>

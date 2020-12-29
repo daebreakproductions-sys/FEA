@@ -24,10 +24,6 @@ const routes: Routes = [
     path: 'tip',
     loadChildren: () => import('./tip/tip-detail.module').then( m => m.TipDetailPageModule)
   },
-  {
-    path: 'tag-content',
-    loadChildren: () => import('./tag-content/tag-content.module').then( m => m.TagContentPageModule)
-  },
 ];
 
 @NgModule({

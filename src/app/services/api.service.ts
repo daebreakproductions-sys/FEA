@@ -293,8 +293,8 @@ export class ApiService {
   public searchFeedByName(name: string) {
     return this.apiTokenGet('ugc/feed', {q: name}) as Promise<UGC[]>;
   }
-  public queryFeed(p: FeedQuery) {
-    return this.apiTokenGet('ugc/feed', {q: p.q, tags: p.tags.join(','), markets: p.markets.join(','), kind: p.kind.join(','), page: p.page, length: p.length}) as Promise<UGC[]>;
+  public queryFeed(p: any) {
+    return this.apiTokenGet('ugc/feed', p) as Promise<UGC[]>;
   }
 
   // Comments

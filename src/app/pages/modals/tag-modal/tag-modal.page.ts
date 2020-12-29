@@ -36,7 +36,6 @@ export class TagModalPage implements OnInit {
       error: err => console.error('Observer got an error: ' + err),
       complete: () => this.allTags = this.tagService.tags,
     };
-    console.log(this.initialTags);
     if(this.tagService.doneLoading) {
       this.allTags = this.tagService.tags;
       this.associatedTags = this.initialTags.map(tag => {

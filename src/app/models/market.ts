@@ -10,6 +10,6 @@ export interface Market extends Entity {
     lat: number;
     lng: number;
     image: object;
-    dealsCount: bigint;
+    dealsCount: number;
     image64: string;
 }

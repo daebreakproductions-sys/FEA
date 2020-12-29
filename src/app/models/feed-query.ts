@@ -1,8 +1,8 @@
 export interface FeedQuery {
-    q: string;
-    tags: number[];
-    markets: number[];
-    kind: string[];
+    q?: string;
+    tags: string;
+    markets: string;
+    kind: string;
     page: number;
     length: number;
 }

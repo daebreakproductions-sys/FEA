@@ -8,6 +8,7 @@ import { DealService } from '@app/services/deal.service';
 import { TagService } from '@app/services/tag.service';
 import { UserService } from '@app/services/user.service';
 import { ApiService } from '@app/services/api.service';
+import { FeedService } from '@app/services/feed.service';
 
 @Component({
   selector: 'app-deal',
@@ -28,6 +29,7 @@ export class DealDetailPage implements OnInit {
     public tagService: TagService,
     public commentService: CommentService,
     public apiService: ApiService,
+    public feedService: FeedService,
   ) { }
 
   ngOnInit() {
@@ -76,6 +78,7 @@ export class DealDetailPage implements OnInit {
     this.router.navigate(['detail', 'user', this.deal.usr.id]);
   }
   navigateToTag(id: number) {
-    this.router.navigate(['detail', 'tag-content', id]);
+    this.feedService.loadByTag(this.tags.find(t => t.id == id));
+    this.router.navigate(['tabs', 'feed']);
   }
 }
