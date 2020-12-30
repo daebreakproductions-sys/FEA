@@ -46,9 +46,9 @@ export class DealService {
       });
     })
   }
-  async byUser(id: number) {
+  async byUser(id: number, page: number = 0) {
     return new Promise<Deal[]>((resolve) => {
-      this.api.getUserContent(id).then(ugcs => {
+      this.api.getUserContent(id, page).then(ugcs => {
         let deals: Deal[];
         deals = ugcs.filter(ugc => {
           return ugc.class.endsWith('Deal');
