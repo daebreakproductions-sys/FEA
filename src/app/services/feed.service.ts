@@ -33,11 +33,13 @@ export class FeedService {
     this.tags = [];
     this.markets = [];
     this.types = ["deal", "tip"];
+    this.endOfFeed = false;
   }
 
   freshQuery() {
     this.page = 0;
     this.results = [];
+    this.endOfFeed = false;
     return this.query();
   }
   query() {
@@ -133,7 +135,7 @@ export class FeedService {
 
   setSearchTerm(term: string) {
     this.q = term;
-    this.freshQuery();
+    return this.freshQuery();
   }
   getSearchTerm() {
     return this.q;

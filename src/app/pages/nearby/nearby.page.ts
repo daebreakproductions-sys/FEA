@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Market } from '@app/models/market';
 import { MarketService } from '@app/services/market.service';
 import * as L from 'leaflet';
 import { Geolocation } from '@ionic-native/geolocation/ngx/index';
 import { Geoposition } from '@ionic-native/geolocation';
 import { Router } from '@angular/router';
+import { IonSearchbar } from '@ionic/angular';
+import { FeedService } from '@app/services/feed.service';
+import { Deal } from '@app/models/deal';
 
 @Component({
   selector: 'app-nearby',
@@ -12,6 +15,9 @@ import { Router } from '@angular/router';
   styleUrls: ['nearby.page.scss']
 })
 export class NearbyPage implements OnInit {
+  @ViewChild('mapDiv') mapDiv: ElementRef;
+  @ViewChild('mapContainer') mapContainer: ElementRef;
+  @ViewChild(IonSearchbar) searchBar: any;
   private map: L.Map;
   private icon: L.Icon;
   private iconBlue: L.Icon;
@@ -21,11 +27,14 @@ export class NearbyPage implements OnInit {
   readonly locationResize: number = 0.7;
   private parser: DOMParser;
   public mapInitialized: boolean = false;
+  public currentMarkers: L.Marker[] = [];
+  public currentLocation: Geoposition;
 
   constructor( 
     public marketService: MarketService,
     public geolocation: Geolocation,
     public router: Router,
+    public feedService: FeedService,
   ) { 
     this.icon = L.icon({
       iconUrl:      'assets/images/placeholder.svg',
@@ -41,45 +50,109 @@ export class NearbyPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.searchBar.value = this.feedService.getSearchTerm();
     if(this.mapInitialized) {
       // Only do this if the map has already loaded
       this.geolocation.getCurrentPosition().then(locationData => {
+        this.currentLocation = locationData;
         this.setMapZoom(locationData);
       });
     }
   }
+  showAllMarkets() {
+    this.geolocation.getCurrentPosition().then(locationData => {
+      this.currentLocation = locationData;
+      L.marker([locationData.coords.latitude, locationData.coords.longitude], {
+        icon: this.iconBlue
+      }).addTo(this.map);
+
+      if(this.marketService.doneLoading) {
+        this.addMarkers(this.marketService.markets);
+        this.setMapZoom(locationData);
+        this.mapInitialized = true;
+      } else {
+        const myObserver = {
+          next: x => { },
+          error: err => console.error('Observer got an error: ' + err),
+          complete: () => {
+            this.addMarkers(this.marketService.markets);
+            this.setMapZoom(locationData);
+            this.mapInitialized = true;
+          },
+        };
+        this.marketService.notifier.subscribe(myObserver);
+      }
+    });
+  }
   addMarkers(markets: Market[]) {
     markets.forEach( market => {
       if(market.lat && market.lng) {
-        L.marker([market.lat, market.lng], {
+        let m = L.marker([market.lat, market.lng], {
           icon: this.icon
         }).bindPopup(
           '<p><b>' + market.name + '</b></p><p><ion-label color="primary" id="lbl-market-' + market.id + '">Details</ion-label></p>'
-        ).addTo(this.map);
+        );
+        this.currentMarkers.push(m);
+        m.addTo(this.map);
       }
     })
   }
-  setMapZoom(location: Geoposition) {
-    let nearby = this.marketService.getNearby(location.coords, 5).map(result => {
-      return result.market;
-    });
-    let minLat = Math.min(nearby.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
-    let maxLat = Math.max(nearby.sort((a, b) => b.lat - a.lat)[0].lat, location.coords.latitude);
-    let minLng = Math.min(nearby.sort((a, b) => a.lng - b.lng)[0].lng, location.coords.longitude);
-    let maxLng = Math.max(nearby.sort((a, b) => b.lng - a.lng)[0].lng, location.coords.longitude);
+  zoomToData(dataset: Market[], location: Geoposition = this.currentLocation) {
+    let minLat = Math.min(dataset.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
+    let maxLat = Math.max(dataset.sort((a, b) => b.lat - a.lat)[0].lat, location.coords.latitude);
+    let minLng = Math.min(dataset.sort((a, b) => a.lng - b.lng)[0].lng, location.coords.longitude);
+    let maxLng = Math.max(dataset.sort((a, b) => b.lng - a.lng)[0].lng, location.coords.longitude);
 
     this.map.flyToBounds([
       [minLat, minLng],
       [maxLat, maxLng]
     ]);
   }
+  setMapZoom(location: Geoposition) {
+    let nearby = this.marketService.getNearby(location.coords, 5).map(result => {
+      return result.market;
+    });
+    this.zoomToData(nearby, location);
+  }
 
   navigate(id: number) {
     this.router.navigate(['detail/market', id]);
   }
 
+  search(searchTerm: any) {
+    if(searchTerm) {
+      this.feedService.setTypes(["deal"]);
+      this.feedService.setSearchTerm(searchTerm).then(() => {
+        this.currentMarkers.forEach(m => {
+          this.map.removeLayer(m);
+        });
+        let ids = new Set<number>();
+        this.feedService.results.forEach(ugc => {
+          ids.add((<Deal>ugc).market.id);
+        });
+        let mkts = Array.from(ids).map(id => {
+          return this.marketService.byId(id);
+        });
+        this.addMarkers(mkts);
+        this.zoomToData(mkts);
+      });
+    } else {
+      this.feedService.reset();
+      this.feedService.freshQuery();
+      this.showAllMarkets();
+    }
+  }
+
   ngOnInit(){
-    this.map = L.map('map', {
+  }
+  ngAfterViewChecked() {
+    // Set height of map so it is just below the search bar
+    let height = this.searchBar.el.offsetHeight;
+    this.mapContainer.nativeElement.style.setProperty('top', height + 'px')
+  }
+  ngAfterViewInit() {
+    // let height = this.searchBar.nativeElement;
+    this.map = L.map(this.mapDiv.nativeElement, {
       center: [ 43.016697, -83.694476 ],
       zoom: 10
     });
@@ -101,29 +174,7 @@ export class NearbyPage implements OnInit {
       });
     });
 
-    this.geolocation.getCurrentPosition().then(locationData => {
-      L.marker([locationData.coords.latitude, locationData.coords.longitude], {
-        icon: this.iconBlue
-      }).addTo(this.map);
-
-      if(this.marketService.doneLoading) {
-        this.addMarkers(this.marketService.markets);
-        this.setMapZoom(locationData);
-        this.mapInitialized = true;
-  } else {
-        const myObserver = {
-          next: x => { },
-          error: err => console.error('Observer got an error: ' + err),
-          complete: () => {
-            this.addMarkers(this.marketService.markets);
-            this.setMapZoom(locationData);
-            this.mapInitialized = true;
-          },
-        };
-        this.marketService.notifier.subscribe(myObserver);
-      }
-    });
-
+    this.showAllMarkets();
   }
 }
 

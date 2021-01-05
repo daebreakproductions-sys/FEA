@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, IonSearchbar, ModalController } from '@ionic/angular';
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
 import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { FeedService } from '@app/services/feed.service';
@@ -11,6 +11,7 @@ import { FeedService } from '@app/services/feed.service';
 })
 export class FeedPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonSearchbar) searchBar: IonSearchbar;
   public searchTerm: string;
   public tipSelected: boolean = true;
   public dealSelected: boolean = true;
@@ -25,7 +26,10 @@ export class FeedPage implements OnInit {
       this.feedService.query();
     }
   }
-
+  ionViewWillEnter() {
+    this.searchBar.value = this.feedService.getSearchTerm();
+    this.infiniteScroll.disabled = this.feedService.endOfFeed;
+  }
   search(searchTerm: any) {
     if(searchTerm) {
       this.feedService.setSearchTerm(searchTerm);
