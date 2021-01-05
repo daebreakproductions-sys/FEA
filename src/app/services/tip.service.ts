@@ -26,9 +26,9 @@ export class TipService {
       });
     })
   }
-  async byUser(id: number, page: number = 0) {
+  async byUser(id: number, page: number = 0, pageLength: number = 10) {
     return new Promise<Tip[]>((resolve) => {
-      this.api.getUserContent(id, page).then(ugcs => {
+      this.api.getUserContent(id, page, pageLength).then(ugcs => {
         let tips: Tip[];
         tips = ugcs.filter(ugc => {
           return ugc.class.endsWith('Tip');

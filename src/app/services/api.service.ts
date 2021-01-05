@@ -284,11 +284,11 @@ export class ApiService {
   public getMine() {
     return this.apiTokenGet('users/me/mine') as Promise<UGC[]>;
   }
-  public getUserContent(id: number, page: number) {
-    return this.apiTokenGet('ugc/feed/' + id + '/false', { page: page }) as Promise<UGC[]>;
+  public getUserContent(id: number, page: number, length: number) {
+    return this.apiTokenGet('ugc/feed/' + id + '/false', { page: page, length: length }) as Promise<UGC[]>;
   }
-  public getUserLikes(id: number, page: number) {
-    return this.apiTokenGet('ugc/feed/' + id + '/true', { page: page }) as Promise<UGC[]>;
+  public getUserLikes(id: number, page: number, length: number) {
+    return this.apiTokenGet('ugc/feed/' + id + '/true', { page: page, length: length }) as Promise<UGC[]>;
   }
   public searchFeedByName(name: string) {
     return this.apiTokenGet('ugc/feed', {q: name}) as Promise<UGC[]>;

@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshFeed($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ng-container *ngFor="let tip of tips">
     <app-eats-ugc-card [ugc]="tip"></app-eats-ugc-card>
   </ng-container>
@@ -12,4 +15,9 @@
       <ion-label style="margin: auto;">No tips to show</ion-label>
     </ion-col>
   </ion-row>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPage($event)">
+    <ion-infinite-scroll-content
+      loadingText="Loading more Tips">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
