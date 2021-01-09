@@ -36,16 +36,16 @@
   <!-- Social Footer -->
   <ion-row>
     <ion-col (click)="likeAction()">
-      <ion-icon *ngIf="ugc.iLike" name="heart" color="danger"></ion-icon>
-      <ion-icon *ngIf="!ugc.iLike" name="heart-outline"></ion-icon>
+      <ion-icon *ngIf="ugc.iLike" name="heart" color="danger" class="iconFooter"></ion-icon>
+      <ion-icon *ngIf="!ugc.iLike" name="heart-outline" class="iconFooter"></ion-icon>
       <ion-label> {{ugc.reactionCount}} {{ugc.reactionCount == 1 ? 'Like' : 'Likes'}}</ion-label>
     </ion-col>
     <ion-col (click)="goToDetail()">
-      <ion-icon name="pricetag-outline"></ion-icon>
+      <ion-icon name="pricetag-outline" class="iconFooter"></ion-icon>
       <ion-label> {{ugc.tagCount}} {{ugc.tagCount == 1 ? 'Tag' : 'Tags'}}</ion-label>
     </ion-col>
     <ion-col (click)="goToDetail()">
-      <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      <ion-icon name="chatbox-ellipses-outline" class="iconFooter"></ion-icon>
       <ion-label> {{ugc.commentCount}} {{ugc.commentCount == 1 ? 'Comment' : 'Comments'}}</ion-label>
     </ion-col>
   </ion-row>
