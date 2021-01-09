@@ -4,6 +4,7 @@ import { FDCService, FoodNutrient, FoundationFoodItem } from '@app/lib/usda';
 import { LoadingController } from '@ionic/angular';
 import { OverlayBaseController } from '@ionic/angular/util/overlay';
 import { Observable } from 'rxjs';
+import * as FDCNutrition from "assets/fdcNutrition.json";
 
 @Component({
   selector: 'app-detail',
@@ -20,6 +21,8 @@ export class DetailPage implements OnInit {
   }[];
   loading: HTMLIonLoadingElement
   readonly dismissTime: number = 10000;
+  public nutritionSummary: any;
+  public displayFullNutrients: boolean = false;
 
   constructor(
     public usda: FDCService,
@@ -48,22 +51,16 @@ export class DetailPage implements OnInit {
     });
     setTimeout(() => {
       if(this.food == null) {
-        this.title = "Error Occurred. Please try again."
+        // this.title = "Error Occurred. Please try again."
       }
     }, this.dismissTime);
     this.loading.present();
 
     let id = this.route.snapshot.params.id;
     this.usda.getFood(id).subscribe(myObserver);
-
-    // console.log(this.route)
-    // if (this.route.snapshot.data['special']) {
-    //   this.food = this.route.snapshot.data['special'];
-    //   this.title = this.food.description.split(',').map(value => { return value.trim()}).join(' / ');
-    //   console.log(this.food)
-    //   this.digestNutrients(this.food.foodNutrients);
-    // }
-    // this.loadingController.dismiss();
+    
+    this.nutritionSummary = FDCNutrition.default[id.toString()];
+    console.log(this.nutritionSummary);
   }
 
   digestNutrients(nutrients: FoodNutrient[]) {
@@ -81,4 +78,7 @@ export class DetailPage implements OnInit {
     );
   }
 
+  toggleNutrients() {
+    this.displayFullNutrients = !this.displayFullNutrients;
+  }
 }

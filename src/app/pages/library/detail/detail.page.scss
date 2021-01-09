@@ -1,0 +1,14 @@
+ion-grid.table {
+    border: solid 1px gray;
+    border-top-style: none;
+    border-left-style: none;
+    padding: 0px;
+}
+// ion-grid.table ion-row {
+//     border: solid 1px gray;
+// }
+ion-grid.table ion-col {
+    border: solid 1px gray;
+    border-bottom-style: none;
+    border-right-style: none;
+}

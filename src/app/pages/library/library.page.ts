@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbridgedFoodItem, FDCService, FoodListCriteria } from '@app/lib/usda';
+import { AbridgedFoodItem, FDCService, FoodListCriteria, FoundationFoodItem } from '@app/lib/usda';
 import { Animation, AnimationController, LoadingController } from '@ionic/angular';
 
 @Component({
@@ -55,6 +55,11 @@ export class LibraryPage implements OnInit {
     };
   }
   groupFoods() {
+    // This log statement is useful for generating 
+    // console.log(this.foods.map(food => {
+    //   let f = <FoundationFoodItem>food;
+    //   return f.fdcId + ", " + f.description;
+    // }))
     this.foods.forEach(food => {
       let group: string = food.description.split(',')[0].trim().toLowerCase();
       if(!this.groupedFoods.hasOwnProperty(group)) {

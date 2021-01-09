@@ -9,15 +9,141 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h2 class="ion-text-capitalize ion-text-wrap">{{title}}</h2>
+        <h2 class="ion-padding-start ion-text-capitalize ion-text-wrap">{{title}}</h2>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-toolbar>
-          <ion-title color="primary">Nutrients</ion-title>
+          <ion-title color="primary">Nutrient Summary</ion-title>
         </ion-toolbar>
-        <ion-list *ngIf="displayNutrients">
+        <ion-grid class="table" *ngIf="nutritionSummary">
+          <!-- Serving Size -->
+          <ion-row *ngIf="nutritionSummary.serving != 0">
+            <ion-col>
+              <b>Serving Size</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.serving}} grams
+            </ion-col>
+          </ion-row>
+          <!-- Total Calories -->
+          <ion-row *ngIf="nutritionSummary.calories != 0">
+            <ion-col>
+              <b>Total Calories</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.calories}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <br/>
+        <ion-grid class="table" *ngIf="nutritionSummary
+        && (nutritionSummary.pctCaloriesMale != 0 || nutritionSummary.pctCaloriesFemale != 0
+        || nutritionSummary.pctCarbMale != 0 || nutritionSummary.pctCarbFemale != 0
+        || nutritionSummary.pctFatMale != 0 || nutritionSummary.pctFatFemale != 0
+        || nutritionSummary.pctFiberMale != 0 || nutritionSummary.pctFiberFemale != 0
+        || nutritionSummary.pctProteinMale != 0 || nutritionSummary.pctProteinFemale != 0
+        || nutritionSummary.pctSugarMale != 0 || nutritionSummary.pctSugarFemale != 0)">
+          <ion-row>
+            <ion-col size="6">
+              
+            </ion-col>
+            <ion-col>
+              <b>USRDA % for Male</b>
+            </ion-col>
+            <ion-col>
+              <b>USRDA % for Female</b>
+            </ion-col>
+          </ion-row>
+          <!-- Pct Calories by USRDA -->
+          <ion-row *ngIf="nutritionSummary.pctCaloriesMale != 0 && nutritionSummary.pctCaloriesFemale != 0">
+            <ion-col size="6">
+              <b>Calories</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctCaloriesMale}}%
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctCaloriesFemale}}%
+            </ion-col>
+          </ion-row>
+          <!-- Pct Carbohydrates by USRDA -->
+          <ion-row *ngIf="nutritionSummary.pctCarbMale != 0 && nutritionSummary.pctCarbFemale != 0">
+            <ion-col size="6">
+              <b>Carbohydrates</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctCarbMale}}%
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctCarbFemale}}%
+            </ion-col>
+          </ion-row>
+          <!-- Pct Fat by USRDA -->
+          <ion-row *ngIf="nutritionSummary.pctFatMale != 0 && nutritionSummary.pctFatFemale != 0">
+            <ion-col size="6">
+              <b>Fat</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctFatMale}}%
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctFatFemale}}%
+            </ion-col>
+          </ion-row>
+          <!-- Pct Fiber by USRDA -->
+          <ion-row *ngIf="nutritionSummary.pctFiberMale != 0 && nutritionSummary.pctFiberFemale != 0">
+            <ion-col size="6">
+              <b>Fiber</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctFiberMale}}%
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctFiberFemale}}%
+            </ion-col>
+          </ion-row>
+          <!-- Pct Protein by USRDA -->
+          <ion-row *ngIf="nutritionSummary.pctProteinMale != 0 && nutritionSummary.pctProteinFemale != 0">
+            <ion-col size="6">
+              <b>Protein</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctProteinMale}}%
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctProteinFemale}}%
+            </ion-col>
+          </ion-row>
+          <!-- Pct Sugar by USRDA -->
+          <ion-row *ngIf="nutritionSummary.pctSugarMale != 0 && nutritionSummary.pctSugarFemale != 0">
+            <ion-col size="6">
+              <b>Sugar</b>
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctSugarMale}}%
+            </ion-col>
+            <ion-col>
+              {{nutritionSummary.pctSugarFemale}}%
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-label><i>"USRDA" = "U.S. Recommended Daily Allowances"</i></ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-toolbar (click)="toggleNutrients()">
+          <ion-title color="primary">Full Nutrients List</ion-title>
+          <ion-icon slot="end" size="large" name="chevron-down" *ngIf="!displayFullNutrients" class="ion-padding-end"></ion-icon>
+          <ion-icon slot="end" size="large" name="chevron-up" *ngIf="displayFullNutrients" class="ion-padding-end"></ion-icon>
+        </ion-toolbar>
+        <ion-list *ngIf="displayFullNutrients">
           <ion-item *ngFor="let each of displayNutrients">
             <ion-label position="stacked">{{each.name}}</ion-label>
             <ion-input (disabled)="true" >{{each.value}}{{each.unit}}</ion-input>
