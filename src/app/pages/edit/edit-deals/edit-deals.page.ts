@@ -22,6 +22,7 @@ import { ModalController } from '@ionic/angular';
 export class EditDealsPage implements OnInit {
   public dealForm: FormGroup;
   public validation_messages;
+  public clearPickerOptions: any;
   public deal: Deal;
   public tags: Tag[];
 
@@ -49,6 +50,7 @@ export class EditDealsPage implements OnInit {
     });
     this.dealForm = AddDealsPage.newDealForm();
     this.validation_messages = AddDealsPage.validation_messages;
+    this.clearPickerOptions = AddDealsPage.clearPickerOptions(this.dealForm, 'endDate');
     this.maxDate = this._maxDate();
   }
 

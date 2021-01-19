@@ -5,7 +5,8 @@ export class StartEndDatesValidator {
         let startDate: Date = new Date((<FormControl>formGroup.controls['startDate']).value);
         let endDate: Date = new Date((<FormControl>formGroup.controls['endDate']).value);
 
-        if(endDate <= startDate) {
+        if(endDate.getFullYear() > 1970 && endDate <= startDate) {
+            // Allow end date to be null
             return { startLater: true };
         }
         return null;

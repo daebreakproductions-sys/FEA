@@ -110,6 +110,11 @@
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-left ion-padding-start">
+        <ion-icon 
+          *ngIf="prevButton.show" 
+          name="arrow-back-outline" 
+          [color]="prevButton.disabled ? 'light' : 'primary'">
+        </ion-icon>
         <ion-label 
           *ngIf="prevButton.show" 
           (click)="prevClick()"
@@ -124,6 +129,11 @@
           [color]="nextButton.disabled ? 'light' : 'primary'">
           {{ nextButton.text }}
         </ion-label>
+        <ion-icon 
+          *ngIf="nextButton.show" 
+          name="arrow-forward-outline" 
+          [color]="nextButton.disabled ? 'light' : 'primary'">
+        </ion-icon>
         <ion-button *ngIf="showSaveButton" (click)="saveTip()">Save Tip</ion-button>
       </ion-col>
     </ion-row>

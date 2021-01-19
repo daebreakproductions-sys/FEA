@@ -23,6 +23,7 @@ export class AddDealsPage implements OnInit {
   @ViewChild('search') searchBar: IonSearchbar;
   public dealForm: FormGroup;
   public validation_messages;
+  public clearPickerOptions: any;
 
   public deal: Deal;
   public associatedTags: {
@@ -65,6 +66,7 @@ export class AddDealsPage implements OnInit {
   ) { 
     this.dealForm = AddDealsPage.newDealForm();
     this.validation_messages = AddDealsPage.validation_messages;
+    this.clearPickerOptions = AddDealsPage.clearPickerOptions(this.dealForm, 'endDate');
   }
 
   public static newDealForm() {
@@ -85,6 +87,26 @@ export class AddDealsPage implements OnInit {
     }, (formGroup: FormGroup) => {
       return StartEndDatesValidator.checkDates(formGroup);
    });
+  }
+  public static clearPickerOptions(dealForm: FormGroup, control: string) {
+    return {
+      buttons: [
+        {
+          text: 'Clear',
+          handler: () => dealForm.controls[control].setValue(null)
+        },
+        {
+          text: 'Done',
+          handler: (data) => {
+            let dt = new Date();
+            dt.setFullYear(data.year.value);
+            dt.setMonth(data.month.value - 1);
+            dt.setDate(data.day.value);
+            dealForm.controls[control].setValue(dt);
+          }
+        }
+      ]
+    };
   }
   public static validation_messages = {
     'title': [
@@ -158,29 +180,33 @@ export class AddDealsPage implements OnInit {
   updateSlideUI() {
     this.slider.getActiveIndex().then(slideNumber => {
       // Determine lock/unlock for slides
+      // Title, Picture, Details, Location, Tags, Description
       let locked = false;
-      switch(slideNumber) {
+      switch(slideNumber) { 
         case 0:
           // Title
           locked = !this.checkStep1();
-          this.nextButton.text = 'Location';
+          this.nextButton.text = 'Picture';
           break;
         case 1:
-          // Location
+          // Picture
+          setTimeout(() => {
+            this.slider.updateAutoHeight(175);
+          }, 75);
           locked = !this.checkStep2();
           this.prevButton.text = 'Title';
-          this.nextButton.text = 'Description';
-          break;
-        case 2:
-          // Description
-          locked = !this.checkStep3();
-          this.prevButton.text = 'Location';
           this.nextButton.text = 'Details';
           break;
-        case 3:
+        case 2:
           // Details
+          locked = !this.checkStep3();
+          this.prevButton.text = 'Picture';
+          this.nextButton.text = 'Location';
+          break;
+        case 3:
+          // Location
           locked = !this.checkStep4();
-          this.prevButton.text = 'Description';
+          this.prevButton.text = 'Details';
           this.nextButton.text = 'Tags';
           break;
         case 4:
@@ -190,15 +216,12 @@ export class AddDealsPage implements OnInit {
             this.slider.updateAutoHeight(225);
           }, 25);
           locked = !this.checkStep5();
-          this.prevButton.text = 'Details';
-          this.nextButton.text = 'Picture';
+          this.prevButton.text = 'Location';
+          this.nextButton.text = 'Description';
           break;
         case 5:
-          // Picture
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep6();
+          // Description
+          locked = !this.checkStep5();
           this.prevButton.text = 'Tags';
           break;
       }
@@ -382,31 +405,32 @@ export class AddDealsPage implements OnInit {
     }
   }
 
+  // Title, Picture, Details, Location, Tags, Description
   // These all return true if they are valid
   checkStep1(): boolean {
     // Title
     return this.dealForm.controls['title'].valid;// (this.deal.title != '') && (this.deal.title != null);
   }
   checkStep2(): boolean {
-    // Location
-    return (this.deal.market != null);
-  }
-  checkStep3(): boolean {
-    // Description
+    // Picture
     return true;
   }
-  checkStep4(): boolean {
+  checkStep3(): boolean {
     // Start/End Date and Price
     return (this.dealForm.controls['startDate'].valid &&
       this.dealForm.controls['endDate'].valid &&
       this.dealForm.controls['price'].valid);
+  }
+  checkStep4(): boolean {
+    // Location
+    return (this.deal.market != null);
   }
   checkStep5(): boolean {
     // Tags
     return true;
   }
   checkStep6(): boolean {
-    // Picture
+    // Description
     return true;
   }
 
