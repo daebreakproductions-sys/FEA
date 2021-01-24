@@ -40,7 +40,6 @@ export class DetailPage implements OnInit {
         this.title = this.food.description.split(',').map(value => { return value.trim()}).join(' / ');
         this.digestNutrients(this.food.foodNutrients);
         this.loading.dismiss(); 
-        console.log(this.food)
       }
     };
 
@@ -60,7 +59,6 @@ export class DetailPage implements OnInit {
     this.usda.getFood(id).subscribe(myObserver);
     
     this.nutritionSummary = FDCNutrition.default[id.toString()];
-    console.log(this.nutritionSummary);
   }
 
   digestNutrients(nutrients: FoodNutrient[]) {
