@@ -132,20 +132,15 @@ export class EditDealsPage implements OnInit {
       title: this.dealForm.get('title').value,
       market: { id: this.deal.market.id },
       text: this.dealForm.get('description').value,
-      startDate: Math.round(new Date(this.dealForm.get('startDate').value).getTime()),
-      endDate: Math.round(new Date(this.dealForm.get('endDate').value).getTime()),
+      startDate: Math.round(new Date(this.dealForm.get('startDate').value).getTime() / 1000),
+      endDate: Math.round(new Date(this.dealForm.get('endDate').value).getTime() / 1000),
       price: this.dealForm.get('price').value,
-      image: this.deal.image64
+      image: this.deal.image64,
+      tags: this.tags.map(t => {
+        return {id: t.id};
+      })
     }
     this.dealService.update(newDeal).then( deal => {
-      let updateTags: Tag[] = [];
-      updateTags = this.extraTags(deal.tags, this.tags).concat(
-        this.extraTags(this.tags, deal.tags)
-      );
-      
-      updateTags.forEach(tag => {
-        this.tagService.tagItem(Number(deal.id), tag);
-      });
       this.router.navigate(['detail', 'deal', deal.id]);
     });
   }

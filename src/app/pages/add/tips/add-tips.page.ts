@@ -19,6 +19,7 @@ export class AddTipsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
   @ViewChild('search') searchBar: IonSearchbar;
   public tipForm: FormGroup;
+  public validation_messages;
   public types: {val: number, show: string}[] = [];
 
   slideOpts = {
@@ -54,14 +55,8 @@ export class AddTipsPage implements OnInit {
     public router: Router,
     public tipService: TipService,
   ) { 
-    this.tipForm = new FormGroup({
-      type: new FormControl('',Validators.compose([
-        Validators.required,
-      ])),
-      description: new FormControl('',Validators.compose([
-        Validators.required,
-      ])),
-    });
+    this.tipForm = AddTipsPage.newTipForm();
+    this.validation_messages = AddTipsPage.validation_messages;
     getAllEnumEntries(TipType).forEach(type => {
       this.types.push({
         val: Number(type[1]),
@@ -69,15 +64,25 @@ export class AddTipsPage implements OnInit {
       })
     });
   }
-  public validation_messages = {
-      'type': [
-        { type: 'required', message: 'Tip type is required.' }
-      ],
-      'description': [
-        { type: 'required', message: 'A description of this tip is required.' }
-      ],
-    };
+  public static validation_messages = {
+    'type': [
+      { type: 'required', message: 'Tip type is required.' }
+    ],
+    'description': [
+      { type: 'required', message: 'A description of this tip is required.' }
+    ],
+  };
 
+  public static newTipForm() {
+    return new FormGroup({
+      type: new FormControl('',Validators.compose([
+        Validators.required,
+      ])),
+      description: new FormControl('',Validators.compose([
+        Validators.required,
+      ])),
+    });
+  }
   ngOnInit() {
   }
   ionViewWillEnter() {

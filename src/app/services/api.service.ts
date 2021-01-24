@@ -251,6 +251,9 @@ export class ApiService {
   public createTip(tip: Tip) {
     return this.apiTokenPost('ugc/tips/create', tip) as Promise<number>;
   }
+  public updateTip(tip: any) {
+    return this.apiTokenPost('ugc/tips/' + tip.id, tip) as Promise<number>;
+  }
   public getTip(id: number) {
     return this.apiTokenGet('ugc/tips/' + id) as Promise<Tip>;
   }

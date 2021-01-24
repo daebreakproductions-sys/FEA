@@ -31,6 +31,13 @@
     </ion-col>
   </ion-row>
 
+  <!-- Edit Button -->
+  <ion-row *ngIf="this.userService.me.id == this.tip.usr.id">
+    <ion-col>
+      <ion-button expand="block" (click)="editTip()">Edit your tip<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+
   <!-- Description -->
   <ion-toolbar class="ion-align-items-center">
     <ion-title color="primary">Description</ion-title>
@@ -49,7 +56,7 @@
     <ion-row class="ion-align-items-center">
       <ion-col *ngIf="tags">
         <ng-container *ngFor="let tag of tags">
-          <ion-button fill="solid" size="small" (click)="navigateToTag(tag.id)">#{{tag.name}}</ion-button>
+          <ion-button fill="solid" size="small" class="rounded" (click)="navigateToTag(tag.id)">#{{tag.name}}</ion-button>
         </ng-container>
       </ion-col>
       <ion-col *ngIf="tags == null">
@@ -88,7 +95,7 @@
     </ion-row>
     <ion-row>
       <ion-input type="text" placeholder="Leave a comment" [(ngModel)]="commentField"></ion-input>
-      <ion-button fill="outline" (click)="addComment()">Post</ion-button>
+      <ion-button fill="outline" class="rounded" (click)="addComment()">Post</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>

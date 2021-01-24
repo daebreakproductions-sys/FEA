@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditTipsPageRoutingModule } from './edit-tips-routing.module';
 
 import { EditTipsPage } from './edit-tips.page';
+import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { EditTipsPage } from './edit-tips.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    EditTipsPageRoutingModule
+    EditTipsPageRoutingModule,
+    TagModalPageModule,
   ],
   declarations: [EditTipsPage]
 })

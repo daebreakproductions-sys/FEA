@@ -1,9 +1,68 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-tips</ion-title>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
+    <ion-title>Edit your Tip</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content *ngIf="tip">
+  <form [formGroup]="tipForm">
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Type</ion-label>
+            <ion-select formControlName="type">
+              <ng-container *ngFor="let choice of types">
+                <ion-select-option [value]="choice.val">{{choice.show | titlecase}}</ion-select-option>
+              </ng-container>
+            </ion-select>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.type">
+            <ion-item *ngIf="tipForm.get('type').hasError(validation.type) && (tipForm.get('type').dirty || tipForm.get('type').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.description">
+            <ion-item *ngIf="tipForm.get('description').hasError(validation.type) && (tipForm.get('description').dirty || tipForm.get('description').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="presentTagModal()">
+        <ion-title color="primary">
+          Tags
+        </ion-title>
+        <ion-icon class="ion-padding-end" name="create-outline" color ="primary" size="large"></ion-icon>
+      </ion-row>
+      <ion-row (click)="presentTagModal()">
+        <ion-col *ngIf="tags">
+          <ng-container *ngFor="let tag of tags">
+            <ion-button class="tag" fill="solid" class="rounded" size="small">#{{tag.name}}</ion-button>
+          </ng-container>
+        </ion-col>
+        <ion-col *ngIf="tags == null" class="ion-justify-content-center">
+          <ion-spinner></ion-spinner>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" [disabled]="!tipForm.valid" (click)="saveTip()">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

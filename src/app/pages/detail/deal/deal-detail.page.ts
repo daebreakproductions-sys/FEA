@@ -77,6 +77,9 @@ export class DealDetailPage implements OnInit {
   userDetail() {
     this.router.navigate(['detail', 'user', this.deal.usr.id]);
   }
+  editDeal() {
+    this.router.navigate(['edit', 'deal', this.deal.id]);
+  }
   navigateToTag(id: number) {
     this.feedService.loadByTag(this.tags.find(t => t.id == id));
     this.router.navigate(['tabs', 'feed']);

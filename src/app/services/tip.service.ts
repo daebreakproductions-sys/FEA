@@ -26,6 +26,15 @@ export class TipService {
       });
     })
   }
+  async update(tip: any) {
+    return new Promise<Tip>((resolve) => {
+      this.api.updateTip(tip).then(id => {
+        this.api.getTip(id).then(newTip => {
+          resolve(HelperService.PopulateTip(newTip));
+        })
+      });
+    })
+  }
   async byUser(id: number, page: number = 0, pageLength: number = 10) {
     return new Promise<Tip[]>((resolve) => {
       this.api.getUserContent(id, page, pageLength).then(ugcs => {

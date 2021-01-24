@@ -84,8 +84,8 @@
         <ion-col>
           <ng-container *ngFor="let validation of validation_messages.dates">
             <ion-item *ngIf="dealForm.hasError(validation.type) &&
-              ((dealForm.get('startDate').dirty && dealForm.get('endDate').dirty) || 
-              (dealForm.get('startDate').touched && dealForm.get('endDate').touched))">
+              ((dealForm.get('startDate').dirty || dealForm.get('endDate').dirty) || 
+              (dealForm.get('startDate').touched || dealForm.get('endDate').touched))">
               <ion-label class="ion-text-wrap" color="danger">
                 {{ validation.message }}
               </ion-label>
@@ -117,7 +117,7 @@
       <ion-row (click)="presentTagModal()">
         <ion-col *ngIf="tags">
           <ng-container *ngFor="let tag of tags">
-            <ion-button class="tag" fill="solid" size="small">#{{tag.name}}</ion-button>
+            <ion-button class="tag" fill="solid" class="rounded" size="small">#{{tag.name}}</ion-button>
           </ng-container>
         </ion-col>
         <ion-col *ngIf="tags == null" class="ion-justify-content-center">
@@ -141,7 +141,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button expand="block" (click)="saveDeal()">Save</ion-button>
+          <ion-button expand="block" [disabled]="!dealForm.valid" (click)="saveDeal()">Save</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
