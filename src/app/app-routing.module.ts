@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'tag-modal',
     loadChildren: () => import('./pages/modals/tag-modal/tag-modal.module').then( m => m.TagModalPageModule)
   },
+  {
+    path: 'filter-modal',
+    loadChildren: () => import('./pages/modals/filter-modal/filter-modal.module').then( m => m.FilterModalPageModule)
+  },
 
   //{ path: 'logout', loadChildren: () => import('./pages/auth/logout/logout.module').then(m => m.LogoutPageModule) },
   //{ path: '**', loadChildren: () => import('./pages/common/not-found/not-found.module').then(m => m.NotFoundPageModule) }

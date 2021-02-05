@@ -5,8 +5,9 @@
   <ion-toolbar class="tagBar">
     <ion-button *ngFor="let market of feedService.getMarkets()" size="small" fill="outline" class="tagButton" (click)="removeMarket(market.id)">{{market.name}}<ion-icon name="close-circle"></ion-icon></ion-button>
     <ion-button *ngFor="let tag of feedService.getTags()" size="small" fill="outline" class="tagButton" (click)="removeTag(tag.id)">#{{tag.name}}<ion-icon name="close-circle"></ion-icon></ion-button>
-    <ion-button slot="end" class="iconButton" (click)="presentTagModal()"><ion-label class="hashButton"><b>#</b></ion-label></ion-button>
-    <ion-button slot="end" class="iconButton" (click)="presentMarketModal()"><ion-icon name="storefront-outline" size="large"></ion-icon></ion-button>
+    <!-- <ion-button slot="end" class="iconButton" (click)="presentTagModal()"><ion-label class="hashButton"><b>#</b></ion-label></ion-button>
+    <ion-button slot="end" class="iconButton" (click)="presentMarketModal()"><ion-icon name="storefront-outline" size="large"></ion-icon></ion-button> -->
+    <ion-button slot="end" class="iconButton" (click)="presentFilterModal()"><ion-icon name="funnel-outline" size="large"></ion-icon></ion-button>
   </ion-toolbar>
   <ion-toolbar>
     <ion-row>

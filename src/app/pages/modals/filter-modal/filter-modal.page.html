@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-label slot="start" color="primary" (click)="save()" class="ion-padding-start">Save</ion-label>
+    <ion-title>Choose Filters</ion-title>
+    <ion-label slot="end" color="primary" (click)="dismiss()" class="ion-padding-end">Cancel</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-title color="primary">Tags</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="associatedTags">
+        <ng-container *ngFor="let tag of associatedTags">
+          <ion-button class="tag" [fill]="tag.selected ? 'solid' : 'outline'" size="small" (click)="toggleTag(tag.tag.id)">#{{tag.tag.name}}</ion-button>
+        </ng-container>
+      </ion-col>
+      <ion-col *ngIf="associatedTags == null" class="ion-justify-content-center">
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar #search showCancelButton="focus" debounce="500" animated (ionChange)="searchTag($event)"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="searchTags && searchTags.length > 0">
+        <ng-container *ngFor="let tag of searchTags">
+          <ion-button class="tag" fill="outline" size="small" (click)="chooseSearchTag(tag.tag.id)">#{{tag.tag.name}}</ion-button>
+        </ng-container>
+      </ion-col>
+      <ion-col *ngIf="searchTags && searchTags.length == 0">
+        <ion-button class="tag" (click)="newTag(tagSearchTerm)">Create new tag #{{ tagSearchTerm }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-toolbar>
+    <ion-title color="primary">Markets</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="associatedMarkets">
+        <ng-container *ngFor="let mkt of associatedMarkets">
+          <ion-button class="tag" [fill]="mkt.selected ? 'solid' : 'outline'" size="small" (click)="toggleMarket(mkt.market.id)">{{mkt.market.name}}</ion-button>
+        </ng-container>
+      </ion-col>
+      <ion-col *ngIf="associatedTags == null" class="ion-justify-content-center">
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar showCancelButton="focus" debounce="500" animated (ionChange)="searchMarket($event)"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ng-container *ngIf="searchMarkets">
+    <ion-toolbar>
+      <ion-title color="primary" size="small">Search Results</ion-title>
+    </ion-toolbar>
+    <ion-list>
+      <ion-row *ngIf="searchMarkets == []" style="height: 100%">
+        <ion-col class="ion-text-center" style="margin: auto;">
+          <ion-spinner style="margin: auto;"></ion-spinner>
+        </ion-col>
+      </ion-row>
+      <ion-item *ngFor="let market of searchMarkets" (click)="chooseSearchMarket(market.market.id)">
+        {{market.market.name}} ({{market.market.address}})
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <ion-toolbar>
+    <ion-title color="primary" size="small">Nearby</ion-title>
+  </ion-toolbar>
+  <ion-list>
+    <ion-row *ngIf="nearby == null" style="height: 100%">
+      <ion-col class="ion-text-center" style="margin: auto;">
+        <ion-spinner style="margin: auto;"></ion-spinner>
+      </ion-col>
+    </ion-row>
+    <ion-item *ngFor="let market of nearby" (click)="chooseNearbyMarket(market.id)">
+      {{market.name}}
+    </ion-item>
+  </ion-list>
+</ion-content>

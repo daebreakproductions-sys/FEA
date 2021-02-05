@@ -3,6 +3,8 @@ import { IonInfiniteScroll, IonSearchbar, ModalController } from '@ionic/angular
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
 import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { FeedService } from '@app/services/feed.service';
+import { FilterModalPage } from '../modals/filter-modal/filter-modal.page';
+import { FilterModalResult } from '@app/models/filter-modal-result';
 
 @Component({
   selector: 'app-feed',
@@ -36,6 +38,26 @@ export class FeedPage implements OnInit {
     } else {
       this.feedService.clearSearchTerm();
     }
+  }
+  async presentFilterModal() {
+    const modal = await this.modalController.create({
+      component: FilterModalPage,
+      componentProps: {
+        initialTags: this.feedService.getTags(),
+        initialMarkets: this.feedService.getMarkets(),
+      }
+    });
+    modal.present();
+    await modal.onWillDismiss().then(result => {
+      let data: FilterModalResult = result.data;
+      if(data.markets != null) {
+        this.feedService.clearType('tip');
+        this.feedService.setMarkets(data.markets);
+      }
+      if(data.tags != null) {
+        this.feedService.setTags(data.tags);
+      }
+    });
   }
   async presentMarketModal() {
     const modal = await this.modalController.create({
