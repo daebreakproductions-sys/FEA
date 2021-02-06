@@ -17,6 +17,8 @@ export class TipsPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+  ionViewWillEnter() {
     this.tipService.myTips().then(mine => {
       this.tipService.myFaveTips().then(faves => {
         this.tips = mine.concat(faves).sort((a,b) => {
@@ -25,5 +27,4 @@ export class TipsPage implements OnInit {
       });
     });
   }
-
 }

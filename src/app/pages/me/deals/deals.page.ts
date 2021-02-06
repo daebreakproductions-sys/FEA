@@ -16,6 +16,9 @@ export class DealsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
+  }
+  ionViewWillEnter() {
     this.dealService.myDeals().then(mine => {
       this.dealService.myFaveDeals().then(faves => {
         this.deals = mine.concat(faves).sort((a,b) => {
