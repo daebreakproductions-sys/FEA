@@ -1,4 +1,6 @@
 ion-searchbar {
+  margin-top: constant(safe-area-inset-top);
+  margin-top: env(safe-area-inset-top);
   padding: 2px;
 }
 .map-container {

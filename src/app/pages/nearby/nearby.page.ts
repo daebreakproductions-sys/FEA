@@ -5,7 +5,7 @@ import * as L from 'leaflet';
 import { Geolocation } from '@ionic-native/geolocation/ngx/index';
 import { Geoposition } from '@ionic-native/geolocation';
 import { Router } from '@angular/router';
-import { IonSearchbar } from '@ionic/angular';
+import { IonSearchbar, Platform } from '@ionic/angular';
 import { FeedService } from '@app/services/feed.service';
 import { Deal } from '@app/models/deal';
 
@@ -35,6 +35,7 @@ export class NearbyPage implements OnInit {
     public geolocation: Geolocation,
     public router: Router,
     public feedService: FeedService,
+    public platform: Platform,
   ) { 
     this.icon = L.icon({
       iconUrl:      'assets/images/placeholder.svg',
@@ -181,6 +182,10 @@ export class NearbyPage implements OnInit {
   ngAfterViewChecked() {
     // Set height of map so it is just below the search bar
     let height = this.searchBar.el.offsetHeight;
+    // iOS fix for headers in notch
+    if(this.platform.is("ios")) {
+      height = this.searchBar.el.getBoundingClientRect().bottom;
+    }
     this.mapContainer.nativeElement.style.setProperty('top', height + 'px')
   }
   ngAfterViewInit() {
