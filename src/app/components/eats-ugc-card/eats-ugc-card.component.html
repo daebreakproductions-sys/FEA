@@ -5,7 +5,7 @@
       <img *ngIf="user.avatar64" [src]="'data:image/jpg;base64,' + user.avatar64">
       <img *ngIf="user.avatar64 === null" src="assets/images/empty_avatar.png">
     </ion-avatar>
-    <ion-card-header>
+    <ion-card-header class="custom-vertical-pad">
       <ion-card-title item-content class="ion-align-items-center">
         {{ user.name != ' ' ? user.name : user.username }}
         <ion-icon *ngIf="user.id != userService.me.id && userService.iFollow(user.id)" name="people" color="primary"></ion-icon>
@@ -14,6 +14,9 @@
       <ion-card-subtitle item-content>{{ tip ? tip.tipType : '' | titlecase }} {{ type }}</ion-card-subtitle>
     </ion-card-header>
   </ion-item>
+  <ion-card-content class="date-line">
+    <ion-card-subtitle color="light">{{ ugc.created.toDate().toDateString() }}</ion-card-subtitle>
+  </ion-card-content>
 
   <!-- Card Image -->
   <ion-img *ngIf="deal && deal.image64" [src]="'data:image/jpg;base64,' + deal.image64" (click)="goToDetail()"></ion-img>

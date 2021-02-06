@@ -4,6 +4,7 @@ import { Market } from '@app/models/market';
 import { Tag } from '@app/models/tag';
 import { UGC } from '@app/models/ugc';
 import { ApiService } from './api.service';
+import { HelperService } from './helper-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,10 @@ export class FeedService {
     return new Promise<void>((resolve) => {
       this.api.queryFeed(params).then(ugcs => {
         this.endOfFeed = (ugcs.length != this.length);
-        this.results = this.results.concat(ugcs);
+        let formatted = ugcs.map(ugc => {
+          return <UGC>HelperService.PopulateEntity(ugc);
+        });
+        this.results = this.results.concat(formatted);
         this.loading = false;
         resolve();
       });
