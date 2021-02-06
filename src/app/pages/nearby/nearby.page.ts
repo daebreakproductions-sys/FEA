@@ -54,21 +54,29 @@ export class NearbyPage implements OnInit {
     if(this.mapInitialized) {
       // Only do this if the map has already loaded
       this.geolocation.getCurrentPosition().then(locationData => {
-        this.currentLocation = locationData;
-        this.setMapZoom(locationData);
+        if(this.isLocationOutsideGeneseeCounty(locationData)) {
+          this.currentLocation = this.getFakeGeneseeCountyCoords();
+        } else {
+          this.currentLocation = locationData;
+        }
+        this.setMapZoom(this.currentLocation);
       });
     }
   }
   showAllMarkets() {
     this.geolocation.getCurrentPosition().then(locationData => {
-      this.currentLocation = locationData;
-      L.marker([locationData.coords.latitude, locationData.coords.longitude], {
+      if(this.isLocationOutsideGeneseeCounty(locationData)) {
+        this.currentLocation = this.getFakeGeneseeCountyCoords();
+      } else {
+        this.currentLocation = locationData;
+      }
+      L.marker([this.currentLocation.coords.latitude, this.currentLocation.coords.longitude], {
         icon: this.iconBlue
       }).addTo(this.map);
 
       if(this.marketService.doneLoading) {
         this.addMarkers(this.marketService.markets);
-        this.setMapZoom(locationData);
+        this.setMapZoom(this.currentLocation);
         this.mapInitialized = true;
       } else {
         const myObserver = {
@@ -76,7 +84,7 @@ export class NearbyPage implements OnInit {
           error: err => console.error('Observer got an error: ' + err),
           complete: () => {
             this.addMarkers(this.marketService.markets);
-            this.setMapZoom(locationData);
+            this.setMapZoom(this.currentLocation);
             this.mapInitialized = true;
           },
         };
@@ -113,6 +121,31 @@ export class NearbyPage implements OnInit {
       return result.market;
     });
     this.zoomToData(nearby, location);
+  }
+  isLocationOutsideGeneseeCounty(location: Geoposition): boolean {
+    let top: number = 43.253205;
+    let left: number = -84.173757;
+    let bottom: number = 42.779275;
+    let right: number = -83.354729;
+
+    return location.coords.latitude > top ||
+      location.coords.latitude < bottom ||
+      location.coords.longitude > right ||
+      location.coords.longitude < left;
+  }
+  getFakeGeneseeCountyCoords(): Geoposition {
+    return {
+      coords: {
+        latitude: 43.031255,
+        longitude: -83.705226,
+        heading: 0,
+        accuracy: 0.1,
+        altitude: 229,
+        altitudeAccuracy: 0.1,
+        speed: 0
+      },
+      timestamp: Date.now()
+    };
   }
 
   navigate(id: number) {
