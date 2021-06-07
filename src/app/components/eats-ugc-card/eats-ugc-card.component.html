@@ -20,6 +20,7 @@
 
   <!-- Card Image -->
   <ion-img *ngIf="deal && deal.image64" [src]="'data:image/jpg;base64,' + deal.image64" (click)="goToDetail()"></ion-img>
+  <ion-img *ngIf="tip && tip.image64" [src]="'data:image/jpg;base64,' + tip.image64" (click)="goToDetail()"></ion-img>
 
   <!-- Card Content -->
   <ion-card-content *ngIf="deal" (click)="goToDetail()">

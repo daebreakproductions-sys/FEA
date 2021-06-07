@@ -21,9 +21,16 @@ export class TipsPage implements OnInit {
   ionViewWillEnter() {
     this.tipService.myTips().then(mine => {
       this.tipService.myFaveTips().then(faves => {
-        this.tips = mine.concat(faves).sort((a,b) => {
-          return Number(b.created.epochSecond - a.created.epochSecond); // Sort by date descending
+        let nonDuplicates = faves.filter((fTip) => {
+          return !mine.some((mTip) => {
+            return mTip.id == fTip.id;
+          })
         });
+        this.tips = mine
+          .concat(nonDuplicates)
+          .sort((a,b) => {
+            return Number(b.created.epochSecond - a.created.epochSecond); // Sort by date descending
+          });
       });
     });
   }

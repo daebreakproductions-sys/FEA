@@ -6,6 +6,7 @@ import { Tip } from '@app/models/tip';
 import { TipType } from '@app/models/tip-type.enum';
 import { AddTipsPage } from '@app/pages/add/tips/add-tips.page';
 import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
+import { HelperService } from '@app/services/helper-service.service';
 import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
 import { ModalController } from '@ionic/angular';
@@ -22,6 +23,8 @@ export class EditTipsPage implements OnInit {
   public tip: Tip;
   public tags: Tag[];
   public types: {val: number, show: string}[] = [];
+
+  public imageToUpload: File;
 
   constructor(
     public route: ActivatedRoute,
@@ -68,17 +71,31 @@ export class EditTipsPage implements OnInit {
       }
     });
   }
+  attachFile(e) {
+    if (e.target.files.length == 0) {
+      console.log("No file selected!");
+      return
+    }
+    let file: File = e.target.files[0];
+    this.imageToUpload = file;
+    HelperService.readFileContent(file).then(contents => {
+      this.tip.image64 = contents.split(',')[1];
+      this.imageToUpload = null;
+    });
+  }
+
   saveTip() {
     let newTip = {
       id: this.tip.id,
       type: this.tipForm.get('type').value,
       text: this.tipForm.get('description').value,
+      image: this.tip.image64,
       tags: this.tags.map(t => {
         return { id: t.id };
       })
     }
     this.tipService.update(newTip).then(tip => {
-      this.router.navigate(['tabs/me']);
+      this.router.navigate(['detail', 'tip', tip.id]);
     });
   }
 }

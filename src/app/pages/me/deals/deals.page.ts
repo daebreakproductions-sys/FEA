@@ -21,9 +21,16 @@ export class DealsPage implements OnInit {
   ionViewWillEnter() {
     this.dealService.myDeals().then(mine => {
       this.dealService.myFaveDeals().then(faves => {
-        this.deals = mine.concat(faves).sort((a,b) => {
-          return Number(b.created.epochSecond - a.created.epochSecond); // Sort by date descending
+        let nonDuplicates = faves.filter((fTip) => {
+          return !mine.some((mTip) => {
+            return mTip.id == fTip.id;
+          })
         });
+        this.deals = mine
+          .concat(nonDuplicates)
+          .sort((a,b) => {
+            return Number(b.created.epochSecond - a.created.epochSecond); // Sort by date descending
+          });
       });
     });
   }

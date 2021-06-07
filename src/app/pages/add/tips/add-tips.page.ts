@@ -9,6 +9,8 @@ import { IonSearchbar, IonSlides } from '@ionic/angular';
 import * as keyword_extractor from 'keyword-extractor'
 import {getAllEnumKeys, getAllEnumValues, getAllEnumEntries} from 'enum-for'
 import { debounceTime } from 'rxjs/operators';
+import { Tip } from '@app/models/tip';
+import { HelperService } from '@app/services/helper-service.service';
 
 @Component({
   selector: 'app-tips',
@@ -39,6 +41,7 @@ export class AddTipsPage implements OnInit {
   }
   public showSaveButton: boolean = false;
 
+  public tip: Tip;
   public associatedTags: {
     selected: boolean,
     tag: Tag
@@ -47,6 +50,7 @@ export class AddTipsPage implements OnInit {
     selected: boolean,
     tag: Tag
   }[];
+  public imageToUpload: File;
   public tagSearchTerm: string = '';
 
   constructor(
@@ -84,14 +88,23 @@ export class AddTipsPage implements OnInit {
     });
   }
   ngOnInit() {
+    this.resetTip();
   }
   ionViewWillEnter() {
     // Reset the form in case it has already been used
     this.tipForm.reset();
+    this.resetTip();
     this.associatedTags = null;
     this.searchTags = null;
     this.tagSearchTerm = null;
     this.searchBar.value = null;
+  }
+  resetTip() {
+    this.tip = {
+      text: null,
+      tipType: null,
+      image64: null,
+    };
   }
   ngAfterViewInit() {
     for(let control in this.tipForm.controls) {
@@ -176,10 +189,25 @@ export class AddTipsPage implements OnInit {
     });
   }
 
+  attachFile(e) {
+    if (e.target.files.length == 0) {
+      console.log("No file selected!");
+      return
+    }
+    let file: File = e.target.files[0];
+    this.imageToUpload = file;
+    HelperService.readFileContent(file).then(contents => {
+      this.tip.image64 = contents.split(',')[1];
+      this.imageToUpload = null;
+      this.updateSlideUI();
+    });
+  }
+
   saveTip() {
     let newTip = {
       type: this.tipForm.get('type').value,
       text: this.tipForm.get('description').value,
+      image: this.tip.image64,
     }
     this.tipService.create(newTip).then(tip => {
       this.associatedTags.filter(tag => {
@@ -187,7 +215,7 @@ export class AddTipsPage implements OnInit {
       }).forEach(tag => {
         this.tagService.tagItem(tip.id, tag.tag);
       });
-      this.router.navigate(['tabs/me']);
+      this.router.navigate(['tabs/me/tips']);
     });
   }
 
@@ -205,16 +233,25 @@ export class AddTipsPage implements OnInit {
           // Description
           locked = !this.checkStep2();
           this.prevButton.text = 'Type';
-          this.nextButton.text = 'Tags';
+          this.nextButton.text = 'Picture';
           break;
         case 2:
+          // Picture
+          setTimeout(() => {
+            this.slider.updateAutoHeight(175);
+          }, 75);
+          locked = !this.checkStep3();
+          this.prevButton.text = 'Description';
+          this.nextButton.text = 'Tags';
+          break;
+        case 3:
           // Tags
           this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(225);
           }, 25);
-          locked = !this.checkStep3();
-          this.prevButton.text = 'Description';
+          locked = !this.checkStep4();
+          this.prevButton.text = 'Picture';
           break;
       }
       this.slider.lockSwipeToNext(locked);
@@ -235,7 +272,7 @@ export class AddTipsPage implements OnInit {
   }
   nextButtonVisible(slideNumber: number) {
     switch(slideNumber) {
-      case 2:
+      case 3:
         this.nextButton.show = false;
         break;
       default:
@@ -244,7 +281,7 @@ export class AddTipsPage implements OnInit {
   }
   saveButtonVisible(slideNumber: number) {
     switch(slideNumber) {
-      case 2:
+      case 3:
         this.showSaveButton = true;
         break;
       default:
@@ -272,6 +309,10 @@ export class AddTipsPage implements OnInit {
     return this.tipForm.controls['description'].valid;;
   }
   checkStep3(): boolean {
+    // Image
+    return true;
+  }
+  checkStep4(): boolean {
     // Tags
     return true;
   }

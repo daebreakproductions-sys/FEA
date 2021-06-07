@@ -15,8 +15,8 @@
     <ion-card-header>
       <ion-card-title item-content>
         {{ tip.usr.name.trim() == '' ? tip.usr.username : tip.usr.name }}
-        <ion-icon *ngIf="userService.iFollow(tip.usr.id)" name="people" color="primary"></ion-icon>
-        <ion-icon *ngIf="!userService.iFollow(tip.usr.id)" name="people-outline"></ion-icon>
+        <ion-icon *ngIf="tip.usr.id != userService.me.id && userService.iFollow(tip.usr.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="tip.usr.id != userService.me.id && !userService.iFollow(tip.usr.id)" name="people-outline"></ion-icon>
       </ion-card-title>
       <ion-card-subtitle item-content>{{ tip.tipType ? tip.tipType.toString() : '' | titlecase}} Tip</ion-card-subtitle>
     </ion-card-header>
@@ -37,6 +37,9 @@
       <ion-button expand="block" (click)="editTip()">Edit your tip<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
     </ion-col>
   </ion-row>
+
+  <!-- Deal Image -->
+  <ion-img *ngIf="tip && tip.image64" [src]="'data:image/jpg;base64,' + tip.image64"></ion-img>
 
   <!-- Description -->
   <ion-toolbar class="ion-align-items-center">

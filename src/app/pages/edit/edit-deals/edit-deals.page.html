@@ -8,6 +8,7 @@
 <ion-content *ngIf="deal">
   <form [formGroup]="dealForm">
     <ion-grid class="ion-padding">
+      <!-- Title -->
       <ion-row>
         <ion-col>
           <ion-item>
@@ -23,6 +24,7 @@
           </ng-container>        
         </ion-col>
       </ion-row>
+      <!-- Market -->
       <ion-row>
         <ion-col>
           <ion-item (click)="presentMarketModal()">
@@ -37,6 +39,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+      <!-- Description -->
       <ion-row>
         <ion-col>
           <ion-item>
@@ -52,6 +55,7 @@
           </ng-container>
         </ion-col>
       </ion-row>
+      <!-- Start/End Date -->
       <ion-row>
         <ion-col size="6">
           <ion-item>
@@ -93,6 +97,7 @@
           </ng-container>
         </ion-col>
       </ion-row>
+      <!-- Price -->
       <ion-row>
         <ion-col>
           <ion-item>
@@ -108,6 +113,7 @@
           </ng-container>
         </ion-col>
       </ion-row>
+      <!-- Tags -->
       <ion-row (click)="presentTagModal()">
         <ion-title color="primary">
           Tags
@@ -124,6 +130,7 @@
           <ion-spinner></ion-spinner>
         </ion-col>
       </ion-row>
+      <!-- Picture -->
       <ion-row>
         <ion-col>
           <ion-img *ngIf="deal.image64" [src]="'data:image/jpg;base64,' + deal.image64"></ion-img>
@@ -139,6 +146,7 @@
           </ion-list>
         </ion-col>
       </ion-row>
+      <!-- Save Button -->
       <ion-row>
         <ion-col>
           <ion-button expand="block" [disabled]="!dealForm.valid" (click)="saveDeal()">Save</ion-button>

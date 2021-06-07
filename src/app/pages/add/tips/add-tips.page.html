@@ -71,6 +71,32 @@
           </ion-row>
         </ion-grid>
       </ion-slide>
+      <!-- Picture -->
+      <ion-slide>
+        <ion-grid class="ion-padding">
+          <ion-row>
+            <ion-col>
+              <h1>Add a photo</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-img *ngIf="tip.image64" [src]="'data:image/jpg;base64,' + tip.image64"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-list lines="none" *ngIf="imageToUpload == null">
+                <ion-item>
+                  <ion-label for="photoInput"><ion-icon name="image-outline" color="primary" size="large" slot="start"></ion-icon>Add a Photo</ion-label>
+                  <input id="photoInput" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" width="0px"/>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- Tags -->
       <ion-slide>
         <ion-grid>
           <ion-row>
