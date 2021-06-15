@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.service';
 import { TagService } from '@app/services/tag.service';
 import { MarketService } from '@app/services/market.service';
+import { environment } from '@app/../environments/environment';
+import { Plugins, AppState } from '@capacitor/core';
+
 
 @Component({
   selector: 'app-login',
@@ -52,6 +55,13 @@ export class LoginPage implements OnInit {
         });
         toast.present();
       }
+    });
+  }
+
+  async resetPasswordLink() {
+    const { App } = Plugins;
+    await App.openUrl({
+      url: environment.api_url + 'password-reset',
     });
   }
 
