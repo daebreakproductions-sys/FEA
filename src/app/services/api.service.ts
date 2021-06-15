@@ -79,6 +79,8 @@ export class ApiService {
           }).subscribe((data: any) => {
             resolve(data);
           }, err => {
+            if(err.status == 401)
+              this.auth.clearAccessToken();
             reject(err);
           });
         }
@@ -101,6 +103,8 @@ export class ApiService {
           }).subscribe((data: any) => {
             resolve(data);
           }, err => {
+            if(err.status == 401)
+              this.auth.clearAccessToken();
             reject(err);
           });
         }
@@ -123,6 +127,8 @@ export class ApiService {
           }).subscribe((data: any) => {
             resolve(data);
           }, err => {
+            if(err.status == 401)
+              this.auth.clearAccessToken();
             reject(err);
           });
         }
@@ -145,6 +151,8 @@ export class ApiService {
           }).subscribe((data: any) => {
             resolve(data);
           }, err => {
+            if(err.status == 401)
+              this.auth.clearAccessToken();
             reject(err);
           });
         }
@@ -166,6 +174,8 @@ export class ApiService {
           }).subscribe((data: any) => {
             resolve(data);
           }, err => {
+            if(err.status == 401)
+              this.auth.clearAccessToken();
             reject(err);
           });
         }

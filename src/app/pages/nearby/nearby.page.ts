@@ -78,7 +78,7 @@ export class NearbyPage implements OnInit {
       if(this.marketService.doneLoading) {
         this.addMarkers(this.marketService.markets);
         this.setMapZoom(this.currentLocation);
-        this.mapInitialized = true;
+        this.mapInitialized = this.marketService.doneLoading && this.marketService.markets.length > 0;
       } else {
         const myObserver = {
           next: x => { },
@@ -86,7 +86,7 @@ export class NearbyPage implements OnInit {
           complete: () => {
             this.addMarkers(this.marketService.markets);
             this.setMapZoom(this.currentLocation);
-            this.mapInitialized = true;
+            this.mapInitialized = this.marketService.doneLoading && this.marketService.markets.length > 0;
           },
         };
         this.marketService.notifier.subscribe(myObserver);
