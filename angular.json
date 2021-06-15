@@ -179,7 +179,7 @@
             "test": {
               "browserTarget": "app:build:test"
             },
-            "production": {
+            "prod": {
               "browserTarget": "app:build:production"
             }
           }
