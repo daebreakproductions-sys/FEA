@@ -91,8 +91,13 @@ export class NearbyPage implements OnInit {
         };
         this.marketService.notifier.subscribe(myObserver);
       }
+    }).catch(err => {
+      setTimeout(() => {
+        this.showAllMarkets();
+      }, 1000);
     });
   }
+  
   addMarkers(markets: Market[]) {
     markets.forEach( market => {
       if(market.lat && market.lng) {
