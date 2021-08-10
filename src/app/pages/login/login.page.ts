@@ -11,7 +11,7 @@ import { UserService } from '@app/services/user.service';
 import { TagService } from '@app/services/tag.service';
 import { MarketService } from '@app/services/market.service';
 import { environment } from '@app/../environments/environment';
-import { Plugins, AppState } from '@capacitor/core';
+import { Plugins } from '@capacitor/core';
 
 
 @Component({

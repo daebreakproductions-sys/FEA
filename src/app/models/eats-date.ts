@@ -8,6 +8,9 @@ export class EatsDate {
     }
 
     public toDate() : Date {
-        return new Date(Number(this.epochSecond) * 1000);
+        if(this.epochSecond === BigInt(0))
+            return null;
+        else 
+            return new Date(Number(this.epochSecond) * 1000);
     }
 }

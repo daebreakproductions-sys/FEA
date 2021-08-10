@@ -62,8 +62,10 @@ export class EditDealsPage implements OnInit {
   
     this.dealForm.get('title').setValue(deal.title);
     this.dealForm.get('description').setValue(deal.text);
-    this.dealForm.get('startDate').setValue((<EatsDate>deal.startDate).toDate());
-    this.dealForm.get('endDate').setValue((<EatsDate>deal.endDate).toDate());
+    this.dealForm.get('startDate').setValue((<EatsDate>deal.startDate).toDate().toISOString());
+    if((<EatsDate>deal.endDate).epochSecond !== BigInt(0)) {
+      this.dealForm.get('endDate').setValue((<EatsDate>deal.endDate).toDate().toISOString());
+    }
     this.dealForm.get('price').setValue(deal.price);
 
     this.tagService.byEntityId(this.deal.id).then(tags => {

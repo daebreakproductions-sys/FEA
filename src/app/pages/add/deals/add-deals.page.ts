@@ -12,6 +12,9 @@ import { TagService } from '@app/services/tag.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { DealService } from '@app/services/deal.service';
 import { Router } from '@angular/router';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-deals',
@@ -63,6 +66,9 @@ export class AddDealsPage implements OnInit {
     public tagService: TagService,
     public dealService: DealService,
     public router: Router,
+    private camera: Camera,
+    public actionSheetController: ActionSheetController,
+    private file: File,
   ) { 
     this.dealForm = AddDealsPage.newDealForm();
     this.validation_messages = AddDealsPage.validation_messages;
@@ -332,18 +338,43 @@ export class AddDealsPage implements OnInit {
     });
   }
 
-  attachFile(e) {
-    if (e.target.files.length == 0) {
-      console.log("No file selected!");
-      return
+  pickImage(sourceType) {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
     }
-    let file: File = e.target.files[0];
-    this.imageToUpload = file;
-    HelperService.readFileContent(file).then(contents => {
-      this.deal.image64 = contents.split(',')[1];
-      this.imageToUpload = null;
-      this.updateSlideUI();
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      this.deal.image64 = imageData;
+    }, (err) => {
+      // Handle error
     });
+  }  
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: "Select Image source",
+      buttons: [{
+        text: 'Load from Library',
+        handler: () => {
+          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+        }
+      },
+      {
+        text: 'Use Camera',
+        handler: () => {
+          this.pickImage(this.camera.PictureSourceType.CAMERA);
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      }
+      ]
+    });
+    await actionSheet.present();
   }
 
   saveDeal() {

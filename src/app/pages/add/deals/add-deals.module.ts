@@ -8,6 +8,8 @@ import { DealsPageRoutingModule } from './add-deals-routing.module';
 
 import { AddDealsPage } from './add-deals.page';
 import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-modal.module';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/File/ngx';
 
 @NgModule({
   imports: [
@@ -17,6 +19,10 @@ import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-mod
     ReactiveFormsModule,
     DealsPageRoutingModule,
     MarketModalPageModule
+  ],
+  providers: [
+    Camera,
+    File,
   ],
   declarations: [AddDealsPage]
 })
