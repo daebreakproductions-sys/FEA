@@ -62,7 +62,7 @@
     </ion-item>
     <ion-item *ngIf="deal.endDate">
       <ion-label position="stacked">End Date</ion-label>
-      <ion-input readonly="true" >{{ deal.endDate.toDate().toDateString() }}</ion-input>
+      <ion-input readonly="true" >{{ deal.endDate.epochSecond == 0 ? null : deal.endDate.toDate().toDateString() }}</ion-input>
     </ion-item>
     <ion-item *ngIf="deal.text">
       <ion-label position="stacked">Description</ion-label>
