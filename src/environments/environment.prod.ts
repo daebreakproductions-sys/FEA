@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: 'http://app.flinteats.org/',
+  api_url: 'https://app.flinteats.org/',
 };

@@ -1,6 +1,6 @@
 {
   "name": "flinteats",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "author": "Flint Eats",
   "homepage": "https://flinteats.org/",
   "scripts": {
@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "resources": "cordova-res ios && cordova-res android && node resources/resources.js",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc && jetifier"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +42,7 @@
     "cordova-plugin-camera": "^5.0.3",
     "cordova-plugin-geolocation": "^4.1.0",
     "enum-for": "0.0.5",
+    "jetifier": "^2.0.0",
     "keyword-extractor": "0.0.20",
     "leaflet": "^1.7.1",
     "rxjs": "~7.3.0",

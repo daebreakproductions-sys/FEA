@@ -1,5 +1,5 @@
 {
-  "appId": "org.flinteats",
+  "appId": "com.myepicidea.flinteats",
   "appName": "Flint Eats",
   "bundledWebRuntime": false,
   "npmClient": "npm",
