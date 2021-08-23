@@ -344,7 +344,9 @@ export class AddDealsPage implements OnInit {
       sourceType: sourceType,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      cameraDirection: 0 // 0: Back Camera, 1: Front Camera
     }
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
@@ -375,6 +377,7 @@ export class AddDealsPage implements OnInit {
       ]
     });
     await actionSheet.present();
+    this.updateSlideUI();
   }
 
   saveDeal() {

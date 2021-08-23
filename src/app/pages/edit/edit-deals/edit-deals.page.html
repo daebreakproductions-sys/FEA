@@ -131,17 +131,16 @@
         </ion-col>
       </ion-row>
       <!-- Picture -->
-      <ion-row>
+      <ion-row (click)="selectImage()">
         <ion-col>
           <ion-img *ngIf="deal.image64" [src]="'data:image/jpg;base64,' + deal.image64"></ion-img>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row (click)="selectImage()">
         <ion-col class="ion-text-center">
-          <ion-list lines="none" *ngIf="imageToUpload == null">
+          <ion-list lines="none">
             <ion-item>
-              <ion-label for="photoInput"><ion-icon name="image-outline" color="primary" size="large" slot="start"></ion-icon>{{deal.image64 ? 'Edit Photo' : 'Add a Photo'}}</ion-label>
-              <input id="photoInput" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" width="0px"/>
+              <ion-label><ion-icon name="image-outline" color="primary" size="large" slot="start"></ion-icon>{{deal.image64 ? 'Edit Photo' : 'Add a Photo'}}</ion-label>
             </ion-item>
           </ion-list>
         </ion-col>

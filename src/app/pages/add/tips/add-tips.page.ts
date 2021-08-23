@@ -5,11 +5,12 @@ import { Tag } from '@app/models/tag';
 import { TipType } from '@app/models/tip-type.enum'
 import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
-import { IonSearchbar, IonSlides } from '@ionic/angular';
+import { ActionSheetController, IonSearchbar, IonSlides } from '@ionic/angular';
 import * as keyword_extractor from 'keyword-extractor'
 import {getAllEnumKeys, getAllEnumValues, getAllEnumEntries} from 'enum-for'
 import { debounceTime } from 'rxjs/operators';
 import { Tip } from '@app/models/tip';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 import { HelperService } from '@app/services/helper-service.service';
 
 @Component({
@@ -58,6 +59,8 @@ export class AddTipsPage implements OnInit {
     public tagService: TagService,
     public router: Router,
     public tipService: TipService,
+    private camera: Camera,
+    public actionSheetController: ActionSheetController,
   ) { 
     this.tipForm = AddTipsPage.newTipForm();
     this.validation_messages = AddTipsPage.validation_messages;
@@ -189,18 +192,46 @@ export class AddTipsPage implements OnInit {
     });
   }
 
-  attachFile(e) {
-    if (e.target.files.length == 0) {
-      console.log("No file selected!");
-      return
+  pickImage(sourceType) {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      cameraDirection: 0 // 0: Back Camera, 1: Front Camera
     }
-    let file: File = e.target.files[0];
-    this.imageToUpload = file;
-    HelperService.readFileContent(file).then(contents => {
-      this.tip.image64 = contents.split(',')[1];
-      this.imageToUpload = null;
-      this.updateSlideUI();
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      this.tip.image64 = imageData;
+    }, (err) => {
+      // Handle error
     });
+  }  
+  async selectImage() {
+    const actionSheet = await this.actionSheetController.create({
+      header: "Select Image source",
+      buttons: [{
+        text: 'Load from Library',
+        handler: () => {
+          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+        }
+      },
+      {
+        text: 'Use Camera',
+        handler: () => {
+          this.pickImage(this.camera.PictureSourceType.CAMERA);
+        }
+      },
+      {
+        text: 'Cancel',
+        role: 'cancel'
+      }
+      ]
+    });
+    await actionSheet.present();
+    this.updateSlideUI();
   }
 
   saveTip() {
