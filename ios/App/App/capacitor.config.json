@@ -1,13 +1,13 @@
 {
 	"appId": "com.myepicidea.flinteats",
 	"appName": "Flint Eats",
-	"bundledWebRuntime": false,
-	"npmClient": "npm",
 	"webDir": "www",
 	"plugins": {
 		"SplashScreen": {
-			"launchShowDuration": 0
+			"launchAutoHide": false
 		}
 	},
-	"cordova": {}
+	"server": {
+		"iosScheme": "ionic"
+	}
 }
