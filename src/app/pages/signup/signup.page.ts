@@ -39,9 +39,9 @@ export class SignupPage implements OnInit {
         Validators.pattern('^(\([0-9]{3}\)|[0-9]{3}-?) ?[0-9]{3}(-| )?[0-9]{4}$')
       ])),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(5),
+        Validators.minLength(8),
         Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$') //this is for the letters (both uppercase and lowercase) and numbers validation
+        Validators.pattern('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[`~!@#$%^&\\*\\(\\)\\-_=\\+\\{\\}\\[\\]|\\\\:;"\'<>,\\.?\\/]).{8,}') //this is for the letters (both uppercase and lowercase) and numbers validation
      ])),
       passwordConfirm: new FormControl('')
     }, (formGroup: FormGroup) => {
@@ -67,8 +67,8 @@ export class SignupPage implements OnInit {
       ],
       'password': [
         { type: 'required', message: 'A Password is required.' },
-        { type: 'minlength', message: 'Password must be at least 5 characters long.' },
-        { type: 'pattern', message: 'You must include a number, uppercase, and lowercase letter.' }
+        { type: 'minlength', message: 'Password must be at least 8 characters long.' },
+        { type: 'pattern', message: 'You must include a number, uppercase and lowercase letter, and a symbol.' }
       ],
       'passwordConfirm': [
         // { type: 'required', message: 'A Password is required.' },

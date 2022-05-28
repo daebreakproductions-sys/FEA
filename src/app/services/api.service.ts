@@ -189,7 +189,10 @@ export class ApiService {
   }
   public retrieveCurrentUser() {
     return this.apiTokenGet('users/me') as Promise<User>;
-  };
+  }
+  public deleteCurrentUser() {
+    return this.apiTokenDelete('users/me') as Promise<boolean>;
+  }
   public newUser(user: NewUser) {
     return this.apiPublicPost('auth/create', user) as Promise<string>;
   }
@@ -197,7 +200,7 @@ export class ApiService {
     return this.apiTokenPut('users/me/avatar', file) as Promise<number>;
   }
   public updatePassword(pass: string) {
-    return this.apiTokenPost('users/me/password', pass) as Promise<string>;
+    return this.apiTokenPost('users/me/password', pass) as Promise<string[]>;
   }
   public setCurrentUser(user: User) {
     this.currentUser = user;

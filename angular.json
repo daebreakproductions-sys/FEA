@@ -90,8 +90,8 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
+              "sourceMap": true,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -180,7 +180,7 @@
               "browserTarget": "app:build:local"
             },
             "dev": {
-              "browserTarget": "app:build:devkit"
+              "browserTarget": "app:build:dev"
             },
             "test": {
               "browserTarget": "app:build:test"
