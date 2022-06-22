@@ -116,6 +116,7 @@ export class UserOptionsPage implements OnInit {
     const { role } = await alert.onDidDismiss();
     if(role == 'destructive') {
       console.log("Deleting User");
+      this.api.deleteCurrentUser();
       this.logout();
     }
   }

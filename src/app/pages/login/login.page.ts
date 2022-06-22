@@ -2,9 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
 import { ApiService } from '@app/services/api.service';
-import { User } from '@app/models/user';
-import { HelperService } from '@app/services/helper-service.service';
-import { EatsDate } from '@app/models/eats-date';
 import { AuthService } from '@app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.service';
@@ -12,6 +9,7 @@ import { TagService } from '@app/services/tag.service';
 import { MarketService } from '@app/services/market.service';
 import { environment } from '@app/../environments/environment';
 import { Plugins } from '@capacitor/core';
+import { FoodPantrySiteService } from '@app/services/foodpantrysite.service';
 
 
 @Component({
@@ -33,6 +31,7 @@ export class LoginPage implements OnInit {
     public userService: UserService,
     public tagService: TagService,
     public marketService: MarketService,
+    public foodPantrySiteService: FoodPantrySiteService,
     ) { }
 
   login(){
@@ -44,6 +43,7 @@ export class LoginPage implements OnInit {
         this.userService.init();
         this.tagService.init();
         this.marketService.init();
+        this.foodPantrySiteService.init();
 
         this.router.navigateByUrl(this.auth.getRedirectUrl());
       } else {

@@ -3,8 +3,8 @@ import { APIListOptions } from '@app/models/list-options';
 import { Market } from '@app/models/market';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from './api.service';
-import { Coordinates } from '@ionic-native/geolocation';
 import { AuthService } from './auth.service';
+import { Position } from '@capacitor/geolocation';
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +25,21 @@ export class MarketService {
   init() {
     this.markets = [];
     if(this.auth.isAuthenticated()) {
-      let params: APIListOptions = {
-        start: 0,
-        length: this.pageSize,
-        orderField: 'name',
-        orderDir: 'ASC'
-      };
-      this.startPaging(params);
+      this.api.getAllMarkets().then(markets => {
+        this.markets = markets;
+        this.notifier.next(markets);
+        this.doneLoading = true;
+        this.notifier.complete();
+      });
     }
   }
 
+  private params: APIListOptions = {
+    start: 0,
+    length: this.pageSize,
+    orderField: 'name',
+    orderDir: 'ASC'
+  };
   startPaging(params: APIListOptions) {
     this.api.getMarkets(params).then(markets => {
       this.markets = this.markets.concat(markets);
@@ -56,9 +61,9 @@ export class MarketService {
     })
   }
 
-  getNearby(location: Coordinates, numberOfResults: number): { distance: number, market: Market } [] {
+  getNearby(location: Position, numberOfResults: number): { distance: number, market: Market } [] {
     let distances = this.markets.map(mkt => {
-      return { distance: this.distance(mkt.lat, mkt.lng, location.latitude, location.longitude), market: mkt };
+      return { distance: this.distance(mkt.lat, mkt.lng, location.coords.latitude, location.coords.longitude), market: mkt };
     });
 
     return distances.sort((a,b) => {

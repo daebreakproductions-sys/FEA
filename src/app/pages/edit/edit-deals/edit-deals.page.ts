@@ -12,8 +12,8 @@ import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { DealService } from '@app/services/deal.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { TagService } from '@app/services/tag.service';
+import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 @Component({
   selector: 'app-edit-deals',
@@ -33,15 +33,12 @@ export class EditDealsPage implements OnInit {
 
   public locationTouched: boolean = false;
 
-  public imageToUpload: File;
-
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     public dealService: DealService,
     public modalController: ModalController,
     public tagService: TagService,
-    private camera: Camera,
     public actionSheetController: ActionSheetController,
   ) { }
 
@@ -118,46 +115,19 @@ export class EditDealsPage implements OnInit {
     let dt = new Date();
     return dt.toISOString();
   }
-  pickImage(sourceType) {
-    const options: CameraOptions = {
+  selectImage() {
+    const options: ImageOptions = {
       quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      cameraDirection: 0 // 0: Back Camera, 1: Front Camera
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Prompt
     }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      this.deal.image64 = imageData;
+    Camera.getPhoto(options).then((imageData) => {
+      this.deal.image64 = imageData.base64String;
     }, (err) => {
       // Handle error
+      console.log(err)
     });
   }  
-  async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
-      buttons: [{
-        text: 'Load from Library',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-        }
-      },
-      {
-        text: 'Use Camera',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
-  }
 
   saveDeal() {
     let newDeal = {

@@ -11,7 +11,7 @@
         <ion-icon *ngIf="user.id != userService.me.id && userService.iFollow(user.id)" name="people" color="primary"></ion-icon>
         <ion-icon *ngIf="user.id != userService.me.id && !userService.iFollow(user.id)" name="people-outline"></ion-icon>
       </ion-card-title>
-      <ion-card-subtitle item-content>{{ (tip ? tip.tipType.toString() : '') | titlecase }} {{ type }}</ion-card-subtitle>
+      <ion-card-subtitle item-content>{{ (tip && tip.tipType ? tip.tipType.toString() : '') | titlecase }} {{ type }}</ion-card-subtitle>
     </ion-card-header>
   </ion-item>
   <ion-card-content class="date-line">

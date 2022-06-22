@@ -2,8 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Market } from '@app/models/market';
 import { MarketService } from '@app/services/market.service';
 import * as L from 'leaflet';
-import { Geolocation } from '@ionic-native/geolocation/ngx/index';
-import { Geoposition } from '@ionic-native/geolocation';
+import { Geolocation, Position } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
 import { IonSearchbar, Platform } from '@ionic/angular';
 import { FeedService } from '@app/services/feed.service';
@@ -28,11 +27,10 @@ export class NearbyPage implements OnInit {
   private parser: DOMParser;
   public mapInitialized: boolean = false;
   public currentMarkers: L.Marker[] = [];
-  public currentLocation: Geoposition;
+  public currentLocation: Position;
 
   constructor( 
     public marketService: MarketService,
-    public geolocation: Geolocation,
     public router: Router,
     public feedService: FeedService,
     public platform: Platform,
@@ -54,7 +52,7 @@ export class NearbyPage implements OnInit {
     this.searchBar.value = this.feedService.getSearchTerm();
     if(this.mapInitialized) {
       // Only do this if the map has already loaded
-      this.geolocation.getCurrentPosition().then(locationData => {
+      Geolocation.getCurrentPosition().then(locationData => {
         if(this.isLocationOutsideGeneseeCounty(locationData)) {
           this.currentLocation = this.getFakeGeneseeCountyCoords();
         } else {
@@ -65,7 +63,7 @@ export class NearbyPage implements OnInit {
     }
   }
   showAllMarkets() {
-    this.geolocation.getCurrentPosition().then(locationData => {
+    Geolocation.getCurrentPosition().then(locationData => {
       if(this.isLocationOutsideGeneseeCounty(locationData)) {
         this.currentLocation = this.getFakeGeneseeCountyCoords();
       } else {
@@ -111,7 +109,7 @@ export class NearbyPage implements OnInit {
       }
     })
   }
-  zoomToData(dataset: Market[], location: Geoposition = this.currentLocation) {
+  zoomToData(dataset: Market[], location: Position = this.currentLocation) {
     let minLat = Math.min(dataset.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
     let maxLat = Math.max(dataset.sort((a, b) => b.lat - a.lat)[0].lat, location.coords.latitude);
     let minLng = Math.min(dataset.sort((a, b) => a.lng - b.lng)[0].lng, location.coords.longitude);
@@ -122,13 +120,13 @@ export class NearbyPage implements OnInit {
       [maxLat, maxLng]
     ]);
   }
-  setMapZoom(location: Geoposition) {
-    let nearby = this.marketService.getNearby(location.coords, 5).map(result => {
+  setMapZoom(location: Position) {
+    let nearby = this.marketService.getNearby(location, 5).map(result => {
       return result.market;
     });
     this.zoomToData(nearby, location);
   }
-  isLocationOutsideGeneseeCounty(location: Geoposition): boolean {
+  isLocationOutsideGeneseeCounty(location: Position): boolean {
     let top: number = 43.253205;
     let left: number = -84.173757;
     let bottom: number = 42.779275;
@@ -139,7 +137,7 @@ export class NearbyPage implements OnInit {
       location.coords.longitude > right ||
       location.coords.longitude < left;
   }
-  getFakeGeneseeCountyCoords(): Geoposition {
+  getFakeGeneseeCountyCoords(): Position {
     return {
       coords: {
         latitude: 43.031255,

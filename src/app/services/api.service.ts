@@ -14,6 +14,7 @@ import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
 import { Comment } from '@app/models/comment'
 import { FeedQuery } from '@app/models/feed-query';
+import { FoodPantrySite } from '@app/models/foodpantrysite';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -222,8 +223,19 @@ export class ApiService {
   public getMarkets(params: APIListOptions) {
     return this.apiTokenGet('markets/list', params) as Promise<Market[]>;
   }
+  public getAllMarkets() {
+    return this.apiTokenGet('markets/list') as Promise<Market[]>;
+  }
   public searchMarkets(searchTerm: string) {
     return this.apiTokenGet('markets/search', {q: searchTerm}) as Promise<Market[]>;
+  }
+
+  // Food Pantry Sites
+  public getFoodPantrySites(params: APIListOptions) {
+    return this.apiTokenGet('foodpantrysites/list', params) as Promise<FoodPantrySite[]>;
+  }
+  public getAllFoodPantrySites() {
+    return this.apiTokenGet('foodpantrysites/list') as Promise<FoodPantrySite[]>;
   }
 
   // Tags

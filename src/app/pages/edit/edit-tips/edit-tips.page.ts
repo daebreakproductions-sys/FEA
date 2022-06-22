@@ -9,9 +9,9 @@ import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { HelperService } from '@app/services/helper-service.service';
 import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
+import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { getAllEnumEntries } from 'enum-for'
-import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 @Component({
   selector: 'app-edit-tips',
@@ -25,15 +25,12 @@ export class EditTipsPage implements OnInit {
   public tags: Tag[];
   public types: {val: number, show: string}[] = [];
 
-  public imageToUpload: File;
-
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     public tipService: TipService,
     public modalController: ModalController,
     public tagService: TagService,
-    private camera: Camera,
     public actionSheetController: ActionSheetController,
   ) { 
     getAllEnumEntries(TipType).forEach(type => {
@@ -74,46 +71,19 @@ export class EditTipsPage implements OnInit {
       }
     });
   }
-  pickImage(sourceType) {
-    const options: CameraOptions = {
+  selectImage() {
+    const options: ImageOptions = {
       quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      cameraDirection: 0 // 0: Back Camera, 1: Front Camera
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Prompt
     }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      this.tip.image64 = imageData;
+    Camera.getPhoto(options).then((imageData) => {
+      this.tip.image64 = imageData.base64String;
     }, (err) => {
       // Handle error
+      console.log(err)
     });
   }  
-  async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
-      buttons: [{
-        text: 'Load from Library',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-        }
-      },
-      {
-        text: 'Use Camera',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
-  }
 
   saveTip() {
     let newTip = {

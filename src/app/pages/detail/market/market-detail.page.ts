@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Market } from '@app/models/market';
 import { FeedService } from '@app/services/feed.service';
 import { MarketService } from '@app/services/market.service';
-import { Geoposition } from '@ionic-native/geolocation';
 import { Platform } from '@ionic/angular';
 
 @Component({

@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { AddTipsPageRoutingModule } from './add-tips-routing.module';
 
 import { AddTipsPage } from './add-tips.page';
-import { Camera } from '@ionic-native/Camera/ngx';
 
 @NgModule({
   imports: [
@@ -18,7 +17,6 @@ import { Camera } from '@ionic-native/Camera/ngx';
     AddTipsPageRoutingModule
   ],
   providers: [
-    Camera,
   ],
   declarations: [AddTipsPage]
 })

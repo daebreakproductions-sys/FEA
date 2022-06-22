@@ -93,7 +93,7 @@
             <ion-col size="6">
               <ion-item>
                 <ion-label position="floating">End Date</ion-label>
-                <ion-datetime formControlName="endDate" [min]="minDate" [max]="maxDate" [pickerOptions]="clearPickerOptions"></ion-datetime>
+                <ion-datetime formControlName="endDate" [min]="minDate" [max]="maxDate"></ion-datetime>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.endDate">
                 <ion-item *ngIf="dealForm.get('endDate').hasError(validation.type) && (dealForm.get('endDate').dirty || dealForm.get('endDate').touched)">

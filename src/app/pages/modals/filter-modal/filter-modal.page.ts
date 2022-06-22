@@ -4,7 +4,7 @@ import { Tag } from '@app/models/tag';
 import { MarketService } from '@app/services/market.service';
 import { TagService } from '@app/services/tag.service';
 import { IonSearchbar, ModalController } from '@ionic/angular';
-import { Geolocation } from '@ionic-native/geolocation/ngx/index';
+import { Geolocation } from '@capacitor/geolocation';
 import { FilterModalResult } from '@app/models/filter-modal-result';
 
 @Component({
@@ -45,7 +45,6 @@ export class FilterModalPage implements OnInit {
     public viewCtrl: ModalController,
     public tagService: TagService,
     public marketService: MarketService,
-    public geolocation: Geolocation,
   ) { }
 
   loadInitialTags() {
@@ -66,8 +65,8 @@ export class FilterModalPage implements OnInit {
       }
     });
   
-    this.geolocation.getCurrentPosition().then(data => {
-      this.nearby = this.marketService.getNearby(data.coords, 5).map(result => {
+    Geolocation.getCurrentPosition().then(data => {
+      this.nearby = this.marketService.getNearby(data, 5).map(result => {
         return result.market;
       });
     });

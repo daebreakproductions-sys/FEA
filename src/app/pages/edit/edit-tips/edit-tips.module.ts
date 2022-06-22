@@ -8,7 +8,6 @@ import { EditTipsPageRoutingModule } from './edit-tips-routing.module';
 
 import { EditTipsPage } from './edit-tips.page';
 import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
-import { Camera } from '@ionic-native/Camera/ngx';
 
 @NgModule({
   imports: [
@@ -20,7 +19,6 @@ import { Camera } from '@ionic-native/Camera/ngx';
     TagModalPageModule,
   ],
   providers: [
-    Camera,
   ],
   declarations: [EditTipsPage]
 })

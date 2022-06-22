@@ -12,8 +12,7 @@ import { TagService } from '@app/services/tag.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { DealService } from '@app/services/deal.service';
 import { Router } from '@angular/router';
-import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
-import { File } from '@ionic-native/File/ngx';
+import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/Camera';
 import { ActionSheetController } from '@ionic/angular';
 
 @Component({
@@ -38,7 +37,6 @@ export class AddDealsPage implements OnInit {
     tag: Tag
   }[];
   public tagSearchTerm: string = '';
-  public imageToUpload: File;
   public minDate: string;
   public maxDate: string;
   public now: string;
@@ -66,9 +64,7 @@ export class AddDealsPage implements OnInit {
     public tagService: TagService,
     public dealService: DealService,
     public router: Router,
-    private camera: Camera,
     public actionSheetController: ActionSheetController,
-    private file: File,
   ) { 
     this.dealForm = AddDealsPage.newDealForm();
     this.validation_messages = AddDealsPage.validation_messages;
@@ -338,47 +334,20 @@ export class AddDealsPage implements OnInit {
     });
   }
 
-  pickImage(sourceType) {
-    const options: CameraOptions = {
+  selectImage() {
+    const options: ImageOptions = {
       quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      cameraDirection: 0 // 0: Back Camera, 1: Front Camera
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Prompt
     }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      this.deal.image64 = imageData;
+    Camera.getPhoto(options).then((imageData) => {
+      this.deal.image64 = imageData.base64String;
+      this.updateSlideUI();
     }, (err) => {
       // Handle error
+      console.log(err)
     });
   }  
-  async selectImage() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image source",
-      buttons: [{
-        text: 'Load from Library',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-        }
-      },
-      {
-        text: 'Use Camera',
-        handler: () => {
-          this.pickImage(this.camera.PictureSourceType.CAMERA);
-        }
-      },
-      {
-        text: 'Cancel',
-        role: 'cancel'
-      }
-      ]
-    });
-    await actionSheet.present();
-    this.updateSlideUI();
-  }
 
   saveDeal() {
     let newDeal = {

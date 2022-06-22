@@ -73,7 +73,7 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">End Date</ion-label>
-            <ion-datetime formControlName="endDate" [value]="deal.endDate.epochSecond == 0 ? null : deal.endDate.toDate().toISOString()" [min]="minDate" [max]="maxDate" displayFormat="M/D/YY" [pickerOptions]="clearPickerOptions"></ion-datetime>
+            <ion-datetime formControlName="endDate" [value]="deal.endDate.epochSecond == 0 ? null : deal.endDate.toDate().toISOString()" [min]="minDate" [max]="maxDate" displayFormat="M/D/YY"></ion-datetime>
           </ion-item>
           <ng-container *ngFor="let validation of validation_messages.endDate">
             <ion-item *ngIf="dealForm.get('endDate').hasError(validation.type) && (dealForm.get('endDate').dirty || dealForm.get('endDate').touched)">

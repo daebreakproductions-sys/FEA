@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar } from '@capacitor/status-bar';
 import { MarketService } from './services/market.service';
 import { TagService } from './services/tag.service';
 import { DealService } from './services/deal.service';
 import { UserService } from './services/user.service';
+import { FoodPantrySiteService } from './services/foodpantrysite.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,8 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     private marketService: MarketService,
+    private foodPantrySiteService: FoodPantrySiteService,
     private tagService: TagService,
     private userService: UserService,
   ) {
@@ -28,12 +28,13 @@ export class AppComponent {
   initializeApp() {
     // Also init these services in login.page.ts
     this.marketService.init();
+    this.foodPantrySiteService.init();
     this.tagService.init();
     this.userService.init();
     
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      //StatusBar.styleDefault();
+      SplashScreen.hide();
     });
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Market } from '@app/models/market';
 import { MarketService } from '@app/services/market.service';
 import { ModalController } from '@ionic/angular';
-import { Geolocation } from '@ionic-native/geolocation/ngx/index';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-market-modal',
@@ -18,7 +18,6 @@ export class MarketModalPage implements OnInit {
   constructor(
     public viewCtrl: ModalController,
     public marketService: MarketService,
-    public geolocation: Geolocation,
   ) { 
     
   }
@@ -35,8 +34,8 @@ export class MarketModalPage implements OnInit {
       this.marketService.notifier.subscribe(myObserver);
     }
 
-    this.geolocation.getCurrentPosition().then(data => {
-      this.nearby = this.marketService.getNearby(data.coords, 5).map(result => {
+    Geolocation.getCurrentPosition().then(data => {
+      this.nearby = this.marketService.getNearby(data, 5).map(result => {
         return result.market;
       });
     });
