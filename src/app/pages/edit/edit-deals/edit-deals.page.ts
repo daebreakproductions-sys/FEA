@@ -3,14 +3,11 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Deal } from '@app/models/deal';
 import { EatsDate } from '@app/models/eats-date';
-import { Entity } from '@app/models/entity';
 import { Tag } from '@app/models/tag';
-import { UGC } from '@app/models/ugc';
 import { AddDealsPage } from '@app/pages/add/deals/add-deals.page';
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
 import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { DealService } from '@app/services/deal.service';
-import { HelperService } from '@app/services/helper-service.service';
 import { TagService } from '@app/services/tag.service';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { ActionSheetController, ModalController } from '@ionic/angular';
@@ -27,10 +24,6 @@ export class EditDealsPage implements OnInit {
   public deal: Deal;
   public tags: Tag[];
 
-  public minDate: string;
-  public maxDate: string;
-  public now: string;
-
   public locationTouched: boolean = false;
 
   constructor(
@@ -45,20 +38,15 @@ export class EditDealsPage implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.params.id;
     this.dealService.byId(id).then(deal => {
-      console.log(deal);
       this.loadFields(deal);
     });
     this.dealForm = AddDealsPage.newDealForm();
     this.validation_messages = AddDealsPage.validation_messages;
     this.clearPickerOptions = AddDealsPage.clearPickerOptions(this.dealForm, 'endDate');
-    this.maxDate = this._maxDate();
   }
 
   loadFields(deal: Deal) {
     this.deal = deal;
-  
-    this.minDate = this._minDate();
-    this.now = this._now();
   
     this.dealForm.get('title').setValue(deal.title);
     this.dealForm.get('description').setValue(deal.text);
@@ -99,22 +87,6 @@ export class EditDealsPage implements OnInit {
     });
   }
 
-  readonly oneMonth: number = 1000 * 60 * 60 * 24 * 30;
-  private _minDate() {
-    let now = new Date();
-    let original = new Date(this.deal.startDate.toDate());
-    now.setTime(Math.min(Date.now() - this.oneMonth, original.getTime()));
-    return now.toISOString();
-  }
-  private _maxDate() {
-    let now = new Date();
-    now.setTime(Date.now() + this.oneMonth);
-    return now.toISOString();
-  }
-  private _now() {
-    let dt = new Date();
-    return dt.toISOString();
-  }
   selectImage() {
     const options: ImageOptions = {
       quality: 100,

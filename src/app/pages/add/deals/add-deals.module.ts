@@ -8,6 +8,7 @@ import { DealsPageRoutingModule } from './add-deals-routing.module';
 
 import { AddDealsPage } from './add-deals.page';
 import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-modal.module';
+import { PopupDateModule } from '@app/components/popup-date/popup-date.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-mod
     IonicModule,
     ReactiveFormsModule,
     DealsPageRoutingModule,
-    MarketModalPageModule
+    MarketModalPageModule,
+    PopupDateModule,
   ],
   providers: [
   ],

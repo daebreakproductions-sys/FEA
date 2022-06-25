@@ -30,16 +30,19 @@ export class DealDetailPage implements OnInit {
     public commentService: CommentService,
     public apiService: ApiService,
     public feedService: FeedService,
-  ) { }
+  ) {
+    route.params.subscribe(val => {
+      let id = this.route.snapshot.params.id;
+      this.dealService.byId(id).then(deal => {
+        this.deal = deal;
+        this.loadTags();
+        this.loadComments();
+      })
+    });
+  }
 
   ngOnInit() {
-    let id = this.route.snapshot.params.id;
-    this.dealService.byId(id).then(deal => {
-      console.log(deal);
-      this.deal = deal;
-      this.loadTags();
-      this.loadComments();
-    })
+
   }
 
   likeAction() {

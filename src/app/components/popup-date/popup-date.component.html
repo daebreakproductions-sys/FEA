@@ -1,0 +1,17 @@
+<ion-item [id]="popupId + '-open-modal'">
+  <ion-label>
+    <h2>{{ label }}</h2>
+    <h3>{{ dateDisplay ?? 'MM/DD/YY' }}</h3>
+  </ion-label>
+</ion-item>
+<ion-popover [trigger]="popupId + '-open-modal'" (ionPopoverDidPresent)="popoverOpening()">
+  <ng-template>
+    <ion-datetime #date formControlName="date" 
+      presentation="date" [value]="dateValue" [min]="minDate" [max]="maxDate" 
+      (ionChange)="updateDate(date.value)"></ion-datetime>
+      <ion-item>
+        <ion-button size="small" color="secondary" fill="outline" slot="start" (click)="cancelButton()">Cancel</ion-button>
+        <ion-button size="small" color="primary" fill="solid" slot="end" (click)="selectButton()">Select</ion-button>
+      </ion-item>
+  </ng-template>
+</ion-popover>

@@ -78,10 +78,10 @@
           </ion-row>
           <ion-row>
             <ion-col size="6">
-              <ion-item>
-                <ion-label position="floating">Discovery Date</ion-label>
-                <ion-datetime formControlName="startDate" [value]="now" [min]="minDate" [max]="maxDate"></ion-datetime>
-              </ion-item>
+              <app-popup-date 
+                label="Discovery Date"
+                formControlName="startDate"
+                popupId="discovery"></app-popup-date>
               <ng-container *ngFor="let validation of validation_messages.startDate">
                 <ion-item *ngIf="dealForm.get('startDate').hasError(validation.type) && (dealForm.get('startDate').dirty || dealForm.get('startDate').touched)">
                   <ion-label class="ion-text-wrap" color="danger">
@@ -91,10 +91,10 @@
               </ng-container>
             </ion-col>
             <ion-col size="6">
-              <ion-item>
-                <ion-label position="floating">End Date</ion-label>
-                <ion-datetime formControlName="endDate" [min]="minDate" [max]="maxDate"></ion-datetime>
-              </ion-item>
+              <app-popup-date 
+                label="End Date"
+                formControlName="endDate"
+                popupId="end"></app-popup-date>
               <ng-container *ngFor="let validation of validation_messages.endDate">
                 <ion-item *ngIf="dealForm.get('endDate').hasError(validation.type) && (dealForm.get('endDate').dirty || dealForm.get('endDate').touched)">
                   <ion-label class="ion-text-wrap" color="danger">

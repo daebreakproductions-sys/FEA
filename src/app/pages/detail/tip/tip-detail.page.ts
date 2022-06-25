@@ -30,16 +30,19 @@ export class TipDetailPage implements OnInit {
     public commentService: CommentService,
     public apiService: ApiService,
     public feedService: FeedService,
-  ) { }
+  ) {    
+    route.params.subscribe(val => {
+      let id = this.route.snapshot.params.id;
+      this.tipService.byId(id).then(tip => {
+        this.tip = tip;
+        this.loadTags();
+        this.loadComments();
+      })
+    });
+  }
 
   ngOnInit() {
-    let id = this.route.snapshot.params.id;
-    this.tipService.byId(id).then(tip => {
-      console.log(tip);
-      this.tip = tip;
-      this.loadTags();
-      this.loadComments();
-    })
+
   }
 
   likeAction() {

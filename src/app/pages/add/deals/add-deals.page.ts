@@ -9,11 +9,11 @@ import { debounceTime, filter, map } from 'rxjs/operators';
 import { Tag } from '@app/models/tag';
 import * as keyword_extractor from 'keyword-extractor'
 import { TagService } from '@app/services/tag.service';
-import { HelperService } from '@app/services/helper-service.service';
 import { DealService } from '@app/services/deal.service';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/Camera';
 import { ActionSheetController } from '@ionic/angular';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-deals',
@@ -37,9 +37,6 @@ export class AddDealsPage implements OnInit {
     tag: Tag
   }[];
   public tagSearchTerm: string = '';
-  public minDate: string;
-  public maxDate: string;
-  public now: string;
 
   slideOpts = {
     initialSlide: 0,
@@ -118,7 +115,7 @@ export class AddDealsPage implements OnInit {
       ],
       'description': [],
       'startDate': [
-        { type: 'required', message: 'A Start Date is required.' },
+        { type: 'required', message: 'A Discovery Date is required.' },
       ],
       'endDate': [
         { type: 'required', message: 'An End date is required.' },
@@ -127,15 +124,12 @@ export class AddDealsPage implements OnInit {
         { type: 'required', message: 'A Price is required.' },
       ],
       'dates': [
-        { type: 'startLater', message: 'The End date cannot be earlier than the Start date' }
+        { type: 'startLater', message: 'The End date cannot be earlier than the Discovery date' }
       ],
     };
 
   ngOnInit() {
     this.resetDeal();
-    this.minDate = this._minDate();
-    this.maxDate = this._maxDate();
-    this.now = this._now();
   }
   ionViewWillEnter() {
     // Reset the form in case it has already been used
@@ -248,22 +242,6 @@ export class AddDealsPage implements OnInit {
         this.nextClick();
       }, 500);
     });
-  }
-
-  readonly oneMonth: number = 1000 * 60 * 60 * 24 * 30;
-  private _minDate() {
-    let now = new Date();
-    now.setTime(Date.now() - this.oneMonth);
-    return now.toISOString();
-  }
-  private _maxDate() {
-    let now = new Date();
-    now.setTime(Date.now() + this.oneMonth);
-    return now.toISOString();
-  }
-  private _now() {
-    let dt = new Date();
-    return dt.toISOString();
   }
 
   readonly extractorOpts = {

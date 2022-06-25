@@ -9,6 +9,7 @@ import { EditDealsPageRoutingModule } from './edit-deals-routing.module';
 import { EditDealsPage } from './edit-deals.page';
 import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-modal.module';
 import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
+import { PopupDateModule } from '@app/components/popup-date/popup-date.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module
     EditDealsPageRoutingModule,
     MarketModalPageModule,
     TagModalPageModule,
+    PopupDateModule,
   ],
   providers: [
   ],
