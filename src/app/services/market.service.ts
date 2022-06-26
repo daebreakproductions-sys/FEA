@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { Position } from '@capacitor/geolocation';
+import { HelperService } from './helper-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -93,7 +94,14 @@ export class MarketService {
     }
   }
 
-  byId(id: number) {
+  byId(id: bigint) {
+    return new Promise<Market>((resolve) => {
+      this.api.getMarket(id).then(mkt => {
+        resolve(HelperService.PopulateMarket(mkt));
+      });
+    });
+  }
+  byIdFromCache(id: number) {
     return this.markets.filter(mkt => {
       return mkt.id == id;
     })[0];

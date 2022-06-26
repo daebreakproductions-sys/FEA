@@ -21,6 +21,9 @@
       <ion-card-subtitle item-content>{{ (tip.tipType ? tip.tipType.toString() : '') | titlecase}} Tip</ion-card-subtitle>
     </ion-card-header>
   </ion-item>
+  <ion-card-content class="date-line">
+    <ion-card-subtitle color="light">{{ tip.created.toDate().toDateString() }}</ion-card-subtitle>
+  </ion-card-content>
   <ion-row>
     <ion-col>
       <ion-card-subtitle (click)="likeAction()">

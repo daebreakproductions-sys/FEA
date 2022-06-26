@@ -223,6 +223,9 @@ export class ApiService {
   public getMarkets(params: APIListOptions) {
     return this.apiTokenGet('markets/list', params) as Promise<Market[]>;
   }
+  public getMarket(id: bigint) {
+    return this.apiTokenGet('markets/' + id) as Promise<Market>;
+  }
   public getAllMarkets() {
     return this.apiTokenGet('markets/list') as Promise<Market[]>;
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Deal } from '@app/models/deal';
 import { EatsDate } from '@app/models/eats-date';
 import { Entity } from '@app/models/entity';
+import { Market } from '@app/models/market';
 import { Tip } from '@app/models/tip';
 import { User } from '@app/models/user';
 
@@ -20,6 +21,9 @@ export class HelperService {
   }
   public static PopulateTip(tip: Tip): Tip {
     return <Tip>this.PopulateEntity(tip);
+  }
+  public static PopulateMarket(mkt: Market): Market {
+    return <Market>this.PopulateEntity(mkt);
   }
   public static PopulateEntity(entity: Entity) : Entity {
     entity.created = new EatsDate(entity.created);

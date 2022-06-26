@@ -168,7 +168,7 @@ export class NearbyPage implements OnInit {
           ids.add((<Deal>ugc).market.id);
         });
         let mkts = Array.from(ids).map(id => {
-          return this.marketService.byId(id);
+          return this.marketService.byIdFromCache(id);
         });
         this.addMarkers(mkts);
         this.zoomToData(mkts);

@@ -15,7 +15,11 @@ export class TipService {
   ) { }
 
   async byId(id: number) {
-    return await this.api.getTip(id);
+    return new Promise<Tip>((resolve) => {
+      this.api.getTip(id).then(tip => {
+        resolve(HelperService.PopulateTip(tip));
+      });
+    });
   }
   async create(tip: any) {
     return new Promise<Tip>((resolve) => {

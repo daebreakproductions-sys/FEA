@@ -19,17 +19,17 @@ export class MarketDetailPage implements OnInit {
     public platform: Platform,
     public feedService: FeedService,
     public router: Router,
-  ) { }
+  ) { 
+    route.params.subscribe(val => {
+      let id = this.route.snapshot.params.id;
+      this.marketService.byId(id).then(mkt => {
+        this.market = mkt;
+      });
+    });
+  }
 
   ngOnInit() {
-    let id = this.route.snapshot.params.id;
-    if(this.marketService.doneLoading) {
-      this.market = this.marketService.byId(id);
-    } else {
-      this.marketService.notifier.subscribe({
-        complete: () => this.market = this.marketService.byId(id)
-      });
-    }
+
   }
 
   navigate() {
