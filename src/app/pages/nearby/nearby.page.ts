@@ -3,7 +3,7 @@ import { Market } from '@app/models/market';
 import { MarketService } from '@app/services/market.service';
 import * as L from 'leaflet';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonSearchbar, Platform } from '@ionic/angular';
 import { FeedService } from '@app/services/feed.service';
 import { Deal } from '@app/models/deal';
@@ -34,6 +34,7 @@ export class NearbyPage implements OnInit {
     public router: Router,
     public feedService: FeedService,
     public platform: Platform,
+    private route: ActivatedRoute,
   ) { 
     this.icon = L.icon({
       iconUrl:      'assets/images/placeholder.svg',
@@ -46,22 +47,22 @@ export class NearbyPage implements OnInit {
       iconSize:     [this.iconWidth * this.locationResize, this.iconHeight * this.locationResize], // size of the icon
       iconAnchor:   [this.iconWidth * this.locationResize * 0.5, this.iconHeight * this.locationResize],
     });
+    route.params.subscribe(val => {
+      this.searchBar.value = this.feedService.getSearchTerm();
+      if(this.mapInitialized) {
+        // Only do this if the map has already loaded
+        Geolocation.getCurrentPosition().then(locationData => {
+          if(this.isLocationOutsideGeneseeCounty(locationData)) {
+            this.currentLocation = this.getFakeGeneseeCountyCoords();
+          } else {
+            this.currentLocation = locationData;
+          }
+          this.setMapZoom(this.currentLocation);
+        });
+      }
+    });
   }
 
-  ionViewWillEnter() {
-    this.searchBar.value = this.feedService.getSearchTerm();
-    if(this.mapInitialized) {
-      // Only do this if the map has already loaded
-      Geolocation.getCurrentPosition().then(locationData => {
-        if(this.isLocationOutsideGeneseeCounty(locationData)) {
-          this.currentLocation = this.getFakeGeneseeCountyCoords();
-        } else {
-          this.currentLocation = locationData;
-        }
-        this.setMapZoom(this.currentLocation);
-      });
-    }
-  }
   showAllMarkets() {
     Geolocation.getCurrentPosition().then(locationData => {
       if(this.isLocationOutsideGeneseeCounty(locationData)) {
@@ -90,6 +91,7 @@ export class NearbyPage implements OnInit {
         this.marketService.notifier.subscribe(myObserver);
       }
     }).catch(err => {
+      console.log(err)
       setTimeout(() => {
         this.showAllMarkets();
       }, 1000);
