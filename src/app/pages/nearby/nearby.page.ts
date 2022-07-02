@@ -7,6 +7,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonSearchbar, Platform } from '@ionic/angular';
 import { FeedService } from '@app/services/feed.service';
 import { Deal } from '@app/models/deal';
+import { EatsLocation } from '@app/models/eats-location';
+import { EatsLocationsService } from '@app/services/eats-locations.service';
+import { HelperService } from '@app/services/helper-service.service';
 
 @Component({
   selector: 'app-nearby',
@@ -18,8 +21,9 @@ export class NearbyPage implements OnInit {
   @ViewChild('mapContainer') mapContainer: ElementRef;
   @ViewChild(IonSearchbar) searchBar: any;
   private map: L.Map;
-  private icon: L.Icon;
+  private iconMarket: L.Icon;
   private iconBlue: L.Icon;
+  private iconPantry: L.Icon;
   readonly resize: number = 0.65;
   readonly iconHeight: number = 98 * this.resize;
   readonly iconWidth: number = 71 * this.resize;
@@ -31,23 +35,31 @@ export class NearbyPage implements OnInit {
 
   constructor( 
     public marketService: MarketService,
+    public eatsLocationsService: EatsLocationsService,
     public router: Router,
     public feedService: FeedService,
     public platform: Platform,
+    public helpers: HelperService,
     private route: ActivatedRoute,
   ) { 
-    this.icon = L.icon({
-      iconUrl:      'assets/images/placeholder.svg',
-      iconSize:     [this.iconWidth, this.iconHeight], // size of the icon
-      iconAnchor:   [this.iconWidth * 0.5, this.iconHeight],
-      popupAnchor:  [0, this.iconHeight * -0.9],
-    });
     this.iconBlue = L.icon({
       iconUrl:      'assets/images/placeholder_blue.svg',
+      iconSize:     [this.iconWidth, this.iconHeight], // size of the icon
+      iconAnchor:   [this.iconWidth * 0.5, this.iconHeight],
+    });
+   this.iconMarket = L.icon({
+      iconUrl:      'assets/images/placeholder_market.svg',
       iconSize:     [this.iconWidth * this.locationResize, this.iconHeight * this.locationResize], // size of the icon
       iconAnchor:   [this.iconWidth * this.locationResize * 0.5, this.iconHeight * this.locationResize],
+      popupAnchor:  [0, this.iconHeight * -0.9],
     });
-    route.params.subscribe(val => {
+    this.iconPantry = L.icon({
+      iconUrl:      'assets/images/placeholder_pantry.svg',
+      iconSize:     [this.iconWidth * this.locationResize, this.iconHeight * this.locationResize], // size of the icon
+      iconAnchor:   [this.iconWidth * this.locationResize * 0.5, this.iconHeight * this.locationResize],
+      popupAnchor:  [0, this.iconHeight * -0.9],
+    });
+     route.params.subscribe(val => {
       this.searchBar.value = this.feedService.getSearchTerm();
       if(this.mapInitialized) {
         // Only do this if the map has already loaded
@@ -63,7 +75,7 @@ export class NearbyPage implements OnInit {
     });
   }
 
-  showAllMarkets() {
+  showAllEatsLocations() {
     Geolocation.getCurrentPosition().then(locationData => {
       if(this.isLocationOutsideGeneseeCounty(locationData)) {
         this.currentLocation = this.getFakeGeneseeCountyCoords();
@@ -74,37 +86,37 @@ export class NearbyPage implements OnInit {
         icon: this.iconBlue
       }).addTo(this.map);
 
-      if(this.marketService.doneLoading) {
-        this.addMarkers(this.marketService.markets);
+      if(this.eatsLocationsService.doneLoading) {
+        this.addMarkers(this.eatsLocationsService.eatsLocations);
         this.setMapZoom(this.currentLocation);
-        this.mapInitialized = this.marketService.doneLoading && this.marketService.markets.length > 0;
+        this.mapInitialized = this.eatsLocationsService.doneLoading && this.eatsLocationsService.eatsLocations.length > 0;
       } else {
         const myObserver = {
           next: x => { },
           error: err => console.error('Observer got an error: ' + err),
           complete: () => {
-            this.addMarkers(this.marketService.markets);
+            this.addMarkers(this.eatsLocationsService.eatsLocations);
             this.setMapZoom(this.currentLocation);
-            this.mapInitialized = this.marketService.doneLoading && this.marketService.markets.length > 0;
+            this.mapInitialized = this.eatsLocationsService.doneLoading && this.eatsLocationsService.eatsLocations.length > 0;
           },
         };
-        this.marketService.notifier.subscribe(myObserver);
+        this.eatsLocationsService.notifier.subscribe(myObserver);
       }
     }).catch(err => {
       console.log(err)
       setTimeout(() => {
-        this.showAllMarkets();
+        this.showAllEatsLocations();
       }, 1000);
     });
   }
   
-  addMarkers(markets: Market[]) {
-    markets.forEach( market => {
-      if(market.lat && market.lng) {
-        let m = L.marker([market.lat, market.lng], {
-          icon: this.icon
+  addMarkers(eatsLocations: EatsLocation[]) {
+    eatsLocations.forEach( eatsLoc => {
+      if(eatsLoc.lat && eatsLoc.lng) {
+        let m = L.marker([eatsLoc.lat, eatsLoc.lng], {
+          icon: this.helpers.getClassType(eatsLoc) == "Market" ? this.iconMarket : this.iconPantry
         }).bindPopup(
-          '<p><b>' + market.name + '</b></p><p><ion-label color="primary" id="lbl-market-' + market.id + '">Details</ion-label></p>'
+          '<p><b>' + eatsLoc.name + '</b></p><p><ion-label color="primary" id="lbl-market-' + eatsLoc.id + '">Details</ion-label></p>'
         );
         this.currentMarkers.push(m);
         m.addTo(this.map);
@@ -178,7 +190,7 @@ export class NearbyPage implements OnInit {
     } else {
       this.feedService.reset();
       this.feedService.freshQuery();
-      this.showAllMarkets();
+      this.showAllEatsLocations();
     }
   }
 
@@ -217,7 +229,7 @@ export class NearbyPage implements OnInit {
       });
     });
 
-    this.showAllMarkets();
+    this.showAllEatsLocations();
   }
 }
 

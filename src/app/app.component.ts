@@ -2,12 +2,9 @@ import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { StatusBar } from '@capacitor/status-bar';
-import { MarketService } from './services/market.service';
 import { TagService } from './services/tag.service';
-import { DealService } from './services/deal.service';
 import { UserService } from './services/user.service';
-import { FoodPantrySiteService } from './services/foodpantrysite.service';
+import { EatsLocationsService } from './services/eats-locations.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +14,7 @@ import { FoodPantrySiteService } from './services/foodpantrysite.service';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private marketService: MarketService,
-    private foodPantrySiteService: FoodPantrySiteService,
+    private locationsService: EatsLocationsService,
     private tagService: TagService,
     private userService: UserService,
   ) {
@@ -27,8 +23,7 @@ export class AppComponent {
 
   initializeApp() {
     // Also init these services in login.page.ts
-    this.marketService.init();
-    this.foodPantrySiteService.init();
+    this.locationsService.init();
     this.tagService.init();
     this.userService.init();
     

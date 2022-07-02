@@ -6,6 +6,5 @@ export interface UGC extends Entity {
     usr?: User;
     reactionCount?: number;
     iLike?: boolean;
-    class?: string;
     tags?: Tag[];
 }

@@ -6,10 +6,9 @@ import { AuthService } from '@app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.service';
 import { TagService } from '@app/services/tag.service';
-import { MarketService } from '@app/services/market.service';
 import { environment } from '@app/../environments/environment';
 import { Plugins } from '@capacitor/core';
-import { FoodPantrySiteService } from '@app/services/foodpantrysite.service';
+import { EatsLocationsService } from '@app/services/eats-locations.service';
 
 
 @Component({
@@ -30,8 +29,7 @@ export class LoginPage implements OnInit {
     public router: Router,
     public userService: UserService,
     public tagService: TagService,
-    public marketService: MarketService,
-    public foodPantrySiteService: FoodPantrySiteService,
+    public locationsService: EatsLocationsService,
     ) { }
 
   login(){
@@ -42,8 +40,7 @@ export class LoginPage implements OnInit {
         // Also init these services in app.component.ts
         this.userService.init();
         this.tagService.init();
-        this.marketService.init();
-        this.foodPantrySiteService.init();
+        this.locationsService.init();
 
         this.router.navigateByUrl(this.auth.getRedirectUrl());
       } else {

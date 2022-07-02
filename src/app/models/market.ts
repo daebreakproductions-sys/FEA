@@ -1,14 +1,10 @@
-import { Entity } from "./entity";
+import { EatsLocation } from "./eats-location";
 
-export interface Market extends Entity {
-    name: string;
+export interface Market extends EatsLocation {
     email: string;
-    address: string;
     hours: string;
     phone: string;
     url: string;
-    lat: number;
-    lng: number;
     image: object;
     dealsCount: number;
     image64: string;

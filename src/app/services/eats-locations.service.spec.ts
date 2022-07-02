@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LocationService } from './location.service';
+import { EatsLocationsService } from './eats-locations.service';
 
 describe('LocationService', () => {
-  let service: LocationService;
+  let service: EatsLocationsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LocationService);
+    service = TestBed.inject(EatsLocationsService);
   });
 
   it('should be created', () => {

@@ -7,6 +7,7 @@ import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
+import { HelperService } from '@app/services/helper-service.service';
 import { UserService } from '@app/services/user.service';
 
 @Component({
@@ -28,10 +29,11 @@ export class EatsUgcCardComponent implements OnInit {
     public router: Router,
     public apiService: ApiService,
     public userService: UserService,
+    public helpers: HelperService,
   ) { }
 
   ngOnInit() {
-    let type = this.ugc.class.split('.').pop();
+    let type = this.helpers.getClassType(this.ugc);
     this.type = type;
     switch(type) {
       case "Deal":

@@ -1,11 +1,7 @@
-import { Entity } from "./entity";
+import { EatsLocation } from "./eats-location";
 
-export interface FoodPantrySite extends Entity {
-    name: string;
-    address: string;
-    phone: string;
-    schedule: string;
-    notes: string;
-    lat: number;
-    lng: number;
+export interface FoodPantrySite extends EatsLocation {
+    phone?: string;
+    schedule?: string;
+    notes?: string;
 }
