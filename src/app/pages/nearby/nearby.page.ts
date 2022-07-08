@@ -116,7 +116,14 @@ export class NearbyPage implements OnInit {
         let m = L.marker([eatsLoc.lat, eatsLoc.lng], {
           icon: this.helpers.getClassType(eatsLoc) == "Market" ? this.iconMarket : this.iconPantry
         }).bindPopup(
-          '<p><b>' + eatsLoc.name + '</b></p><p><ion-label color="primary" id="lbl-market-' + eatsLoc.id + '">Details</ion-label></p>'
+          '<p>\
+            <b>' + eatsLoc.name + '</b>\
+          </p>\
+          <p>\
+            <ion-label color="primary" id="lbl-' + this.helpers.getClassType(eatsLoc).toLowerCase() +'-' + eatsLoc.id + '">\
+              Details\
+            </ion-label>\
+          </p>'
         );
         this.currentMarkers.push(m);
         m.addTo(this.map);
@@ -166,8 +173,9 @@ export class NearbyPage implements OnInit {
     };
   }
 
-  navigate(id: number) {
-    this.router.navigate(['detail/market', id]);
+  navigate(type: string, id: number) {
+    //Add routing for Food Pantries
+    this.router.navigate(['detail', type, id]);
   }
 
   search(searchTerm: any) {
@@ -221,11 +229,12 @@ export class NearbyPage implements OnInit {
 
     this.map.on('popupopen', (ev) => {
       let popup = this.parser.parseFromString(ev.sourceTarget._popup._content, "text/html");
-      let lbl = popup.getElementsByTagName("ion-label")[0]
+      let lbl = popup.getElementsByTagName("ion-label")[0];
+      let type = lbl.id.split('-')[1];
       let id = Number(lbl.id.split('-')[2]);
-      const label = L.DomUtil.get('lbl-market-' + id);
+      const label = L.DomUtil.get('lbl-' + type + '-' + id);
       L.DomEvent.addListener(label, 'click', (ee) => {
-        this.navigate(id);
+        this.navigate(type, id);
       });
     });
 

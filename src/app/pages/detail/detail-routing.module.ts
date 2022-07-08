@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'tip',
     loadChildren: () => import('./tip/tip-detail.module').then( m => m.TipDetailPageModule)
   },
+  {
+    path: 'foodpantrysite',
+    loadChildren: () => import('./foodpantrysite/foodpantrysite-detail.module').then( m => m.FoodPantrySiteDetailPageModule)
+  },
 ];
 
 @NgModule({

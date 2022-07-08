@@ -25,7 +25,6 @@ export class EatsLocationsService {
     const myObserver = {
       next: x => {
         this.eatsLocations = this.eatsLocations.concat(x);
-        console.log(this.eatsLocations);
       },
       error: err => console.error('Observer got an error: ' + err),
       complete: () => { },
