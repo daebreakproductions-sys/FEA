@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-back-button defaultHref="/tabs/nearby" slot="start"></ion-back-button>
-    <ion-title *ngIf="market" class="ion-text-wrap">{{ market.name }}</ion-title>
+    <ion-title *ngIf="market">
+      <div class="ion-text-wrap">{{ market.name }}</div>
+    </ion-title>
     <ion-button *ngIf="market" (click)="navigate()" slot="end" class="ion-padding-end">
       <ion-icon name="car-outline" color="white" size="large"></ion-icon>
     </ion-button>

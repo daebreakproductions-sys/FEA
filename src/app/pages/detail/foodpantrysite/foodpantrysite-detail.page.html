@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-back-button defaultHref="/tabs/nearby" slot="start"></ion-back-button>
-    <ion-title *ngIf="foodPantrySite" class="ion-text-wrap">{{ foodPantrySite.name }}</ion-title>
+    <ion-title *ngIf="foodPantrySite">
+      <div class="ion-text-wrap">{{ foodPantrySite.name }}</div>
+    </ion-title>
     <ion-button *ngIf="foodPantrySite" (click)="navigate()" slot="end" class="ion-padding-end">
       <ion-icon name="car-outline" color="white" size="large"></ion-icon>
     </ion-button>
@@ -20,7 +22,10 @@
     </ion-item>
     <ion-item>
       <ion-icon name="time-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ foodPantrySite.schedule ? foodPantrySite.schedule : "No Schedule found" }}</ion-label>
+      <ion-label *ngIf="!foodPantrySite.schedule" class="ion-text-wrap">No Schedule found</ion-label>
+      <div *ngIf="foodPantrySite.schedule">
+        <ion-label *ngFor="let line of foodPantrySite.schedule.split('\n')" class="ion-text-wrap">{{ line }}</ion-label>
+      </div>
     </ion-item>
     <ion-item>
       <ion-icon name="newspaper-outline" color="primary" slot="start" size="large"></ion-icon>
