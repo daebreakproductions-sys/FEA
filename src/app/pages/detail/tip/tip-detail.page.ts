@@ -17,26 +17,18 @@ import { FeedService } from '@app/services/feed.service';
 })
 export class TipDetailPage implements OnInit {
   public tip: Tip;
-  public tags: Tag[];
-  public comments: Comment[];
-  public commentField: string = "";
 
   constructor(
     public route: ActivatedRoute,
     public userService: UserService,
     public tipService: TipService,
     public router: Router,
-    public tagService: TagService,
-    public commentService: CommentService,
     public apiService: ApiService,
-    public feedService: FeedService,
   ) {    
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
       this.tipService.byId(id).then(tip => {
         this.tip = tip;
-        this.loadTags();
-        this.loadComments();
       })
     });
   }
@@ -56,32 +48,10 @@ export class TipDetailPage implements OnInit {
     }
     this.apiService.toggleLike(this.tip.id);
   }
-  loadTags() {
-    this.tagService.byEntityId(this.tip.id).then(tags => {
-      this.tags = tags;
-    });
-  }
-  loadComments() {
-    this.commentService.byEntityId(this.tip.id).then(comments => {
-      this.comments = comments;
-    });
-  }
-  addComment() {
-    if(this.commentField.trim() != "") {
-      this.commentService.create(this.tip.id, this.commentField).then(() => {
-        this.loadComments();
-        this.commentField = "";
-      });
-    }
-  }
   userDetail() {
     this.router.navigate(['detail', 'user', this.tip.usr.id]);
   }
   editTip() {
     this.router.navigate(['edit', 'tip', this.tip.id]);
-  }
-  navigateToTag(id: number) {
-    this.feedService.loadByTag(this.tags.find(t => t.id == id));
-    this.router.navigate(['tabs', 'feed']);
   }
 }

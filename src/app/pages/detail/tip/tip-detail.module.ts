@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { TipDetailPageRoutingModule } from './tip-detail-routing.module';
 
 import { TipDetailPage } from './tip-detail.page';
+import { TagDisplayModule } from '@app/components/tags/tag-display/tag-display.module';
+import { DetailCommentsModule } from '@app/components/comments/detail-comments/detail-comments.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TipDetailPageRoutingModule
+    TipDetailPageRoutingModule,
+    TagDisplayModule,
+    DetailCommentsModule,
   ],
   declarations: [TipDetailPage]
 })
