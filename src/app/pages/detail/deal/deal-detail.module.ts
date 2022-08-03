@@ -9,6 +9,7 @@ import { DealDetailPageRoutingModule } from './deal-detail-routing.module';
 import { DealDetailPage } from './deal-detail.page';
 import { DetailCommentsModule } from '@app/components/comments/detail-comments/detail-comments.module';
 import { TagDisplayModule } from '@app/components/tags/tag-display/tag-display.module';
+import { UserHeaderModule } from '@app/components/user-header/user-header.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { TagDisplayModule } from '@app/components/tags/tag-display/tag-display.m
     DealDetailPageRoutingModule,
     DetailCommentsModule,
     TagDisplayModule,
+    UserHeaderModule,
   ],
   declarations: [DealDetailPage]
 })

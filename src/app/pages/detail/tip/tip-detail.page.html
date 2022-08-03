@@ -7,20 +7,8 @@
 
 <ion-content *ngIf="tip">
   <!-- User Header -->
-  <ion-item lines="none" (click)="userDetail()">
-    <ion-avatar item-start>
-      <img *ngIf="tip.usr.avatar64" [src]="'data:image/jpg;base64,' + tip.usr.avatar64">
-      <img *ngIf="tip.usr.avatar64 === null" src="assets/images/empty_avatar.png">
-    </ion-avatar>
-    <ion-card-header>
-      <ion-card-title item-content>
-        {{ tip.usr.name.trim() == '' ? tip.usr.username : tip.usr.name }}
-        <ion-icon *ngIf="tip.usr.id != userService.me.id && userService.iFollow(tip.usr.id)" name="people" color="primary"></ion-icon>
-        <ion-icon *ngIf="tip.usr.id != userService.me.id && !userService.iFollow(tip.usr.id)" name="people-outline"></ion-icon>
-      </ion-card-title>
-      <ion-card-subtitle item-content>{{ (tip.tipType ? tip.tipType.toString() : '') | titlecase}} Tip</ion-card-subtitle>
-    </ion-card-header>
-  </ion-item>
+  <eats-user-header [usr]="tip.usr" title="{{ (tip.tipType ? tip.tipType.toString() : '') | titlecase}} Tip"></eats-user-header>
+
   <ion-card-content class="date-line">
     <ion-card-subtitle color="light">{{ tip.created.toDate().toDateString() }}</ion-card-subtitle>
   </ion-card-content>

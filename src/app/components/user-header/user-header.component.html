@@ -1,0 +1,14 @@
+<ion-item lines="none" (click)="userDetail()">
+  <ion-avatar item-start>
+    <img *ngIf="usr.avatar64" [src]="'data:image/jpg;base64,' + usr.avatar64">
+    <img *ngIf="usr.avatar64 === null" src="assets/images/empty_avatar.png">
+  </ion-avatar>
+  <ion-card-header>
+    <ion-card-title item-content>
+      {{ usr.name.trim() == '' ? usr.username : usr.name }}
+      <ion-icon *ngIf="usr.id != userService.me.id && userService.iFollow(usr.id)" name="people" color="primary"></ion-icon>
+      <ion-icon *ngIf="usr.id != userService.me.id && !userService.iFollow(usr.id)" name="people-outline"></ion-icon>
+    </ion-card-title>
+    <ion-card-subtitle item-content>{{ title }}</ion-card-subtitle>
+  </ion-card-header>
+</ion-item>

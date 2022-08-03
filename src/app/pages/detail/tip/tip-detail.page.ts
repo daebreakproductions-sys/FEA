@@ -48,9 +48,6 @@ export class TipDetailPage implements OnInit {
     }
     this.apiService.toggleLike(this.tip.id);
   }
-  userDetail() {
-    this.router.navigate(['detail', 'user', this.tip.usr.id]);
-  }
   editTip() {
     this.router.navigate(['edit', 'tip', this.tip.id]);
   }

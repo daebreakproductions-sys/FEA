@@ -46,9 +46,6 @@ export class DealDetailPage implements OnInit {
   marketDetail() {
     this.router.navigate(['detail', 'market', this.deal.market.id]);
   }
-  userDetail() {
-    this.router.navigate(['detail', 'user', this.deal.usr.id]);
-  }
   editDeal() {
     this.router.navigate(['edit', 'deal', this.deal.id]);
   }
