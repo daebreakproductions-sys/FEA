@@ -15,6 +15,9 @@ import { UGC } from '@app/models/ugc';
 import { Comment } from '@app/models/comment'
 import { FeedQuery } from '@app/models/feed-query';
 import { FoodPantrySite } from '@app/models/foodpantrysite';
+import { Recipe } from '@app/models/recipe';
+import { RecipeStep } from '@app/models/recipe-step';
+import { RecipeIngredient } from '@app/models/recipe-ingredient';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -285,6 +288,50 @@ export class ApiService {
   public getTip(id: number) {
     return this.apiTokenGet('ugc/tips/' + id) as Promise<Tip>;
   }
+
+  // Recipes
+  public getRecipes(params: APIListOptions) {
+    return this.apiTokenGet('ugc/recipes/list', params) as Promise<Recipe[]>;
+  }
+  public createRecipe(recipe: Recipe) {
+    return this.apiTokenPost('ugc/recipes/create', recipe) as Promise<number>;
+  }
+  public updateRecipe(recipe: any) {
+    return this.apiTokenPost('ugc/recipes/' + recipe.id, recipe) as Promise<number>;
+  }
+  public getRecipe(id: number) {
+    return this.apiTokenGet('ugc/recipes/' + id) as Promise<Recipe>;
+  }
+
+  // Recipe Steps
+  public getRecipeStepsByRecipeId(recipeId: number) {
+    return this.apiTokenGet('ugc/recipes/' + recipeId + '/steps/list') as Promise<RecipeStep[]>;
+  }
+  public createRecipeStep(recipeId: number, recipeStep: RecipeStep) {
+    return this.apiTokenPost('ugc/recipes/' + recipeId + '/steps/create', recipeStep) as Promise<number>;
+  }
+  public updateRecipeStep(recipeId: number, recipeStep: any) {
+    return this.apiTokenPost('ugc/recipes/' + recipeId + '/steps/' + recipeStep.id, recipeStep) as Promise<number>;
+  }
+  public deleteRecipeStep(recipeId: number, recipeStepId: number) {
+    return this.apiTokenDelete('ugc/recipes/' + recipeId + '/steps/' + recipeStepId) as Promise<number>;
+  }
+
+
+  // Recipe Ingredients
+  public getRecipeIngredientsByRecipeId(recipeId: number) {
+    return this.apiTokenGet('ugc/recipes/' + recipeId + '/ingredients/list') as Promise<RecipeIngredient[]>;
+  }
+  public createRecipeIngredient(recipeId: number, recipeIngredient: RecipeIngredient) {
+    return this.apiTokenPost('ugc/recipes/' + recipeId + '/ingredients/create', recipeIngredient) as Promise<number>;
+  }
+  public updateRecipeIngredient(recipeId: number, recipeIngredient: any) {
+    return this.apiTokenPost('ugc/recipes/' + recipeId + '/ingredients/' + recipeIngredient.id, recipeIngredient) as Promise<number>;
+  }
+  public deleteRecipeIngredient(recipeId: number, recipeIngredientId: number) {
+    return this.apiTokenDelete('ugc/recipes/' + recipeId + '/ingredients/' + recipeIngredientId) as Promise<number>;
+  }
+
 
   // Reaction/Likes
   public toggleLike(id: number) {

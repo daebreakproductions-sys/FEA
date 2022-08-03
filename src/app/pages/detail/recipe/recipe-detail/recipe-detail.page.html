@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/tabs/me/recipes"></ion-back-button>
+    <ion-title>Recipes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="recipe">
+  <!-- User Header -->
+  <eats-user-header [usr]="recipe.usr" title="Recipe"></eats-user-header>
+
+  <!-- Tags -->
+  <eats-tag-display [UGCId]="recipe.id"></eats-tag-display>
+
+  <!-- Comments -->
+  <eats-detail-comments [UGCId]="recipe.id"></eats-detail-comments>
+</ion-content>
+
+<ion-row *ngIf="recipe == null" style="height: 100%">
+  <ion-col class="ion-text-center" style="margin: auto;">
+    <ion-spinner style="margin: auto;"></ion-spinner>
+  </ion-col>
+</ion-row>

@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'foodpantrysite',
     loadChildren: () => import('./foodpantrysite/foodpantrysite-detail.module').then( m => m.FoodPantrySiteDetailPageModule)
   },
+  {
+    path: 'recipe',
+    loadChildren: () => import('./recipe/recipe-detail/recipe-detail.module').then( m => m.RecipeDetailPageModule)
+  },
 ];
 
 @NgModule({
