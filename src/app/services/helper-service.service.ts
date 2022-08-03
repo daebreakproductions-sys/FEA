@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Comment } from '@app/models/comment';
 import { Deal } from '@app/models/deal';
 import { EatsDate } from '@app/models/eats-date';
 import { Entity } from '@app/models/entity';
@@ -24,6 +25,9 @@ export class HelperService {
   }
   public static PopulateMarket(mkt: Market): Market {
     return <Market>this.PopulateEntity(mkt);
+  }
+  public static PopulateComment(comment: Comment): Comment {
+    return <Comment>this.PopulateEntity(comment);
   }
   public static PopulateEntity(entity: Entity) : Entity {
     entity.created = new EatsDate(entity.created);

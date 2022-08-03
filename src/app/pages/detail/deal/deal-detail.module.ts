@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { DealDetailPageRoutingModule } from './deal-detail-routing.module';
 
 import { DealDetailPage } from './deal-detail.page';
+import { DetailCommentsModule } from '@app/components/comments/detail-comments/detail-comments.module';
+import { TagDisplayModule } from '@app/components/tags/tag-display/tag-display.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DealDetailPageRoutingModule
+    DealDetailPageRoutingModule,
+    DetailCommentsModule,
+    TagDisplayModule,
   ],
   declarations: [DealDetailPage]
 })

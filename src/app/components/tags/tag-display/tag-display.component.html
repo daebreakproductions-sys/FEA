@@ -1,0 +1,15 @@
+<ion-toolbar class="ion-align-items-center">
+  <ion-title color="primary">Tags</ion-title>
+</ion-toolbar>
+<ion-grid>
+  <ion-row class="ion-align-items-center">
+    <ion-col *ngIf="tags">
+      <ng-container *ngFor="let tag of tags">
+        <ion-button fill="solid" size="small" class="rounded" (click)="navigateToTag(tag.id)">#{{tag.name}}</ion-button>
+      </ng-container>
+    </ion-col>
+    <ion-col *ngIf="tags == null">
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+</ion-grid>
