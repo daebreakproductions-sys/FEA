@@ -8,7 +8,75 @@
 <ion-content *ngIf="recipe">
   <!-- User Header -->
   <eats-user-header [usr]="recipe.usr" title="Recipe"></eats-user-header>
+  <ion-card-content class="date-line">
+    <ion-card-subtitle color="light">Last Updated {{ recipe.modified.toDate().toDateString() }}</ion-card-subtitle>
+  </ion-card-content>
 
+  <!-- Edit Button -->
+  <ion-row *ngIf="this.userService.me.id == this.recipe.usr.id">
+    <ion-col>
+      <ion-button expand="block" (click)="editRecipe()">Edit your recipe<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+
+  <!-- Main Recipe Image -->
+  <ion-img *ngIf="recipe && recipe.image64" [src]="'data:image/jpg;base64,' + recipe.image64"></ion-img>
+
+  <!-- Title -->
+  <ion-card-content lines="none">
+    <ion-card-title>
+      {{ recipe.title }}
+    </ion-card-title>
+    <ion-card-subtitle (click)="likeAction()">
+      <ion-icon *ngIf="recipe.iLike" name="heart" color="danger"></ion-icon>
+      <ion-icon *ngIf="!recipe.iLike" name="heart-outline"></ion-icon>
+      <ion-label> {{recipe.reactionCount}} {{recipe.reactionCount == 1 ? 'Like' : 'Likes'}}</ion-label>
+    </ion-card-subtitle>
+  </ion-card-content>
+
+  <!-- Recipe Summary -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary"><ion-icon name="restaurant-outline"></ion-icon> Description</ion-title>
+  </ion-toolbar>
+  <ion-card-content lines="none">
+    <ion-card-subtitle>
+      Serves: {{ recipe.servings }}
+    </ion-card-subtitle>
+    <ion-card-subtitle *ngIf="recipe.steps">
+      Preparation Time: {{ sumTime(recipe.steps) }} minutes
+    </ion-card-subtitle>
+    <ion-card-content>
+      {{ recipe.description }}
+    </ion-card-content>
+  </ion-card-content>
+
+  <!-- Recipe Ingredients -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary"><ion-icon name="receipt-outline"></ion-icon> Ingredients</ion-title>
+  </ion-toolbar>
+  <ion-list>
+    <ion-item class="ion-align-items-center" *ngFor="let ingredient of recipe.ingredients">
+      {{ ingredient.measurement }} {{ ingredient.name }}
+    </ion-item>
+  </ion-list>
+    
+  <!-- Recipe Steps -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary"><ion-icon name="library-outline"></ion-icon> Instructions</ion-title>
+  </ion-toolbar>
+  <ion-card-content lines="none" *ngFor="let step of recipe.steps.sort(sortStepsByOrder)">
+    <ion-img *ngIf="step.image64" [src]="'data:image/jpg;base64,' + step.image64"></ion-img>
+    <ion-card-title>
+      {{ step.title }}
+    </ion-card-title>
+    <ion-card-subtitle>
+      <ion-icon name="time-outline"></ion-icon> {{ step.timeMinutes }} minutes
+    </ion-card-subtitle>
+    <ion-card-content>
+      {{ step.instructions }}
+    </ion-card-content>
+  </ion-card-content>
+  
   <!-- Tags -->
   <eats-tag-display [UGCId]="recipe.id"></eats-tag-display>
 

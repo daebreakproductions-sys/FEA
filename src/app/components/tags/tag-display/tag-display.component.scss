@@ -1,3 +1,12 @@
 ion-button.rounded {
-    --border-radius: 16px;
+  --border-radius: 16px;
+}
+ion-title {
+  &.md {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      height: 0;
+      text-align: center;
   }
+}

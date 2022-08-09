@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '@app/models/recipe';
+import { RecipeStep } from '@app/models/recipe-step';
+import { ApiService } from '@app/services/api.service';
 import { RecipeService } from '@app/services/recipe.service';
+import { UserService } from '@app/services/user.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -14,6 +17,9 @@ export class RecipeDetailPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public recipeService: RecipeService,
+    public router: Router,
+    public userService: UserService,
+    public apiService: ApiService,
   ) { 
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
@@ -26,4 +32,24 @@ export class RecipeDetailPage implements OnInit {
   ngOnInit() {
   }
 
+  likeAction() {
+    if(this.recipe.iLike) {
+      this.recipe.reactionCount -= 1;
+      this.recipe.iLike = false;
+    } else {
+      // API Action
+      this.recipe.reactionCount += 1;
+      this.recipe.iLike = true;
+    }
+    this.apiService.toggleLike(this.recipe.id);
+  }
+  editRecipe() {
+    this.router.navigate(['edit', 'recipe', this.recipe.id]);
+  }
+  sumTime(steps: RecipeStep[]): Number {
+    return steps.map(i=>i.timeMinutes).reduce((a,b)=>a+b);
+  }
+  sortStepsByOrder(stepA: RecipeStep, stepB: RecipeStep) {
+    return stepA.stepOrder - stepB.stepOrder;
+  }
 }

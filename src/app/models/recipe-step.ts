@@ -4,6 +4,6 @@ export interface RecipeStep extends Entity {
     stepOrder: number;
     title: string;
     instructions: string;
-    image: object;
+    image64: object;
     timeMinutes: number;
 }

@@ -5,7 +5,7 @@ import { UGC } from "./ugc";
 export interface Recipe extends UGC {
     title: string;
     description: string;
-    image: object;
+    image64: object;
     servings: bigint;
     published: boolean;
     ingredients: RecipeIngredient[];
