@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
+    <ion-title>Edit your Recipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="recipe">
+  <form [formGroup]="recipeForm">
+    <ion-grid class="ion-padding">
+      <!-- Picture -->
+      <eats-photo-edit [image64]="recipe.image64" (photoUpdatedEvent)="updateImage($event)"></eats-photo-edit>
+      <!-- Title -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Title</ion-label>
+            <ion-input formControlName="title" type="text"></ion-input>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages_recipe.title">
+            <ion-item *ngIf="recipeForm.get('title').hasError(validation.type) && (recipeForm.get('title').dirty || recipeForm.get('title').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>        
+        </ion-col>
+      </ion-row>
+      <!-- Description -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="description"></ion-textarea>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages_recipe.description">
+            <ion-item *ngIf="recipeForm.get('description').hasError(validation.type) && (recipeForm.get('description').dirty || recipeForm.get('description').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <!-- Servings -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Serves</ion-label>
+            <ion-input formControlName="servings" type="number"></ion-input>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages_recipe.servings">
+            <ion-item *ngIf="recipeForm.get('servings').hasError(validation.type) && (recipeForm.get('servings').dirty || recipeForm.get('servings').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>        
+        </ion-col>
+      </ion-row>
+      <!-- Published -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Published</ion-label>
+            <ion-toggle color="primary" formControlName="published"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- Ingredients -->
+      <!-- Steps -->
+      <!-- Tags -->
+      <eats-tag-edit [UGCId]="recipe.id" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-edit>
+      <!-- Save Button -->
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" [disabled]="!recipeForm.valid" (click)="saveRecipe()">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

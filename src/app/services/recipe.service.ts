@@ -10,9 +10,7 @@ export class RecipeService {
 
   constructor(
     public api: ApiService,
-  ) { 
-    
-  }
+  ) { }
 
   byId(id: number) {
     return new Promise<Recipe>((resolve) => {
@@ -20,5 +18,24 @@ export class RecipeService {
         resolve(HelperService.PopulateRecipe(recipe));
       });
     });
+  }
+
+  async create(recipe: any) {
+    return new Promise<Recipe>((resolve) => {
+      this.api.createRecipe(recipe).then(id => {
+        this.api.getRecipe(id).then(newRecipe => {
+          resolve(HelperService.PopulateRecipe(newRecipe));
+        })
+      });
+    })
+  }  
+  async update(recipe: any) {
+    return new Promise<Recipe>((resolve) => {
+      this.api.updateRecipe(recipe).then(id => {
+        this.api.getRecipe(id).then(newRecipe => {
+          resolve(HelperService.PopulateRecipe(newRecipe));
+        })
+      });
+    })
   }
 }
