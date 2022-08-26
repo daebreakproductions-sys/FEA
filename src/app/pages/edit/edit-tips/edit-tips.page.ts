@@ -77,7 +77,7 @@ export class EditTipsPage implements OnInit {
   saveTip() {
     let newTip = {
       id: this.tip.id,
-      type: this.tipForm.get('type').value,
+      tipType: this.tipForm.get('type').value,
       text: this.tipForm.get('description').value,
       image: this.tip.image64,
       tags: this.tags.map(t => {

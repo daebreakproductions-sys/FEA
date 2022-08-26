@@ -15,7 +15,7 @@
             <ion-label position="floating">Type</ion-label>
             <ion-select formControlName="type">
               <ng-container *ngFor="let choice of types">
-                <ion-select-option [value]="choice.val">{{choice.show | titlecase}}</ion-select-option>
+                <ion-select-option [value]="choice.show">{{choice.show | titlecase}}</ion-select-option>
               </ng-container>
             </ion-select>
           </ion-item>
