@@ -9,6 +9,7 @@ import { EditTipsPageRoutingModule } from './edit-tips-routing.module';
 import { EditTipsPage } from './edit-tips.page';
 import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
 import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
+import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
     EditTipsPageRoutingModule,
     TagModalPageModule,
     TagEditModule,
+    PhotoEditModule,
   ],
   providers: [
   ],

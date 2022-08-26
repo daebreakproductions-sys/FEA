@@ -1,0 +1,14 @@
+<ion-row (click)="selectImage()">
+  <ion-col>
+    <ion-img *ngIf="image64" [src]="'data:image/jpg;base64,' + image64"></ion-img>
+  </ion-col>
+</ion-row>
+<ion-row (click)="selectImage()">
+  <ion-col class="ion-text-center">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label><ion-icon name="image-outline" color="primary" size="large" slot="start"></ion-icon>{{image64 ? 'Edit Photo' : 'Add a Photo'}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>

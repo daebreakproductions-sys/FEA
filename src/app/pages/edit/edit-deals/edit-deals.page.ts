@@ -59,6 +59,9 @@ export class EditDealsPage implements OnInit {
   updateTags(tags: Tag[]) {
     this.tags = tags;
   }
+  updateImage(image64) {
+    this.deal.image64 = image64;
+  }
 
   async presentMarketModal() {
     const modal = await this.modalController.create({

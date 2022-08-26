@@ -60,6 +60,9 @@ export class EditTipsPage implements OnInit {
   updateTags(tags: Tag[]) {
     this.tags = tags;
   }
+  updateImage(image64) {
+    this.tip.image64 = image64;
+  }
   selectImage() {
     const options: ImageOptions = {
       quality: 100,

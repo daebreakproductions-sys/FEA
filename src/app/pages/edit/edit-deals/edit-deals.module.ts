@@ -11,6 +11,7 @@ import { MarketModalPageModule } from '@app/pages/modals/market-modal/market-mod
 import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
 import { PopupDateModule } from '@app/components/popup-date/popup-date.module';
 import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
+import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.module';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
     TagModalPageModule,
     PopupDateModule,
     TagEditModule,
+    PhotoEditModule,
   ],
   providers: [
   ],
