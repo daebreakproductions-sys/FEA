@@ -55,10 +55,9 @@ export class EditDealsPage implements OnInit {
       this.dealForm.get('endDate').setValue((<EatsDate>deal.endDate).toDate().toISOString());
     }
     this.dealForm.get('price').setValue(deal.price);
-
-    this.tagService.byEntityId(this.deal.id).then(tags => {
-      this.tags = tags;
-    });
+  }
+  updateTags(tags: Tag[]) {
+    this.tags = tags;
   }
 
   async presentMarketModal() {
@@ -69,21 +68,6 @@ export class EditDealsPage implements OnInit {
     await modal.onWillDismiss().then(market => {
       this.deal.market = market.data;
       this.locationTouched = true;
-    });
-  }
-  async presentTagModal() {
-    const modal = await this.modalController.create({
-      component: TagModalPage,
-      componentProps: {
-        initialTags: this.tags,
-      }
-    });
-    modal.present();
-    await modal.onWillDismiss().then(tags => {
-      console.log(tags)
-      if(tags.data != null) {
-        this.tags = tags.data;
-      }
     });
   }
 
@@ -118,14 +102,5 @@ export class EditDealsPage implements OnInit {
     this.dealService.update(newDeal).then( deal => {
       this.router.navigate(['detail', 'deal', deal.id]);
     });
-  }
-
-  extraTags(list1: Tag[], list2: Tag[]) {
-    // Find tags in e2 not in e1
-    return list2.filter(t2 => {
-      return !list1.some(t1 => {
-        return t1.id == t2.id;
-      })
-    })
   }
 }

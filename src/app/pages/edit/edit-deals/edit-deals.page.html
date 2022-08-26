@@ -116,22 +116,7 @@
         </ion-col>
       </ion-row>
       <!-- Tags -->
-      <ion-row (click)="presentTagModal()">
-        <ion-title color="primary">
-          Tags
-        </ion-title>
-        <ion-icon class="ion-padding-end" name="create-outline" color ="primary" size="large"></ion-icon>
-      </ion-row>
-      <ion-row (click)="presentTagModal()">
-        <ion-col *ngIf="tags">
-          <ng-container *ngFor="let tag of tags">
-            <ion-button class="tag" fill="solid" class="rounded" size="small">#{{tag.name}}</ion-button>
-          </ng-container>
-        </ion-col>
-        <ion-col *ngIf="tags == null" class="ion-justify-content-center">
-          <ion-spinner></ion-spinner>
-        </ion-col>
-      </ion-row>
+      <eats-tag-edit [UGCId]="deal.id" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-edit>
       <!-- Picture -->
       <ion-row (click)="selectImage()">
         <ion-col>

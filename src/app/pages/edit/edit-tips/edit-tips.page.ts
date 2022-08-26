@@ -57,19 +57,8 @@ export class EditTipsPage implements OnInit {
     this.tipForm.get('type').setValue(tip.tipType);
     this.tipForm.get('description').setValue(tip.text);
   }
-  async presentTagModal() {
-    const modal = await this.modalController.create({
-      component: TagModalPage,
-      componentProps: {
-        initialTags: this.tags,
-      }
-    });
-    modal.present();
-    await modal.onWillDismiss().then(tags => {
-      if(tags.data != null) {
-        this.tags = tags.data;
-      }
-    });
+  updateTags(tags: Tag[]) {
+    this.tags = tags;
   }
   selectImage() {
     const options: ImageOptions = {

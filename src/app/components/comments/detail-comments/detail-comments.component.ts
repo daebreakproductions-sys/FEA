@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommentService } from '@app/services/comment.service';
 import { Comment } from '@app/models/comment'
 import { HelperService } from '@app/services/helper-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'eats-detail-comments',
@@ -16,10 +17,13 @@ export class DetailCommentsComponent implements OnInit {
   constructor(
     public commentService: CommentService,
     public helperService: HelperService,
+    public route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.loadComments();
+    this.route.params.subscribe(() => {
+      this.loadComments();
+    })
   }
 
   loadComments() {

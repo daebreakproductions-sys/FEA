@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tag } from '@app/models/tag';
 import { FeedService } from '@app/services/feed.service';
 import { TagService } from '@app/services/tag.service';
@@ -17,10 +17,13 @@ export class TagDisplayComponent implements OnInit {
     public tagService: TagService,
     public feedService: FeedService,
     public router: Router,
+    public route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.loadTags();
+    this.route.params.subscribe(() => {
+      this.loadTags();
+    });
   }
 
   loadTags() {

@@ -74,7 +74,7 @@ export class TagService {
   byEntityId(id: number) {
     return this.api.getTagsByEntity(id);
   }
-  async create(name: string) {
+  async create(name: string): Promise<Tag> {
 
     let tag: Tag = {
       name: name.trim().toLowerCase()
@@ -109,6 +109,15 @@ export class TagService {
         });
       })
     });
+  }
+
+  public static extraTags(list1: Tag[], list2: Tag[]) {
+    // Find tags in e2 not in e1
+    return list2.filter(t2 => {
+      return !list1.some(t1 => {
+        return t1.id == t2.id;
+      })
+    })
   }
 
 }

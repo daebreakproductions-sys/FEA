@@ -8,6 +8,7 @@ import { EditTipsPageRoutingModule } from './edit-tips-routing.module';
 
 import { EditTipsPage } from './edit-tips.page';
 import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
+import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module
     ReactiveFormsModule,
     EditTipsPageRoutingModule,
     TagModalPageModule,
+    TagEditModule,
   ],
   providers: [
   ],
