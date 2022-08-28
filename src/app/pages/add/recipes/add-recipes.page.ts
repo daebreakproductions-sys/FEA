@@ -62,7 +62,7 @@ export class AddRecipesPage implements OnInit {
     ],
     'instructions': [],
     'timeMinutes': [
-      { type: 'required', message: 'Approximate Time cannot be blank.' },
+      { type: 'required', message: 'Prep Time cannot be blank.' },
     ],
   };
   public static newRecipeIngredientForm() {

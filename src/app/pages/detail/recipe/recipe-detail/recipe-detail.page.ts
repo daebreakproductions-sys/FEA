@@ -24,6 +24,8 @@ export class RecipeDetailPage implements OnInit {
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
       this.recipeService.byId(id).then(recipe => {
+        recipe.steps = recipe.steps.sort((a,b) => a.stepOrder - b.stepOrder);
+        recipe.ingredients = recipe.ingredients.sort((a,b) => a.id - b.id);
         this.recipe = recipe;
       })
     });

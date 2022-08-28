@@ -38,4 +38,24 @@ export class RecipeService {
       });
     })
   }
+
+  async createIngredient(recipeId: number, ingredient: any) {
+    return this.api.createRecipeIngredient(recipeId, ingredient);
+  }  
+  async updateIngredient(recipeId: number, ingredient: any) {
+    return this.api.updateRecipeIngredient(recipeId, ingredient);
+  }
+  async deleteIngredient(recipeId: number, ingredientId: number) {
+    return this.api.deleteRecipeIngredient(recipeId, ingredientId);
+  }
+
+  async createStep(recipeId: number, step: any) {
+    return this.api.createRecipeStep(recipeId, step);
+  }  
+  async updateStep(recipeId: number, step: any) {
+    return this.api.updateRecipeStep(recipeId, step);
+  }
+  async deleteStep(recipeId: number, stepId: number) {
+    return this.api.deleteRecipeStep(recipeId, stepId);
+  }
 }

@@ -62,13 +62,122 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label position="floating">Published</ion-label>
+            <ion-label position="stacked">Published</ion-label>
             <ion-toggle color="primary" formControlName="published"></ion-toggle>
           </ion-item>
         </ion-col>
       </ion-row>
+    </ion-grid>
+  </form>
+  <form [formGroup]="recipeIngredientForm">
+    <ion-grid class="ion-padding">
       <!-- Ingredients -->
+      <ion-toolbar class="ion-align-items-center">
+        <ion-title color="primary"><ion-icon name="receipt-outline"></ion-icon> Ingredients</ion-title>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item class="ion-align-items-center" *ngFor="let ingredient of ingredients">
+          <div *ngIf="ingredient.editing">
+            <ion-item>
+              <ion-label position="floating">Measurement</ion-label>
+              <ion-input formControlName="measurement"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Ingredient</ion-label>
+              <ion-input formControlName="name"></ion-input>
+            </ion-item>
+            <ng-container *ngFor="let validation of validation_messages_ingredient.measurement">
+              <ion-item *ngIf="recipeIngredientForm.get('measurement').hasError(validation.type) && (recipeIngredientForm.get('measurement').dirty || recipeIngredientForm.get('measurement').touched)">
+                <ion-label class="ion-text-wrap" color="danger">
+                  {{ validation.message }}
+                </ion-label>
+              </ion-item>
+            </ng-container>        
+            <ng-container *ngFor="let validation of validation_messages_ingredient.name">
+              <ion-item *ngIf="recipeIngredientForm.get('name').hasError(validation.type) && (recipeIngredientForm.get('name').dirty || recipeIngredientForm.get('name').touched)">
+                <ion-label class="ion-text-wrap" color="danger">
+                  {{ validation.message }}
+                </ion-label>
+              </ion-item>
+            </ng-container>        
+          </div>
+          <div *ngIf="!ingredient.editing" [class]="ingredient.deleted ? 'deleted' : ''">{{ ingredient.measurement }} {{ ingredient.name }}</div>
+          <ion-icon name="close-outline" *ngIf="ingredient.editing" slot="end" (click)="cancelIngredientEdit(ingredient)"></ion-icon>
+          <ion-icon name="checkmark-outline" *ngIf="ingredient.editing" slot="end" (click)="saveIngredientEdit(ingredient)"></ion-icon>
+          <ion-icon name="pencil-outline" *ngIf="!ingredient.deleted && !ingredientsEditing()" slot="end" (click)="editIngredient(ingredient)"></ion-icon>
+          <ion-icon name="trash-outline" *ngIf="!ingredient.deleted && !ingredient.editing" slot="end" (click)="ingredient.deleted = !ingredient.deleted"></ion-icon>
+          <ion-icon name="arrow-undo-outline" *ngIf="ingredient.deleted" slot="end" (click)="ingredient.deleted = !ingredient.deleted"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-button *ngIf="!ingredientsEditing()" expand="block" fill="outline" (click)="addIngredient()"><ion-icon name="add-outline"></ion-icon> Add Ingredient</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-grid>
+  </form>
+  <form [formGroup]="recipeStepForm">
+    <ion-grid class="ion-padding">
       <!-- Steps -->
+      <ion-toolbar class="ion-align-items-center">
+        <ion-title color="primary"><ion-icon name="library-outline"></ion-icon> Instructions</ion-title>
+      </ion-toolbar>
+      <ion-list>
+        <ion-item class="ion-align-items-center" *ngFor="let step of steps">
+          <div *ngIf="step.editing">
+            <!-- Picture -->
+            <eats-photo-edit [image64]="step.image64" (photoUpdatedEvent)="setStepPhoto(step,$event)"></eats-photo-edit>
+            <ion-item>
+              <ion-label position="floating">Title</ion-label>
+              <ion-input formControlName="title"></ion-input>
+            </ion-item>
+            <ng-container *ngFor="let validation of validation_messages_step.title">
+              <ion-item *ngIf="recipeStepForm.get('title').hasError(validation.type) && (recipeStepForm.get('title').dirty || recipeStepForm.get('title').touched)">
+                <ion-label class="ion-text-wrap" color="danger">
+                  {{ validation.message }}
+                </ion-label>
+              </ion-item>
+            </ng-container>        
+            <ion-item>
+              <ion-label position="floating">Instruction</ion-label>
+              <ion-textarea formControlName="instructions"></ion-textarea>
+            </ion-item>
+            <ng-container *ngFor="let validation of validation_messages_step.instructions">
+              <ion-item *ngIf="recipeStepForm.get('instructions').hasError(validation.type) && (recipeStepForm.get('instructions').dirty || recipeStepForm.get('instructions').touched)">
+                <ion-label class="ion-text-wrap" color="danger">
+                  {{ validation.message }}
+                </ion-label>
+              </ion-item>
+            </ng-container>        
+            <ion-item>
+              <ion-label position="floating">Prep Time (Minutes)</ion-label>
+              <ion-input formControlName="timeMinutes"></ion-input>
+            </ion-item>
+            <ng-container *ngFor="let validation of validation_messages_step.timeMinutes">
+              <ion-item *ngIf="recipeStepForm.get('timeMinutes').hasError(validation.type) && (recipeStepForm.get('timeMinutes').dirty || recipeStepForm.get('timeMinutes').touched)">
+                <ion-label class="ion-text-wrap" color="danger">
+                  {{ validation.message }}
+                </ion-label>
+              </ion-item>
+            </ng-container>        
+          </div>
+          <ion-thumbnail *ngIf="!step.editing" slot="start">
+            <img *ngIf="step.image64" [src]="'data:image/jpg;base64,' + step.image64" />
+            <img *ngIf="!step.image64" src="assets/images/No-Image-Placeholder.svg" />
+          </ion-thumbnail>
+          <ion-label *ngIf="!step.editing">
+            <h2 [class]="step.deleted ? 'deleted' : ''">{{ step.title }}</h2>
+            <h3><ion-icon name="time-outline"></ion-icon> {{ step.timeMinutes }} minutes</h3>
+          </ion-label>
+          <ion-icon name="close-outline" *ngIf="step.editing" slot="end" (click)="cancelStepEdit(step)"></ion-icon>
+          <ion-icon name="checkmark-outline" *ngIf="step.editing" slot="end" (click)="saveStepEdit(step)"></ion-icon>
+          <ion-icon name="pencil-outline" *ngIf="!step.deleted && !stepsEditing()" slot="end" (click)="editStep(step)"></ion-icon>
+          <ion-icon name="trash-outline" *ngIf="!step.deleted && !step.editing" slot="end" (click)="step.deleted = !step.deleted"></ion-icon>
+          <ion-icon name="arrow-undo-outline" *ngIf="step.deleted" slot="end" (click)="step.deleted = !step.deleted"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-button *ngIf="!stepsEditing()" expand="block" fill="outline" (click)="addStep()"><ion-icon name="add-outline"></ion-icon> Add Instruction</ion-button>
+        </ion-item>
+      </ion-list>
+
       <!-- Tags -->
       <eats-tag-edit [UGCId]="recipe.id" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-edit>
       <!-- Save Button -->
