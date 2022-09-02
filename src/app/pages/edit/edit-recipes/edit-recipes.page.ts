@@ -171,7 +171,6 @@ export class EditRecipesPage implements OnInit {
     // Update Recipe Ingredients
     for (let index = 0; index < this.ingredients.length; index++) {
       const ingred = this.ingredients[index];
-      console.log(ingred)
       if(ingred.deleted && ingred.id != null) {
         // Existing Ingredients that have been deleted
         await this.recipeService.deleteIngredient(this.recipe.id, ingred.id);

@@ -97,7 +97,7 @@ export class TagService {
   }
 
   tagItem(id: number, tag: Tag) {
-    this.api.addTag(tag, id);
+    return this.api.addTag(tag, id);
   }
   searchByTag(id: number) {
     return new Promise<UGC[]>((resolve) => {

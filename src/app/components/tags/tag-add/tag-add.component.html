@@ -1,0 +1,25 @@
+<ion-row>
+  <ion-col *ngIf="associatedTags">
+    <ng-container *ngFor="let tag of associatedTags">
+      <ion-button [fill]="tag.selected ? 'solid' : 'outline'" size="small" (click)="toggleTag(tag.tag.id)">#{{tag.tag.name}}</ion-button>
+    </ng-container>
+  </ion-col>
+  <ion-col *ngIf="associatedTags == null" class="ion-justify-content-center">
+    <ion-spinner></ion-spinner>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-searchbar #search showCancelButton="focus" debounce="500" animated (ionChange)="searchTag($event)"></ion-searchbar>
+  </ion-col>
+</ion-row>
+<ion-row class="bottomRow">
+  <ion-col *ngIf="searchTags && searchTags.length > 0">
+    <ng-container *ngFor="let tag of searchTags">
+      <ion-button fill="outline" size="small" (click)="chooseSearchTag(tag.tag.id)">#{{tag.tag.name}}</ion-button>
+    </ng-container>
+  </ion-col>
+  <ion-col *ngIf="searchTags && searchTags.length == 0">
+    <ion-button (click)="newTag(tagSearchTerm)">Create new tag #{{ tagSearchTerm }}</ion-button>
+  </ion-col>
+</ion-row>
