@@ -13,6 +13,7 @@ import { UserService } from '@app/services/user.service';
 })
 export class RecipeDetailPage implements OnInit {
   public recipe: Recipe;
+  public RecipeService = RecipeService;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,9 +48,6 @@ export class RecipeDetailPage implements OnInit {
   }
   editRecipe() {
     this.router.navigate(['edit', 'recipe', this.recipe.id]);
-  }
-  sumTime(steps: RecipeStep[]): Number {
-    return steps.map(i=>i.timeMinutes).reduce((a,b)=>a+b);
   }
   sortStepsByOrder(stepA: RecipeStep, stepB: RecipeStep) {
     return stepA.stepOrder - stepB.stepOrder;

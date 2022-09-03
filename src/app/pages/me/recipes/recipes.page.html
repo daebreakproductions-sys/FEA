@@ -1,9 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>recipes</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ng-container *ngFor="let recipe of recipes">
+    <app-eats-ugc-card [ugc]="recipe"></app-eats-ugc-card>
+  </ng-container>
 </ion-content>

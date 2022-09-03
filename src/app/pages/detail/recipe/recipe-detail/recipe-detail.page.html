@@ -43,7 +43,7 @@
       Serves: {{ recipe.servings }}
     </ion-card-subtitle>
     <ion-card-subtitle *ngIf="recipe.steps">
-      Preparation Time: {{ sumTime(recipe.steps) }} minutes
+      Preparation Time: {{ RecipeService.sumTime(recipe.steps) }} minutes
     </ion-card-subtitle>
     <ion-card-content>
       {{ recipe.description }}

@@ -8,6 +8,7 @@ import { UGC } from '@app/models/ugc';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
 import { HelperService } from '@app/services/helper-service.service';
+import { RecipeService } from '@app/services/recipe.service';
 import { UserService } from '@app/services/user.service';
 
 @Component({
@@ -24,6 +25,8 @@ export class EatsUgcCardComponent implements OnInit {
   public tip: Tip = null;
   public review: Review = null;
   public recipe: Recipe = null;
+
+  public RecipeService = RecipeService;
 
   constructor(
     public router: Router,

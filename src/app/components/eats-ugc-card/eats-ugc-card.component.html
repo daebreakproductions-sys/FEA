@@ -21,6 +21,7 @@
   <!-- Card Image -->
   <ion-img *ngIf="deal && deal.image64" [src]="'data:image/jpg;base64,' + deal.image64" (click)="goToDetail()"></ion-img>
   <ion-img *ngIf="tip && tip.image64" [src]="'data:image/jpg;base64,' + tip.image64" (click)="goToDetail()"></ion-img>
+  <ion-img *ngIf="recipe && recipe.image64" [src]="'data:image/jpg;base64,' + recipe.image64" (click)="goToDetail()"></ion-img>
 
   <!-- Card Content -->
   <ion-card-content *ngIf="deal" (click)="goToDetail()">
@@ -35,6 +36,17 @@
     <p>
       {{ tip.text }}
     </p>
+  </ion-card-content>
+  <ion-card-content *ngIf="recipe" (click)="goToDetail()">
+    <ion-card-title>
+      {{ recipe.title }}
+    </ion-card-title>
+    <ion-card-subtitle size="small">
+      Serves: {{ recipe.servings }}
+    </ion-card-subtitle>
+    <ion-card-subtitle size="small" *ngIf="recipe.steps?.length > 0">
+      Preparation Time: {{ RecipeService.sumTime(recipe.steps) }} minutes
+    </ion-card-subtitle>
   </ion-card-content>
 
   <!-- Social Footer -->

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '@app/models/recipe';
+import { RecipeStep } from '@app/models/recipe-step';
 import { ApiService } from './api.service';
 import { HelperService } from './helper-service.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ export class RecipeService {
 
   constructor(
     public api: ApiService,
+    public userService: UserService,
   ) { }
 
   byId(id: number) {
@@ -39,6 +42,25 @@ export class RecipeService {
     })
   }
 
+  myRecipes() {
+    return new Promise<Recipe[]>((resolve) => {
+      this.userService.getMyContent("Recipe").then(tips => {
+        resolve(tips.map(ugc => {
+          return <Recipe>HelperService.PopulateEntity(ugc);
+        }));
+      });
+    });
+  }
+  myFaveRecipes() {
+    return new Promise<Recipe[]>((resolve) => {
+      this.userService.getMyFaves("Recipe").then(tips => {
+        resolve(tips.map(ugc => {
+          return <Recipe>HelperService.PopulateEntity(ugc);
+        }));
+      });
+    });
+  }
+
   async createIngredient(recipeId: number, ingredient: any) {
     return this.api.createRecipeIngredient(recipeId, ingredient);
   }  
@@ -58,4 +80,13 @@ export class RecipeService {
   async deleteStep(recipeId: number, stepId: number) {
     return this.api.deleteRecipeStep(recipeId, stepId);
   }
+
+  static sumTime(steps: RecipeStep[]): Number {
+    if(steps == null || steps.length == 0) {
+      return 0;
+    } else {
+      return steps.map(i=>i.timeMinutes).reduce((a,b)=>a+b);
+    }
+  }
+
 }
