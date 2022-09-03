@@ -33,7 +33,7 @@ export class FeedService {
     this.q = null;
     this.tags = [];
     this.markets = [];
-    this.types = ["deal", "tip"];
+    this.types = ["deal", "tip", "recipe"];
     this.endOfFeed = false;
   }
 
