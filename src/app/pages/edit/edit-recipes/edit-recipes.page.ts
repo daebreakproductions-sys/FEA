@@ -214,7 +214,7 @@ export class EditRecipesPage implements OnInit {
       servings: this.recipeForm.get('servings').value,
       published: this.recipeForm.get('published').value,
       image: this.recipe.image64,
-      tags: this.tags.map(t => {
+      tags: this.tags?.map(t => {
         return {id: t.id};
       })
     }

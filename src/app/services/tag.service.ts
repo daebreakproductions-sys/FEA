@@ -50,6 +50,7 @@ export class TagService {
     });
   }
   search(searchTerm: string) {
+    if(searchTerm == null || searchTerm == '') return [];
     return this.tags.filter(tag => {
       return tag.name != null;
     }).filter(tag => {

@@ -170,7 +170,7 @@ export class AddRecipesPage implements OnInit {
     this.updateHeight();
   }
   getTagStrings(): string[] {
-    return ["grape"];
+    return [this.recipeForm.get('title').value, this.recipeForm.get('description').value];
   }
 
   updateHeight() {
@@ -240,14 +240,8 @@ export class AddRecipesPage implements OnInit {
       description: this.recipeForm.get('description').value,
       servings: this.recipeForm.get('servings').value,
       published: false,
-      image: this.recipe.image64,
-      tags: this.tags.map(t => {
-        return {id: t.id};
-      })
+      image: this.recipe.image64
     }
-    this.recipeService.update(newRecipe).then( recipe => {
-      this.router.navigate(['detail', 'recipe', recipe.id]);
-    });
     this.recipeService.create(newRecipe).then( async recipe => {
       for (let index = 0; index < this.tags.length; index++) {
         const tag = this.tags[index];
