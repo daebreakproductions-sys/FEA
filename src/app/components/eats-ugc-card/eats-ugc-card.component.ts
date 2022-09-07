@@ -32,11 +32,10 @@ export class EatsUgcCardComponent implements OnInit {
     public router: Router,
     public apiService: ApiService,
     public userService: UserService,
-    public helpers: HelperService,
   ) { }
 
   ngOnInit() {
-    let type = this.helpers.getClassType(this.ugc);
+    let type = HelperService.getClassType(this.ugc);
     this.type = type;
     switch(type) {
       case "Deal":

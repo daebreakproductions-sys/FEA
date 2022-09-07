@@ -90,7 +90,7 @@ export class HelperService {
       return dist;
     }
   }
-  getClassType(entity: Entity): string {
+  public static getClassType(entity: Entity): string {
     return entity.class.split('.').pop();
   }
 

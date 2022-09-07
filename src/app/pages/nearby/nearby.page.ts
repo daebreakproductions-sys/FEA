@@ -39,7 +39,6 @@ export class NearbyPage implements OnInit {
     public router: Router,
     public feedService: FeedService,
     public platform: Platform,
-    public helpers: HelperService,
     private route: ActivatedRoute,
   ) { 
     this.iconBlue = L.icon({
@@ -114,13 +113,13 @@ export class NearbyPage implements OnInit {
     eatsLocations.forEach( eatsLoc => {
       if(eatsLoc.lat && eatsLoc.lng) {
         let m = L.marker([eatsLoc.lat, eatsLoc.lng], {
-          icon: this.helpers.getClassType(eatsLoc) == "Market" ? this.iconMarket : this.iconPantry
+          icon: HelperService.getClassType(eatsLoc) == "Market" ? this.iconMarket : this.iconPantry
         }).bindPopup(
           '<p>\
             <b>' + eatsLoc.name + '</b>\
           </p>\
           <p>\
-            <ion-label color="primary" id="lbl-' + this.helpers.getClassType(eatsLoc).toLowerCase() +'-' + eatsLoc.id + '">\
+            <ion-label color="primary" id="lbl-' + HelperService.getClassType(eatsLoc).toLowerCase() +'-' + eatsLoc.id + '">\
               Details\
             </ion-label>\
           </p>'
