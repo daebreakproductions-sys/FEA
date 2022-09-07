@@ -24,7 +24,7 @@ export class FeedPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.feedService.results == []) {
+    if(this.feedService.results.length == 0) {
       this.feedService.query();
     }
   }

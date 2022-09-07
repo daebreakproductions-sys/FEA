@@ -33,7 +33,7 @@ export class FeedService {
     this.q = null;
     this.tags = [];
     this.markets = [];
-    this.types = ["deal", "tip", "recipe"];
+    this.types = ["deal", "tip", "recipe", "review"];
     this.endOfFeed = false;
   }
 
@@ -101,10 +101,10 @@ export class FeedService {
     this.markets = this.markets.filter(mkt => mkt.id != id);
     this.freshQuery();
   }
-  loadByMarket(market: Market) {
+  loadByMarket(market: Market, types: string[]) {
     this.reset();
+    this.types = types;
     this.markets = [market];
-    this.types = ['deal'];
     this.freshQuery();
   }
 

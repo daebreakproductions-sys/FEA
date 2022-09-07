@@ -11,4 +11,6 @@ export interface Entity {
     commentCount?: number;
     tagCount?: number;
     viewCount?: number;
+    reviewsRating?: number;
+    reviewsCount?: number;
 }

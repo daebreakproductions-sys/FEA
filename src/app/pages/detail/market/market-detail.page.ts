@@ -44,7 +44,11 @@ export class MarketDetailPage implements OnInit {
   }
 
   navigateToDeals() {
-    this.feedService.loadByMarket(this.market);
+    this.feedService.loadByMarket(this.market, ['deal']);
+    this.router.navigate(['tabs', 'feed']);
+  }
+  navigateToReviews() {
+    this.feedService.loadByMarket(this.market, ['review']);
     this.router.navigate(['tabs', 'feed']);
   }
 
