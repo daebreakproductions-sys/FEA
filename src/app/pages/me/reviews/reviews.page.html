@@ -1,9 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>reviews</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ng-container *ngFor="let review of reviews">
+    <app-eats-ugc-card [ugc]="review"></app-eats-ugc-card>
+  </ng-container>
 </ion-content>

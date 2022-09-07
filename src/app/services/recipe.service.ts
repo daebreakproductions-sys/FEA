@@ -44,8 +44,8 @@ export class RecipeService {
 
   myRecipes() {
     return new Promise<Recipe[]>((resolve) => {
-      this.userService.getMyContent("Recipe").then(tips => {
-        resolve(tips.map(ugc => {
+      this.userService.getMyContent("Recipe").then(recipes => {
+        resolve(recipes.map(ugc => {
           return <Recipe>HelperService.PopulateEntity(ugc);
         }));
       });
@@ -53,8 +53,8 @@ export class RecipeService {
   }
   myFaveRecipes() {
     return new Promise<Recipe[]>((resolve) => {
-      this.userService.getMyFaves("Recipe").then(tips => {
-        resolve(tips.map(ugc => {
+      this.userService.getMyFaves("Recipe").then(recipes => {
+        resolve(recipes.map(ugc => {
           return <Recipe>HelperService.PopulateEntity(ugc);
         }));
       });

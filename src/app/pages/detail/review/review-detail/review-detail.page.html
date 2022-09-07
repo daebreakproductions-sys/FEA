@@ -14,9 +14,9 @@
 
   <!-- Target -->
   <ion-card-content>
-    <ion-row *ngIf="HelperService.getClassType(review.target) == 'Market'">
-      <ion-card-title size="small" color="secondary" (click)="marketDetail()">
-        <ion-icon name="cart-outline"></ion-icon> {{ targetMarket().name }}
+    <ion-row>
+      <ion-card-title size="small" color="secondary" (click)="targetDetail()">
+        <ion-icon [name]="ReviewService.getDisplayIcon(review.target) + '-outline'"></ion-icon> {{ ReviewService.getDisplayName(review.target) }}
       </ion-card-title>
     </ion-row>
   </ion-card-content>

@@ -15,6 +15,7 @@ import { UserService } from '@app/services/user.service';
 export class ReviewDetailPage implements OnInit {
   public review: Review;
   public HelperService = HelperService;
+  public ReviewService = ReviewService;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,7 +52,7 @@ export class ReviewDetailPage implements OnInit {
   editReview() {
     this.router.navigate(['edit', 'review', this.review.id]);
   }
-  marketDetail() {
-    this.router.navigate(['detail', 'market', this.review.target.id]);
+  targetDetail() {
+    this.router.navigate(['detail', HelperService.getClassType(this.review.target).toLowerCase(), this.review.target.id]);
   }
 }

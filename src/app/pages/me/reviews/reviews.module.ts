@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ReviewsPageRoutingModule } from './reviews-routing.module';
 
 import { ReviewsPage } from './reviews.page';
+import { EatsUgcComponentModule } from '@app/components/eats-ugc-card/eats-ugc-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    EatsUgcComponentModule,
     ReviewsPageRoutingModule
   ],
   declarations: [ReviewsPage]
