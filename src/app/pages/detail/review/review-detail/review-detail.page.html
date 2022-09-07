@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="/tabs/me/reviews"></ion-back-button>
+    <ion-title>Reviews</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="review">
+  <!-- User Header -->
+  <eats-user-header [usr]="review.usr" title="Review"></eats-user-header>
+  <ion-card-content class="date-line">
+    <ion-card-subtitle color="light">Created {{ review.created.toDate().toDateString() }}</ion-card-subtitle>
+  </ion-card-content>
+
+  <!-- Target -->
+  <ion-card-content>
+    <ion-row *ngIf="HelperService.getClassType(review.target) == 'Market'">
+      <ion-card-title size="small" color="secondary" (click)="marketDetail()">
+        <ion-icon name="cart-outline"></ion-icon> {{ targetMarket().name }}
+      </ion-card-title>
+    </ion-row>
+  </ion-card-content>
+
+  <!-- Edit Button -->
+  <ion-row *ngIf="this.userService.me.id == this.review.usr.id">
+    <ion-col>
+      <ion-button expand="block" (click)="editReview()">Edit your review<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+
+  <!-- Review -->
+  <ion-toolbar class="ion-align-items-center">
+    <ion-title color="primary"><ion-icon name="chatbubble-outline"></ion-icon> Review</ion-title>
+  </ion-toolbar>
+  <ion-card-content lines="none">
+    <eats-five-star [value]="review.rating"></eats-five-star>
+    <ion-card-title>
+      {{ review.text }}
+    </ion-card-title>
+    <ion-card-subtitle (click)="likeAction()">
+      <ion-icon *ngIf="review.iLike" name="heart" color="danger"></ion-icon>
+      <ion-icon *ngIf="!review.iLike" name="heart-outline"></ion-icon>
+      <ion-label> {{review.reactionCount}} {{review.reactionCount == 1 ? 'Like' : 'Likes'}}</ion-label>
+    </ion-card-subtitle>
+  </ion-card-content>
+
+  <!-- Review Properties -->
+  <ion-list>
+    <ion-item *ngFor="let prop of review.properties">
+      <ion-label>{{ prop.propertyType | titlecase }}</ion-label>
+      <eats-five-star [value]="prop.value"></eats-five-star>
+    </ion-item>
+  </ion-list>
+  
+  <!-- Tags -->
+  <eats-tag-display [UGCId]="review.id"></eats-tag-display>
+
+  <!-- Comments -->
+  <eats-detail-comments [UGCId]="review.id"></eats-detail-comments>
+</ion-content>
+
+<ion-row *ngIf="review == null" style="height: 100%">
+  <ion-col class="ion-text-center" style="margin: auto;">
+    <ion-spinner style="margin: auto;"></ion-spinner>
+  </ion-col>
+</ion-row>

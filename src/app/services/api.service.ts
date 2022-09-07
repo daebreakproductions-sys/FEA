@@ -18,6 +18,7 @@ import { FoodPantrySite } from '@app/models/foodpantrysite';
 import { Recipe } from '@app/models/recipe';
 import { RecipeStep } from '@app/models/recipe-step';
 import { RecipeIngredient } from '@app/models/recipe-ingredient';
+import { Review } from '@app/models/review';
 //import { resolve } from 'dns';
 
 @Injectable({
@@ -330,6 +331,21 @@ export class ApiService {
   }
   public deleteRecipeIngredient(recipeId: number, recipeIngredientId: number) {
     return this.apiTokenDelete('ugc/recipes/' + recipeId + '/ingredients/' + recipeIngredientId) as Promise<number>;
+  }
+
+  
+  // Reviews
+  public getReviews(params: APIListOptions) {
+    return this.apiTokenGet('ugc/reviews/list', params) as Promise<Review[]>;
+  }
+  public createReview(review: Review) {
+    return this.apiTokenPost('ugc/reviews/create', review) as Promise<number>;
+  }
+  public updateReview(review: any) {
+    return this.apiTokenPost('ugc/reviews/' + review.id, review) as Promise<number>;
+  }
+  public getReview(id: number) {
+    return this.apiTokenGet('ugc/reviews/' + id) as Promise<Review>;
   }
 
 

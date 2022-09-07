@@ -1,0 +1,63 @@
+import { Injectable } from '@angular/core';
+import { Review } from '@app/models/review';
+import { ApiService } from './api.service';
+import { HelperService } from './helper-service.service';
+import { UserService } from './user.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReviewService {
+
+  constructor(
+    public api: ApiService,
+    public userService: UserService,
+  ) { }
+
+  byId(id: number) {
+    return new Promise<Review>((resolve) => {
+      this.api.getReview(id).then(review => {
+        resolve(HelperService.PopulateReview(review));
+      });
+    });
+  }
+
+  async create(recipe: any) {
+    return new Promise<Review>((resolve) => {
+      this.api.createReview(recipe).then(id => {
+        this.api.getReview(id).then(newReview => {
+          resolve(HelperService.PopulateReview(newReview));
+        })
+      });
+    })
+  }  
+  async update(recipe: any) {
+    return new Promise<Review>((resolve) => {
+      this.api.updateReview(recipe).then(id => {
+        this.api.getReview(id).then(newReview => {
+          resolve(HelperService.PopulateReview(newReview));
+        })
+      });
+    })
+  }
+
+  myReviews() {
+    return new Promise<Review[]>((resolve) => {
+      this.userService.getMyContent("Review").then(reviews => {
+        resolve(reviews.map(ugc => {
+          return <Review>HelperService.PopulateEntity(ugc);
+        }));
+      });
+    });
+  }
+  myFaveReviews() {
+    return new Promise<Review[]>((resolve) => {
+      this.userService.getMyFaves("Review").then(reviews => {
+        resolve(reviews.map(ugc => {
+          return <Review>HelperService.PopulateEntity(ugc);
+        }));
+      });
+    });
+  }
+
+}

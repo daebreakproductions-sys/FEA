@@ -5,6 +5,7 @@ import { EatsDate } from '@app/models/eats-date';
 import { Entity } from '@app/models/entity';
 import { Market } from '@app/models/market';
 import { Recipe } from '@app/models/recipe';
+import { Review } from '@app/models/review';
 import { Tip } from '@app/models/tip';
 import { User } from '@app/models/user';
 
@@ -26,6 +27,9 @@ export class HelperService {
   }
   public static PopulateRecipe(recipe: Recipe): Recipe {
     return <Recipe>this.PopulateEntity(recipe);
+  }
+  public static PopulateReview(review: Review): Review {
+    return <Review>this.PopulateEntity(review);
   }
   public static PopulateMarket(mkt: Market): Market {
     return <Market>this.PopulateEntity(mkt);
