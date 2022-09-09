@@ -33,7 +33,7 @@
     <ion-title color="primary"><ion-icon name="chatbubble-outline"></ion-icon> Review</ion-title>
   </ion-toolbar>
   <ion-card-content lines="none">
-    <eats-five-star [value]="review.rating"></eats-five-star>
+    <eats-five-star-display [value]="review.rating"></eats-five-star-display>
     <ion-card-title>
       {{ review.text }}
     </ion-card-title>
@@ -48,7 +48,7 @@
   <ion-list>
     <ion-item *ngFor="let prop of review.properties">
       <ion-label>{{ prop.propertyType | titlecase }}</ion-label>
-      <eats-five-star [value]="prop.value"></eats-five-star>
+      <eats-five-star-display [value]="prop.value"></eats-five-star-display>
     </ion-item>
   </ion-list>
   

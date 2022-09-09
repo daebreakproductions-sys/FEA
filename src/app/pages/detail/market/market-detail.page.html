@@ -29,7 +29,7 @@
     </ion-item>
     <ion-item (click)="navigateToReviews()">
       <ion-icon name="chatbubble-outline" color="primary" slot="start" size="large"></ion-icon>
-      <eats-five-star [value]="market.reviewsRating"></eats-five-star>
+      <eats-five-star-display [value]="market.reviewsRating"></eats-five-star-display>
       <ion-label class="ion-text-wrap"> ({{ market.reviewsCount }} {{ market.reviewsCount == 1 ? 'review' : 'reviews' }})</ion-label>
     </ion-item>
     <ion-item>

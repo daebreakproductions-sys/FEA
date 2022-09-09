@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'eats-five-star',
-  templateUrl: './five-star.component.html',
-  styleUrls: ['./five-star.component.scss'],
+  selector: 'eats-five-star-display',
+  templateUrl: './five-star-display.component.html',
+  styleUrls: ['./five-star-display.component.scss'],
 })
-export class FiveStarComponent implements OnInit {
+export class FiveStarDisplayComponent implements OnInit {
   @Input() value: number = 0;
   @Input() reviewCount: number;
 

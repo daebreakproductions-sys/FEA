@@ -49,7 +49,7 @@
     </ion-card-subtitle>
   </ion-card-content>
   <ion-card-content *ngIf="review" (click)="goToDetail()">
-    <eats-five-star [value]="review.rating"></eats-five-star>
+    <eats-five-star-display [value]="review.rating"></eats-five-star-display>
     <ion-card-title>
       {{ review.text }}
     </ion-card-title>

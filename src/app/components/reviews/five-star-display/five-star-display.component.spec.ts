@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { FiveStarComponent } from './five-star.component';
+import { FiveStarDisplayComponent } from './five-star-display.component';
 
 describe('FiveStarComponent', () => {
-  let component: FiveStarComponent;
-  let fixture: ComponentFixture<FiveStarComponent>;
+  let component: FiveStarDisplayComponent;
+  let fixture: ComponentFixture<FiveStarDisplayComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FiveStarComponent ],
+      declarations: [ FiveStarDisplayComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FiveStarComponent);
+    fixture = TestBed.createComponent(FiveStarDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

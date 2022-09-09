@@ -10,7 +10,7 @@ import { ReviewDetailPage } from './review-detail.page';
 import { UserHeaderModule } from '@app/components/user-header/user-header.module';
 import { TagDisplayModule } from '@app/components/tags/tag-display/tag-display.module';
 import { DetailCommentsModule } from '@app/components/comments/detail-comments/detail-comments.module';
-import { FiveStarModule } from '@app/components/reviews/five-star/five-star.module';
+import { FiveStarDisplayModule } from '@app/components/reviews/five-star-display/five-star-display.module';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import { FiveStarModule } from '@app/components/reviews/five-star/five-star.modu
     UserHeaderModule,
     TagDisplayModule,
     DetailCommentsModule,
-    FiveStarModule,
+    FiveStarDisplayModule,
     ReviewDetailPageRoutingModule
   ],
   declarations: [ReviewDetailPage]

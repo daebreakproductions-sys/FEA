@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { FiveStarComponent } from './five-star.component';
+import { FiveStarDisplayComponent } from './five-star-display.component';
 
 @NgModule({
     imports: [
@@ -9,10 +9,10 @@ import { FiveStarComponent } from './five-star.component';
         IonicModule,
     ],
     declarations: [
-        FiveStarComponent,
+        FiveStarDisplayComponent,
     ],
     exports: [
-        FiveStarComponent,
+        FiveStarDisplayComponent,
     ]
 })
-export class FiveStarModule {}
+export class FiveStarDisplayModule {}
