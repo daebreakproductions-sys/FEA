@@ -6,5 +6,5 @@ export interface Review extends UGC {
     target: Entity;
     properties: ReviewProperty[];
     text: string;
-    rating: number;
+    rating?: number;
 }

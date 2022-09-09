@@ -5,7 +5,7 @@ import { Recipe } from '@app/models/recipe';
 import { Tag } from '@app/models/tag';
 import { RecipeService } from '@app/services/recipe.service';
 import { TagService } from '@app/services/tag.service';
-import { ActionSheetController, IonSearchbar, IonSlides, ModalController } from '@ionic/angular';
+import { ActionSheetController, IonSlides, ModalController } from '@ionic/angular';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -52,14 +52,14 @@ export class AddRecipesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.resetDeal();
+    this.resetRecipe();
   }
   ionViewWillEnter() {
     // Reset the form in case it has already been used
     this.recipeForm.reset();
-    this.resetDeal();
+    this.resetRecipe();
   }
-  resetDeal() {
+  resetRecipe() {
     this.recipe = {
       image64: null,
       title: '',
@@ -243,11 +243,13 @@ export class AddRecipesPage implements OnInit {
       image: this.recipe.image64
     }
     this.recipeService.create(newRecipe).then( async recipe => {
-      for (let index = 0; index < this.tags.length; index++) {
-        const tag = this.tags[index];
-        await this.tagService.tagItem(Number(recipe.id), tag);
+      if(this.tags) {
+        for (let index = 0; index < this.tags.length; index++) {
+          const tag = this.tags[index];
+          await this.tagService.tagItem(Number(recipe.id), tag);
+        }
+        this.router.navigate(['edit', 'recipe', recipe.id]);
       }
-      this.router.navigate(['edit', 'recipe', recipe.id]);
     });
   }
 

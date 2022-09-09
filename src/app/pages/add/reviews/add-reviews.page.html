@@ -1,21 +1,129 @@
 <ion-header>
   <ion-toolbar>
     <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
-    <ion-title>New Review</ion-title>
+    <ion-title>Add a new Review</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid class="ion-padding">
     <ion-row class="ion-justify-content-center">
       <ion-col class="ion-justify-content-center" size="4">
-        <ion-img src="/assets/images/sketch.svg"></ion-img>
+        <ion-img src="/assets/images/clipboard.svg"></ion-img>
       </ion-col>
     </ion-row>
+  </ion-grid>
+  <form [formGroup]="reviewForm">
+    <ion-slides 
+      #slider 
+      pager="true" 
+      [options]="slideOpts"
+      (ionSlideDidChange)="updateSlideUI()">
+      <!-- Target -->
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>What are you reviewing?</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item (click)="presentMarketModal()">
+                <ion-icon name="location-outline" color="primary" size="large" class="ion-padding-end"></ion-icon>
+                <ion-label *ngIf="review.target == null">Add Market</ion-label>
+                <ion-label *ngIf="review.target" color="primary">{{ ReviewService.getDisplayName(review.target) }}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- Description -->
+      <ion-slide> 
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Tell us what you think</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Description</ion-label>
+                <ion-textarea formControlName="text" type="text"></ion-textarea>
+              </ion-item>
+              <ng-container *ngFor="let validation of validation_messages.description">
+                <ion-item *ngIf="reviewForm.get('text').hasError(validation.type) && (reviewForm.get('text').dirty || reviewForm.get('text').touched)">
+                  <ion-label class="ion-text-wrap" color="danger">
+                    {{ validation.message }}
+                  </ion-label>
+                </ion-item>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- Details -->
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Please add some details</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <eats-five-star-select title="Selection" (valueUpdatedEvent)="updateRating(ReviewPropertyType.SELECTION, $event)"></eats-five-star-select>
+              <eats-five-star-select title="Cleanliness" (valueUpdatedEvent)="updateRating(ReviewPropertyType.CLEANLINESS, $event)"></eats-five-star-select>
+              <eats-five-star-select title="Friendliness" (valueUpdatedEvent)="updateRating(ReviewPropertyType.FRIENDLINESS, $event)"></eats-five-star-select>
+              <eats-five-star-select title="Accessibility" (valueUpdatedEvent)="updateRating(ReviewPropertyType.ACCESSIBILITY, $event)"></eats-five-star-select>
+              <eats-five-star-select title="Safety" (valueUpdatedEvent)="updateRating(ReviewPropertyType.SAFETY, $event)"></eats-five-star-select>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- Tags -->
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Tag this review to help others find it</h1>
+            </ion-col>
+          </ion-row>
+          <eats-tag-add [tagStrings]="getTagStrings()" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-add>
+        </ion-grid>
+      </ion-slide>
+    </ion-slides>
+  </form>
+  <ion-grid>
     <ion-row>
-      <ion-col class="ion-text-wrap ion-text-center">
-        <h2>This feature isn't quite ready yet. We'll let you know when you can use it.</h2>
-      </ion-col>    
+      <ion-col class="ion-text-left ion-padding-start">
+        <ion-icon 
+          *ngIf="prevButton.show" 
+          name="arrow-back-outline" 
+          [color]="prevButton.disabled ? 'light' : 'primary'">
+        </ion-icon>
+        <ion-label 
+          *ngIf="prevButton.show" 
+          (click)="prevClick()"
+          [color]="prevButton.disabled ? 'light' : 'primary'">
+          {{ prevButton.text }}
+        </ion-label>
+      </ion-col>
+      <ion-col class="ion-text-right ion-padding-end">
+        <ion-label 
+          *ngIf="nextButton.show" 
+          (click)="nextClick()"
+          [color]="nextButton.disabled ? 'light' : 'primary'">
+          {{ nextButton.text }}
+        </ion-label>
+        <ion-icon 
+          *ngIf="nextButton.show" 
+          name="arrow-forward-outline" 
+          [color]="nextButton.disabled ? 'light' : 'primary'">
+        </ion-icon>
+        <ion-button *ngIf="showSaveButton" (click)="saveReview()">Save Review</ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
