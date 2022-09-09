@@ -1,0 +1,9 @@
+<ion-item>
+  <ion-label>{{ title }}</ion-label>
+  <ion-icon class="gold" [name]="subtractStar(value - 0)" (click)="setValue(1)" size="large"></ion-icon>
+  <ion-icon class="gold" [name]="subtractStar(value - 1)" (click)="setValue(2)" size="large"></ion-icon>
+  <ion-icon class="gold" [name]="subtractStar(value - 2)" (click)="setValue(3)" size="large"></ion-icon>
+  <ion-icon class="gold" [name]="subtractStar(value - 3)" (click)="setValue(4)" size="large"></ion-icon>
+  <ion-icon class="gold" [name]="subtractStar(value - 4)" (click)="setValue(5)" size="large"></ion-icon>
+  <ion-icon [class]="value ? '' : 'invisible'" name="close-circle-outline" (click)="setValue(null)" size="large"></ion-icon>
+</ion-item>
