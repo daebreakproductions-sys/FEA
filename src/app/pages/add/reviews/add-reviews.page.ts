@@ -121,13 +121,7 @@ export class AddReviewsPage implements OnInit {
       { type: 'required', message: 'Title is required.' },
       { type: 'minlength', message: 'Title must be at least 3 characters long.' },
       { type: 'maxlength', message: 'Title cannot be more than 255 characters long.' },
-    ],
-    'servings': [
-      { type: 'required', message: 'The number of Servings is required.' },
-      { type: 'min', message: 'The number of Servings must be more than 0.' }
-    ],
-    'description': [],
-    'published': [],
+    ]
   };
   updateTags(tags: Tag[]) {
     this.tags = tags;

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button defaultHref="/tabs/me" slot="start"></ion-back-button>
+    <ion-title>Edit your Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="review">
+  <form [formGroup]="reviewForm">
+    <ion-grid class="ion-padding">
+      <!-- Market -->
+      <ion-row>
+        <ion-col>
+          <ion-item (click)="presentMarketModal()">
+            <ion-icon name="location-outline" color="primary" size="large" class="ion-padding-end"></ion-icon>
+            <ion-label *ngIf="review.target == null">Add Location</ion-label>
+            <ion-label *ngIf="review.target" color="primary">{{ ReviewService.getDisplayName(review.target) }}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="review.target == null && (locationTouched)">
+            <ion-label class="ion-text-wrap" color="danger">
+              Market is required.
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <!-- Description -->
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="text"></ion-textarea>
+          </ion-item>
+          <ng-container *ngFor="let validation of validation_messages.description">
+            <ion-item *ngIf="reviewForm.get('text').hasError(validation.type) && (reviewForm.get('text').dirty || reviewForm.get('text').touched)">
+              <ion-label class="ion-text-wrap" color="danger">
+                {{ validation.message }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <!-- Review Properties -->
+      <ion-row>
+        <ion-col>
+          <h1>Please add some details</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <eats-five-star-select title="Selection" (valueUpdatedEvent)="updateRating('selection', $event)" [initialValue]="rawProperties['selection']"></eats-five-star-select>
+          <eats-five-star-select title="Cleanliness" (valueUpdatedEvent)="updateRating('cleanliness', $event)" [initialValue]="rawProperties['cleanliness']"></eats-five-star-select>
+          <eats-five-star-select title="Friendliness" (valueUpdatedEvent)="updateRating('friendliness', $event)" [initialValue]="rawProperties['friendliness']"></eats-five-star-select>
+          <eats-five-star-select title="Accessibility" (valueUpdatedEvent)="updateRating('accessibility', $event)" [initialValue]="rawProperties['accessibility']"></eats-five-star-select>
+          <eats-five-star-select title="Safety" (valueUpdatedEvent)="updateRating('safety', $event)" [initialValue]="rawProperties['safety']"></eats-five-star-select>
+        </ion-col>
+      </ion-row>
+      <!-- Tags -->
+      <eats-tag-edit [UGCId]="review.id" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-edit>
+      <!-- Save Button -->
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" [disabled]="!reviewForm.valid || review.target == null" (click)="saveReview()">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
