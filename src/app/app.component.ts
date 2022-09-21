@@ -22,7 +22,7 @@ export class AppComponent {
   }
 
   initializeApp() {
-    // Also init these services in login.page.ts
+    // Also init these services in login.page.ts and signup.page.ts
     this.locationsService.init();
     this.tagService.init();
     this.userService.init();

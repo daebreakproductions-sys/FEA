@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
       if(success) {
         this.loginFailed = false;
         
-        // Also init these services in app.component.ts
+        // Also init these services in app.component.ts and signup.page.ts
         this.userService.init();
         this.tagService.init();
         this.locationsService.init();
