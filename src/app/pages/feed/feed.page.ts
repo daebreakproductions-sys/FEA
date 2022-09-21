@@ -52,37 +52,12 @@ export class FeedPage implements OnInit {
       let data: FilterModalResult = result.data;
       if(data.markets != null) {
         this.feedService.clearType('tip');
-        this.feedService.setMarkets(data.markets);
+        this.feedService.setMarkets(data.markets, false);
       }
       if(data.tags != null) {
-        this.feedService.setTags(data.tags);
+        this.feedService.setTags(data.tags, false);
       }
-    });
-  }
-  async presentMarketModal() {
-    const modal = await this.modalController.create({
-      component: MarketModalPage
-    });
-    modal.present();
-    await modal.onWillDismiss().then(markets => {
-      if(markets.data != null) {
-        this.feedService.clearType('tip');
-        this.feedService.setMarkets(markets.data);
-      }
-    });
-  }
-  async presentTagModal() {
-    const modal = await this.modalController.create({
-      component: TagModalPage,
-      componentProps: {
-        initialTags: this.feedService.getTags(),
-      }
-    });
-    modal.present();
-    await modal.onWillDismiss().then(tags => {
-      if(tags.data != null) {
-        this.feedService.setTags(tags.data);
-      }
+      this.feedService.freshQuery();
     });
   }
   removeTag(id: number) {

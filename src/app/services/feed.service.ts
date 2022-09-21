@@ -73,9 +73,10 @@ export class FeedService {
     return this.query();
   }
 
-  setTags(tags: Tag[]) {
+  setTags(tags: Tag[], refresh: boolean = true) {
     this.tags = tags;
-    this.freshQuery();
+    if(refresh)
+      this.freshQuery();
   }
   getTags() {
     return this.tags;
@@ -90,9 +91,10 @@ export class FeedService {
     this.freshQuery();
   }
 
-  setMarkets(markets: Market[]) {
+  setMarkets(markets: Market[], refresh: boolean = true) {
     this.markets = markets;
-    this.freshQuery();
+    if(refresh)
+      this.freshQuery();
   }
   getMarkets() {
     return this.markets;

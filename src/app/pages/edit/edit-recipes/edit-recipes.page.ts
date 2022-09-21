@@ -155,7 +155,7 @@ export class EditRecipesPage implements OnInit {
     step.image64 = photo;
   }
   getNextStepOrder(): number {
-    return this.steps.map(s => s.stepOrder).reduce((a, b) => Math.max(a, b), -Infinity) + 1;
+    return this.steps.map(s => s.stepOrder).reduce((a, b) => Math.max(a, b), 0) + 1;
   }
   stepsEditing() {
     return this.steps.some((x) => x.editing);
