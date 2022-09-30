@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.service';
 import { TagService } from '@app/services/tag.service';
 import { environment } from '@app/../environments/environment';
-import { Plugins } from '@capacitor/core';
+import { AppLauncher } from '@capacitor/app-launcher';
 import { EatsLocationsService } from '@app/services/eats-locations.service';
 
 
@@ -56,8 +56,7 @@ export class LoginPage implements OnInit {
   }
 
   async resetPasswordLink() {
-    const { App } = Plugins;
-    await App.openUrl({
+    await AppLauncher.openUrl({
       url: environment.api_url + 'password-reset',
     });
   }
