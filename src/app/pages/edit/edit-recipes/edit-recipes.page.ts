@@ -41,8 +41,11 @@ export class EditRecipesPage implements OnInit {
   ) {
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
-      this.recipeService.byId(id).then(deal => {
-        this.loadFields(deal);
+      this.recipeService.byId(id).then(recipe => {
+        if(this.route.snapshot.queryParams['firstLoad']) {
+          recipe.published = true;
+        }
+        this.loadFields(recipe);
       });
       this.recipeForm = AddRecipesPage.newRecipeForm();
       this.validation_messages_recipe = AddRecipesPage.validation_messages_recipe;

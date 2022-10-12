@@ -248,8 +248,10 @@ export class AddRecipesPage implements OnInit {
           const tag = this.tags[index];
           await this.tagService.tagItem(Number(recipe.id), tag);
         }
-        this.router.navigate(['edit', 'recipe', recipe.id]);
       }
+      this.router.navigate(['edit', 'recipe', recipe.id], {
+        queryParams: { firstLoad: true }
+      });
     });
   }
 
