@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,7 +7,6 @@ import { EatsDate } from '@app/models/eats-date';
 import { Tag } from '@app/models/tag';
 import { AddDealsPage } from '@app/pages/add/deals/add-deals.page';
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
-import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
 import { DealService } from '@app/services/deal.service';
 import { TagService } from '@app/services/tag.service';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
@@ -33,6 +33,7 @@ export class EditDealsPage implements OnInit {
     public modalController: ModalController,
     public tagService: TagService,
     public actionSheetController: ActionSheetController,
+    public locationStrategy: LocationStrategy,
   ) { }
 
   ngOnInit() {
@@ -103,7 +104,7 @@ export class EditDealsPage implements OnInit {
       })
     }
     this.dealService.update(newDeal).then( deal => {
-      this.router.navigate(['detail', 'deal', deal.id]);
+      this.locationStrategy.back();
     });
   }
 }

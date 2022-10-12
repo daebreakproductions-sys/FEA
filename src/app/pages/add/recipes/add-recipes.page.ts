@@ -250,6 +250,7 @@ export class AddRecipesPage implements OnInit {
         }
       }
       this.router.navigate(['edit', 'recipe', recipe.id], {
+        replaceUrl: true,
         queryParams: { firstLoad: true }
       });
     });

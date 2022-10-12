@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,6 +31,7 @@ export class EditTipsPage implements OnInit {
     public modalController: ModalController,
     public tagService: TagService,
     public actionSheetController: ActionSheetController,
+    public locationStrategy: LocationStrategy,
   ) { 
     getAllEnumEntries(TipType).forEach(type => {
       this.types.push({
@@ -86,7 +88,7 @@ export class EditTipsPage implements OnInit {
       })
     }
     this.tipService.update(newTip).then(tip => {
-      this.router.navigate(['detail', 'tip', tip.id]);
+      this.locationStrategy.back();
     });
   }
 }

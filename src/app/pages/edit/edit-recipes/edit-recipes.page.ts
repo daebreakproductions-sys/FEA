@@ -1,8 +1,9 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '@app/models/recipe';
-import { EditableRecipeIngredient, RecipeIngredient } from '@app/models/recipe-ingredient';
+import { EditableRecipeIngredient } from '@app/models/recipe-ingredient';
 import { EditableRecipeStep } from '@app/models/recipe-step';
 import { Tag } from '@app/models/tag';
 import { AddRecipesPage } from '@app/pages/add/recipes/add-recipes.page';
@@ -38,6 +39,7 @@ export class EditRecipesPage implements OnInit {
     public modalController: ModalController,
     public tagService: TagService,
     public actionSheetController: ActionSheetController,
+    public locationStrategy: LocationStrategy,
   ) {
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
@@ -222,7 +224,15 @@ export class EditRecipesPage implements OnInit {
       })
     }
     this.recipeService.update(newRecipe).then( recipe => {
-      this.router.navigate(['detail', 'recipe', recipe.id]);
+      if(this.route.snapshot.queryParams['firstLoad']) {
+        this.router.navigate(['detail', 'recipe', recipe.id], {
+          replaceUrl: true
+        });
+      } else {
+        this.locationStrategy.back();
+      }
+
+      
     });
   }
 

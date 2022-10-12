@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -36,6 +37,7 @@ export class EditReviewsPage implements OnInit {
     public modalController: ModalController,
     public tagService: TagService,
     public actionSheetController: ActionSheetController,
+    public locationStrategy: LocationStrategy,
   ) {
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
@@ -97,7 +99,7 @@ export class EditReviewsPage implements OnInit {
       })
     }
     this.reviewService.update(newReview).then( review => {
-      this.router.navigate(['detail', 'review', review.id]);
+      this.locationStrategy.back();
     });
   }
 }
