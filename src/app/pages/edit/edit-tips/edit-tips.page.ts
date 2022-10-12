@@ -5,8 +5,6 @@ import { Tag } from '@app/models/tag';
 import { Tip } from '@app/models/tip';
 import { TipType } from '@app/models/tip-type.enum';
 import { AddTipsPage } from '@app/pages/add/tips/add-tips.page';
-import { TagModalPage } from '@app/pages/modals/tag-modal/tag-modal.page';
-import { HelperService } from '@app/services/helper-service.service';
 import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
@@ -77,7 +75,7 @@ export class EditTipsPage implements OnInit {
     });
   }  
 
-  saveTip() {
+  saveTip = (): void => {
     let newTip = {
       id: this.tip.id,
       tipType: this.tipForm.get('type').value,

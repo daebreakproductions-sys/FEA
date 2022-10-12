@@ -7,10 +7,9 @@ import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
 import { ActionSheetController, IonSearchbar, IonSlides } from '@ionic/angular';
 import * as keyword_extractor from 'keyword-extractor'
-import {getAllEnumKeys, getAllEnumValues, getAllEnumEntries} from 'enum-for'
+import { getAllEnumEntries} from 'enum-for'
 import { debounceTime } from 'rxjs/operators';
 import { Tip } from '@app/models/tip';
-import { HelperService } from '@app/services/helper-service.service';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 
 @Component({
@@ -205,7 +204,7 @@ export class AddTipsPage implements OnInit {
     });
   }  
 
-  saveTip() {
+  saveTip = (): void => {
     let newTip = {
       tipType: this.tipForm.get('type').value,
       text: this.tipForm.get('description').value,

@@ -10,6 +10,7 @@ import { EditTipsPage } from './edit-tips.page';
 import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module';
 import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
 import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.module';
+import { OnceButtonModule } from '@app/components/once-button/once-button.module';
 
 @NgModule({
   imports: [
@@ -17,10 +18,11 @@ import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.mod
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    EditTipsPageRoutingModule,
     TagModalPageModule,
     TagEditModule,
     PhotoEditModule,
+    OnceButtonModule,
+    EditTipsPageRoutingModule,
   ],
   providers: [
   ],

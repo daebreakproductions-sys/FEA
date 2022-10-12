@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddTipsPageRoutingModule } from './add-tips-routing.module';
 
 import { AddTipsPage } from './add-tips.page';
+import { OnceButtonModule } from '@app/components/once-button/once-button.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AddTipsPage } from './add-tips.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    OnceButtonModule,
     AddTipsPageRoutingModule
   ],
   providers: [

@@ -51,7 +51,7 @@
       <!-- Save Button -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" [disabled]="!tipForm.valid" (click)="saveTip()">Save</ion-button>
+          <eats-once-button expand="block" buttonText="Save" [disabled]="!tipForm.valid" [click]="saveTip"></eats-once-button>
         </ion-col>
       </ion-row>
     </ion-grid>
