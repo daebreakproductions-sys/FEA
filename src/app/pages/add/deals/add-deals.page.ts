@@ -327,7 +327,7 @@ export class AddDealsPage implements OnInit {
     });
   }  
 
-  saveDeal() {
+  saveDeal = (): void => {
     let newDeal = {
       title: this.dealForm.get('title').value,
       market: { id: this.deal.market.id },

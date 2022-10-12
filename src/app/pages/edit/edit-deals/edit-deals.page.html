@@ -122,7 +122,7 @@
       <!-- Save Button -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" [disabled]="!dealForm.valid" (click)="saveDeal()">Save</ion-button>
+          <eats-once-button expand="block" buttonText="Save" [disabled]="!dealForm.valid" [click]="saveDeal"></eats-once-button>
         </ion-col>
       </ion-row>
     </ion-grid>

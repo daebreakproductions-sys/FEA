@@ -12,6 +12,7 @@ import { TagModalPageModule } from '@app/pages/modals/tag-modal/tag-modal.module
 import { PopupDateModule } from '@app/components/popup-date/popup-date.module';
 import { TagEditModule } from '@app/components/tags/tag-edit/tag-edit.module';
 import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.module';
+import { OnceButtonModule } from '@app/components/once-button/once-button.module';
 
 @NgModule({
   imports: [
@@ -19,12 +20,13 @@ import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.mod
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    EditDealsPageRoutingModule,
     MarketModalPageModule,
     TagModalPageModule,
     PopupDateModule,
     TagEditModule,
     PhotoEditModule,
+    OnceButtonModule,
+    EditDealsPageRoutingModule,
   ],
   providers: [
   ],
