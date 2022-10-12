@@ -84,7 +84,7 @@ export class EditReviewsPage implements OnInit {
     }
   }
 
-  async saveReview() {
+  saveReview = (): void => {
     // Update Review
     let newReview = {
       id: this.review.id,

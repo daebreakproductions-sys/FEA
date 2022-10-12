@@ -188,7 +188,7 @@ export class AddReviewsPage implements OnInit {
     });
   }
 
-  saveReview() {
+  saveReview = (): void => {
     // Update Recipe Base
     let newReview = {
       text: this.reviewForm.get('text').value,

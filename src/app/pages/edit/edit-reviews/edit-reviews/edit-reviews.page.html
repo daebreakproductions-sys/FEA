@@ -59,7 +59,7 @@
       <!-- Save Button -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" [disabled]="!reviewForm.valid || review.target == null" (click)="saveReview()">Save</ion-button>
+          <eats-once-button expand="block" buttonText="Save" [disabled]="!reviewForm.valid || review.target == null" [click]="saveReview"></eats-once-button>
         </ion-col>
       </ion-row>
     </ion-grid>

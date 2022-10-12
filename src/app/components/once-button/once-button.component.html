@@ -1,0 +1,3 @@
+<ion-button *ngIf="show" [expand]="expand" [disabled]="activated || disabled" (click)="localClick()">
+  <ion-spinner *ngIf="activated"></ion-spinner> {{buttonText}}
+</ion-button>
