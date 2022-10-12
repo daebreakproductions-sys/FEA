@@ -232,7 +232,7 @@ export class AddRecipesPage implements OnInit {
     });
   }
 
-  saveRecipe() {
+  saveRecipe = (): void => {
     // Update Recipe Base
     let newRecipe = {
       id: this.recipe.id,

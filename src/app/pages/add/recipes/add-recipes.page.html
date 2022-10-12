@@ -145,7 +145,7 @@
           name="arrow-forward-outline" 
           [color]="nextButton.disabled ? 'light' : 'primary'">
         </ion-icon>
-        <ion-button *ngIf="showSaveButton" (click)="saveRecipe()">Save Recipe</ion-button>
+        <eats-once-button *ngIf="showSaveButton" buttonText="Save Recipe" [click]="saveRecipe"></eats-once-button>
       </ion-col>
     </ion-row>
   </ion-grid>

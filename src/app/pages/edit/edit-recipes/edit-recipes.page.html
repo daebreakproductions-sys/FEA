@@ -183,7 +183,7 @@
       <!-- Save Button -->
       <ion-row>
         <ion-col>
-          <ion-button expand="block" [disabled]="!recipeForm.valid" (click)="saveRecipe()">Save</ion-button>
+          <eats-once-button expand="block" buttonText="Save" [disabled]="!recipeForm.valid" [click]="saveRecipe"></eats-once-button>
         </ion-col>
       </ion-row>
     </ion-grid>

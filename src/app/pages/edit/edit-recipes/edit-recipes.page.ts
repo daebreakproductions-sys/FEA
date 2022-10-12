@@ -167,7 +167,7 @@ export class EditRecipesPage implements OnInit {
   updateImage(image64) {
     this.recipe.image64 = image64;
   }
-  async saveRecipe() {
+  saveRecipe = async () => {
     // Update Recipe Ingredients
     for (let index = 0; index < this.ingredients.length; index++) {
       const ingred = this.ingredients[index];

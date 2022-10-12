@@ -9,6 +9,7 @@ import { AddRecipesPageRoutingModule } from './add-recipes-routing.module';
 import { AddRecipesPage } from './add-recipes.page';
 import { PhotoEditModule } from '@app/components/photo/photo-edit/photo-edit.module';
 import { TagAddModule } from '@app/components/tags/tag-add/tag-edit.module';
+import { OnceButtonModule } from '@app/components/once-button/once-button.module';
 
 @NgModule({
   imports: [
@@ -16,9 +17,10 @@ import { TagAddModule } from '@app/components/tags/tag-add/tag-edit.module';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    AddRecipesPageRoutingModule,
     PhotoEditModule,
     TagAddModule,
+    OnceButtonModule,
+    AddRecipesPageRoutingModule,
   ],
   declarations: [AddRecipesPage]
 })
