@@ -1,19 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Deal } from '@app/models/deal';
-import { Market } from '@app/models/market';
 import { StartEndDatesValidator } from '@app/validators/start-end-dates';
 import { IonSearchbar, IonSlides, ModalController } from '@ionic/angular';
 import { MarketModalPage } from '../../modals/market-modal/market-modal.page'
-import { debounceTime, filter, map } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { Tag } from '@app/models/tag';
 import * as keyword_extractor from 'keyword-extractor'
 import { TagService } from '@app/services/tag.service';
 import { DealService } from '@app/services/deal.service';
 import { Router } from '@angular/router';
-import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/Camera';
+import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
-import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-deals',
