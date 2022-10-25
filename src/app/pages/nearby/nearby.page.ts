@@ -129,7 +129,7 @@ export class NearbyPage implements OnInit {
       }
     })
   }
-  zoomToData(dataset: Market[], location: Position = this.currentLocation) {
+  zoomToData(dataset: EatsLocation[], location: Position = this.currentLocation) {
     let minLat = Math.min(dataset.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
     let maxLat = Math.max(dataset.sort((a, b) => b.lat - a.lat)[0].lat, location.coords.latitude);
     let minLng = Math.min(dataset.sort((a, b) => a.lng - b.lng)[0].lng, location.coords.longitude);
@@ -141,8 +141,8 @@ export class NearbyPage implements OnInit {
     ]);
   }
   setMapZoom(location: Position) {
-    let nearby = this.marketService.getNearby(location, 5).map(result => {
-      return result.market;
+    let nearby = this.eatsLocationsService.getNearby(location, 5000).map(result => {
+      return result.eatsLocation;
     });
     this.zoomToData(nearby, location);
   }

@@ -38,7 +38,11 @@ export class EatsLocationsService {
     return this.marketService.doneLoading && this.foodPantrySiteService.doneLoading;
   }
   getNearby(location: Position, numberOfResults: number): { distance: number, eatsLocation: EatsLocation } [] {
-    let distances = this.eatsLocations.map(eatsLoc => {
+    let distances = this.eatsLocations
+    .filter(l => {
+      return l.lat && l.lng;
+    })
+    .map(eatsLoc => {
       return { distance: this.helpers.distance(eatsLoc.lat, eatsLoc.lng, location.coords.latitude, location.coords.longitude), eatsLocation: eatsLoc };
     });
 
