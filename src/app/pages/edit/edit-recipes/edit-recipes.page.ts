@@ -1,5 +1,5 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '@app/models/recipe';
@@ -9,7 +9,7 @@ import { Tag } from '@app/models/tag';
 import { AddRecipesPage } from '@app/pages/add/recipes/add-recipes.page';
 import { RecipeService } from '@app/services/recipe.service';
 import { TagService } from '@app/services/tag.service';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, IonReorderGroup, ItemReorderEventDetail, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-recipes',
@@ -23,6 +23,7 @@ export class EditRecipesPage implements OnInit {
   public validation_messages_ingredient;
   public recipeStepForm: FormGroup;
   public validation_messages_step;
+  @ViewChild('reorderIngredients') reorderIngredients: IonReorderGroup;
 
   public clearPickerOptions: any;
   public recipe: Recipe;
@@ -31,6 +32,7 @@ export class EditRecipesPage implements OnInit {
   public steps: EditableRecipeStep[];
 
   public locationTouched: boolean = false;
+  private readonly STEP_ORDER_START_COUNT: number = 1;
 
   constructor(
     public route: ActivatedRoute,
@@ -160,11 +162,29 @@ export class EditRecipesPage implements OnInit {
     step.image64 = photo;
   }
   getNextStepOrder(): number {
-    return this.steps.map(s => s.stepOrder).reduce((a, b) => Math.max(a, b), 0) + 1;
+    return this.steps.map(s => s.stepOrder).reduce((a, b) => Math.max(a, b), 0) + this.STEP_ORDER_START_COUNT;
   }
   stepsEditing() {
     return this.steps.some((x) => x.editing);
   }
+  public stepsLocked = true;
+  unlockSteps() {
+    this.stepsLocked = false;
+  }
+  lockSteps() {
+    this.stepsLocked = true;
+  }
+  doReorderSteps(ev: CustomEvent<ItemReorderEventDetail>) {
+    ev.detail.complete();
+    this.steps.splice(ev.detail.to, 0, this.steps.splice(ev.detail.from, 1)[0]);
+    let count = this.STEP_ORDER_START_COUNT;
+    this.steps.forEach(s => {
+      s.edited = (s.stepOrder != count);
+      s.stepOrder = count;
+      count++;
+    })
+  }
+
 
   updateTags(tags: Tag[]) {
     this.tags = tags;

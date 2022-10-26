@@ -120,7 +120,7 @@
       <ion-toolbar class="ion-align-items-center">
         <ion-title color="primary"><ion-icon name="library-outline"></ion-icon> Instructions</ion-title>
       </ion-toolbar>
-      <ion-list>
+      <ion-reorder-group #reorderSteps (ionItemReorder)="doReorderSteps($event)" [disabled]="stepsLocked">
         <ion-item class="ion-align-items-center" *ngFor="let step of steps">
           <div *ngIf="step.editing">
             <!-- Picture -->
@@ -169,14 +169,19 @@
           </ion-label>
           <ion-icon name="close-outline" *ngIf="step.editing" slot="end" (click)="cancelStepEdit(step)"></ion-icon>
           <ion-icon name="checkmark-outline" *ngIf="step.editing" slot="end" (click)="saveStepEdit(step)"></ion-icon>
-          <ion-icon name="pencil-outline" *ngIf="!step.deleted && !stepsEditing()" slot="end" (click)="editStep(step)"></ion-icon>
-          <ion-icon name="trash-outline" *ngIf="!step.deleted && !step.editing" slot="end" (click)="step.deleted = !step.deleted"></ion-icon>
-          <ion-icon name="arrow-undo-outline" *ngIf="step.deleted" slot="end" (click)="step.deleted = !step.deleted"></ion-icon>
+          <ion-icon name="pencil-outline" *ngIf="!step.deleted && !stepsEditing() && stepsLocked" slot="end" (click)="editStep(step)"></ion-icon>
+          <ion-icon name="trash-outline" *ngIf="!step.deleted && !step.editing && stepsLocked" slot="end" (click)="step.deleted = !step.deleted"></ion-icon>
+          <ion-icon name="arrow-undo-outline" *ngIf="step.deleted && stepsLocked" slot="end" (click)="step.deleted = !step.deleted"></ion-icon>
+          <ion-reorder *ngIf="!stepsEditing()" slot="end"></ion-reorder>
         </ion-item>
-        <ion-item>
-          <ion-button *ngIf="!stepsEditing()" expand="block" fill="outline" (click)="addStep()"><ion-icon name="add-outline"></ion-icon> Add Instruction</ion-button>
-        </ion-item>
-      </ion-list>
+      </ion-reorder-group>
+      <ion-item lines="none">
+        <ion-button *ngIf="!stepsEditing()" expand="block" fill="outline" (click)="addStep()"><ion-icon name="add-outline"></ion-icon> Add Instruction</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button *ngIf="!stepsEditing() && stepsLocked" expand="block" fill="outline" (click)="unlockSteps()"><ion-icon name="git-compare-outline"></ion-icon> Re-Order Instructions</ion-button>
+        <ion-button *ngIf="!stepsEditing() && !stepsLocked" expand="block" fill="outline" (click)="lockSteps()"><ion-icon name="git-compare-outline"></ion-icon> Lock Instructions Order</ion-button>
+      </ion-item>
 
       <!-- Tags -->
       <eats-tag-edit [UGCId]="recipe.id" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-edit>
