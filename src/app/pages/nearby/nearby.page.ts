@@ -1,15 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Market } from '@app/models/market';
+import { Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MarketService } from '@app/services/market.service';
 import * as L from 'leaflet';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IonSearchbar, Platform } from '@ionic/angular';
 import { FeedService } from '@app/services/feed.service';
 import { Deal } from '@app/models/deal';
 import { EatsLocation } from '@app/models/eats-location';
 import { EatsLocationsService } from '@app/services/eats-locations.service';
 import { HelperService } from '@app/services/helper-service.service';
+import { MapPopupComponent } from '@app/components/map-popup/map-popup.component';
 
 @Component({
   selector: 'app-nearby',
@@ -36,10 +36,10 @@ export class NearbyPage implements OnInit {
   constructor( 
     public marketService: MarketService,
     public eatsLocationsService: EatsLocationsService,
-    public router: Router,
     public feedService: FeedService,
     public platform: Platform,
     private route: ActivatedRoute,
+    public viewContainerRef: ViewContainerRef,
   ) { 
     this.iconBlue = L.icon({
       iconUrl:      'assets/images/placeholder_blue.svg',
@@ -112,18 +112,13 @@ export class NearbyPage implements OnInit {
   addMarkers(eatsLocations: EatsLocation[]) {
     eatsLocations.forEach( eatsLoc => {
       if(eatsLoc.lat && eatsLoc.lng) {
+        const component = this.viewContainerRef.createComponent(MapPopupComponent);
+        component.instance.eatsLocation = eatsLoc;
+        component.changeDetectorRef.detectChanges();
+
         let m = L.marker([eatsLoc.lat, eatsLoc.lng], {
           icon: HelperService.getClassType(eatsLoc) == "Market" ? this.iconMarket : this.iconPantry
-        }).bindPopup(
-          '<p>\
-            <b>' + eatsLoc.name + '</b>\
-          </p>\
-          <p>\
-            <ion-label color="primary" id="lbl-' + HelperService.getClassType(eatsLoc).toLowerCase() +'-' + eatsLoc.id + '">\
-              Details\
-            </ion-label>\
-          </p>'
-        );
+        }).bindPopup(component.location.nativeElement);
         this.currentMarkers.push(m);
         m.addTo(this.map);
       }
@@ -170,11 +165,6 @@ export class NearbyPage implements OnInit {
       },
       timestamp: Date.now()
     };
-  }
-
-  navigate(type: string, id: number) {
-    //Add routing for Food Pantries
-    this.router.navigate(['detail', type, id]);
   }
 
   search(searchTerm: any) {
@@ -225,17 +215,6 @@ export class NearbyPage implements OnInit {
 
     tiles.addTo(this.map);
     this.parser = new DOMParser;
-
-    this.map.on('popupopen', (ev) => {
-      let popup = this.parser.parseFromString(ev.sourceTarget._popup._content, "text/html");
-      let lbl = popup.getElementsByTagName("ion-label")[0];
-      let type = lbl.id.split('-')[1];
-      let id = Number(lbl.id.split('-')[2]);
-      const label = L.DomUtil.get('lbl-' + type + '-' + id);
-      L.DomEvent.addListener(label, 'click', (ee) => {
-        this.navigate(type, id);
-      });
-    });
 
     this.showAllEatsLocations();
   }

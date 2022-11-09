@@ -1,0 +1,11 @@
+<p>
+  <b>{{ eatsLocation.name }}</b>
+</p>
+<p *ngIf="eatsLocation.reviewsRating">
+  <eats-five-star-display [value]="eatsLocation.reviewsRating"></eats-five-star-display>
+</p>
+<p>
+  <ion-label color="primary" (click)="navigate()">
+    Details
+  </ion-label>
+</p>
