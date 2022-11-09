@@ -5,7 +5,7 @@
       <div class="ion-text-wrap">{{ market.name }}</div>
     </ion-title>
     <ion-button *ngIf="market" (click)="navigate()" slot="end" class="ion-padding-end">
-      <ion-icon name="car-outline" color="white" size="large"></ion-icon>
+      <ion-icon name="map-outline" color="white" size="large"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -15,13 +15,13 @@
     <ion-item *ngIf="market.image64">
       <ion-img [src]="'data:image/jpg;base64,' + market.image64"></ion-img>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="market.address">
       <ion-icon name="location-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ market.address ? market.address : "No Address found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ market.address }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="market.hours">
       <ion-icon name="time-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ market.hours ? market.hours : "No Hours found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ market.hours }}</ion-label>
     </ion-item>
     <ion-item (click)="navigateToDeals()">
       <ion-icon name="pricetag-outline" color="primary" slot="start" size="large"></ion-icon>
@@ -32,17 +32,17 @@
       <eats-five-star-display [value]="market.reviewsRating"></eats-five-star-display>
       <ion-label class="ion-text-wrap"> ({{ market.reviewsCount }} {{ market.reviewsCount == 1 ? 'review' : 'reviews' }})</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="market.phone">
       <ion-icon name="call-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ market.phone ? market.phone : "No Phone number found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ market.phone }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="market.url">
       <ion-icon name="globe-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ market.url ? market.url : "No Website found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ market.url }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="market.email">
       <ion-icon name="mail-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ market.email ? market.email : "No Email address found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ market.email }}</ion-label>
     </ion-item>
 
   </ion-list>

@@ -5,20 +5,20 @@
       <div class="ion-text-wrap">{{ foodPantrySite.name }}</div>
     </ion-title>
     <ion-button *ngIf="foodPantrySite" (click)="navigate()" slot="end" class="ion-padding-end">
-      <ion-icon name="car-outline" color="white" size="large"></ion-icon>
+      <ion-icon name="map-outline" color="white" size="large"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="foodPantrySite">
-  <ion-list lines="none">
-    <ion-item>
+  <ion-list>
+    <ion-item *ngIf="foodPantrySite.address">
       <ion-icon name="location-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ foodPantrySite.address ? foodPantrySite.address : "No Address found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ foodPantrySite.address }}</ion-label>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="foodPantrySite.phone">
       <ion-icon name="call-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label class="ion-text-wrap">{{ foodPantrySite.phone ? foodPantrySite.phone : "No Phone number found" }}</ion-label>
+      <ion-label class="ion-text-wrap">{{ foodPantrySite.phone }}</ion-label>
     </ion-item>
     <ion-item>
       <ion-icon name="time-outline" color="primary" slot="start" size="large"></ion-icon>
@@ -27,10 +27,9 @@
         <ion-label *ngFor="let line of foodPantrySite.schedule.split('\n')" class="ion-text-wrap">{{ line }}</ion-label>
       </div>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="foodPantrySite.notes">
       <ion-icon name="newspaper-outline" color="primary" slot="start" size="large"></ion-icon>
-      <ion-label *ngIf="!foodPantrySite.notes" class="ion-text-wrap">No Notes found</ion-label>
-      <div *ngIf="foodPantrySite.notes">
+      <div>
         <ion-label *ngFor="let line of foodPantrySite.notes.split('\n')" class="ion-text-wrap">{{ line }}</ion-label>
       </div>
     </ion-item>
