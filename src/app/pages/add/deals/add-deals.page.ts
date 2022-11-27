@@ -20,21 +20,13 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class AddDealsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
-  @ViewChild('search') searchBar: IonSearchbar;
   public dealForm: FormGroup;
   public validation_messages;
   public clearPickerOptions: any;
 
   public deal: Deal;
-  public associatedTags: {
-    selected: boolean,
-    tag: Tag
-  }[];
-  public searchTags: {
-    selected: boolean,
-    tag: Tag
-  }[];
-  public tagSearchTerm: string = '';
+  public tags: Tag[];
+  public tagStrings: string[] = [];
 
   slideOpts = {
     initialSlide: 0,
@@ -133,10 +125,6 @@ export class AddDealsPage implements OnInit {
     // Reset the form in case it has already been used
     this.dealForm.reset();
     this.resetDeal();
-    this.associatedTags = null;
-    this.searchTags = null;
-    this.tagSearchTerm = null;
-    this.searchBar.value = null;
   }
   resetDeal() {
     this.deal = {
@@ -205,7 +193,7 @@ export class AddDealsPage implements OnInit {
           break;
         case 4:
           // Tags
-          this.loadTags();
+          //this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(225);
           }, 25);
@@ -242,72 +230,12 @@ export class AddDealsPage implements OnInit {
     });
   }
 
-  readonly extractorOpts = {
-    language:"english",
-    remove_digits: true,
-    return_changed_case:true,
-    remove_duplicates: false
-  };
-  loadTags() {
-    if(this.associatedTags == null) {
-      this.associatedTags = [];
-      let titleKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['title'].value,this.extractorOpts);
-      let descKeywords: string[] = keyword_extractor.extract(this.dealForm.controls['description'].value,this.extractorOpts);
-      titleKeywords.forEach(keyword => {
-        this.tagService.search(keyword).forEach(tag => {
-          this.associatedTags.push({
-            selected: false,
-            tag: tag
-          });
-        });
-      });
-    }
+  updateTags(tags: Tag[]) {
+    this.tags = tags;
+    this.updateHeight();
   }
-  toggleTag(id: number) {
-    this.associatedTags.forEach(entry => {
-      if(Number(entry.tag.id) == id) {
-        entry.selected = !entry.selected;
-      }
-    })
-  }
-  searchTag(searchEvent: any) {
-    if(searchEvent.target.value) {
-      this.tagSearchTerm = searchEvent.target.value;
-      this.searchTags = this.tagService.search(searchEvent.target.value).map( (val: Tag) => {
-        return { selected: false, tag: val };
-      });
-    } else {
-      this.tagSearchTerm = null;
-      this.searchTags = null;
-    }
-    this.updateSlideUI();
-  }
-  chooseSearchTag(id: number) {
-    let tagIndex: number = this.searchTags.findIndex(which => which.tag.id == id);
-    let tag: Tag = this.searchTags.slice(tagIndex, tagIndex + 1)[0].tag;
-    this.associatedTags.unshift({selected: true, tag: tag});
-    this.eliminateDuplicateTags();
-    this.updateSlideUI();
-  }
-  eliminateDuplicateTags() {
-    let temp: { selected: boolean, tag: Tag }[] = [];
-    this.associatedTags.forEach(item => {
-      if(!temp.some(test => {
-        return test.tag.id == item.tag.id;
-      })) {
-        temp.push(item);
-      }
-    });
-    this.associatedTags = temp;
-  }
-  newTag(term: string) {
-    this.tagService.create(term).then((tag) => {
-      this.associatedTags.push({
-        selected: true,
-        tag: tag
-      });
-      this.updateSlideUI();
-    });
+  getTagStrings(): string[] {
+    return [this.dealForm.get('title').value, this.dealForm.get('description').value];
   }
 
   selectImage() {
@@ -335,12 +263,13 @@ export class AddDealsPage implements OnInit {
       price: this.dealForm.get('price').value,
       image: this.deal.image64
     }
-    this.dealService.create(newDeal).then( deal => {
-      this.associatedTags.filter(tag => {
-        return tag.selected;
-      }).forEach(tag => {
-        this.tagService.tagItem(Number(deal.id), tag.tag);
-      });
+    this.dealService.create(newDeal).then( async deal => {
+      if(this.tags) {
+        for (let index = 0; index < this.tags.length; index++) {
+          const tag = this.tags[index];
+          await this.tagService.tagItem(Number(deal.id), tag);
+        }
+      }
       this.router.navigate(['tabs/me']);
     });
   }

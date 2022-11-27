@@ -72,8 +72,10 @@ export class TagModalPage implements OnInit {
   searchTag(searchEvent: any) {
     if(searchEvent.target.value) {
       this.tagSearchTerm = searchEvent.target.value;
-      this.searchTags = this.tagService.search(searchEvent.target.value).map( (val: Tag) => {
-        return { selected: false, tag: val };
+      this.tagService.search(searchEvent.target.value).then(tags => {
+        this.searchTags = tags.map( (val: Tag) => {
+          return { selected: false, tag: val };
+        });
       });
     } else {
       this.tagSearchTerm = null;
@@ -107,7 +109,10 @@ export class TagModalPage implements OnInit {
   }
   search(searchTerm: any) {
     if(searchTerm.target.value) {
-      this.searchResults = this.tagService.search(searchTerm.target.value);
+      this.tagService.search(searchTerm.target.value)
+        .then(tags => {
+          this.searchResults = tags;
+        });
     } else {
       this.searchResults = null;
     }

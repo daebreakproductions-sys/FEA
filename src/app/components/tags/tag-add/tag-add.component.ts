@@ -37,6 +37,9 @@ export class TagAddComponent implements OnInit {
     this.searchBar.value = null;
     this.loadTags();
   }
+  ngViewWillUpdate() {
+    this.refreshInputs();
+  }
 
   sendUpdate() {
     this.tagsUpdatedEvent.emit(
@@ -57,20 +60,25 @@ export class TagAddComponent implements OnInit {
     console.log("Loading Tags")
     if(this.associatedTags == null) {
       this.associatedTags = [];
-      this.tagStrings.map(inputString => {
-        console.log("Tag input: " + inputString)
-        return keyword_extractor.extract(inputString, this.extractorOpts);
-      })
-      .forEach(keyword => {
-        console.log("Tag keyword: " + keyword)
-        this.tagService.search(keyword).forEach(tag => {
+      this.refreshInputs();
+    }
+  }
+  refreshInputs() {
+    this.tagStrings.map(inputString => {
+      console.log("Tag input: " + inputString)
+      return keyword_extractor.extract(inputString, this.extractorOpts);
+    })
+    .forEach(keyword => {
+      console.log("Tag keyword: " + keyword)
+      this.tagService.search(keyword).then(tags => {
+        tags.forEach(tag => {
           this.associatedTags.push({
             selected: false,
             tag: tag
           });
         });
-      });
-    }
+      })
+    });    
   }
   toggleTag(id: number) {
     this.associatedTags.forEach(entry => {
@@ -82,10 +90,12 @@ export class TagAddComponent implements OnInit {
   searchTag(searchEvent: any) {
     if(searchEvent.target.value) {
       this.tagSearchTerm = searchEvent.target.value;
-      this.searchTags = this.tagService.search(searchEvent.target.value).map( (val: Tag) => {
-        return { selected: false, tag: val };
+      this.tagService.search(searchEvent.target.value).then(tags => {
+        this.searchTags = tags.map( (val: Tag) => {
+          return { selected: false, tag: val };
+        });
+        this.sendUpdate();
       });
-      this.sendUpdate();
     } else {
       this.tagSearchTerm = null;
       this.searchTags = null;

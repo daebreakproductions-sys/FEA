@@ -131,8 +131,10 @@ export class FilterModalPage implements OnInit {
   searchTag(searchEvent: any) {
     if(searchEvent.target.value) {
       this.tagSearchTerm = searchEvent.target.value;
-      this.searchTags = this.tagService.search(searchEvent.target.value).map( (val: Tag) => {
-        return { selected: false, tag: val };
+      this.tagService.search(searchEvent.target.value).then(tags => {
+        this.searchTags = tags.map( (val: Tag) => {
+          return { selected: false, tag: val };
+        });
       });
     } else {
       this.tagSearchTerm = null;

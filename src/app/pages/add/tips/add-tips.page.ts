@@ -19,7 +19,6 @@ import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor
 })
 export class AddTipsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
-  @ViewChild('search') searchBar: IonSearchbar;
   public tipForm: FormGroup;
   public validation_messages;
   public types: {val: number, show: string}[] = [];
@@ -42,15 +41,8 @@ export class AddTipsPage implements OnInit {
   public showSaveButton: boolean = false;
 
   public tip: Tip;
-  public associatedTags: {
-    selected: boolean,
-    tag: Tag
-  }[];
-  public searchTags: {
-    selected: boolean,
-    tag: Tag
-  }[];
-  public tagSearchTerm: string = '';
+  public tags: Tag[];
+  public tagStrings: string[] = [];
 
   constructor(
     public formBuilder: FormBuilder,
@@ -94,10 +86,6 @@ export class AddTipsPage implements OnInit {
     // Reset the form in case it has already been used
     this.tipForm.reset();
     this.resetTip();
-    this.associatedTags = null;
-    this.searchTags = null;
-    this.tagSearchTerm = null;
-    this.searchBar.value = null;
   }
   resetTip() {
     this.tip = {
@@ -121,72 +109,12 @@ export class AddTipsPage implements OnInit {
     this.updateSlideUI();
   }
 
-  readonly extractorOpts = {
-    language:"english",
-    remove_digits: true,
-    return_changed_case:true,
-    remove_duplicates: false
-  };
-  loadTags() {
-    if(this.associatedTags == null) {
-      this.associatedTags = [];
-      let titleKeywords: string[] = keyword_extractor.extract(this.tipForm.controls['description'].value,this.extractorOpts);
-      console.log(titleKeywords);
-      titleKeywords.forEach(keyword => {
-        this.tagService.search(keyword).forEach(tag => {
-          this.associatedTags.push({
-            selected: false,
-            tag: tag
-          });
-        });
-      });
-    }
+  updateTags(tags: Tag[]) {
+    this.tags = tags;
+    this.updateHeight();
   }
-  toggleTag(id: number) {
-    this.associatedTags.forEach(entry => {
-      if(Number(entry.tag.id) == id) {
-        entry.selected = !entry.selected;
-      }
-    })
-  }
-  searchTag(searchEvent: any) {
-    if(searchEvent.target.value) {
-      this.tagSearchTerm = searchEvent.target.value;
-      this.searchTags = this.tagService.search(searchEvent.target.value).map( (val: Tag) => {
-        return { selected: false, tag: val };
-      });
-    } else {
-      this.tagSearchTerm = null;
-      this.searchTags = null;
-    }
-    this.updateSlideUI();
-  }
-  chooseSearchTag(id: number) {
-    let tagIndex: number = this.searchTags.findIndex(which => which.tag.id == id);
-    let tag: Tag = this.searchTags.slice(tagIndex, tagIndex + 1)[0].tag;
-    this.associatedTags.unshift({selected: true, tag: tag});
-    this.eliminateDuplicateTags();
-    this.updateSlideUI();
-  }
-  eliminateDuplicateTags() {
-    let temp: { selected: boolean, tag: Tag }[] = [];
-    this.associatedTags.forEach(item => {
-      if(!temp.some(test => {
-        return test.tag.id == item.tag.id;
-      })) {
-        temp.push(item);
-      }
-    });
-    this.associatedTags = temp;
-  }
-  newTag(term: string) {
-    this.tagService.create(term).then((tag) => {
-      this.associatedTags.push({
-        selected: true,
-        tag: tag
-      });
-      this.updateSlideUI();
-    });
+  getTagStrings(): string[] {
+    return [this.tipForm.get('title').value, this.tipForm.get('description').value];
   }
 
   selectImage() {
@@ -210,16 +138,23 @@ export class AddTipsPage implements OnInit {
       text: this.tipForm.get('description').value,
       image: this.tip.image64,
     }
-    this.tipService.create(newTip).then(tip => {
-      this.associatedTags.filter(tag => {
-        return tag.selected;
-      }).forEach(tag => {
-        this.tagService.tagItem(tip.id, tag.tag);
-      });
+    this.tipService.create(newTip).then( async tip => {
+      if(this.tags) {
+        for (let index = 0; index < this.tags.length; index++) {
+          const tag = this.tags[index];
+          await this.tagService.tagItem(Number(tip.id), tag);
+        }
+      }
       this.router.navigate(['tabs/me/tips']);
     });
   }
 
+  updateHeight() {
+    setTimeout(() => {
+      this.slider.updateAutoHeight(225);
+      this.updateSlideUI();
+    }, 25);
+  }
   updateSlideUI() {
     this.slider.getActiveIndex().then(slideNumber => {
       // Determine lock/unlock for slides
@@ -247,7 +182,7 @@ export class AddTipsPage implements OnInit {
           break;
         case 3:
           // Tags
-          this.loadTags();
+          //this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(225);
           }, 25);

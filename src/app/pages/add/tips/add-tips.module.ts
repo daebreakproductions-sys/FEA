@@ -8,6 +8,7 @@ import { AddTipsPageRoutingModule } from './add-tips-routing.module';
 
 import { AddTipsPage } from './add-tips.page';
 import { OnceButtonModule } from '@app/components/once-button/once-button.module';
+import { TagAddModule } from '@app/components/tags/tag-add/tag-edit.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { OnceButtonModule } from '@app/components/once-button/once-button.module
     IonicModule,
     ReactiveFormsModule,
     OnceButtonModule,
+    TagAddModule,
     AddTipsPageRoutingModule
   ],
   providers: [

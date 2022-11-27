@@ -50,13 +50,9 @@ export class TagService {
     });
   }
   search(searchTerm: string) {
-    if(searchTerm == null || searchTerm == '') return [];
-    return this.tags.filter(tag => {
-      return tag.name != null;
-    }).filter(tag => {
-      return tag.name.toLowerCase().includes(searchTerm.toLowerCase());
-    })
+    return this.api.searchTags(searchTerm);
   }
+
   byId(id: number) {
     return new Promise<Tag>((resolve) => {
       if(this.doneLoading) {
@@ -72,28 +68,22 @@ export class TagService {
       }
     });
   }
+
   byEntityId(id: number) {
     return this.api.getTagsByEntity(id);
   }
-  async create(name: string): Promise<Tag> {
 
+  async create(name: string): Promise<Tag> {
     let tag: Tag = {
       name: name.trim().toLowerCase()
     };
     return new Promise<Tag>((resolve) => {
-      let exactMatch = this.tags.find(val => {
-        return val.name == name;
-      })
-      if(exactMatch) {
-        resolve(exactMatch);
-      } else {
-        this.api.createTag(tag).then(id => {
-          this.api.getTag(id).then(tag => {
-            this.tags.push(tag);
-            resolve(tag);
-          })
-        });
-      }
+      this.api.createTag(tag).then(id => {
+        this.api.getTag(id).then(tag => {
+          this.tags.push(tag);
+          resolve(tag);
+        })
+      });
     })
   }
 

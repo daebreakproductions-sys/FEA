@@ -261,6 +261,9 @@ export class ApiService {
   public getTagsByEntity(entityId: number) {
     return this.apiTokenGet('tags/list/' + entityId) as Promise<Tag[]>;
   }
+  public searchTags(searchTerm: String) {
+    return this.apiTokenGet('tags/search', { q: searchTerm } ) as Promise<Tag[]>;
+  }
 
   // Deals
   public getDeals(params: APIListOptions) {
