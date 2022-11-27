@@ -72,12 +72,10 @@ export class TagAddComponent implements OnInit {
   }
   refreshInputs() {
     this.tagStrings.map(inputString => {
-      console.log("Tag input: " + inputString)
       return keyword_extractor.extract(inputString, this.extractorOpts);
     })
     .flat()
     .forEach(value => {
-      console.log("Tag keyword: " + value)
       this.tagService.search(value).then(tags => {
         tags.forEach(tag => {
           if(!this.associatedTags.map(at => at.tag.id).includes(tag.id))

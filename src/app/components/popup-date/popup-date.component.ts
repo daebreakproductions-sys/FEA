@@ -4,7 +4,7 @@ import { IonDatetime, IonPopover } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 
 @Component({
-  selector: 'app-popup-date',
+  selector: 'eats-popup-date',
   templateUrl: './popup-date.component.html',
   styleUrls: ['./popup-date.component.scss'],
   inputs: ['label', 'popupId', 'initialValue'],

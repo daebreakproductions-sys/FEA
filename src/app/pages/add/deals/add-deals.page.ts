@@ -11,6 +11,7 @@ import { DealService } from '@app/services/deal.service';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
+import { EatsDate } from '@app/models/eats-date';
 
 @Component({
   selector: 'app-deals',
@@ -136,6 +137,8 @@ export class AddDealsPage implements OnInit {
       price: '',
       tags: [],
     }
+    this.dealForm.get('startDate').setValue((new EatsDate({ epochSecond: Date.now()/1000, nano: 0 })).toDate().toISOString());
+    this.dealForm.get('endDate').setValue((new EatsDate({ epochSecond: 0, nano: 0 })).toDate().toISOString());
   }
   ngAfterViewInit() {
     for(let control in this.dealForm.controls) {
