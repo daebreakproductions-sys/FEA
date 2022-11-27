@@ -5,8 +5,7 @@ import { Tag } from '@app/models/tag';
 import { TipType } from '@app/models/tip-type.enum'
 import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
-import { ActionSheetController, IonSearchbar, IonSlides } from '@ionic/angular';
-import * as keyword_extractor from 'keyword-extractor'
+import { ActionSheetController, IonSlides } from '@ionic/angular';
 import { getAllEnumEntries} from 'enum-for'
 import { debounceTime } from 'rxjs/operators';
 import { Tip } from '@app/models/tip';
@@ -113,8 +112,8 @@ export class AddTipsPage implements OnInit {
     this.tags = tags;
     this.updateHeight();
   }
-  getTagStrings(): string[] {
-    return [this.tipForm.get('title').value, this.tipForm.get('description').value];
+  loadTags() {
+    this.tagStrings = [this.tipForm.get('description').value];
   }
 
   selectImage() {
@@ -182,7 +181,7 @@ export class AddTipsPage implements OnInit {
           break;
         case 3:
           // Tags
-          //this.loadTags();
+          this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(225);
           }, 25);

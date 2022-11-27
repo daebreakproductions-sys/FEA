@@ -113,7 +113,7 @@
               <h1>Tag this recipe to help others find it</h1>
             </ion-col>
           </ion-row>
-          <eats-tag-add [tagStrings]="getTagStrings()" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-add>
+          <eats-tag-add [tagStrings]="tagStrings" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-add>
         </ion-grid>
       </ion-slide>
     </ion-slides>

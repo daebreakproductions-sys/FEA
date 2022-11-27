@@ -10,7 +10,14 @@ import * as keyword_extractor from 'keyword-extractor'
   styleUrls: ['./tag-add.component.scss'],
 })
 export class TagAddComponent implements OnInit {
-  @Input() tagStrings: string[];
+  private _tagStrings: string[];
+  @Input() set tagStrings(value: string[]) {
+    this._tagStrings = value;
+    this.refreshInputs();
+  }
+  get tagStrings(): string[] {
+    return this._tagStrings;
+  }
   @Output() tagsUpdatedEvent = new EventEmitter<Tag[]>();
   @ViewChild('search') searchBar: IonSearchbar;
 
@@ -68,14 +75,18 @@ export class TagAddComponent implements OnInit {
       console.log("Tag input: " + inputString)
       return keyword_extractor.extract(inputString, this.extractorOpts);
     })
-    .forEach(keyword => {
-      console.log("Tag keyword: " + keyword)
-      this.tagService.search(keyword).then(tags => {
+    .flat()
+    .forEach(value => {
+      console.log("Tag keyword: " + value)
+      this.tagService.search(value).then(tags => {
         tags.forEach(tag => {
-          this.associatedTags.push({
-            selected: false,
-            tag: tag
-          });
+          if(!this.associatedTags.map(at => at.tag.id).includes(tag.id))
+          {
+            this.associatedTags.push({
+              selected: false,
+              tag: tag
+            });
+          }
         });
       })
     });    
@@ -85,7 +96,8 @@ export class TagAddComponent implements OnInit {
       if(Number(entry.tag.id) == id) {
         entry.selected = !entry.selected;
       }
-    })
+    });
+    this.sendUpdate();
   }
   searchTag(searchEvent: any) {
     if(searchEvent.target.value) {

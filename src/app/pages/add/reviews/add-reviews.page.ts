@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Review } from '@app/models/review';
-import { ReviewProperty } from '@app/models/review-property';
 import { ReviewPropertyType } from '@app/models/review-property-type.enum';
 import { Tag } from '@app/models/tag';
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
@@ -94,8 +93,7 @@ export class AddReviewsPage implements OnInit {
 
   async presentMarketModal() {
     const modal = await this.modalController.create({
-      component: MarketModalPage,
-      cssClass: 'my-custom-class'
+      component: MarketModalPage
     });
     modal.present();
     await modal.onWillDismiss().then(market => {
@@ -127,8 +125,8 @@ export class AddReviewsPage implements OnInit {
     this.tags = tags;
     this.updateHeight();
   }
-  getTagStrings(): string[] {
-    return [this.reviewForm.get('text').value];
+  loadTags() {
+    this.tagStrings = [this.reviewForm.get('text').value];
   }
   updateRating(rating: ReviewPropertyType, val: number) {
     if(val) {
@@ -173,6 +171,7 @@ export class AddReviewsPage implements OnInit {
           break;
         case 3:
           // Tags
+          this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(175);
           }, 75);

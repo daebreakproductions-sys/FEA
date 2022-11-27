@@ -169,8 +169,8 @@ export class AddRecipesPage implements OnInit {
     this.tags = tags;
     this.updateHeight();
   }
-  getTagStrings(): string[] {
-    return [this.recipeForm.get('title').value, this.recipeForm.get('description').value];
+  loadTags() {
+    this.tagStrings = [this.recipeForm.get('title').value, this.recipeForm.get('description').value];
   }
 
   updateHeight() {
@@ -216,7 +216,7 @@ export class AddRecipesPage implements OnInit {
           break;
         case 4:
           // Tags
-          //this.loadTags();
+          this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(225);
           }, 25);

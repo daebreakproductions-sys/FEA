@@ -160,17 +160,6 @@
           </ion-row>
         </ion-grid>
       </ion-slide>
-      <!-- Tags -->
-      <ion-slide>
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <h1>Tag this deal to help others find it</h1>
-            </ion-col>
-          </ion-row>
-          <eats-tag-add [tagStrings]="getTagStrings()" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-add>
-        </ion-grid>
-      </ion-slide>
       <!-- Description -->
       <ion-slide>
         <ion-grid>
@@ -194,6 +183,17 @@
               </ng-container>
             </ion-col>
           </ion-row>
+        </ion-grid>
+      </ion-slide>
+      <!-- Tags -->
+      <ion-slide>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>Tag this deal to help others find it</h1>
+            </ion-col>
+          </ion-row>
+          <eats-tag-add [tagStrings]="tagStrings" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-add>
         </ion-grid>
       </ion-slide>
     </ion-slides>

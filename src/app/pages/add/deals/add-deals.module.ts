@@ -18,7 +18,6 @@ import { TagAddModule } from '@app/components/tags/tag-add/tag-edit.module';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    MarketModalPageModule,
     PopupDateModule,
     OnceButtonModule,
     TagAddModule,

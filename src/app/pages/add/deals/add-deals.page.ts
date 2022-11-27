@@ -2,11 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Deal } from '@app/models/deal';
 import { StartEndDatesValidator } from '@app/validators/start-end-dates';
-import { IonSearchbar, IonSlides, ModalController } from '@ionic/angular';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { MarketModalPage } from '../../modals/market-modal/market-modal.page'
 import { debounceTime } from 'rxjs/operators';
 import { Tag } from '@app/models/tag';
-import * as keyword_extractor from 'keyword-extractor'
 import { TagService } from '@app/services/tag.service';
 import { DealService } from '@app/services/deal.service';
 import { Router } from '@angular/router';
@@ -189,22 +188,22 @@ export class AddDealsPage implements OnInit {
           // Location
           locked = !this.checkStep4();
           this.prevButton.text = 'Details';
-          this.nextButton.text = 'Tags';
+          this.nextButton.text = 'Description';
           break;
         case 4:
+          // Description
+          locked = !this.checkStep5();
+          this.prevButton.text = 'Location';
+          this.nextButton.text = 'Tags';
+          break;
+        case 5:
           // Tags
-          //this.loadTags();
+          this.loadTags();
           setTimeout(() => {
             this.slider.updateAutoHeight(225);
           }, 25);
           locked = !this.checkStep5();
-          this.prevButton.text = 'Location';
-          this.nextButton.text = 'Description';
-          break;
-        case 5:
-          // Description
-          locked = !this.checkStep5();
-          this.prevButton.text = 'Tags';
+          this.prevButton.text = 'Description';
           break;
       }
       this.slider.lockSwipeToNext(locked);
@@ -217,8 +216,7 @@ export class AddDealsPage implements OnInit {
 
   async presentMarketModal() {
     const modal = await this.modalController.create({
-      component: MarketModalPage,
-      cssClass: 'my-custom-class'
+      component: MarketModalPage
     });
     modal.present();
     await modal.onWillDismiss().then(market => {
@@ -234,8 +232,8 @@ export class AddDealsPage implements OnInit {
     this.tags = tags;
     this.updateHeight();
   }
-  getTagStrings(): string[] {
-    return [this.dealForm.get('title').value, this.dealForm.get('description').value];
+  loadTags() {
+    this.tagStrings = [this.dealForm.get('title').value, this.dealForm.get('description').value];
   }
 
   selectImage() {
@@ -334,11 +332,11 @@ export class AddDealsPage implements OnInit {
     return (this.deal.market != null);
   }
   checkStep5(): boolean {
-    // Tags
+    // Description
     return true;
   }
   checkStep6(): boolean {
-    // Description
+    // Tags
     return true;
   }
 
