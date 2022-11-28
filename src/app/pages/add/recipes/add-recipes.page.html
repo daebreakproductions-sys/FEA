@@ -56,7 +56,7 @@
             <ion-col>
               <ion-item>
                 <ion-label position="floating">Description</ion-label>
-                <ion-textarea formControlName="description" type="text"></ion-textarea>
+                <ion-textarea formControlName="description" type="text" autocapitalize="sentences"></ion-textarea>
               </ion-item>
               <ng-container *ngFor="let validation of validation_messages.description">
                 <ion-item *ngIf="recipeForm.get('description').hasError(validation.type) && (recipeForm.get('description').dirty || recipeForm.get('description').touched)">
