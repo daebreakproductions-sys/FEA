@@ -71,8 +71,8 @@ export class TagModalPage implements OnInit {
   }
   searchTag(searchEvent: any) {
     if(searchEvent.target.value) {
-      this.tagSearchTerm = searchEvent.target.value;
-      this.tagService.search(searchEvent.target.value).then(tags => {
+      this.tagSearchTerm = searchEvent.target.value.replaceAll(/[^a-zA-Z0-9]/g, "");
+      this.tagService.search(this.tagSearchTerm).then(tags => {
         this.searchTags = tags.map( (val: Tag) => {
           return { selected: false, tag: val };
         });
