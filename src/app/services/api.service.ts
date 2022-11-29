@@ -13,13 +13,12 @@ import { Deal } from '@app/models/deal';
 import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
 import { Comment } from '@app/models/comment'
-import { FeedQuery } from '@app/models/feed-query';
 import { FoodPantrySite } from '@app/models/foodpantrysite';
 import { Recipe } from '@app/models/recipe';
 import { RecipeStep } from '@app/models/recipe-step';
 import { RecipeIngredient } from '@app/models/recipe-ingredient';
 import { Review } from '@app/models/review';
-//import { resolve } from 'dns';
+import { ProgramVersions } from '@app/models/program-versions';
 
 @Injectable({
   providedIn: 'root'
@@ -403,6 +402,11 @@ export class ApiService {
   }
   public createComment(comment: any) {
     return this.apiTokenPost('ugc/comments/create', comment) as Promise<number>;
+  }
+
+  // Misc.
+  public getServerVersion() {
+    return this.apiPublicGet('auth/versions') as Promise<ProgramVersions>;
   }
 
   // auth

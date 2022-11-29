@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProgramVersions } from '@app/models/program-versions';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
 import { AuthService } from '@app/services/auth.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { PasswordValidator } from '@app/validators/password.validator';
 import { AlertButton, AlertController, ToastController } from '@ionic/angular';
+import { default as packageJson } from '../../../../../package.json';
 
 @Component({
   selector: 'app-user-options',
@@ -17,6 +19,8 @@ export class UserOptionsPage implements OnInit {
   user: User;
   fileToUpload: File;
   password_change_form: FormGroup;
+  public serverVersions: ProgramVersions;
+  public clientVersion: string = packageJson.version;
   
   constructor(
     public api: ApiService,
@@ -35,6 +39,9 @@ export class UserOptionsPage implements OnInit {
         passwordConfirm: new FormControl('')
       }, (formGroup: FormGroup) => {
         return PasswordValidator.passwordsSame(formGroup);
+      });
+      this.api.getServerVersion().then(versions => {
+        this.serverVersions = versions;
       });
     }
 

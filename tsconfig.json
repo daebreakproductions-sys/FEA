@@ -32,7 +32,9 @@
       "es2019",
       "dom",
       "ESNext.BigInt"
-    ]
+    ],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableIvy": true,

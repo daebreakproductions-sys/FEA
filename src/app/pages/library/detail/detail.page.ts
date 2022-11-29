@@ -58,7 +58,7 @@ export class DetailPage implements OnInit {
     let id = this.route.snapshot.params.id;
     this.usda.getFood(id).subscribe(myObserver);
     
-    this.nutritionSummary = FDCNutrition.default[id.toString()];
+    this.nutritionSummary = FDCNutrition[id.toString()];
   }
 
   digestNutrients(nutrients: FoodNutrient[]) {
