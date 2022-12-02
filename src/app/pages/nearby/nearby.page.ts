@@ -59,7 +59,6 @@ export class NearbyPage implements OnInit {
       popupAnchor:  [0, this.iconHeight * -0.9],
     });
      route.params.subscribe(val => {
-      this.searchBar.value = this.feedService.getSearchTerm();
       if(this.mapInitialized) {
         // Only do this if the map has already loaded
         Geolocation.getCurrentPosition().then(locationData => {
@@ -72,6 +71,10 @@ export class NearbyPage implements OnInit {
         });
       }
     });
+  }
+
+  ionViewWillEnter() {
+    this.searchBar.value = this.feedService.getSearchTerm();
   }
 
   showAllEatsLocations() {
@@ -136,7 +139,7 @@ export class NearbyPage implements OnInit {
     ]);
   }
   setMapZoom(location: Position) {
-    let nearby = this.eatsLocationsService.getNearby(location, 5000).map(result => {
+    let nearby = this.eatsLocationsService.getNearby(location, 5).map(result => {
       return result.eatsLocation;
     });
     this.zoomToData(nearby, location);
@@ -180,6 +183,9 @@ export class NearbyPage implements OnInit {
         });
         let mkts = Array.from(ids).map(id => {
           return this.marketService.byIdFromCache(id);
+        })
+        .filter(mkt => {
+          return mkt.lat != 0 && mkt.lng !=0;
         });
         this.addMarkers(mkts);
         this.zoomToData(mkts);
