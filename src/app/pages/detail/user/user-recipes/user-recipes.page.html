@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshFeed($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ng-container *ngFor="let recipe of recipes">
+    <app-eats-ugc-card [ugc]="recipe"></app-eats-ugc-card>
+  </ng-container>
+  <ion-row *ngIf="recipes == null" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-spinner style="margin: auto;"></ion-spinner>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="recipes && recipes.length == 0" style="height: 100%">
+    <ion-col class="ion-text-center" style="margin: auto;">
+      <ion-label style="margin: auto;">No recipes to show</ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPage($event)">
+    <ion-infinite-scroll-content
+      loadingText="Loading more Recipes">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

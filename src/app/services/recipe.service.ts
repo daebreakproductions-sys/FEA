@@ -41,6 +41,20 @@ export class RecipeService {
       });
     })
   }
+  async byUser(id: number, page: number = 0, pageLength: number = 10) {
+    return new Promise<Recipe[]>((resolve) => {
+      this.api.getUserContent(id, page, pageLength).then(ugcs => {
+        let recipes: Recipe[];
+        recipes = ugcs.filter(ugc => {
+          return ugc.class.endsWith('Recipe');
+        })
+        .map(ugc => {
+          return <Recipe>HelperService.PopulateEntity(ugc);
+        });
+        resolve(recipes);
+      });
+    });
+  }
 
   myRecipes() {
     return new Promise<Recipe[]>((resolve) => {

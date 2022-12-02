@@ -43,6 +43,20 @@ export class ReviewService {
       });
     })
   }
+  async byUser(id: number, page: number = 0, pageLength: number = 10) {
+    return new Promise<Review[]>((resolve) => {
+      this.api.getUserContent(id, page, pageLength).then(ugcs => {
+        let reviews: Review[];
+        reviews = ugcs.filter(ugc => {
+          return ugc.class.endsWith('Review');
+        })
+        .map(ugc => {
+          return <Review>HelperService.PopulateEntity(ugc);
+        });
+        resolve(reviews);
+      });
+    });
+  }
 
   myReviews() {
     return new Promise<Review[]>((resolve) => {
