@@ -10,25 +10,25 @@
   <ion-toolbar>
     <ion-row>
       <ion-col class="ion-text-center tab-has-label tab-has-icon tab-layout-icon-top" style="margin: auto;" (click)="feedService.toggleType('deal')">
-        <ion-label [color]="feedService.typeEnabled('deal') ? 'primary' : ''" style="margin: auto;">
+        <ion-label [color]="feedService.typeEnabled('deal') ? 'primary' : ''" [class]="feedService.typeEnabled('deal') ? 'headerIcon' : 'headerIconStrikethrough'">
           <ion-icon [name]="feedService.typeEnabled('deal') ? 'pricetag' : 'pricetag-outline'"></ion-icon>
           Deals
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center tab-has-label tab-has-icon tab-layout-icon-top" style="margin: auto;" (click)="feedService.toggleType('recipe')">
-        <ion-label [color]="feedService.typeEnabled('recipe') ? 'primary' : ''" style="margin: auto;">
+        <ion-label [color]="feedService.typeEnabled('recipe') ? 'primary' : ''" [class]="feedService.typeEnabled('recipe') ? 'headerIcon' : 'headerIconStrikethrough'">
           <ion-icon [name]="feedService.typeEnabled('recipe') ? 'restaurant' : 'restaurant-outline'"></ion-icon>
           Recipes
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center tab-has-label tab-has-icon tab-layout-icon-top" style="margin: auto;" (click)="feedService.toggleType('review')">
-        <ion-label [color]="feedService.typeEnabled('review') ? 'primary' : ''" style="margin: auto;">
+        <ion-label [color]="feedService.typeEnabled('review') ? 'primary' : ''" [class]="feedService.typeEnabled('review') ? 'headerIcon' : 'headerIconStrikethrough'">
           <ion-icon [name]="feedService.typeEnabled('review') ? 'chatbubble' : 'chatbubble-outline'"></ion-icon>
           Reviews
         </ion-label>
       </ion-col>
       <ion-col class="ion-text-center tab-has-label tab-has-icon tab-layout-icon-top" style="margin: auto;" (click)="feedService.toggleType('tip')">
-        <ion-label [color]="feedService.typeEnabled('tip') ? 'primary' : ''" style="margin: auto;">
+        <ion-label [color]="feedService.typeEnabled('tip') ? 'primary' : ''" [class]="feedService.typeEnabled('tip') ? 'headerIcon' : 'headerIconStrikethrough'">
           <ion-icon [name]="feedService.typeEnabled('tip') ? 'bulb' : 'bulb-outline'"></ion-icon>
           Tips
         </ion-label>
