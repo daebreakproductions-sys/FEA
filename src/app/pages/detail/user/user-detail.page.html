@@ -37,18 +37,18 @@
 <ion-content *ngIf="user">
   <ion-tabs>
     <ion-tab-bar slot="top">
-      <!-- <ion-tab-button (click)="clickTab($event, 'recipes')" tab="recipes">
+      <ion-tab-button (click)="clickTab($event, 'user-recipes')" tab="user-recipes">
         <ion-icon name="restaurant"></ion-icon>
-      </ion-tab-button> -->
+      </ion-tab-button>
       <ion-tab-button (click)="clickTab($event, 'user-tips')" tab="user-tips">
         <ion-icon name="bulb"></ion-icon>
       </ion-tab-button>
       <ion-tab-button (click)="clickTab($event, 'user-deals')" tab="user-deals">
         <ion-icon name="pricetag"></ion-icon>
       </ion-tab-button>
-      <!-- <ion-tab-button (click)="clickTab($event, 'reviews')" tab="reviews">
+      <ion-tab-button (click)="clickTab($event, 'user-reviews')" tab="user-reviews">
         <ion-icon name="chatbubble"></ion-icon>
-      </ion-tab-button> -->
+      </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
 

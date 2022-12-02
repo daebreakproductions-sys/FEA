@@ -13,11 +13,11 @@ const routes: Routes = [
     component: UserDetailPage,
     children: [
       {
-        path: 'user-deals',
+        path: 'user-recipes',
         children: [
           {
             path: '',
-            loadChildren: () => import('./user-deals/user-deals.module').then( m => m.UserDealsPageModule)
+            loadChildren: () => import('./user-recipes/user-recipes.module').then( m => m.UserRecipesPageModule)
           }
         ]
       },
@@ -27,6 +27,24 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('./user-tips/user-tips.module').then( m => m.UserTipsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'user-deals',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./user-deals/user-deals.module').then( m => m.UserDealsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'user-reviews',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./user-reviews/user-reviews.module').then( m => m.UserReviewsPageModule)
           }
         ]
       },

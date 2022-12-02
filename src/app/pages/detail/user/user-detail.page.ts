@@ -24,7 +24,11 @@ export class UserDetailPage implements OnInit {
 
   async ngOnInit() {
     let id = this.route.snapshot.params.id;
-    this.tabPath = `${this.router.routerState.snapshot.url.replace('/user-deals', '').replace('/user-tips', '')}/`;
+    this.tabPath = `${this.router.routerState.snapshot.url
+      .replace('/user-recipes', '')
+      .replace('/user-tips', '')
+      .replace('/user-deals', '')
+      .replace('/user-reviews', '')}/`;
     if(id) {
       this.user = await this.api.getUser(id);
       this.api.getUserFollowers(id).then(users => {
