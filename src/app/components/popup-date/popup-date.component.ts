@@ -68,8 +68,8 @@ export class PopupDateComponent implements ControlValueAccessor {
       this.dateValue = this._now();
       this.updateDate(this._now());
     } else {
-      this.dateValue = this.dateControl.value;
-      this.updateDate(this.dateControl.value);
+      this.dateValue = this.dateControl.value.toString();
+      this.updateDate(this.dateValue);
     }
     this.popover.dismiss();
   }

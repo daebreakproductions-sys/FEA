@@ -8,7 +8,7 @@
   <ng-template>
     <ion-datetime #date formControlName="date" 
       presentation="date" [value]="dateValue" [min]="minDate" [max]="maxDate" 
-      (ionChange)="updateDate(date.value)"></ion-datetime>
+      (ionChange)="updateDate(date.value.toString())"></ion-datetime>
       <ion-item>
         <ion-button size="small" color="secondary" fill="outline" slot="start" (click)="cancelButton()">Cancel</ion-button>
         <ion-button size="small" color="primary" fill="solid" slot="end" (click)="selectButton()">Select</ion-button>
