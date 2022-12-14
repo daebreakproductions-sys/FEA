@@ -34,6 +34,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/app/lib/leaflet-plugins/awesome-markers/leaflet.awesome-markers.css",
+              "src/app/lib/leaflet-plugins/font-awesome/css/all.css",
               {
                 "input": "src/theme/variables.scss",
                 "inject": true
@@ -43,7 +45,10 @@
                 "inject": true
               }
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/leaflet/dist/Leaflet.js",
+              "src/app/lib/leaflet-plugins/awesome-markers/leaflet.awesome-markers.js"
+            ],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

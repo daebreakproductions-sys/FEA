@@ -10,6 +10,8 @@ import { EatsLocation } from '@app/models/eats-location';
 import { EatsLocationsService } from '@app/services/eats-locations.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { MapPopupComponent } from '@app/components/map-popup/map-popup.component';
+import 'leaflet.awesome-markers';
+import 'leaflet.markercluster';
 
 @Component({
   selector: 'app-nearby',
@@ -21,12 +23,12 @@ export class NearbyPage implements OnInit {
   @ViewChild('mapContainer') mapContainer: ElementRef;
   @ViewChild(IonSearchbar) searchBar: any;
   private map: L.Map;
-  private iconMarket: L.Icon;
-  private iconBlue: L.Icon;
-  private iconPantry: L.Icon;
+  private iconMarket: L.AwesomeMarkers.Icon;
+  private iconBlue: L.AwesomeMarkers.Icon;
+  private iconPantry: L.AwesomeMarkers.Icon;
   readonly resize: number = 0.65;
   readonly iconHeight: number = 98 * this.resize;
-  readonly iconWidth: number = 71 * this.resize;
+  readonly iconWidth: number = 90 * this.resize;
   readonly locationResize: number = 0.7;
   private parser: DOMParser;
   public mapInitialized: boolean = false;
@@ -41,22 +43,21 @@ export class NearbyPage implements OnInit {
     private route: ActivatedRoute,
     public viewContainerRef: ViewContainerRef,
   ) { 
-    this.iconBlue = L.icon({
-      iconUrl:      'assets/images/placeholder_blue.svg',
-      iconSize:     [this.iconWidth, this.iconHeight], // size of the icon
-      iconAnchor:   [this.iconWidth * 0.5, this.iconHeight],
+    this.iconBlue = L.AwesomeMarkers.icon({
+      icon: 'user',
+      prefix: 'fa',
+      markerColor: 'blue'
     });
-   this.iconMarket = L.icon({
-      iconUrl:      'assets/images/placeholder_market.svg',
-      iconSize:     [this.iconWidth * this.locationResize, this.iconHeight * this.locationResize], // size of the icon
-      iconAnchor:   [this.iconWidth * this.locationResize * 0.5, this.iconHeight * this.locationResize],
-      popupAnchor:  [0, this.iconHeight * -0.9],
+    this.iconMarket = L.AwesomeMarkers.icon({
+      icon: 'shopping-cart',
+      prefix: 'fa',
+      markerColor: 'green'
     });
-    this.iconPantry = L.icon({
-      iconUrl:      'assets/images/placeholder_pantry.svg',
-      iconSize:     [this.iconWidth * this.locationResize, this.iconHeight * this.locationResize], // size of the icon
-      iconAnchor:   [this.iconWidth * this.locationResize * 0.5, this.iconHeight * this.locationResize],
-      popupAnchor:  [0, this.iconHeight * -0.9],
+    this.iconPantry = L.AwesomeMarkers.icon({
+      icon: 'box-open',
+      extraClasses: 'fa-solid',
+      prefix: 'fa',
+      markerColor: 'purple'
     });
      route.params.subscribe(val => {
       if(this.mapInitialized) {
@@ -84,9 +85,10 @@ export class NearbyPage implements OnInit {
       } else {
         this.currentLocation = locationData;
       }
-      L.marker([this.currentLocation.coords.latitude, this.currentLocation.coords.longitude], {
+      let m = L.marker([this.currentLocation.coords.latitude, this.currentLocation.coords.longitude], {
         icon: this.iconBlue
-      }).addTo(this.map);
+      });
+      m.addTo(this.map);
 
       if(this.eatsLocationsService.doneLoading) {
         this.addMarkers(this.eatsLocationsService.eatsLocations);
@@ -122,7 +124,9 @@ export class NearbyPage implements OnInit {
         let m = L.marker([eatsLoc.lat, eatsLoc.lng], {
           icon: HelperService.getClassType(eatsLoc) == "Market" ? this.iconMarket : this.iconPantry
         }).bindPopup(component.location.nativeElement);
+
         this.currentMarkers.push(m);
+        // this.markerLayer.addMarker(m);
         m.addTo(this.map);
       }
     })
@@ -220,7 +224,6 @@ export class NearbyPage implements OnInit {
     });
 
     tiles.addTo(this.map);
-    this.parser = new DOMParser;
 
     this.showAllEatsLocations();
   }

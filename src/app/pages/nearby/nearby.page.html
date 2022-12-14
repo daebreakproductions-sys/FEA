@@ -1,6 +1,8 @@
-<ion-searchbar showCancelButton="focus" debounce="500" animated (ionChange)="search($event.target.value)" placeholder="Search for Deals" id="searchBar"></ion-searchbar>
-<div class="map-container" #mapContainer>
-  <div class="map-frame">
-    <div id="map" #mapDiv></div>
+<div id="solidBG">
+  <ion-searchbar showCancelButton="focus" debounce="500" animated (ionChange)="search($event.target.value)" placeholder="Search for Deals" id="searchBar"></ion-searchbar>
+  <div class="map-container" #mapContainer>
+    <div class="map-frame">
+      <div id="map" #mapDiv></div>
+    </div>
   </div>
 </div>

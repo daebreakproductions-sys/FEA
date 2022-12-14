@@ -18,7 +18,6 @@ export class MapPopupComponent implements OnInit {
   ngOnInit() {}
 
   navigate() {
-    //Add routing for Food Pantries
     this.router.navigate(['detail', HelperService.getClassType(this.eatsLocation).toLowerCase(), this.eatsLocation.id]);
   }
 
