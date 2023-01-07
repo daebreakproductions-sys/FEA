@@ -1,3 +1,5 @@
+@import "theme/variables.scss";
+
 ion-button.rounded {
   --border-radius: 16px;
 }
@@ -9,4 +11,11 @@ ion-title {
       height: 0;
       text-align: center;
   }
+}
+.commentInputBox {
+  border-width: 1px 0px 0px 0px;
+  padding-top: 4px;
+  margin: 0px 8px;
+  border-color: var(--ion-color-medium, black);
+  border-style: solid;
 }

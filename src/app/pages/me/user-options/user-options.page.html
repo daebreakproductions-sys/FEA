@@ -11,7 +11,7 @@
   <ion-grid class="ion-padding">
     <ion-row class="ion-justify-content-center ion-align-items-center">
       <ion-toolbar>
-        <ion-title color="primary">Avatar</ion-title>
+        <ion-title color="primary">Profile Picture</ion-title>
       </ion-toolbar>
       <ion-col size="4">
         <ion-list lines="none">
@@ -26,7 +26,7 @@
       <ion-col align-items-center size="8">
         <ion-list lines="none" *ngIf="fileToUpload == null">
           <ion-item>
-            <label for="photoInput"><ion-icon name="create-outline" color="primary"></ion-icon> Change Avatar</label>
+            <label for="photoInput"><ion-icon name="create-outline" color="primary"></ion-icon> Change Profile Picture</label>
             <input id="photoInput" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" width="0px"/>
           </ion-item>
         </ion-list>
