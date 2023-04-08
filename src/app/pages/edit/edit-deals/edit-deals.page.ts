@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Deal } from '@app/models/deal';
 import { EatsDate } from '@app/models/eats-date';
@@ -18,7 +18,7 @@ import { ActionSheetController, ModalController } from '@ionic/angular';
   styleUrls: ['./edit-deals.page.scss'],
 })
 export class EditDealsPage implements OnInit {
-  public dealForm: FormGroup;
+  public dealForm: UntypedFormGroup;
   public validation_messages;
   public clearPickerOptions: any;
   public deal: Deal;

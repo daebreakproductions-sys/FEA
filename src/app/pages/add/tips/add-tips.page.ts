@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tag } from '@app/models/tag';
 import { TipType } from '@app/models/tip-type.enum'
@@ -18,7 +18,7 @@ import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor
 })
 export class AddTipsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
-  public tipForm: FormGroup;
+  public tipForm: UntypedFormGroup;
   public validation_messages;
   public types: {val: number, show: string}[] = [];
 
@@ -44,7 +44,7 @@ export class AddTipsPage implements OnInit {
   public tagStrings: string[] = [];
 
   constructor(
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public tagService: TagService,
     public router: Router,
     public tipService: TipService,
@@ -69,11 +69,11 @@ export class AddTipsPage implements OnInit {
   };
 
   public static newTipForm() {
-    return new FormGroup({
-      type: new FormControl('',Validators.compose([
+    return new UntypedFormGroup({
+      type: new UntypedFormControl('',Validators.compose([
         Validators.required,
       ])),
-      description: new FormControl('',Validators.compose([
+      description: new UntypedFormControl('',Validators.compose([
         Validators.required,
       ])),
     });

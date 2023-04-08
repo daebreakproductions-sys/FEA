@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Review } from '@app/models/review';
 import { ReviewPropertyType } from '@app/models/review-property-type.enum';
@@ -18,7 +18,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class AddReviewsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
-  public reviewForm: FormGroup;
+  public reviewForm: UntypedFormGroup;
   public validation_messages;
 
   public review: Review;
@@ -50,7 +50,7 @@ export class AddReviewsPage implements OnInit {
 
   constructor(
     public modalController: ModalController,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public reviewService: ReviewService,
     public router: Router,
     public actionSheetController: ActionSheetController,
@@ -106,8 +106,8 @@ export class AddReviewsPage implements OnInit {
   }
 
   public static newReviewForm() {
-    return new FormGroup({
-      text: new FormControl('', Validators.compose([
+    return new UntypedFormGroup({
+      text: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(255),
         Validators.minLength(3),
         Validators.required

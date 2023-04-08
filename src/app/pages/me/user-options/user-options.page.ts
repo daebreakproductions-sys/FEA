@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProgramVersions } from '@app/models/program-versions';
 import { User } from '@app/models/user';
@@ -18,26 +18,26 @@ import { default as packageJson } from '../../../../../package.json';
 export class UserOptionsPage implements OnInit {
   user: User;
   fileToUpload: File;
-  password_change_form: FormGroup;
+  password_change_form: UntypedFormGroup;
   public serverVersions: ProgramVersions;
   public clientVersion: string = packageJson.version;
   
   constructor(
     public api: ApiService,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public toastController: ToastController,
     public auth: AuthService,
     public router: Router,
     public alertController: AlertController,
     ) { 
-      this.password_change_form = new FormGroup({
-        password: new FormControl('', Validators.compose([
+      this.password_change_form = new UntypedFormGroup({
+        password: new UntypedFormControl('', Validators.compose([
           Validators.minLength(8),
           Validators.required,
           Validators.pattern('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[`~!@#$%^&\\*\\(\\)\\-_=\\+\\{\\}\\[\\]|\\\\:;"\'<>,\\.?\\/]).{8,}') //this is for the letters (both uppercase and lowercase), numbers, and special character validation
        ])),
-        passwordConfirm: new FormControl('')
-      }, (formGroup: FormGroup) => {
+        passwordConfirm: new UntypedFormControl('')
+      }, (formGroup: UntypedFormGroup) => {
         return PasswordValidator.passwordsSame(formGroup);
       });
       this.api.getServerVersion().then(versions => {

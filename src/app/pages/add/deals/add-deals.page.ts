@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Deal } from '@app/models/deal';
 import { StartEndDatesValidator } from '@app/validators/start-end-dates';
 import { IonSlides, ModalController } from '@ionic/angular';
@@ -20,7 +20,7 @@ import { EatsDate } from '@app/models/eats-date';
 })
 export class AddDealsPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
-  public dealForm: FormGroup;
+  public dealForm: UntypedFormGroup;
   public validation_messages;
   public clearPickerOptions: any;
 
@@ -47,7 +47,7 @@ export class AddDealsPage implements OnInit {
 
   constructor(
     public modalController: ModalController,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public tagService: TagService,
     public dealService: DealService,
     public router: Router,
@@ -59,25 +59,25 @@ export class AddDealsPage implements OnInit {
   }
 
   public static newDealForm() {
-    return new FormGroup({
-      title: new FormControl('', Validators.compose([
+    return new UntypedFormGroup({
+      title: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(50),
         Validators.minLength(3),
         Validators.required
       ])),
-      description: new FormControl(''),
-      startDate: new FormControl('', Validators.compose([
+      description: new UntypedFormControl(''),
+      startDate: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-      endDate: new FormControl(''),
-      price: new FormControl('', Validators.compose([
+      endDate: new UntypedFormControl(''),
+      price: new UntypedFormControl('', Validators.compose([
         Validators.required,
       ])),
-    }, (formGroup: FormGroup) => {
+    }, (formGroup: UntypedFormGroup) => {
       return StartEndDatesValidator.checkDates(formGroup);
    });
   }
-  public static clearPickerOptions(dealForm: FormGroup, control: string) {
+  public static clearPickerOptions(dealForm: UntypedFormGroup, control: string) {
     return {
       buttons: [
         {

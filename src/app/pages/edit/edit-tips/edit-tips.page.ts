@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Tag } from '@app/models/tag';
 import { Tip } from '@app/models/tip';
@@ -18,7 +18,7 @@ import { getAllEnumEntries } from 'enum-for'
   styleUrls: ['./edit-tips.page.scss'],
 })
 export class EditTipsPage implements OnInit {
-  public tipForm: FormGroup;
+  public tipForm: UntypedFormGroup;
   public validation_messages;
   public tip: Tip;
   public tags: Tag[];

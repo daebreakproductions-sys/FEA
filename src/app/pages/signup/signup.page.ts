@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NewUser } from '@app/models/new-user';
 import { User } from '@app/models/user';
@@ -17,11 +17,11 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  public signup_form: FormGroup;
+  public signup_form: UntypedFormGroup;
   newUser: User;
 
   constructor(
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public api: ApiService,
     public toastController: ToastController,
     public router: Router,
@@ -29,30 +29,30 @@ export class SignupPage implements OnInit {
     public userService: UserService,
     public tagService: TagService,
   ) {
-    this.signup_form = new FormGroup({
-      username: new FormControl('', Validators.compose([
+    this.signup_form = new UntypedFormGroup({
+      username: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(25),
         Validators.minLength(5),
         Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$'),
         Validators.required
       ])),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      email: new FormControl('', Validators.compose([
+      firstName: new UntypedFormControl(''),
+      lastName: new UntypedFormControl(''),
+      email: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.email
       ])),
-      phone: new FormControl('', Validators.compose([
+      phone: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^(\([0-9]{3}\)|[0-9]{3}-?) ?[0-9]{3}(-| )?[0-9]{4}$')
       ])),
-      password: new FormControl('', Validators.compose([
+      password: new UntypedFormControl('', Validators.compose([
         Validators.minLength(8),
         Validators.required,
         Validators.pattern('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[`~!@#$%^&\\*\\(\\)\\-_=\\+\\{\\}\\[\\]|\\\\:;"\'<>,\\.?\\/]).{8,}') //this is for the letters (both uppercase and lowercase) and numbers validation
      ])),
-      passwordConfirm: new FormControl('')
-    }, (formGroup: FormGroup) => {
+      passwordConfirm: new UntypedFormControl('')
+    }, (formGroup: UntypedFormGroup) => {
       return PasswordValidator.passwordsSame(formGroup);
    });
   }

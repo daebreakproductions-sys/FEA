@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Recipe } from '@app/models/recipe';
 import { Tag } from '@app/models/tag';
@@ -15,7 +15,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class AddRecipesPage implements OnInit {
   @ViewChild(IonSlides) slider: IonSlides;
-  public recipeForm: FormGroup;
+  public recipeForm: UntypedFormGroup;
   public validation_messages;
 
   public recipe: Recipe;
@@ -41,7 +41,7 @@ export class AddRecipesPage implements OnInit {
 
   constructor(
     public modalController: ModalController,
-    public formBuilder: FormBuilder,
+    public formBuilder: UntypedFormBuilder,
     public recipeService: RecipeService,
     public router: Router,
     public actionSheetController: ActionSheetController,
@@ -87,18 +87,18 @@ export class AddRecipesPage implements OnInit {
   }
 
   public static newRecipeForm() {
-    return new FormGroup({
-      title: new FormControl('', Validators.compose([
+    return new UntypedFormGroup({
+      title: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(255),
         Validators.minLength(3),
         Validators.required
       ])),
-      servings: new FormControl('', Validators.compose([
+      servings: new UntypedFormControl('', Validators.compose([
         Validators.required,
         Validators.min(1)
       ])),
-      description: new FormControl(''),
-      published: new FormControl(''),
+      description: new UntypedFormControl(''),
+      published: new UntypedFormControl(''),
     });
   }
   public static validation_messages_recipe = {
@@ -115,16 +115,16 @@ export class AddRecipesPage implements OnInit {
     'published': [],
   };
   public static newRecipeStepForm() {
-    return new FormGroup({
-      title: new FormControl('', Validators.compose([
+    return new UntypedFormGroup({
+      title: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(45),
         Validators.minLength(3),
         Validators.required
       ])),
-      timeMinutes: new FormControl('', Validators.compose([
+      timeMinutes: new UntypedFormControl('', Validators.compose([
         Validators.required
       ])),
-      instructions: new FormControl(''),
+      instructions: new UntypedFormControl(''),
     });
   }
   public static validation_messages_step = {
@@ -139,13 +139,13 @@ export class AddRecipesPage implements OnInit {
     ],
   };
   public static newRecipeIngredientForm() {
-    return new FormGroup({
-      name: new FormControl('', Validators.compose([
+    return new UntypedFormGroup({
+      name: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(255),
         Validators.minLength(3),
         Validators.required
       ])),
-      measurement: new FormControl('', Validators.compose([
+      measurement: new UntypedFormControl('', Validators.compose([
         Validators.maxLength(45)
       ])),
     });

@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Review } from '@app/models/review';
 import { ReviewPropertyType } from '@app/models/review-property-type.enum';
@@ -18,7 +18,7 @@ import { getAllEnumEntries } from 'enum-for';
   styleUrls: ['./edit-reviews.page.scss'],
 })
 export class EditReviewsPage implements OnInit {
-  public reviewForm: FormGroup;
+  public reviewForm: UntypedFormGroup;
   public validation_messages;
 
   public review: Review;

@@ -1,6 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '@app/models/recipe';
 import { EditableRecipeIngredient } from '@app/models/recipe-ingredient';
@@ -17,11 +17,11 @@ import { ActionSheetController, IonReorderGroup, ItemReorderEventDetail, ModalCo
   styleUrls: ['./edit-recipes.page.scss'],
 })
 export class EditRecipesPage implements OnInit {
-  public recipeForm: FormGroup;
+  public recipeForm: UntypedFormGroup;
   public validation_messages_recipe;
-  public recipeIngredientForm: FormGroup;
+  public recipeIngredientForm: UntypedFormGroup;
   public validation_messages_ingredient;
-  public recipeStepForm: FormGroup;
+  public recipeStepForm: UntypedFormGroup;
   public validation_messages_step;
   @ViewChild('reorderIngredients') reorderIngredients: IonReorderGroup;
 

@@ -1,11 +1,11 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 export class PasswordValidator {
-    static passwordsSame(formGroup: FormGroup) {
+    static passwordsSame(formGroup: UntypedFormGroup) {
         let val;
         let valid = true;
-        let pass: FormControl = <FormControl>formGroup.controls['password'];
-        let passConfirm: FormControl = <FormControl>formGroup.controls['passwordConfirm'];
+        let pass: UntypedFormControl = <UntypedFormControl>formGroup.controls['password'];
+        let passConfirm: UntypedFormControl = <UntypedFormControl>formGroup.controls['passwordConfirm'];
     
         // for (let key in formGroup.controls) {
         //     if (formGroup.controls.hasOwnProperty(key)) {
