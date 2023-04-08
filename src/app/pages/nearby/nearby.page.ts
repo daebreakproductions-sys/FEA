@@ -23,6 +23,7 @@ export class NearbyPage implements OnInit {
   @ViewChild('mapContainer') mapContainer: ElementRef;
   @ViewChild(IonSearchbar) searchBar: any;
   private map: L.Map;
+  private cluster: L.MarkerClusterGroup;
   private iconMarket: L.AwesomeMarkers.Icon;
   private iconBlue: L.AwesomeMarkers.Icon;
   private iconPantry: L.AwesomeMarkers.Icon;
@@ -30,7 +31,6 @@ export class NearbyPage implements OnInit {
   readonly iconHeight: number = 98 * this.resize;
   readonly iconWidth: number = 90 * this.resize;
   readonly locationResize: number = 0.7;
-  private parser: DOMParser;
   public mapInitialized: boolean = false;
   public currentMarkers: L.Marker[] = [];
   public currentLocation: Position;
@@ -79,16 +79,14 @@ export class NearbyPage implements OnInit {
   }
 
   showAllEatsLocations() {
+    this.cluster.clearLayers();
     Geolocation.getCurrentPosition().then(locationData => {
       if(this.isLocationOutsideGeneseeCounty(locationData)) {
         this.currentLocation = this.getFakeGeneseeCountyCoords();
       } else {
         this.currentLocation = locationData;
       }
-      let m = L.marker([this.currentLocation.coords.latitude, this.currentLocation.coords.longitude], {
-        icon: this.iconBlue
-      });
-      m.addTo(this.map);
+      this.addCurrentLocationMarker();
 
       if(this.eatsLocationsService.doneLoading) {
         this.addMarkers(this.eatsLocationsService.eatsLocations);
@@ -126,10 +124,16 @@ export class NearbyPage implements OnInit {
         }).bindPopup(component.location.nativeElement);
 
         this.currentMarkers.push(m);
-        // this.markerLayer.addMarker(m);
-        m.addTo(this.map);
+        this.cluster.addLayer(m);
       }
     })
+  }
+  addCurrentLocationMarker() {
+    this.map.addLayer(
+      L.marker([this.currentLocation.coords.latitude, this.currentLocation.coords.longitude], {
+        icon: this.iconBlue
+      })
+    );
   }
   zoomToData(dataset: EatsLocation[], location: Position = this.currentLocation) {
     let minLat = Math.min(dataset.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
@@ -179,7 +183,7 @@ export class NearbyPage implements OnInit {
       this.feedService.setTypes(["deal"]);
       this.feedService.setSearchTerm(searchTerm).then(() => {
         this.currentMarkers.forEach(m => {
-          this.map.removeLayer(m);
+          this.cluster.removeLayer(m);
         });
         let ids = new Set<number>();
         this.feedService.results.forEach(ugc => {
@@ -224,6 +228,12 @@ export class NearbyPage implements OnInit {
     });
 
     tiles.addTo(this.map);
+
+    this.cluster = L.markerClusterGroup({
+      showCoverageOnHover: false,
+      // disableClusteringAtZoom: 16
+    });
+    this.cluster.addTo(this.map);
 
     this.showAllEatsLocations();
   }
