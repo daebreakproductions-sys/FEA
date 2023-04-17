@@ -83,7 +83,7 @@ export class UserService {
   }
 
   public iFollow(id: number): boolean {
-    return this.followees.some(usr => {
+    return this.auth.isAuthenticated() && this.followees.some(usr => {
       return usr.id == id;
     });
   }
@@ -107,5 +107,9 @@ export class UserService {
         });
       }
     });
+  }
+
+  public isMe(user: User): boolean {
+    return this.auth.isAuthenticated() && this.me.id == user.id;
   }
 }

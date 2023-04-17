@@ -24,9 +24,10 @@ const routes: Routes = [
         path: 'library',
         loadChildren: () => import('./../../pages/library/library.module').then( m => m.LibraryPageModule)
       },
-          {
+      {
         path: 'me',
-        loadChildren: () => import('./../../pages/me/me.module').then(m => m.MePageModule)
+        loadChildren: () => import('./../../pages/me/me.module').then(m => m.MePageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: '',
@@ -34,7 +35,6 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ],
-    canActivate: [AuthGuard]
   },
   {
     path: '',

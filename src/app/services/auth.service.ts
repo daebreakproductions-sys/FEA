@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from '@app/models/user';
-import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +8,6 @@ export class AuthService {
   private authenticated: boolean = false;
   private redirectUrl: string = '/tabs/nearby';
   private cache_key = '_v1';
-  private currentUser: User = null;
   
   constructor ( ) {
     this.getAccessTokenPromise();
