@@ -8,8 +8,8 @@
     <ion-card-header class="custom-vertical-pad">
       <ion-card-title item-content class="ion-align-items-center">
         {{ user.name != ' ' ? user.name : user.username }}
-        <ion-icon *ngIf="user.id != userService.me.id && userService.iFollow(user.id)" name="people" color="primary"></ion-icon>
-        <ion-icon *ngIf="user.id != userService.me.id && !userService.iFollow(user.id)" name="people-outline"></ion-icon>
+        <ion-icon *ngIf="!userService.isMe(user) && userService.iFollow(user.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="!userService.isMe(user) && !userService.iFollow(user.id)" name="people-outline"></ion-icon>
       </ion-card-title>
       <ion-card-subtitle item-content>{{ (tip && tip.tipType ? tip.tipType.toString() : '') | titlecase }} {{ type }}</ion-card-subtitle>
     </ion-card-header>

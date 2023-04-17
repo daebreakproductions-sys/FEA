@@ -16,8 +16,8 @@
       </ion-avatar>
       <ion-label class="ion-padding-start">
         {{ follower.name.trim() == "" ? follower.username : follower.name }}
-        <ion-icon *ngIf="follower.id != userService.me.id && userService.iFollow(follower.id)" name="people" color="primary"></ion-icon>
-        <ion-icon *ngIf="follower.id != userService.me.id && !userService.iFollow(follower.id)" name="people-outline"></ion-icon>
+        <ion-icon *ngIf="!userService.isMe(follower) && userService.iFollow(follower.id)" name="people" color="primary"></ion-icon>
+        <ion-icon *ngIf="!userService.isMe(follower) && !userService.iFollow(follower.id)" name="people-outline"></ion-icon>
       </ion-label>
     </ion-item>
   </ion-list>

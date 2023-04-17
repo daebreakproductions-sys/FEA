@@ -10,7 +10,7 @@
   <eats-user-header [usr]="deal.usr" title="Deal"></eats-user-header>
 
   <!-- Edit Button -->
-  <ion-row *ngIf="this.userService.me.id == this.deal.usr.id">
+  <ion-row *ngIf="this.userService.isMe(this.deal.usr)">
     <ion-col>
       <ion-button expand="block" (click)="editDeal()">Edit your deal<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
     </ion-col>

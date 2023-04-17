@@ -13,7 +13,7 @@
   </ion-card-content>
 
   <!-- Edit Button -->
-  <ion-row *ngIf="this.userService.me.id == this.recipe.usr.id">
+  <ion-row *ngIf="this.userService.isMe(this.recipe.usr)">
     <ion-col>
       <ion-button expand="block" (click)="editRecipe()">Edit your recipe<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
     </ion-col>

@@ -23,7 +23,7 @@
   </ion-row>
 
   <!-- Edit Button -->
-  <ion-row *ngIf="this.userService.me.id == this.tip.usr.id">
+  <ion-row *ngIf="this.userService.isMe(this.tip.usr)">
     <ion-col>
       <ion-button expand="block" (click)="editTip()">Edit your tip<ion-icon class="ion-padding-start ion-padding-end" name="create-outline"></ion-icon></ion-button>
     </ion-col>

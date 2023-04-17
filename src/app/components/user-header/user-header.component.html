@@ -6,8 +6,8 @@
   <ion-card-header>
     <ion-card-title item-content>
       {{ usr.name.trim() == '' ? usr.username : usr.name }}
-      <ion-icon *ngIf="usr.id != userService.me.id && userService.iFollow(usr.id)" name="people" color="primary"></ion-icon>
-      <ion-icon *ngIf="usr.id != userService.me.id && !userService.iFollow(usr.id)" name="people-outline"></ion-icon>
+      <ion-icon *ngIf="!userService.isMe(usr) && userService.iFollow(usr.id)" name="people" color="primary"></ion-icon>
+      <ion-icon *ngIf="!userService.isMe(usr) && !userService.iFollow(usr.id)" name="people-outline"></ion-icon>
     </ion-card-title>
     <ion-card-subtitle item-content>{{ title }}</ion-card-subtitle>
   </ion-card-header>
