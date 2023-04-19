@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrimaryPage } from './primary.page';
-import { AuthGuard } from './../../guards/auth-guard.service';
+import { AlertAuthGuard } from './../../guards/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: PrimaryPage,
-    canActivate: [AuthGuard],
+    canActivate: [AlertAuthGuard],
     children: [
       {
         path: '',
@@ -22,7 +22,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    AuthGuard,
+    AlertAuthGuard,
   ],
   exports: [RouterModule]
 })

@@ -1,14 +1,14 @@
 import { AuthService } from '@app/services/auth.service';
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Route, UrlSegment} from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class AlertAuthGuard implements CanActivate {
-
+export class LoginAuthGuard implements CanActivate {
 
   constructor(
-    private auth: AuthService,
+    private auth: AuthService, 
+    private router: Router, 
   ) {
 
   }
@@ -17,9 +17,10 @@ export class AlertAuthGuard implements CanActivate {
     if (this.auth.isAuthenticated()){
       return true;
     }
-
-    this.auth.launchLoginAlert(state.url);
-
+    // Store the attempted URL for redirecting later
+    this.auth.setRedirectUrl(state.url);
+    this.router.navigate(['/login']);
     return false;
   }
+
 }

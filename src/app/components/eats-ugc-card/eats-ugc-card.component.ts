@@ -7,6 +7,7 @@ import { Tip } from '@app/models/tip';
 import { UGC } from '@app/models/ugc';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
+import { AuthService } from '@app/services/auth.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { RecipeService } from '@app/services/recipe.service';
 import { ReviewService } from '@app/services/review.service';
@@ -34,6 +35,7 @@ export class EatsUgcCardComponent implements OnInit {
     public router: Router,
     public apiService: ApiService,
     public userService: UserService,
+    public authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -65,15 +67,19 @@ export class EatsUgcCardComponent implements OnInit {
     this.router.navigate(['detail', this.type.toLowerCase(), this.ugc.id]);
   }
   likeAction() {
-    if(this.ugc.iLike) {
-      this.ugc.reactionCount -= 1;
-      this.ugc.iLike = false;
+    if(this.authService.isAuthenticated()) {
+      if(this.ugc.iLike) {
+        this.ugc.reactionCount -= 1;
+        this.ugc.iLike = false;
+      } else {
+        // API Action
+        this.ugc.reactionCount += 1;
+        this.ugc.iLike = true;
+      }
+      this.apiService.toggleLike(this.ugc.id);
     } else {
-      // API Action
-      this.ugc.reactionCount += 1;
-      this.ugc.iLike = true;
+      this.authService.launchLoginAlert('detail/' + this.type.toLowerCase() + '/' + this.ugc.id);
     }
-    this.apiService.toggleLike(this.ugc.id);
   }
 
 }

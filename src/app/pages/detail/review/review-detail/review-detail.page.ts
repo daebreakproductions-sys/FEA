@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Market } from '@app/models/market';
 import { Review } from '@app/models/review';
 import { ApiService } from '@app/services/api.service';
+import { AuthService } from '@app/services/auth.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { ReviewService } from '@app/services/review.service';
 import { UserService } from '@app/services/user.service';
@@ -23,6 +24,7 @@ export class ReviewDetailPage implements OnInit {
     public router: Router,
     public userService: UserService,
     public apiService: ApiService,
+    private authService: AuthService,
   ) {
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
@@ -36,15 +38,19 @@ export class ReviewDetailPage implements OnInit {
   }
 
   likeAction() {
-    if(this.review.iLike) {
-      this.review.reactionCount -= 1;
-      this.review.iLike = false;
+    if(this.authService.isAuthenticated()) {
+      if(this.review.iLike) {
+        this.review.reactionCount -= 1;
+        this.review.iLike = false;
+      } else {
+        // API Action
+        this.review.reactionCount += 1;
+        this.review.iLike = true;
+      }
+      this.apiService.toggleLike(this.review.id);
     } else {
-      // API Action
-      this.review.reactionCount += 1;
-      this.review.iLike = true;
+      this.authService.launchLoginAlert(this.router.url);
     }
-    this.apiService.toggleLike(this.review.id);
   }
   targetMarket(): Market {
     return <Market>this.review.target;

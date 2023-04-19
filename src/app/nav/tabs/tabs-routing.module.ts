@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@app/guards/auth-guard.service';
+import { AlertAuthGuard } from '@app/guards/auth-guard.service';
 import { TabsPage } from './tabs.page';
+import { LoginAuthGuard } from '@app/guards/login-guard.service';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
       {
         path: 'me',
         loadChildren: () => import('./../../pages/me/me.module').then(m => m.MePageModule),
-        canActivate: [AuthGuard]
+        canActivate: [LoginAuthGuard]
       },
       {
         path: '',
@@ -40,7 +41,7 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/nearby',
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AlertAuthGuard]
   }
 ];
 

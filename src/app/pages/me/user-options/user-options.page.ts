@@ -97,7 +97,7 @@ export class UserOptionsPage implements OnInit {
 
   logout() {
     this.auth.clearAccessToken();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/tabs/feed');
   }
 
   async presentDeleteAlert() {

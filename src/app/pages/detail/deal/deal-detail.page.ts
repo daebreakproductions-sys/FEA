@@ -4,6 +4,7 @@ import { Deal } from '@app/models/deal';
 import { DealService } from '@app/services/deal.service';
 import { UserService } from '@app/services/user.service';
 import { ApiService } from '@app/services/api.service';
+import { AuthService } from '@app/services/auth.service';
 
 @Component({
   selector: 'app-deal',
@@ -19,6 +20,7 @@ export class DealDetailPage implements OnInit {
     public userService: UserService,
     public router: Router,
     public apiService: ApiService,
+    private authService: AuthService,
   ) {
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
@@ -33,15 +35,19 @@ export class DealDetailPage implements OnInit {
   }
 
   likeAction() {
-    if(this.deal.iLike) {
-      this.deal.reactionCount -= 1;
-      this.deal.iLike = false;
+    if(this.authService.isAuthenticated()) {
+      if(this.deal.iLike) {
+        this.deal.reactionCount -= 1;
+        this.deal.iLike = false;
+      } else {
+        // API Action
+        this.deal.reactionCount += 1;
+        this.deal.iLike = true;
+      }
+      this.apiService.toggleLike(this.deal.id);
     } else {
-      // API Action
-      this.deal.reactionCount += 1;
-      this.deal.iLike = true;
+      this.authService.launchLoginAlert(this.router.url);
     }
-    this.apiService.toggleLike(this.deal.id);
   }
   marketDetail() {
     this.router.navigate(['detail', 'market', this.deal.market.id]);

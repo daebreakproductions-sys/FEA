@@ -14,10 +14,11 @@ import { ApiModule } from './lib/usda/api.module'
 import { Configuration } from './lib/usda/configuration';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { AuthGuard } from './guards/auth-guard.service';
+import { AlertAuthGuard } from './guards/auth-guard.service';
 import { MarketService } from './services/market.service';
 import { DealService } from './services/deal.service';
 import { EatsLocationsService } from './services/eats-locations.service';
+import { LoginAuthGuard } from './guards/login-guard.service';
 
 export function apiKeyGetter():Configuration {
   return new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC" } });
@@ -38,7 +39,8 @@ export function apiKeyGetter():Configuration {
     providers: [
         ApiService,
         AuthService,
-        AuthGuard,
+        AlertAuthGuard,
+        LoginAuthGuard,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         MarketService,
         EatsLocationsService,

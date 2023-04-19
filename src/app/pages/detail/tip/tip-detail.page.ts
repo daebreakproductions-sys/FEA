@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Tag } from '@app/models/tag';
 import { Tip } from '@app/models/tip';
-import { Comment } from '@app/models/comment';
-import { CommentService } from '@app/services/comment.service';
-import { TagService } from '@app/services/tag.service';
 import { UserService } from '@app/services/user.service';
 import { ApiService } from '@app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipService } from '@app/services/tip.service';
-import { FeedService } from '@app/services/feed.service';
+import { AuthService } from '@app/services/auth.service';
 
 @Component({
   selector: 'app-tip-detail',
@@ -24,6 +20,7 @@ export class TipDetailPage implements OnInit {
     public tipService: TipService,
     public router: Router,
     public apiService: ApiService,
+    private authService: AuthService,
   ) {    
     route.params.subscribe(val => {
       let id = this.route.snapshot.params.id;
@@ -38,15 +35,19 @@ export class TipDetailPage implements OnInit {
   }
 
   likeAction() {
-    if(this.tip.iLike) {
-      this.tip.reactionCount -= 1;
-      this.tip.iLike = false;
+    if(this.authService.isAuthenticated()) {
+      if(this.tip.iLike) {
+        this.tip.reactionCount -= 1;
+        this.tip.iLike = false;
+      } else {
+        // API Action
+        this.tip.reactionCount += 1;
+        this.tip.iLike = true;
+      }
+      this.apiService.toggleLike(this.tip.id);
     } else {
-      // API Action
-      this.tip.reactionCount += 1;
-      this.tip.iLike = true;
+      this.authService.launchLoginAlert(this.router.url);
     }
-    this.apiService.toggleLike(this.tip.id);
   }
   editTip() {
     this.router.navigate(['edit', 'tip', this.tip.id]);

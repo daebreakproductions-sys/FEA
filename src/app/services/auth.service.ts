@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,10 @@ export class AuthService {
   private redirectUrl: string = '/tabs/nearby';
   private cache_key = '_v1';
   
-  constructor ( ) {
+  constructor (
+    private router: Router,
+    private alertController: AlertController,
+  ) {
     this.getAccessTokenPromise();
   }
 
@@ -47,6 +52,31 @@ export class AuthService {
       this.authenticated = true;
     }
     return this.authenticated;
+  }
+
+  public launchLoginAlert(redirectUrl: string) {
+    this.setRedirectUrl(redirectUrl);
+    this.alertController.create({
+      header: 'Please Log in',
+      message: 'Log into your FEA account to access this and other features.',
+      backdropDismiss: true,
+      buttons: [
+        {
+          text: 'Go Back',
+          role: 'cancel',
+        },
+        {
+          text: 'Sign In',
+          role: 'confirm',
+          handler: () => {
+            this.router.navigate(['/login']);
+          },
+        },
+      ],
+      animated: true
+    }).then((alert) => {
+      alert.present();
+    });
   }
 
 }

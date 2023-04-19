@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AlertAuthGuard } from './guards/auth-guard.service';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./nav/primary/primary.module').then(m => m.PrimaryPageModule) },
@@ -18,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'add',
-    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule)
+    loadChildren: () => import('./pages/add/add.module').then( m => m.AddPageModule),
+    canActivate: [AlertAuthGuard]
   },
   {
     path: 'market-modal',
@@ -34,7 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'edit',
-    loadChildren: () => import('./pages/edit/edit-routing.module').then( m => m.EditRoutingModule)
+    loadChildren: () => import('./pages/edit/edit-routing.module').then( m => m.EditRoutingModule),
+    canActivate: [AlertAuthGuard]
   },
   {
     path: 'tag-modal',
