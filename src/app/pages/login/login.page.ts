@@ -4,11 +4,10 @@ import { ToastController } from '@ionic/angular';
 import { ApiService } from '@app/services/api.service';
 import { AuthService } from '@app/services/auth.service';
 import { Router } from '@angular/router';
-import { UserService } from '@app/services/user.service';
-import { TagService } from '@app/services/tag.service';
 import { environment } from '@app/../environments/environment';
 import { AppLauncher } from '@capacitor/app-launcher';
-import { EatsLocationsService } from '@app/services/eats-locations.service';
+import { InitService } from '@app/services/init-service.service';
+import { UserService } from '@app/services/user.service';
 
 
 @Component({
@@ -27,22 +26,19 @@ export class LoginPage implements OnInit {
     public toastController: ToastController,
     public auth: AuthService,
     public router: Router,
-    public userService: UserService,
-    public tagService: TagService,
-    public locationsService: EatsLocationsService,
-    ) { }
+    private initService: InitService,
+    private userService: UserService,
+  ) { }
 
   login(){
     this.api.login(this.username, this.password).then(async success => {
       if(success) {
         this.loginFailed = false;
         
-        // Also init these services in app.component.ts and signup.page.ts
+        this.initService.initializeServicesOnce();
         this.userService.init();
-        this.tagService.init();
-        this.locationsService.init();
 
-        this.router.navigateByUrl(this.auth.getRedirectUrl());
+        this.router.navigateByUrl(this.auth.getRedirectUrl(), { replaceUrl: true });
       } else {
         this.loginFailed = true;
         const toast = await this.toastController.create({

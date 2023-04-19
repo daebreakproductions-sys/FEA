@@ -4,9 +4,8 @@ import { Router } from '@angular/router';
 import { NewUser } from '@app/models/new-user';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
-import { EatsLocationsService } from '@app/services/eats-locations.service';
 import { HelperService } from '@app/services/helper-service.service';
-import { TagService } from '@app/services/tag.service';
+import { InitService } from '@app/services/init-service.service';
 import { UserService } from '@app/services/user.service';
 import { PasswordValidator } from '@app/validators/password.validator';
 import { ToastController } from '@ionic/angular';
@@ -25,9 +24,8 @@ export class SignupPage implements OnInit {
     public api: ApiService,
     public toastController: ToastController,
     public router: Router,
-    public eatsLocationsService: EatsLocationsService,
     public userService: UserService,
-    public tagService: TagService,
+    private initService: InitService,
   ) {
     this.signup_form = new UntypedFormGroup({
       username: new UntypedFormControl('', Validators.compose([
@@ -96,10 +94,7 @@ export class SignupPage implements OnInit {
       if(HelperService.isNumber(result)) {
         this.api.login(username, password).then(async success => {
           if(success) {
-            // Also init these services in app.component.ts and login.page.ts
-            this.userService.init();
-            this.tagService.init();
-            this.eatsLocationsService.init();
+            this.initService.initializeServicesOnce();
             this.router.navigate(['/tabs/nearby']);
           }
         });
@@ -112,6 +107,5 @@ export class SignupPage implements OnInit {
         toast.present();
       }
     })
-    console.log(this.signup_form);
   }
 }

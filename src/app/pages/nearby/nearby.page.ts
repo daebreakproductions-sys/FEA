@@ -12,6 +12,7 @@ import { HelperService } from '@app/services/helper-service.service';
 import { MapPopupComponent } from '@app/components/map-popup/map-popup.component';
 import 'leaflet.awesome-markers';
 import 'leaflet.markercluster';
+import { InitService } from '@app/services/init-service.service';
 
 @Component({
   selector: 'app-nearby',
@@ -42,6 +43,7 @@ export class NearbyPage implements OnInit {
     public platform: Platform,
     private route: ActivatedRoute,
     public viewContainerRef: ViewContainerRef,
+    private initService: InitService,
   ) { 
     this.iconBlue = L.AwesomeMarkers.icon({
       icon: 'user',
@@ -59,7 +61,8 @@ export class NearbyPage implements OnInit {
       prefix: 'fa',
       markerColor: 'purple'
     });
-     route.params.subscribe(val => {
+    this.initService.initializeServicesOnce();
+    route.params.subscribe(val => {
       if(this.mapInitialized) {
         // Only do this if the map has already loaded
         Geolocation.getCurrentPosition().then(locationData => {

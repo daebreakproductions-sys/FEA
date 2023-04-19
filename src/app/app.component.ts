@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { TagService } from './services/tag.service';
-import { UserService } from './services/user.service';
-import { EatsLocationsService } from './services/eats-locations.service';
+import { InitService } from './services/init-service.service';
 
 @Component({
   selector: 'app-root',
@@ -14,18 +12,13 @@ import { EatsLocationsService } from './services/eats-locations.service';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private locationsService: EatsLocationsService,
-    private tagService: TagService,
-    private userService: UserService,
+    private initService: InitService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
-    // Also init these services in login.page.ts and signup.page.ts
-    this.locationsService.init();
-    this.tagService.init();
-    this.userService.init();
+    this.initService.initializeServicesOnce();
     
     this.platform.ready().then(() => {
       //StatusBar.styleDefault();
