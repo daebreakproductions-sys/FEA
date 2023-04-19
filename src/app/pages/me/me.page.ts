@@ -18,7 +18,6 @@ export class MePage implements OnInit {
   async ngOnInit() {
     this.tabPath = '/tabs/me/';
     this.user = await this.api.getCurrentUser();
-    console.log(this.user);
   }
 
   clickTab(event: Event, tab: string) {

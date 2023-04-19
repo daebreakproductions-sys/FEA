@@ -26,14 +26,12 @@ export class MarketService {
 
   init() {
     this.markets = [];
-    if(this.auth.isAuthenticated()) {
-      this.api.getAllMarkets().then(markets => {
-        this.markets = markets;
-        this.notifier.next(markets);
-        this.doneLoading = true;
-        this.notifier.complete();
-      });
-    }
+    this.api.getAllMarkets().then(markets => {
+      this.markets = markets;
+      this.notifier.next(markets);
+      this.doneLoading = true;
+      this.notifier.complete();
+    });
   }
 
   private params: APIListOptions = {

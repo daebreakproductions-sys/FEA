@@ -22,14 +22,12 @@ export class FoodPantrySiteService {
 
   init() {
     this.foodpantrysites = [];
-    if(this.auth.isAuthenticated()) {
-      this.api.getAllFoodPantrySites().then(foodpantrysites => {
-        this.foodpantrysites = foodpantrysites;
-        this.notifier.next(foodpantrysites);
-        this.doneLoading = true;
-        this.notifier.complete();
-      });
-    }
+    this.api.getAllFoodPantrySites().then(foodpantrysites => {
+      this.foodpantrysites = foodpantrysites;
+      this.notifier.next(foodpantrysites);
+      this.doneLoading = true;
+      this.notifier.complete();
+    });
   }
 
   byId(id: number) {
