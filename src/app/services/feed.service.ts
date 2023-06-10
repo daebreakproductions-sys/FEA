@@ -55,6 +55,7 @@ export class FeedService {
     if(this.q != null) {
       params.q = this.q;
     }
+    // Add our own Observable here so we can "cancel" an existing query to ignore the results
     return new Promise<void>((resolve) => {
       this.api.queryFeed(params).then(ugcs => {
         this.endOfFeed = (ugcs.length != this.length);

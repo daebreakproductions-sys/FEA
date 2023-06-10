@@ -381,7 +381,7 @@ export class ApiService {
     return this.apiTokenGet('users/me/mine') as Promise<UGC[]>;
   }
   public getUserContent(id: number, page: number, length: number) {
-    return this.apiTokenGet('ugc/feed/' + id + '/false', { page: page, length: length }) as Promise<UGC[]>;
+    return this.apiPublicGet('ugc/feed/' + id + '/false', { page: page, length: length }) as Promise<UGC[]>;
   }
   public getUserLikes(id: number, page: number, length: number) {
     return this.apiTokenGet('ugc/feed/' + id + '/true', { page: page, length: length }) as Promise<UGC[]>;

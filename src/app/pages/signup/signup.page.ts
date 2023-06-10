@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NewUser } from '@app/models/new-user';
 import { User } from '@app/models/user';
 import { ApiService } from '@app/services/api.service';
+import { AuthService } from '@app/services/auth.service';
 import { HelperService } from '@app/services/helper-service.service';
 import { InitService } from '@app/services/init-service.service';
 import { UserService } from '@app/services/user.service';
@@ -26,6 +27,7 @@ export class SignupPage implements OnInit {
     public router: Router,
     public userService: UserService,
     private initService: InitService,
+    private authService: AuthService,
   ) {
     this.signup_form = new UntypedFormGroup({
       username: new UntypedFormControl('', Validators.compose([
@@ -95,7 +97,7 @@ export class SignupPage implements OnInit {
         this.api.login(username, password).then(async success => {
           if(success) {
             this.initService.initializeServicesOnce();
-            this.router.navigate(['/tabs/nearby']);
+            this.router.navigateByUrl(this.authService.getRedirectUrl() ?? '/tabs/nearby');
           }
         });
       } else {
