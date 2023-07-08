@@ -408,6 +408,17 @@ export class ApiService {
   public getServerVersion() {
     return this.apiPublicGet('auth/versions') as Promise<ProgramVersions>;
   }
+  public getPrivacyPolicy() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.url+'resources/privacy-policy.html',{
+        responseType: 'text'
+      }).subscribe((data: string) => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      });
+    });
+  }
 
   // auth
   public login(username: string, password: string){

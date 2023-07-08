@@ -127,4 +127,8 @@ export class UserOptionsPage implements OnInit {
       this.logout();
     }
   }
+
+  navigateToPrivacyPolicy() {
+    this.router.navigate(['privacy-policy'])
+  }
 }
