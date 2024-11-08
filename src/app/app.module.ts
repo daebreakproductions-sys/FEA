@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApiModule } from './lib/usda/api.module'
 import { Configuration } from './lib/usda/configuration';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -23,20 +23,15 @@ import { LoginAuthGuard } from './guards/login-guard.service';
 export function apiKeyGetter():Configuration {
   return new Configuration({ apiKeys: {api_key: "T0CUqfUYUm7HhgRPz7Uuga8IbscMIQ8xaeVblGSC" } });
 }
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
     ],
-    imports: [
-        BrowserModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         ApiModule.forRoot(apiKeyGetter),
         BrowserAnimationsModule,
-        HttpClientModule,
-        ServiceWorkerModule.register('/assets/js/ngsw-worker.js', { enabled: environment.production })
-    ],
-    providers: [
+        ServiceWorkerModule.register('/assets/js/ngsw-worker.js', { enabled: environment.production })], providers: [
         ApiService,
         AuthService,
         AlertAuthGuard,
@@ -46,7 +41,6 @@ export function apiKeyGetter():Configuration {
         EatsLocationsService,
         ApiService,
         DealService,
-    ],
-    bootstrap: [AppComponent]
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
