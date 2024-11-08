@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
 
     namespace 'com.myepicidea.flinteats'
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.myepicidea.flinteats"
         minSdkVersion rootProject.ext.minSdkVersion

@@ -9,5 +9,15 @@
 	},
 	"server": {
 		"iosScheme": "ionic"
-	}
+	},
+	"packageClassList": [
+		"AppPlugin",
+		"AppLauncherPlugin",
+		"CAPCameraPlugin",
+		"GeolocationPlugin",
+		"HapticsPlugin",
+		"KeyboardPlugin",
+		"SplashScreenPlugin",
+		"StatusBarPlugin"
+	]
 }
