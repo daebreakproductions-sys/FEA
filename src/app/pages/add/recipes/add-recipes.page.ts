@@ -5,8 +5,10 @@ import { Recipe } from '@app/models/recipe';
 import { Tag } from '@app/models/tag';
 import { RecipeService } from '@app/services/recipe.service';
 import { TagService } from '@app/services/tag.service';
-import { ActionSheetController, IonSlides, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { debounceTime } from 'rxjs/operators';
+import { IonicSlides } from '@ionic/angular';
+import { SwiperContainer } from 'swiper/element';
 
 @Component({
   selector: 'app-recipes',
@@ -14,7 +16,8 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./add-recipes.page.scss'],
 })
 export class AddRecipesPage implements OnInit {
-  @ViewChild(IonSlides) slider: IonSlides;
+  @ViewChild('slider') slider: SwiperContainer;
+  swiperModules = [IonicSlides];
   public recipeForm: UntypedFormGroup;
   public validation_messages;
 
@@ -78,7 +81,7 @@ export class AddRecipesPage implements OnInit {
         .pipe(debounceTime(400))
         .subscribe(() => {
           setTimeout(() => {
-            this.slider.updateAutoHeight(225);
+            this.slider.swiper.updateAutoHeight(225);
             this.updateSlideUI();
           }, 25);
         });
@@ -175,61 +178,60 @@ export class AddRecipesPage implements OnInit {
 
   updateHeight() {
     setTimeout(() => {
-      this.slider.updateAutoHeight(225);
+      this.slider.swiper.updateAutoHeight(225);
       this.updateSlideUI();
     }, 25);
   }
   updateSlideUI() {
-    this.slider.getActiveIndex().then(slideNumber => {
-      // Determine lock/unlock for slides
-      // Title, Picture, Details, Location, Tags, Description
-      let locked = false;
-      switch(slideNumber) { 
-        case 0:
-          // Title
-          locked = !this.checkStep1();
-          this.nextButton.text = 'Description';
-          break;
-        case 1:
-          // Description
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep2();
-          this.prevButton.text = 'Title';
-          this.nextButton.text = 'Servings';
-          break;
-        case 2:
-          // Servings
-          locked = !this.checkStep3();
-          this.prevButton.text = 'Description';
-          this.nextButton.text = 'Picture';
-          break;
-        case 3:
-          // Picture
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep4();
-          this.prevButton.text = 'Servings';
-          this.nextButton.text = 'Tags';
-          break;
-        case 4:
-          // Tags
-          this.loadTags();
-          setTimeout(() => {
-            this.slider.updateAutoHeight(225);
-          }, 25);
-          locked = !this.checkStep5();
-          this.prevButton.text = 'Picture';
-          break;
-      }
-      this.slider.lockSwipeToNext(locked);
-      this.nextButton.disabled = locked;
-      this.prevButtonVisible(slideNumber);
-      this.nextButtonVisible(slideNumber);
-      this.saveButtonVisible(slideNumber);
-    });
+    let slideNumber = this.slider.swiper.activeIndex;
+    // Determine lock/unlock for slides
+    // Title, Picture, Details, Location, Tags, Description
+    let locked = false;
+    switch(slideNumber) { 
+      case 0:
+        // Title
+        locked = !this.checkStep1();
+        this.nextButton.text = 'Description';
+        break;
+      case 1:
+        // Description
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(175);
+        }, 75);
+        locked = !this.checkStep2();
+        this.prevButton.text = 'Title';
+        this.nextButton.text = 'Servings';
+        break;
+      case 2:
+        // Servings
+        locked = !this.checkStep3();
+        this.prevButton.text = 'Description';
+        this.nextButton.text = 'Picture';
+        break;
+      case 3:
+        // Picture
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(175);
+        }, 75);
+        locked = !this.checkStep4();
+        this.prevButton.text = 'Servings';
+        this.nextButton.text = 'Tags';
+        break;
+      case 4:
+        // Tags
+        this.loadTags();
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(225);
+        }, 25);
+        locked = !this.checkStep5();
+        this.prevButton.text = 'Picture';
+        break;
+    }
+    this.slider.swiper.allowSlideNext = !locked;
+    this.nextButton.disabled = locked;
+    this.prevButtonVisible(slideNumber);
+    this.nextButtonVisible(slideNumber);
+    this.saveButtonVisible(slideNumber);
   }
 
   saveRecipe = (): void => {
@@ -286,12 +288,12 @@ export class AddRecipesPage implements OnInit {
 
   nextClick() {
     if(!this.nextButton.disabled) {
-      this.slider.slideNext();
+      this.slider.swiper.slideNext();
     }
   }
   prevClick() {
     if(!this.prevButton.disabled) {
-      this.slider.slidePrev();
+      this.slider.swiper.slidePrev();
     }
   }
 

@@ -14,13 +14,14 @@
     </ion-row>
   </ion-grid>
   <form [formGroup]="dealForm">
-    <ion-slides 
+    <swiper-container
+      [modules]="swiperModules"
       #slider 
-      pager="true" 
+      [pagination]="true" 
       [options]="slideOpts"
-      (ionSlideDidChange)="updateSlideUI()">
+      (swiperslidechange)="updateSlideUI()">
       <!-- Title -->
-      <ion-slide> 
+      <swiper-slide> 
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -43,9 +44,9 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-slide>
+      </swiper-slide>
       <!-- Picture -->
-      <ion-slide>
+      <swiper-slide>
         <ion-grid class="ion-padding">
           <ion-row>
             <ion-col>
@@ -67,9 +68,9 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-slide>
+      </swiper-slide>
       <!-- Details -->
-      <ion-slide>
+      <swiper-slide>
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -134,9 +135,9 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-slide>
+      </swiper-slide>
       <!-- Location -->
-      <ion-slide>
+      <swiper-slide>
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -160,9 +161,9 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-slide>
+      </swiper-slide>
       <!-- Description -->
-      <ion-slide>
+      <swiper-slide>
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -185,9 +186,9 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-      </ion-slide>
+      </swiper-slide>
       <!-- Tags -->
-      <ion-slide>
+      <swiper-slide>
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -196,8 +197,8 @@
           </ion-row>
           <eats-tag-add [tagStrings]="tagStrings" (tagsUpdatedEvent)="updateTags($event)"></eats-tag-add>
         </ion-grid>
-      </ion-slide>
-    </ion-slides>
+      </swiper-slide>
+    </swiper-container>
   </form>
   <ion-grid>
     <ion-row>

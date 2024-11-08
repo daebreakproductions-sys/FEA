@@ -7,9 +7,11 @@ import { Tag } from '@app/models/tag';
 import { MarketModalPage } from '@app/pages/modals/market-modal/market-modal.page';
 import { ReviewService } from '@app/services/review.service';
 import { TagService } from '@app/services/tag.service';
-import { ActionSheetController, IonSlides, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { getAllEnumEntries } from 'enum-for';
 import { debounceTime } from 'rxjs/operators';
+import { IonicSlides } from '@ionic/angular';
+import { SwiperContainer } from 'swiper/element';
 
 @Component({
   selector: 'app-reviews',
@@ -17,7 +19,8 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./add-reviews.page.scss'],
 })
 export class AddReviewsPage implements OnInit {
-  @ViewChild(IonSlides) slider: IonSlides;
+  @ViewChild('slider') slider: SwiperContainer;
+  swiperModules = [IonicSlides];
   public reviewForm: UntypedFormGroup;
   public validation_messages;
 
@@ -83,7 +86,7 @@ export class AddReviewsPage implements OnInit {
         .pipe(debounceTime(400))
         .subscribe(() => {
           setTimeout(() => {
-            this.slider.updateAutoHeight(225);
+            this.slider.swiper.updateAutoHeight(225);
             this.updateSlideUI();
           }, 25);
         });
@@ -138,53 +141,52 @@ export class AddReviewsPage implements OnInit {
 
   updateHeight() {
     setTimeout(() => {
-      this.slider.updateAutoHeight(225);
+      this.slider.swiper.updateAutoHeight(225);
       this.updateSlideUI();
     }, 25);
   }
   updateSlideUI() {
-    this.slider.getActiveIndex().then(slideNumber => {
-      // Determine lock/unlock for slides
-      // Target, Description, SELECTION/CLEANLINESS/FRIENDLINESS, ACCESSIBILITY/SAFETY, Tags
+    let slideNumber = this.slider.swiper.activeIndex;
+    // Determine lock/unlock for slides
+    // Target, Description, SELECTION/CLEANLINESS/FRIENDLINESS, ACCESSIBILITY/SAFETY, Tags
 
-      let locked = false;
-      switch(slideNumber) { 
-        case 0:
-          // Target
-          locked = !this.checkStep1();
-          this.nextButton.text = 'Description';
-          break;
-        case 1:
-          // Description
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep2();
-          this.prevButton.text = 'Reviewee';
-          this.nextButton.text = 'Details';
-          break;
-        case 2:
-          // Details
-          locked = !this.checkStep3();
-          this.prevButton.text = 'Description';
-          this.nextButton.text = 'Tags';
-          break;
-        case 3:
-          // Tags
-          this.loadTags();
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep4();
-          this.prevButton.text = 'Details';
-          break;
-      }
-      this.slider.lockSwipeToNext(locked);
-      this.nextButton.disabled = locked;
-      this.prevButtonVisible(slideNumber);
-      this.nextButtonVisible(slideNumber);
-      this.saveButtonVisible(slideNumber);
-    });
+    let locked = false;
+    switch(slideNumber) { 
+      case 0:
+        // Target
+        locked = !this.checkStep1();
+        this.nextButton.text = 'Description';
+        break;
+      case 1:
+        // Description
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(175);
+        }, 75);
+        locked = !this.checkStep2();
+        this.prevButton.text = 'Reviewee';
+        this.nextButton.text = 'Details';
+        break;
+      case 2:
+        // Details
+        locked = !this.checkStep3();
+        this.prevButton.text = 'Description';
+        this.nextButton.text = 'Tags';
+        break;
+      case 3:
+        // Tags
+        this.loadTags();
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(175);
+        }, 75);
+        locked = !this.checkStep4();
+        this.prevButton.text = 'Details';
+        break;
+    }
+    this.slider.swiper.allowSlideNext = !locked;
+    this.nextButton.disabled = locked;
+    this.prevButtonVisible(slideNumber);
+    this.nextButtonVisible(slideNumber);
+    this.saveButtonVisible(slideNumber);
   }
 
   saveReview = (): void => {
@@ -243,12 +245,12 @@ export class AddReviewsPage implements OnInit {
 
   nextClick() {
     if(!this.nextButton.disabled) {
-      this.slider.slideNext();
+      this.slider.swiper.slideNext();
     }
   }
   prevClick() {
     if(!this.prevButton.disabled) {
-      this.slider.slidePrev();
+      this.slider.swiper.slidePrev();
     }
   }
 

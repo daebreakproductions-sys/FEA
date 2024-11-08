@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -22,6 +22,7 @@ import { OnceButtonModule } from '@app/components/once-button/once-button.module
     OnceButtonModule,
     AddReviewsPageRoutingModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
   declarations: [AddReviewsPage]
 })
 export class AddReviewsPageModule {}

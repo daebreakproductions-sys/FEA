@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FDCService, FoodNutrient, FoundationFoodItem } from '@app/lib/usda';
 import { LoadingController } from '@ionic/angular';
-import { OverlayBaseController } from '@ionic/angular/util/overlay';
 import { Observable } from 'rxjs';
 import * as FDCNutrition from "assets/fdcNutrition.json";
 

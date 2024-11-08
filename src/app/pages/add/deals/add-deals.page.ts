@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Deal } from '@app/models/deal';
 import { StartEndDatesValidator } from '@app/validators/start-end-dates';
-import { IonSlides, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { MarketModalPage } from '../../modals/market-modal/market-modal.page'
 import { debounceTime } from 'rxjs/operators';
 import { Tag } from '@app/models/tag';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 import { EatsDate } from '@app/models/eats-date';
+import { IonicSlides } from '@ionic/angular';
+import { SwiperContainer } from 'swiper/element';
 
 @Component({
   selector: 'app-deals',
@@ -19,7 +21,8 @@ import { EatsDate } from '@app/models/eats-date';
   styleUrls: ['./add-deals.page.scss'],
 })
 export class AddDealsPage implements OnInit {
-  @ViewChild(IonSlides) slider: IonSlides;
+  @ViewChild('slider') slider: SwiperContainer;
+  swiperModules = [IonicSlides];
   public dealForm: UntypedFormGroup;
   public validation_messages;
   public clearPickerOptions: any;
@@ -147,7 +150,7 @@ export class AddDealsPage implements OnInit {
         .pipe(debounceTime(400))
         .subscribe(() => {
           setTimeout(() => {
-            this.slider.updateAutoHeight(225);
+            this.slider.swiper.updateAutoHeight(225);
             this.updateSlideUI();
           }, 25);
         });
@@ -157,64 +160,63 @@ export class AddDealsPage implements OnInit {
 
   updateHeight() {
     setTimeout(() => {
-      this.slider.updateAutoHeight(225);
+      this.slider.swiper.updateAutoHeight(225);
       this.updateSlideUI();
     }, 25);
   }
   updateSlideUI() {
-    this.slider.getActiveIndex().then(slideNumber => {
-      // Determine lock/unlock for slides
-      // Title, Picture, Details, Location, Tags, Description
-      let locked = false;
-      switch(slideNumber) { 
-        case 0:
-          // Title
-          locked = !this.checkStep1();
-          this.nextButton.text = 'Picture';
-          break;
-        case 1:
-          // Picture
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep2();
-          this.prevButton.text = 'Title';
-          this.nextButton.text = 'Details';
-          break;
-        case 2:
-          // Details
-          locked = !this.checkStep3();
-          this.prevButton.text = 'Picture';
-          this.nextButton.text = 'Location';
-          break;
-        case 3:
-          // Location
-          locked = !this.checkStep4();
-          this.prevButton.text = 'Details';
-          this.nextButton.text = 'Description';
-          break;
-        case 4:
-          // Description
-          locked = !this.checkStep5();
-          this.prevButton.text = 'Location';
-          this.nextButton.text = 'Tags';
-          break;
-        case 5:
-          // Tags
-          this.loadTags();
-          setTimeout(() => {
-            this.slider.updateAutoHeight(225);
-          }, 25);
-          locked = !this.checkStep5();
-          this.prevButton.text = 'Description';
-          break;
-      }
-      this.slider.lockSwipeToNext(locked);
-      this.nextButton.disabled = locked;
-      this.prevButtonVisible(slideNumber);
-      this.nextButtonVisible(slideNumber);
-      this.saveButtonVisible(slideNumber);
-    });
+    // Determine lock/unlock for slides
+    // Title, Picture, Details, Location, Tags, Description
+    let slideNumber = this.slider.swiper.activeIndex;
+    let locked = false;
+    switch(slideNumber) { 
+      case 0:
+        // Title
+        locked = !this.checkStep1();
+        this.nextButton.text = 'Picture';
+        break;
+      case 1:
+        // Picture
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(175);
+        }, 75);
+        locked = !this.checkStep2();
+        this.prevButton.text = 'Title';
+        this.nextButton.text = 'Details';
+        break;
+      case 2:
+        // Details
+        locked = !this.checkStep3();
+        this.prevButton.text = 'Picture';
+        this.nextButton.text = 'Location';
+        break;
+      case 3:
+        // Location
+        locked = !this.checkStep4();
+        this.prevButton.text = 'Details';
+        this.nextButton.text = 'Description';
+        break;
+      case 4:
+        // Description
+        locked = !this.checkStep5();
+        this.prevButton.text = 'Location';
+        this.nextButton.text = 'Tags';
+        break;
+      case 5:
+        // Tags
+        this.loadTags();
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(225);
+        }, 25);
+        locked = !this.checkStep5();
+        this.prevButton.text = 'Description';
+        break;
+    }
+    this.slider.swiper.allowSlideNext = !locked;
+    this.nextButton.disabled = locked;
+    this.prevButtonVisible(slideNumber);
+    this.nextButtonVisible(slideNumber);
+    this.saveButtonVisible(slideNumber);
   }
 
   async presentMarketModal() {
@@ -305,12 +307,12 @@ export class AddDealsPage implements OnInit {
 
   nextClick() {
     if(!this.nextButton.disabled) {
-      this.slider.slideNext();
+      this.slider.swiper.slideNext();
     }
   }
   prevClick() {
     if(!this.prevButton.disabled) {
-      this.slider.slidePrev();
+      this.slider.swiper.slidePrev();
     }
   }
 

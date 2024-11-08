@@ -5,11 +5,13 @@ import { Tag } from '@app/models/tag';
 import { TipType } from '@app/models/tip-type.enum'
 import { TagService } from '@app/services/tag.service';
 import { TipService } from '@app/services/tip.service';
-import { ActionSheetController, IonSlides } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
 import { getAllEnumEntries} from 'enum-for'
 import { debounceTime } from 'rxjs/operators';
 import { Tip } from '@app/models/tip';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
+import { SwiperContainer } from 'swiper/element';
+import { IonicSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-tips',
@@ -17,7 +19,8 @@ import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor
   styleUrls: ['./add-tips.page.scss'],
 })
 export class AddTipsPage implements OnInit {
-  @ViewChild(IonSlides) slider: IonSlides;
+  @ViewChild('slider') slider: SwiperContainer;
+  swiperModules = [IonicSlides];
   public tipForm: UntypedFormGroup;
   public validation_messages;
   public types: {val: number, show: string}[] = [];
@@ -100,7 +103,7 @@ export class AddTipsPage implements OnInit {
         .pipe(debounceTime(400))
         .subscribe(() => {
           setTimeout(() => {
-            this.slider.updateAutoHeight(225);
+            this.slider.swiper.updateAutoHeight(225);
             this.updateSlideUI();
           }, 25);
         });
@@ -150,51 +153,50 @@ export class AddTipsPage implements OnInit {
 
   updateHeight() {
     setTimeout(() => {
-      this.slider.updateAutoHeight(225);
+      this.slider.swiper.updateAutoHeight(225);
       this.updateSlideUI();
     }, 25);
   }
   updateSlideUI() {
-    this.slider.getActiveIndex().then(slideNumber => {
-      // Determine lock/unlock for slides
-      let locked = false;
-      switch(slideNumber) {
-        case 0:
-          // Type
-          locked = !this.checkStep1();
-          this.nextButton.text = 'Description';
-          break;
-        case 1:
-          // Description
-          locked = !this.checkStep2();
-          this.prevButton.text = 'Type';
-          this.nextButton.text = 'Picture';
-          break;
-        case 2:
-          // Picture
-          setTimeout(() => {
-            this.slider.updateAutoHeight(175);
-          }, 75);
-          locked = !this.checkStep3();
-          this.prevButton.text = 'Description';
-          this.nextButton.text = 'Tags';
-          break;
-        case 3:
-          // Tags
-          this.loadTags();
-          setTimeout(() => {
-            this.slider.updateAutoHeight(225);
-          }, 25);
-          locked = !this.checkStep4();
-          this.prevButton.text = 'Picture';
-          break;
-      }
-      this.slider.lockSwipeToNext(locked);
-      this.nextButton.disabled = locked;
-      this.prevButtonVisible(slideNumber);
-      this.nextButtonVisible(slideNumber);
-      this.saveButtonVisible(slideNumber);
-    });
+    let slideNumber = this.slider.swiper.activeIndex;
+    // Determine lock/unlock for slides
+    let locked = false;
+    switch(slideNumber) {
+      case 0:
+        // Type
+        locked = !this.checkStep1();
+        this.nextButton.text = 'Description';
+        break;
+      case 1:
+        // Description
+        locked = !this.checkStep2();
+        this.prevButton.text = 'Type';
+        this.nextButton.text = 'Picture';
+        break;
+      case 2:
+        // Picture
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(175);
+        }, 75);
+        locked = !this.checkStep3();
+        this.prevButton.text = 'Description';
+        this.nextButton.text = 'Tags';
+        break;
+      case 3:
+        // Tags
+        this.loadTags();
+        setTimeout(() => {
+          this.slider.swiper.updateAutoHeight(225);
+        }, 25);
+        locked = !this.checkStep4();
+        this.prevButton.text = 'Picture';
+        break;
+    }
+    this.slider.swiper.allowSlideNext = !locked;
+    this.nextButton.disabled = locked;
+    this.prevButtonVisible(slideNumber);
+    this.nextButtonVisible(slideNumber);
+    this.saveButtonVisible(slideNumber);
   }
   prevButtonVisible(slideNumber: number) {
     switch(slideNumber) {
@@ -226,12 +228,12 @@ export class AddTipsPage implements OnInit {
 
   nextClick() {
     if(!this.nextButton.disabled) {
-      this.slider.slideNext();
+      this.slider.swiper.slideNext();
     }
   }
   prevClick() {
     if(!this.prevButton.disabled) {
-      this.slider.slidePrev();
+      this.slider.swiper.slidePrev();
     }
   }
   // These all return true if they are valid
