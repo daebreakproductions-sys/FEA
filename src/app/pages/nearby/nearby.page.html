@@ -4,5 +4,25 @@
     <div class="map-frame">
       <div id="map" #mapDiv></div>
     </div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content" [routerLink]="['/detail', popupContent.class.includes('Market') ? 'market' : 'foodpantrysite', popupContent.id]">
+        <ion-row>
+          <ion-label color="primary">
+            <b>{{ popupContent.title }}</b>
+          </ion-label>
+        </ion-row>
+        @if(popupContent.rating) {
+          <ion-row>
+            <eats-five-star-display [value]="popupContent.rating"></eats-five-star-display>
+          </ion-row>
+        }
+        <ion-row>
+          <ion-label color="dark">
+            <u>Details</u>
+          </ion-label>
+        </ion-row>
+      </div>
+    </div>
   </div>
 </div>

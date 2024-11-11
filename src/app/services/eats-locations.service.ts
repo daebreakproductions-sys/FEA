@@ -37,7 +37,7 @@ export class EatsLocationsService {
   doneLoading(): boolean {
     return this.marketService.doneLoading && this.foodPantrySiteService.doneLoading;
   }
-  getNearby(location: Position, numberOfResults: number): { distance: number, eatsLocation: EatsLocation } [] {
+  getNearby(location: { coords: {latitude: number, longitude: number}}, numberOfResults: number): { distance: number, eatsLocation: EatsLocation } [] {
     let distances = this.eatsLocations
     .filter(l => {
       return l.lat && l.lng;
