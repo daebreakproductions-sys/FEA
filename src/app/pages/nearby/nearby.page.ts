@@ -333,7 +333,9 @@ export class NearbyPage {
         });
         let ids = new Set<number>();
         this.feedService.results.forEach(ugc => {
-          ids.add((<Deal>ugc).market.id);
+          if(ugc.deal) {
+            ids.add(ugc.deal.market.id);
+          }
         });
         let mkts = Array.from(ids).map(id => {
           return this.marketService.byIdFromCache(id);

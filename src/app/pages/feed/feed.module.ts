@@ -11,6 +11,7 @@ import { TagModalPageModule } from '../modals/tag-modal/tag-modal.module';
 import { MarketModalPageModule } from '../modals/market-modal/market-modal.module';
 import { EatsUgcComponentModule } from '@app/components/eats-ugc-card/eats-ugc-card.module';
 import { FilterModalPageModule } from '../modals/filter-modal/filter-modal.module';
+import { EatsPgUgcComponentModule } from "../../components/eats-pg-ugc-card/eats-pg-ugc-card.module";
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FilterModalPageModule } from '../modals/filter-modal/filter-modal.modul
     TagModalPageModule,
     FilterModalPageModule,
     MarketModalPageModule,
-  ],
+    EatsPgUgcComponentModule
+],
   declarations: [FeedPage]
 })
 export class FeedPageModule {}

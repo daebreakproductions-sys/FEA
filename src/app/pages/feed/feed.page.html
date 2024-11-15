@@ -42,7 +42,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container *ngFor="let ugc of feedService.results">
-    <app-eats-ugc-card [ugc]="ugc"></app-eats-ugc-card>
+    <app-pg-eats-ugc-card [ugc]="ugc"></app-pg-eats-ugc-card>
   </ng-container>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPage($event)">
     <ion-infinite-scroll-content

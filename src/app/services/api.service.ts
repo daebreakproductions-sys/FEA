@@ -25,6 +25,7 @@ import { ProgramVersions } from '@app/models/program-versions';
 })
 export class ApiService {
   public url = environment.api_url;
+  public pg_url = environment.pg_url;
   private accessToken = null;
   private currentUser: User;
 
@@ -39,6 +40,18 @@ export class ApiService {
   private apiPublicGet(apiMethod: string, params = null){
     return new Promise((resolve, reject) => {
       this.http.get(this.url+apiMethod,{
+        params: params
+      }).subscribe((data: any) => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      });
+    });
+  }
+
+  private pgPublicGet<T>(apiMethod: string, params = null){
+    return new Promise<T>((resolve, reject) => {
+      this.http.get(this.pg_url+apiMethod,{
         params: params
       }).subscribe((data: any) => {
         resolve(data);
@@ -391,6 +404,9 @@ export class ApiService {
   }
   public queryFeed(p: any) {
     return this.apiPublicGet('ugc/feed', p) as Promise<UGC[]>;
+  }
+  public queryFeedPg<T>(p: any) {
+    return this.pgPublicGet<T>('ugc', p)
   }
 
   // Comments

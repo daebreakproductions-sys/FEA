@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { FeedQuery } from '@app/models/feed-query';
+import { FeedQuery, FeedQueryPg } from '@app/models/feed-query';
 import { Market } from '@app/models/market';
 import { Tag } from '@app/models/tag';
 import { UGC } from '@app/models/ugc';
 import { ApiService } from './api.service';
 import { HelperService } from './helper-service.service';
+import { PgUGC } from '@app/models/postgrest';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedService {
-  public results: UGC[];
+  public results: PgUGC[];
   public endOfFeed: boolean;
   public loading: boolean = false;
   // Parameters
@@ -43,30 +44,69 @@ export class FeedService {
     this.endOfFeed = false;
     return this.query();
   }
-  query() {
+  async query() {
     this.loading = true;
-    let params: FeedQuery = {
-      tags: this.tags.map(tag => tag.id).join(','),
-      markets: this.markets.map(mkt => mkt.id).join(','),
-      kind: this.types.join(','),
-      page: this.page,
-      length: this.length
-    };
+    // let params: FeedQuery = {
+    //   tags: this.tags.map(tag => tag.id).join(','),
+    //   markets: this.markets.map(mkt => mkt.id).join(','),
+    //   kind: this.types.join(','),
+    //   page: this.page,
+    //   length: this.length
+    // };
+    // if(this.q != null) {
+    //   params.q = this.q;
+    // }
+    let params: FeedQueryPg = {
+      select: 'id,entity(created,modified,entity_tag!left(tag(*)),comment!fkcwo1n0f96e30h6v7gvu587hrs(id,text)),\
+usr!fkrulucpl3e6e7mfq71h03q49pb(id,firstname,lastname,username,image_path),\
+tip(id,text,tiptype,image_path),\
+deal(id,text,price,title,enddate,startdate,market(id,name),image_path),\
+recipe(id,servings,title,description,published,image_path,recipestep(id,title,image_path,step_order,instructions,time_minutes)),\
+review(id,text,entity!fk5syqvx6lhvcksh53pgjuf22bw(market(id,name)),reviewproperty(value)),\
+reaction!fkloe4jk2wh5f5akqrwe9waen0t(user_id),\
+ugc_tags',
+      or: '(' + this.types.map((t) => t+'.not.is.null').join(',') + ')',
+      order: 'entity(created).desc',
+      limit: this.length,
+      offset: this.page * this.length,
+    }
+    if(this.tags.length > 0) {
+      params['ugc_tags'] = 'ov.{' + this.tags.map(tag => tag.id).join(',') + '}';
+    }
+    if(this.markets.length > 0) {
+      params['deal.market_id'] = 'in.(' + this.markets.map(mkt => mkt.id).join(',') + ')';
+      params['deal'] = 'not.is.null';
+    }
     if(this.q != null) {
-      params.q = this.q;
+      if(this.types.includes('deal')) {
+        params['deal.search_col'] = 'plfts.' + encodeURIComponent(this.q);
+      }
+      if(this.types.includes('tip')) {
+        params['tip.search_col'] = 'plfts.' + encodeURIComponent(this.q);
+      }
+      if(this.types.includes('review')) {
+        params['review.search_col'] = 'plfts.' + encodeURIComponent(this.q);
+      }
+      if(this.types.includes('recipe')) {
+        params['recipe.search_col'] = 'plfts.' + encodeURIComponent(this.q);
+      }
     }
     // Add our own Observable here so we can "cancel" an existing query to ignore the results
-    return new Promise<void>((resolve) => {
-      this.api.queryFeed(params).then(ugcs => {
-        this.endOfFeed = (ugcs.length != this.length);
-        let formatted = ugcs.map(ugc => {
-          return <UGC>HelperService.PopulateEntity(ugc);
-        });
-        this.results = this.results.concat(formatted);
-        this.loading = false;
-        resolve();
-      });
-    });
+    // return new Promise<void>((resolve) => {
+    //   this.api.queryFeed(params).then(ugcs => {
+    //     this.endOfFeed = (ugcs.length != this.length);
+    //     let formatted = ugcs.map(ugc => {
+    //       return <UGC>HelperService.PopulateEntity(ugc);
+    //     });
+    //     this.results = this.results.concat(formatted);
+    //     this.loading = false;
+    //     resolve();
+    //   });
+    // });
+    let ugcs = await this.api.queryFeedPg<PgUGC[]>(params);
+    this.endOfFeed = (ugcs.length != this.length);
+    this.results = this.results.concat(ugcs);
+    this.loading = false;
   }
 
   nextPage() {

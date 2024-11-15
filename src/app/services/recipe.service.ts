@@ -4,6 +4,7 @@ import { RecipeStep } from '@app/models/recipe-step';
 import { ApiService } from './api.service';
 import { HelperService } from './helper-service.service';
 import { UserService } from './user.service';
+import { PgRecipeStep } from '@app/models/postgrest';
 
 @Injectable({
   providedIn: 'root'
@@ -100,6 +101,14 @@ export class RecipeService {
       return 0;
     } else {
       return steps.map(i=>i.timeMinutes).reduce((a,b)=>a+b);
+    }
+  }
+
+  static sumTimePg(steps: PgRecipeStep[]): Number {
+    if(steps == null || steps.length == 0) {
+      return 0;
+    } else {
+      return steps.map(i=>i.time_minutes).reduce((a,b)=>a+b);
     }
   }
 

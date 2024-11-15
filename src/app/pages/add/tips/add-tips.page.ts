@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Tag } from '@app/models/tag';
@@ -19,7 +19,7 @@ import { IonicSlides } from '@ionic/angular';
   styleUrls: ['./add-tips.page.scss'],
 })
 export class AddTipsPage implements OnInit {
-  @ViewChild('slider') slider: SwiperContainer;
+  @ViewChild('slider', {read: ElementRef}) slider: ElementRef<SwiperContainer>;
   swiperModules = [IonicSlides];
   public tipForm: UntypedFormGroup;
   public validation_messages;
@@ -103,7 +103,7 @@ export class AddTipsPage implements OnInit {
         .pipe(debounceTime(400))
         .subscribe(() => {
           setTimeout(() => {
-            this.slider.swiper.updateAutoHeight(225);
+            this.slider.nativeElement.swiper.updateAutoHeight(225);
             this.updateSlideUI();
           }, 25);
         });
@@ -153,12 +153,13 @@ export class AddTipsPage implements OnInit {
 
   updateHeight() {
     setTimeout(() => {
-      this.slider.swiper.updateAutoHeight(225);
+      this.slider.nativeElement.swiper.updateAutoHeight(225);
       this.updateSlideUI();
     }, 25);
   }
   updateSlideUI() {
-    let slideNumber = this.slider.swiper.activeIndex;
+    console.log(this.slider)
+    let slideNumber = this.slider.nativeElement.swiper.activeIndex;
     // Determine lock/unlock for slides
     let locked = false;
     switch(slideNumber) {
@@ -176,7 +177,7 @@ export class AddTipsPage implements OnInit {
       case 2:
         // Picture
         setTimeout(() => {
-          this.slider.swiper.updateAutoHeight(175);
+          this.slider.nativeElement.swiper.updateAutoHeight(175);
         }, 75);
         locked = !this.checkStep3();
         this.prevButton.text = 'Description';
@@ -186,13 +187,13 @@ export class AddTipsPage implements OnInit {
         // Tags
         this.loadTags();
         setTimeout(() => {
-          this.slider.swiper.updateAutoHeight(225);
+          this.slider.nativeElement.swiper.updateAutoHeight(225);
         }, 25);
         locked = !this.checkStep4();
         this.prevButton.text = 'Picture';
         break;
     }
-    this.slider.swiper.allowSlideNext = !locked;
+    this.slider.nativeElement.swiper.allowSlideNext = !locked;
     this.nextButton.disabled = locked;
     this.prevButtonVisible(slideNumber);
     this.nextButtonVisible(slideNumber);
@@ -228,12 +229,12 @@ export class AddTipsPage implements OnInit {
 
   nextClick() {
     if(!this.nextButton.disabled) {
-      this.slider.swiper.slideNext();
+      this.slider.nativeElement.swiper.slideNext();
     }
   }
   prevClick() {
     if(!this.prevButton.disabled) {
-      this.slider.swiper.slidePrev();
+      this.slider.nativeElement.swiper.slidePrev();
     }
   }
   // These all return true if they are valid

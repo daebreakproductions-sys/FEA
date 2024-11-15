@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Recipe } from '@app/models/recipe';
@@ -16,7 +16,7 @@ import { SwiperContainer } from 'swiper/element';
   styleUrls: ['./add-recipes.page.scss'],
 })
 export class AddRecipesPage implements OnInit {
-  @ViewChild('slider') slider: SwiperContainer;
+  @ViewChild('slider', {read: ElementRef}) slider: ElementRef<SwiperContainer>;
   swiperModules = [IonicSlides];
   public recipeForm: UntypedFormGroup;
   public validation_messages;
@@ -81,7 +81,7 @@ export class AddRecipesPage implements OnInit {
         .pipe(debounceTime(400))
         .subscribe(() => {
           setTimeout(() => {
-            this.slider.swiper.updateAutoHeight(225);
+            this.slider.nativeElement.swiper.updateAutoHeight(225);
             this.updateSlideUI();
           }, 25);
         });
@@ -178,12 +178,12 @@ export class AddRecipesPage implements OnInit {
 
   updateHeight() {
     setTimeout(() => {
-      this.slider.swiper.updateAutoHeight(225);
+      this.slider.nativeElement.swiper.updateAutoHeight(225);
       this.updateSlideUI();
     }, 25);
   }
   updateSlideUI() {
-    let slideNumber = this.slider.swiper.activeIndex;
+    let slideNumber = this.slider.nativeElement.swiper.activeIndex;
     // Determine lock/unlock for slides
     // Title, Picture, Details, Location, Tags, Description
     let locked = false;
@@ -196,7 +196,7 @@ export class AddRecipesPage implements OnInit {
       case 1:
         // Description
         setTimeout(() => {
-          this.slider.swiper.updateAutoHeight(175);
+          this.slider.nativeElement.swiper.updateAutoHeight(175);
         }, 75);
         locked = !this.checkStep2();
         this.prevButton.text = 'Title';
@@ -211,7 +211,7 @@ export class AddRecipesPage implements OnInit {
       case 3:
         // Picture
         setTimeout(() => {
-          this.slider.swiper.updateAutoHeight(175);
+          this.slider.nativeElement.swiper.updateAutoHeight(175);
         }, 75);
         locked = !this.checkStep4();
         this.prevButton.text = 'Servings';
@@ -221,13 +221,13 @@ export class AddRecipesPage implements OnInit {
         // Tags
         this.loadTags();
         setTimeout(() => {
-          this.slider.swiper.updateAutoHeight(225);
+          this.slider.nativeElement.swiper.updateAutoHeight(225);
         }, 25);
         locked = !this.checkStep5();
         this.prevButton.text = 'Picture';
         break;
     }
-    this.slider.swiper.allowSlideNext = !locked;
+    this.slider.nativeElement.swiper.allowSlideNext = !locked;
     this.nextButton.disabled = locked;
     this.prevButtonVisible(slideNumber);
     this.nextButtonVisible(slideNumber);
@@ -288,12 +288,12 @@ export class AddRecipesPage implements OnInit {
 
   nextClick() {
     if(!this.nextButton.disabled) {
-      this.slider.swiper.slideNext();
+      this.slider.nativeElement.swiper.slideNext();
     }
   }
   prevClick() {
     if(!this.prevButton.disabled) {
-      this.slider.swiper.slidePrev();
+      this.slider.nativeElement.swiper.slidePrev();
     }
   }
 
