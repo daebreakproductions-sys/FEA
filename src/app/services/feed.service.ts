@@ -26,7 +26,7 @@ export class FeedService {
     public api: ApiService,
   ) { 
     this.reset();
-    this.query();
+    // this.query();
   }
 
   reset() {
@@ -46,23 +46,13 @@ export class FeedService {
   }
   async query() {
     this.loading = true;
-    // let params: FeedQuery = {
-    //   tags: this.tags.map(tag => tag.id).join(','),
-    //   markets: this.markets.map(mkt => mkt.id).join(','),
-    //   kind: this.types.join(','),
-    //   page: this.page,
-    //   length: this.length
-    // };
-    // if(this.q != null) {
-    //   params.q = this.q;
-    // }
     let params: FeedQueryPg = {
       select: 'id,entity(created,modified,entity_tag!left(tag(*)),comment!fkcwo1n0f96e30h6v7gvu587hrs(id,text)),\
 usr!fkrulucpl3e6e7mfq71h03q49pb(id,firstname,lastname,username,image_path),\
 tip(id,text,tiptype,image_path),\
 deal(id,text,price,title,enddate,startdate,market(id,name),image_path),\
 recipe(id,servings,title,description,published,image_path,recipestep(id,title,image_path,step_order,instructions,time_minutes)),\
-review(id,text,entity!fk5syqvx6lhvcksh53pgjuf22bw(market(id,name)),reviewproperty(value)),\
+review(id,text,entity!fk5syqvx6lhvcksh53pgjuf22bw(id,market(id,name)),reviewproperty(value)),\
 reaction!fkloe4jk2wh5f5akqrwe9waen0t(user_id),\
 ugc_tags',
       or: '(' + this.types.map((t) => t+'.not.is.null').join(',') + ')',
@@ -74,8 +64,13 @@ ugc_tags',
       params['ugc_tags'] = 'ov.{' + this.tags.map(tag => tag.id).join(',') + '}';
     }
     if(this.markets.length > 0) {
-      params['deal.market_id'] = 'in.(' + this.markets.map(mkt => mkt.id).join(',') + ')';
-      params['deal'] = 'not.is.null';
+      if(this.typeEnabled('review')) {
+        params['review.entity.id'] = 'in.(' + this.markets.map(mkt => mkt.id).join(',') + ')';
+        params['review.entity'] = 'not.is.null';
+      } else if (this.typeEnabled('deal')) {
+        params['deal.market_id'] = 'in.(' + this.markets.map(mkt => mkt.id).join(',') + ')';
+        params['deal'] = 'not.is.null';
+      }
     }
     if(this.q != null) {
       if(this.types.includes('deal')) {
@@ -92,17 +87,6 @@ ugc_tags',
       }
     }
     // Add our own Observable here so we can "cancel" an existing query to ignore the results
-    // return new Promise<void>((resolve) => {
-    //   this.api.queryFeed(params).then(ugcs => {
-    //     this.endOfFeed = (ugcs.length != this.length);
-    //     let formatted = ugcs.map(ugc => {
-    //       return <UGC>HelperService.PopulateEntity(ugc);
-    //     });
-    //     this.results = this.results.concat(formatted);
-    //     this.loading = false;
-    //     resolve();
-    //   });
-    // });
     let ugcs = await this.api.queryFeedPg<PgUGC[]>(params);
     this.endOfFeed = (ugcs.length != this.length);
     this.results = this.results.concat(ugcs);
@@ -134,6 +118,7 @@ ugc_tags',
 
   setMarkets(markets: Market[], refresh: boolean = true) {
     this.markets = markets;
+    this.setTypes(['review']);
     if(refresh)
       this.freshQuery();
   }
@@ -165,6 +150,13 @@ ugc_tags',
     } else {
       // Not yet in list, add
       this.setType(type);
+      if(this.markets.length > 0) {
+        if(type == 'review') {
+          this.clearType('deal');
+        } else if (type == 'deal') {
+          this.clearType('review');
+        }
+      }
     }
     this.freshQuery();
   }
