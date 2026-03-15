@@ -1,0 +1,442 @@
+address,email,hours,image,lat,lng,name,phone,url,id,image_path
+"2602 Davison Rd Flint, Mi 48506",,"Mon - Sun, 11am - 9pm",\x,43.0327528,-83.6573265,Southern Pride Market Inc,810-515-1587,,25,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_25.png
+"4400 S Saginaw St Flint, Mi 48507",,"Mon-Fri, 9am - 5pm",\x,42.98388020000001,-83.67714749999999,Discount Rx Pharmacy,(810) 239-2667,,29,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_29.png
+"3717 Fenton Rd Flint, Mi 48507",,"Mon - Sun, 8am -10pm",\x,42.989131,-83.6924339,Rite Aid #4438,(810) 232-5118,,31,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_31.png
+"1124 N Ballenger Hwy Flint, Mi 48504",,"Mon - Sun, 8am -10pm",\x,43.0251211,-83.7307883,Rite Aid Pharmacy #4761,(810) 233-6765,,35,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_35.png
+"2838 E Court St Flint, Mi 48503",,"Mon - Sun, 8am -10pm",\x,43.01772709999999,-83.6533657,Rite Aid Discount Pharmacy #4504,(810) 767-3059,,37,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_37.png
+"3521 Corunna Rd Flint, Mi 48503",,"Mon - Sun, 8am -10pm",\x,43.0019335,-83.73260789999999,Rite Aid Discount Pharmacy #4588,(810) 235-6363,,41,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_41.png
+"1013 W Pierson Rd Flint, Mi 48505",,"Mon - Sat, 7am - 11pm; Sun, 12pm - 8pm",\x,43.0606437,-83.7176305,Mikes Grocery Inc,(810) 789-5406,,43,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_43.png
+"3007 N Franklin Ave Flint, Mi 48506",,"Mon - Sat, 9am - 2am; Sun, 11am - 2am",\x,43.042662,-83.6656363,Z'S Liquor Mart,(810) 285-9957,,47,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_47.png
+"101 E Pierson Flint, Mi 48505",,"Mon - Sat, 7am - 2am; Sun, 8am -12pm",\x,43.0614272,-83.70425519999999,Sims Market,(810) 787-2275,,49,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_49.png
+"3302 S Dort Hwy Flint, Mi 48507",,,\x,42.9928915,-83.6541477,Liquor Palace Of Flint,(810) 820-9861,,53,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_53.png
+"4203 Clio Rd Flint, Mi 48504",,,\x,43.0527448,-83.7330916,Clio Road Drive Thru,(810) 720-8777,,57,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_57.png
+"1633 W Atherton Flint, Mi 48507",,"Mon - Sun, 8am - Midnight",\x,42.9879306,-83.70293509999999,Westgate Liquor,(810)422-7493,,59,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_59.png
+"201 W Carpenter Rd Flint, Mi 48505",,,\x,43.0751943,-83.70722339999999,Easy Shop,(810) 785-8820,,63,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_63.png
+"1652 N Chevrolet Flint, Mi 48504",,"Mon - Sun, 9am -1am",\x,43.0302778,-83.7156203,Quick Pick,(810) 820-3318,,65,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_65.png
+"3518 Corunna Rd Flint, Mi 48503",,"Mon - Sat, 9am - 2am; Sun, 11am - 10pm",\x,43.0026563,-83.7328219,Juliano'S C Store,(810) 239-6581,,67,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_67.png
+"1945 Fenton Rd Flint, Mi 48507",,Mon - Sat: 9am - 2am; Sun: 10am - 12am,\x,43.0011889,-83.6930048,Liquor Corner Two Inc,(810) 234-7790,,71,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_71.png
+"4202 Fenton Rd Flint, Mi 48507",,"Mon - Sun, 8am - 12 am",\x,42.9849797,-83.693383,Tony K'S Party Shoppe,(810) 767-8050,,73,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_73.png
+"5011 Clio Flint, Mi 48504",,,\x,43.0754375,-83.7339009,Liquor Cave,(810) 789-1111,,77,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_77.png
+"4612 Western Rd Flint, Mi 48506",,Mon - Sun: 6am - 10pm,\x,43.0569491,-83.65616299999999,Sams Rollingwood Market,(810) 736-6618,,81,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_81.png
+"1113 W Pasadena Flint, Mi 48504",,,\x,43.0459847,-83.71904190000001,Nikolais Neighborhood Party Store,(810) 787-1405,,83,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_83.png
+"2809 W Court St Flint, Mi 48503",,Mon - Sat: 9am - 2am; Sun: 12pm - 12am,\x,43.0066616,-83.7258492,Cheers Market,(810) 232-7645,,85,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_85.png
+"1817 N Saginaw Flint, Mi 48505",,"Mon - Sun, 10am - 2am",\x,43.0333265,-83.6940267,Dado Market 1817 Inc,(810) 238-2447,,89,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_89.png
+"1602 Oren Avenue Flint, Mi 48503",,,\x,43.0311882,-83.70324509999999,Kings Market,(810) 238-2425,,91,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_91.png
+"4117 Clio Rd Flint, Mi 48504",,,\x,43.0518989,-83.7330681,Liquor Wheel,(810) 732-6475,,95,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_95.png
+"1701 S Saginaw St Flint, Mi 48503",,"Mon - Sun, 7am - 2am",\x,43.0055574,-83.6796773,South End Market Flint,(810) 234-0322,,97,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_97.png
+"2318 Lewis St Flint, Mi 48506",,Mon - Th: 9am - 11pm; Fri - Sat: 9am - Midnight; Sun: 10am - Midnight,\x,43.0369942,-83.6748796,Easy Pick Food Shoppe,(810)767-2977,,101,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_101.png
+"4101 N Dort Hwy Flint, Mi 48505",,,\x,42.97151299999999,-83.64934799999999,Big D Party Store,(810) 787-3246,,107,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_107.png
+"1235 N Dort Hwy Flint, Mi 48506",,"Mon - Fri, 9am - 2am; Sat, 10am - 2am; Sun, 12pm - 12am",\x,43.028427,-83.65566439999999,Macs Food Fair,(810) 239-2022,,111,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_111.png
+"701 W Stewart Flint, Mi 48504",,"Mon - Sun, 9am -11pm",\x,43.0537964,-83.71382559999999,Saba'S Mini Mart,(810) 785-0801,,113,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_113.png
+"1302 Dupont Flint, Mi 48504",,10am - 10pm; Closed some Sundays + Holidays,\x,43.0226597,-83.7124621,4-Way Party Store,(810) 234-6444,,117,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_117.png
+"523 W Carpenter Rd Flint, Mi 48505",,"Mon - Sun, 8am - 2am",\x,43.0752615,-83.71110159999999,Zerka Food Center,810-787-3188,,123,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_123.png
+"2605 Corunna Rd Flint, Mi 48503",,,\x,43.002979,-83.72160099999999,Corunna Dollar Store,(810) 342-0515,,125,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_125.png
+"3401 Lapeer Rd Flint, Mi 48503",,"Monday - Sunday, 8am - 2am",\x,43.0100953,-83.648163,Lapeer Liquor Shoppe,(810) 743-6746,,127,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_127.png
+"127 E Main St Flushing, Mi 48433",,,\x,43.063216,-83.854776,"Rye Bakery, The",,,1073,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1073.png
+"6016 Clio Rd Flint, Mi 48504",,,\x,43.0670728,-83.7329049,Safaros Food Store,(810) 787-5626,,141,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_141.png
+"2134 M L King Ave Flint, Mi 48503",,,\x,43.03580470000001,-83.7040153,D & H Market,(810) 234-9231,,147,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_147.png
+"2101 S Dort Hwy Flint, Mi 48507",,,\x,43.00345249999999,-83.6531936,E-Z  Stop,(810) 239-4445,,153,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_153.png
+"3412 Clio Rd Flint, Mi 48504",,"Mon - Sat: 9am -1am; Sun, 9am - 12am",\x,43.0465735,-83.7322603,Holiday Wine Shoppe,(810) 789-4030,,157,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_157.png
+"3026 Fenton Rd Flint, Mi 48507",,"Mon - Fri, 9am -12am",\x,42.9933781,-83.69338429999999,Sals Party Store Inc,(810) 471-9717,,161,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_161.png
+"2212 Lewis St Flint, Mi 48506",,"Mon - Sat, 9:30 am - 9:30pm; Sun, 11am - 9:30pm",\x,43.0362005,-83.6748796,Jules Market Inc,(810) 232-8912,,163,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_163.png
+"3246 Richfield Rd Flint, Mi 48506",,,\x,43.05059019999999,-83.6460857,Kc'S Market Iii,(810) 736-8520,,165,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_165.png
+"3110 Ml King Ave  Flint, Mi 48505",,"Mon - Sun, 8am - 9pm",\x,43.0445012,-83.7044284,Hinky Dinky Market,(810) 789-0990,,173,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_173.png
+"1916 Davison Road Flint, Mi 48506",,"Mon-Sat, 8am-9pm; Sun, 8am - 7pm",\x,43.0322154,-83.66468069999999,Fresh Choice Market Place Flint,(810) 285-9921,,175,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_175.png
+"4311 Dupont Flint, Mi 48505",,Mon - Sat 8am - 9pm; Sun - 9am - 7pm,\x,43.0545689,-83.71483970000001,Mr B'S Foodland,(810) 789-8121,,181,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_181.png
+"3701 Corunna Rd Flint, Mi 48532",,Mon - Sun: 9:30 am - 8:30 pm,\x,43.00203500000001,-83.7348076,Kamils Mid Eastern Food,(810) 239-5819,,183,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_183.png
+"1780 South Dort Hwy Flint, Mi 48503",,24/7,\x,43.0099385,-83.6550212,Cal'S Marathon Llc,810-235-1400,,187,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_187.png
+"4005 Clio Rd Flint, Mi 48504",,24/7,\x,43.0506174,-83.73307910000001,Gas Masters #6 Inc,(810) 787-2209,,189,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_189.png
+"7030 Dort Hwy Flint, Mi 48505",,24/7,\x,43.075515,-83.6738678,Dort Hwy Gas & Mart Inc,(810) 785-1731,,191,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_191.png
+"2800 Corunna Road Flint, Mi 48503",,"Monday - Sunday, 5am - 10pm (openning and closing hours may vary)",\x,43.0027946,-83.72506369999999,Marathon - B Raj Investment Llc,810-235-1635,,195,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_195.png
+"902 Dort Hwy Flint, Mi 48503",,24/7,\x,43.0181603,-83.65493719999999,Sunoco Gas Station,(810) 785-1731,,197,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_197.png
+"2905 N Saginaw St Flint, Mi 48505",,24/7,\x,43.0424321,-83.69418189999999,Marathon - A And B Gas Inc,810-238-7741,,201,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_201.png
+"2320 Davison Rd Flint, Mi 48506",,24/7,\x,43.03281610000001,-83.66017269999999,Merauiz Oil Inc,810-233-6732,,203,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_203.png
+"3317 Martin L King Ave Flint, Mi 48505",,24/7,\x,43.0461337,-83.7049584,King Oil Mart Llc,810-407-7172,,207,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_207.png
+"1901 N Dort Hwy Flint, Mi 48506",,24/7,\x,43.033105,-83.65567949999999,Aas Gas Mart,(810) 232-7330,,211,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_211.png
+"5140 Fleming Rd Flint, Mi 48504",,24/7,\x,43.060464,-83.723292,Fleming Oil Inc,810-785-6582,,213,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_213.png
+"1330 E Atherton Flint, Mi 48507",,24/7,\x,42.9888615,-83.6539488,Ez Fuel Inc,(810) 744-4452,,215,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_215.png
+"6040 Clio Rd Flint, Mi 48504",,24/7,\x,43.0676115,-83.7330601,Dous Oil Inc,810-789-8816,,219,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_219.png
+"7022 N Saginaw Flint, Mi 48505",,24/7,\x,43.07516560000001,-83.6932169,Marathon,(810) 787-5923,,221,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_221.png
+"3802 Davison Rd Flint, Mi 48506",,24/7,\x,43.0329972,-83.6375655,Admiral Petroleum Co #124,(810) 742-5532,,229,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_229.png
+"3913 Fenton Rd Flint, Mi 48507",,24/7,\x,42.9874439,-83.6928016,Admiral Petroleum Co #123,(810) 234-5782,,231,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_231.png
+"2617 N Dort Flint, Mi 48506",,"Mon - Sun, 5am - 3am (closed 3am-5am)",\x,43.0393775,-83.6558098,Admiral Petroleum #105,(810) 239-6122,,235,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_235.png
+"4030 N Dort Hwy Flint, Mi 48506",,24/7,\x,43.0516793,-83.6637659,Dort Fill Up Inc,(810) 736-4655,,239,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_239.png
+"116 W Broad St Linden, Mi 48451",,,\x,42.8147842,-83.7834122,Sweet D'S Confections,,,1079,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1079.png
+"3910 Fenton Rd Flint, Mi 48507",,24/7,\x,42.9873757,-83.69327919999999,One Stop Food Stores #15,810-239-9071,,245,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_245.png
+"429 N B Chavez Dr Flint, Mi 48503",,Tuesday Mornings,\x,43.0192094,-83.6838463,Riverside Tabernacle,810-234-6246,,247,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_247.png
+"2608 Corunna Rd Flint, Mi 48503",,"Mon - Sat, 9am - 9pm; Sun, 1pm - 6pm",\x,43.0034219,-83.721712,Seoul Oriental Market,(810) 767-7054,,251,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_251.png
+"3708 Fenton Rd Flint, Mi 48507",,"Mon - Sun , 8am - 9pm",\x,42.9889088,-83.6935282,Dollar General Store #8120,(810) 760-9739,,255,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_255.png
+"2627 W Pierson Rd Flint, Mi 48504",,Monday - Sunday : 08:00 AM-10:00 PM,\x,43.0593491,-83.73622569999999,Family Dollar Stores Of Mi Inc #2779,8107875984,,257,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_257.png
+"115 E Pierson Rd Flint, Mi 48505",,"Mon - Sun , 8am - 9pm",\x,43.06157,-83.70355649999999,Dollar General Store #13580,(810) 785-4635,,259,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_259.png
+"132 W 1St St Flint, Mi 48502",,"May vary, generally Mon - Sat 10:30 - 6pm. Call to confirm",\x,43.0154973,-83.6919518,Healthy Dollar,810 - 341- 1227,,263,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_263.png
+"4401 Dupont St Flint, Mi 48505",,"Mon - Sat, 10am - 8pm; Sun, 11am -6pm",\x,43.0548213,-83.7148076,Super Dollar Town Plus,(810) 787-3301,,265,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_265.png
+"877 E 5Th Ave Flint, Mi 48503",,Monday - Sunday : 08:00 AM-10:00 PM,\x,43.02402499999999,-83.6917562,Family Dollar Store #7389,8102383832,,269,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_269.png
+"2513 N Saginaw St Flint, Mi 48505",,Mon-Sun:  9am - 6pm,\x,43.0394526,-83.6944212,Dollar & Dime Inc,(810) 760-9413,,271,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_271.png
+"4823 Fenton Rd Flint, Mi 48507",,Mon - Sat: 9:00am - 10:00pm | Sun: 10:00am - 9:00pm,\x,42.9805547,-83.69169079999999,Dollar Tree Store 03284,810-234-0998,,275,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_275.png
+"1275 N Ballenger Hwy Flint, Mi 48504",,Monday - Sun : 8AM-10PM,\x,43.0242955,-83.7322823,Family Dollar Stores Of Mich #6009,8104243736,,277,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_277.png
+"3102 N Franklin Ave Flint, Mi 48506",,Monday - Sunday : 08:00 AM-08:00 PM,\x,43.0437143,-83.6648469,Family Dollar Stores Of Mich #7035,8107670431,,281,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_281.png
+"1717 N Dort Hwy Flint, Mi 48506",,"Mon - Sun , 8am - 9pm",\x,43.032315,-83.65589039999999,Dollar General Store #9625,(810) 424-6404,,283,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_283.png
+"2918 Flushing Rd Flint, Mi 48504",,"Mon - Sat, 8am - 9pm; Sun, 9am - 8pm",\x,43.0253451,-83.7321163,Save A Lot #307,(810) 238-4275,,287,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_287.png
+"5125 Fenton Rd Flint, Mi 48507",,"Mon - Sun, 8am - 9pm",\x,42.97773,-83.6928686,Save A Lot #301,(810) 424-9426,,289,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_289.png
+"808 W Pasadena Flint, Mi 48504",,"Mon - Th, 8am - 10pm; Fri - Sat, 8am - 11pm; Sun 9am - 10pm",\x,43.046498,-83.7156586,"Prince Party Store, The",(810) 787-4180,,293,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_293.png
+"601 S Saginaw Flint, Mi 48502",,Mon - Fri 7Am - 4pm,\x,43.0150173,-83.6893977,Ground Floor Llc,(810) 285-9235,,295,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_295.png
+"5106 N Saginaw Flint, Mi 48505",,"Mon - Sun, 8am - 11pm",\x,43.0785121,-83.69363220000001,Ez Stop Food Mart #2,(810) 407-8896,,297,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_297.png
+"3001 Corunna Rd Flint, Mi 48503",,"Mon-Sat, 9am-4pm, closed Sun",\x,43.0024065,-83.72738059999999,Bread Basket,(810) 235-2212,,305,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_305.png
+"2709 Davison Rd Flint, Mi 48506",,Mon - Fri: 9am - 5pm,\x,43.03329009999999,-83.6559968,Mr Bread Inc,(810) 767-3551,,307,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_307.png
+"1101 S Saginaw St Flint, Mi 48502",,,\x,43.0115152,-83.68494989999999,Kandy Shack,,,309,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_309.png
+"4313 Corunna Rd Flint, Mi 48532",,24/7,\x,42.9996451,-83.7644827,Wal-Mart Supercenter #1928,(810) 733-5055,,313,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_313.png
+"5186 Fenton Rd Flint, Mi 48507",,Sun - Sat: 6 AM - Midnight,\x,42.9545057,-83.69325769999999,Kroger Store #425,(810) 232-7137,,319,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_319.png
+"4519 Richfield Rd Flint, Mi 48506",,"Mon - Sun, 8am -10pm",\x,43.051924,-83.61662419999999,Rite Aid #1587,(810) 250-0165,,325,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_325.png
+"4001 Davison Rd Burton, Mi 48509",,"Mon - Sun, 8am -10pm",\x,43.0338857,-83.634771,Rite Aid Discount Pharmacy #3667,(810) 742-0217,,329,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_329.png
+"3283 S Saginaw St Burton, Mi 48529",,,\x,42.9813582,-83.67395139999999,Mikes Super Sav,(810) 742-9890,,337,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_337.png
+"1341 W Coldwater Rd Flint, Mi 48505",,,\x,43.08987279999999,-83.70689879999999,Kingwater Market,(810) 789-8820,,343,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_343.png
+"5375 N Saginaw St Flint, Mi 48505",,"Mon-Sat 8:30am - 2am; Sun, 9am - 2am",\x,43.0625158,-83.6943271,Beecher Beer & Wine,(810) 789-4816,,359,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_359.png
+"3021 S Linden Rd Flint, Mi 48507",,24/7 Except Christmas Eve,\x,42.983884,-83.7722165,Montegos,(810) 733-3800,,369,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_369.png
+"1395 W Bristol Rd Flint, Mi 48507",,,\x,42.9734579,-83.70772319999999,Zerkas Stop & Shop #2,810-760-9411,,373,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_373.png
+"2008 W Coldwater Rd Flint, Mi 48505",,"Mon - Sat: 10am - 11pm, Sun: 12pm - 10pm",\x,43.090597,-83.7143679,Square One Food Store,(810) 785-3639,,377,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_377.png
+"2013 W Bristol Rd Flint, Mi 48507",,24/7,\x,42.9732856,-83.7133131,Khirfans Super K,(810) 238-1211,,381,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_381.png
+"2014 S Center Rd Burton, Mi 48519",,"Mon - Fri, 9am - 9pm; Sat-Sun, 9am - 10pm",\x,43.003756,-83.6351169,Center Road Market,(810) 742-1555,,387,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_387.png
+"4516 Pasadena Ave Flint, Mi 48504",,"Sun - Th, 9am - 12am; Fri-Sat, 9am - 1am",\x,43.0463052,-83.77207899999999,Linden Road Store,(810) 732-0320,,391,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_391.png
+"2096 E Judd Rd Burton, Mi 48529",,"Mon - Fri, 9am - 10:00 pm; Sat- Sun: 9am - 11pm",\x,42.96707079999999,-83.66889760000001,J Ps Party Shoppe,(810) 744-0798,,393,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_393.png
+"5272 N Saginaw Flint, Mi 48505",,,\x,43.0832572,-83.693736,Northend Market,(810) 789-0611,,397,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_397.png
+"7007 Clio Rd Mt Morris, Mi 48458",,,\x,43.1042888,-83.7344184,Country Corner Market,(810) 687-2870,,399,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_399.png
+"4190 E Court St Burton, Mi 48509",,"Mon - Sat, 10am - 8pm; Sun, 12pm - 5pm",\x,43.0165896,-83.6296871,General Nutrition Center #0041,(810) 744-0332,,403,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_403.png
+"3457 Linden Rd Flint, Mi 48507",,"Mon-Sat, 10am-9pm; Sun, 12pm - 6pm",\x,42.9755936,-83.7713753,General Nutrition Center #754,(810) 732-6410,,405,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_405.png
+"4508 Van Slyke Flint, Mi 48507",,Mon - Sun 10am - 9pm,\x,42.9596996,-83.7133546,Michigan Food Market,(810) 410-4525,,409,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_409.png
+"5204 N Saginaw Street Flint, Mi 48505",,"Mon - Sat, 8am - 8pm; Sun, 8am - 7pm",\x,43.0812666,-83.6935906,Great Giant Supermarket,(810) 787-5201,,411,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_411.png
+"4012 Davison Rd Burton, Mi 48509",,24/7,\x,43.032781,-83.6349719,Asf 5 Inc,810-422-9818,,415,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_415.png
+"5050 W Pierson Rd Flint, Mi 48504",,,\x,43.0609115,-83.7750559,Pierson Service Station Llc,(810) 733-2159,,417,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_417.png
+"4151 W Pierson Rd Flint, Mi 48504",,24/7,\x,43.060162,-83.75925699999999,Marathon - Hasan Fuel Inc,810-787-1295,,421,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_421.png
+"G 3416 W Pierson Rd Flint, Mi 48504",,24/7,\x,43.0610069,-83.7490883,Marathon - Aziz Station Inc,810-820-6055,,423,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_423.png
+"5515 Clio Road Flint, Mi 48504",,24/7,\x,43.0892846,-83.7337627,Amir Petroleum Llc,(810) 785-1785,,427,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_427.png
+"5120 Corunna Rd Flint, Mi 48532",,,\x,43.00233559999999,-83.77701929999999,Corunna Road West Express Stop,(810) 733-0460,,429,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_429.png
+"4172 W Pierson Rd Flint, Mi 48504",,"Mon - th, 5am - 11pm; Fri, 5am - 12am; Sat , 6am - 12am; Sun, 7am - 10pm",\x,43.0609629,-83.7599123,Pierson Rd Fuel Stop Inc,(810) 785-3589,,433,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_433.png
+"6114 N Saginaw Mt Morris, Mi 48458",,"Mon- Sun, 6 AM to 10PM",\x,43.093203,-83.693793,Faris Fuel Stop Inc,810-789-8722,,435,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_435.png
+"4646 S Dort Hwy Flint, Mi 48507",,24/7,\x,42.9824091,-83.6537529,Admiral Petroleum Co #286,(810) 835-4821,,439,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_439.png
+"1374 W Bristol Flint, Mi 48507",,24/7,\x,42.9740887,-83.7069135,Bristol Fuel Llc,(810) 232-4741,,441,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_441.png
+"5015 Richfield Rd Flint, Mi 48506",,24/7,\x,43.0518776,-83.615262,Marathon - Atn Oil Inc,810-250-0144,,447,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_447.png
+"1117 S Belsay Rd Burton, Mi 48509",,,\x,43.0159023,-83.59446899999999,Sunoco,,,1089,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1089.png
+"2333 S. Center Rd Burton, Mi 48519",,24/7,\x,42.9933387,-83.6316454,Meijer Gas Station #29,(810) 744-4000,,457,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_457.png
+"3155 Miller Rd Flint, Mi 48507",,24/7,\x,42.989853,-83.7373454,Speedway  #5524 Good Customer Service,(810) 238-5850,,461,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_461.png
+"1499 S Linden Road Flint, Mi 48532",,24/7,\x,43.0025661,-83.7719335,Speedway #8745,(810) 230-2555,,463,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_463.png
+"1258 East Bristol Rd Burton, Mi 48529",,24/7,\x,42.9742272,-83.6834733,Speedway #5518 Good Customer Service,(810) 233-3753,,467,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_467.png
+"6010 Davison Burton, Mi 48509",,24/7,\x,43.0332711,-83.5953968,One Stop Food Store #22,810-742-7470,,469,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_469.png
+"2374 W Hill Rd Flint, Mi 48507",,24/7,\x,42.9442866,-83.7265434,One Stop Food Stores #21,810-767-3870,,473,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_473.png
+"2169 W Bristol Rd Flint, Mi 48507",,24/7,\x,42.9732264,-83.7191249,Speedway #8749,(810) 232-0007,,475,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_475.png
+"1466 E Bristol Rd Burton, Mi 48529",,24/7,\x,42.97406549999999,-83.67535939999999,Speedway #8753,(810) 742-6031,,479,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_479.png
+"3514 E Bristol Rd Burton, Mi 48529",,24/7,\x,42.9745609,-83.63372059999999,Speedway  #2206 Good Customer Service,(810) 743-6570,,483,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_483.png
+"1181 E Bristol Rd Burton, Mi 48529",,"Mon - Sat, 9am - 10pm; Sun, 9am - 9pm",\x,42.9750139,-83.68628129999999,Dollar Express,810-341-5070,,491,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_491.png
+"2015 Coldwater Rd Flint, Mi 48505",,"Mon - Sun , 8am - 9pm",\x,43.0900129,-83.7145616,Dollar General Store #13249,(810) 250-7654,,497,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_497.png
+"2452 W Hill Rd Flint, Mi 48507",,Mon - Sat: 9:00am - 10:00pm | Sun: 10:00am - 8:00pm,\x,42.9446027,-83.7291821,Dollar Tree #4122,810-762-1054,,501,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_501.png
+"5219 Corunna Rd Flint, Mi 48532",,"Mon - Sun , 8am - 10pm",\x,43.0004274,-83.7809709,Dollar General Store #8528,(810) 732-7801,,509,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_509.png
+"5038 Miller Road Flint, Mi 48507",,"Mon - Sat, 9am - 9pm; Sun, 10am - 7pm",\x,42.9776375,-83.7745186,Ollies Bargain Outlet Inc,(810) 820-3105,,513,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_513.png
+"4270 Corunna Rd Flint, Mi 48532",,Monday - Friday 9am - 8pm;Saturday 9am - 8pm;Sunday 10am - 8pm,\x,43.0031675,-83.7636228,Aldi #81,(No branch phone number),,515,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_515.png
+"2501 Flushing Rd Flint, Mi 48504",,24/7,\x,43.0216024,-83.7224073,University Mini Mart Llc,810-239-6761,,521,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_521.png
+"3491 Pierson Flint, Mi 48504",,"Mon - Sat, 10am - 6pm; closed holidays",\x,43.0603079,-83.7522,Snack Depot,(810) 789-8780,,527,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_527.png
+"1356 W Hill Rd Flint, Mi 48507",,"Mon - Fri, 8am - 7pm; Sat, 8am - 6pm; Sun, 10am - 5pm",\x,42.9448744,-83.7053834,Bimbo Bakeries Usa Inc,(810) 239-8070,,531,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_531.png
+"5131 S Saginaw Flint, Mi 48507",,Mon-Sat: 9 am - 6 pm,\x,42.9819307,-83.6744228,Aldos Italian Bakery,(810) 744-9123,,533,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_533.png
+"1361 W Coldwater Mt Morris Twp, Mi 48505",,,\x,43.089871,-83.70814600000001,Pick & Save Supermarket - Flint,(810) 820-9111,,535,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_535.png
+"4141 Morrish Rd Swartz Creek, Mi 48473",,,\x,42.9682383,-83.8270829,Meijer Inc #259,,,537,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_537.png
+"710 S Mill Clio, Mi 48420",,,\x,43.1713614,-83.7360174,Vgs Food #1925,,,541,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_541.png
+"7461 N Genesee Genesee, Mi 48437",,,\x,43.1185873,-83.61880560000002,Vgs Food #1929,,,543,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_543.png
+"6170 S Saginaw Grand Blanc, Mi 48439",,,\x,42.9410648,-83.64634430000001,Wal-Mart Store #3726,,,547,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_547.png
+"7188 N Saginaw Rd Mt Morris, Mi 48458",,,\x,43.1105195,-83.6932697,Kroger Store #407,,,557,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_557.png
+"4392 N Irish Rd Davison, Mi 48423",,,\x,43.0736298,-83.5558997,Outdoor Adventures Lake Shore Resort,,,1093,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1093.png
+"6160 S Saginaw Rd Grand Blanc, Mi 48439",,,\x,42.8868803,-83.5997191,Sam'S Club #4944,,,571,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_571.png
+"901 S State St Davison, Mi 48423",,,\x,43.0197011,-83.51693519999999,Walgreens #10953,,,577,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_577.png
+"11801 N Saginaw St Mount Morris, Mi 48458",,,\x,43.1198612,-83.69497779999999,Rite Aid #7736,,,589,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_589.png
+"521 N. State Rd. Davison, Mi 48423",,,\x,43.0341872,-83.5188048,Rite Aid #7738,,,591,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_591.png
+"4515 E Mt Morris Rd Mount Morris, Mi 48437",,,\x,43.121047,-83.6186299,Rite Aid Pharmacy #4447,,,599,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_599.png
+"841 S State Rd Davison, Mi 48423",,,\x,43.0207246,-83.51686939999999,Rite Aid Pharmacy #4439,,,601,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_601.png
+"602 W Broad Linden, Mi 48451",,,\x,42.8134066,-83.7894486,Rite Aid Disc Pharmacy  #3452,,,607,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_607.png
+"803 South State Rd Davison, Mi 48423",,,\x,43.022088,-83.5164788,General Nutrition  #8640,,,617,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_617.png
+"17205 Silver Parkway Fenton, Mi 48430",,,\x,42.7947455,-83.7363482,General Nutrition Center #5862,,,621,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_621.png
+"3035 E Grand Blanc Rd Grand Blanc, Mi 48439",,,\x,42.9167159,-83.6502878,Grand Food Castle,,,625,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_625.png
+"3517 S Belsay Rd Burton, Mi 48519",,,\x,42.9760438,-83.59317930000002,Nehrings Market Inc,,,627,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_627.png
+"11911 S Saginaw Grand Blanc, Mi 48439",,,\x,42.9239052,-83.6252195,Saginaw Fuel South Llc,,,631,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_631.png
+"11843 S Saginaw Grand Blanc, Mi 48439",,,\x,42.9243061,-83.6258153,Saginaw Fuel Mid Llc,,,637,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_637.png
+"1235 Irish Rd Davison, Mi 48423",,,\x,43.0259968,-83.55611859999999,Meijer Gas Station #244,,,641,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_641.png
+"8005 Davison Rd Davison, Mi 48423",,,\x,43.03472070000001,-83.5559414,One Stop Food Store #31,,,647,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_647.png
+"436 N Leroy Fenton, Mi 48430",,,\x,42.8000862,-83.7046941,Mr Js Petroleum/Clark,,,651,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_651.png
+"1435 E Hill Rd Grand Blanc, Mi 48439",,,\x,42.9444814,-83.67592929999999,Speedway #8763,,,655,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_655.png
+"8333 N Saginaw Rd Mt Morris, Mi 48458",,,\x,43.128563,-83.69496099999999,Speedway #8386,,,657,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_657.png
+"3245 Owen Rd Fenton, Mi 48430",,,\x,42.7893705,-83.7362249,Speedway  #8405,,,661,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_661.png
+"7512 N Dort Hwy Mt Morris, Mi 48458",,,\x,43.1193489,-83.67568969999999,One Stop Food Store #19,,,665,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_665.png
+"4181 W Mt Morris Rd Mt Morris, Mi 48458",,,\x,43.118075,-83.761409,Beacon & Bridge Market #7,,,667,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_667.png
+"1177 S State Rd Davison, Mi 48423",,,\x,43.015136,-83.5170574,Speedway #8403,,,671,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_671.png
+"3117 Sheridan Blvd Lennon, Mi 48449",,,\x,42.9835885,-83.9282071,Speedway #8797,,,675,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_675.png
+"5550 Fenton Rd Flint, Mi 48507",,,\x,42.944675,-83.6926253,Speedway #2227,,,677,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_677.png
+"3011 Thompson Rd Fenton, Mi 48430",,,\x,42.8624216,-83.7297507,Beacon & Bridge Market #4,,,681,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_681.png
+"11536 N Saginaw Mt Morris, Mi 48458",,,\x,43.1169463,-83.6940267,One Stop Food Store #14,,,685,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_685.png
+"6533 W Pierson Flushing, Mi 48433",,,\x,43.0599065,-83.8125985,Speedway #2346,,,687,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_687.png
+"10318 Hegel Rd Goodrich, Mi 48438",,,\x,42.9166867,-83.5020758,Beacon & Bridge Market #29,,,691,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_691.png
+"227 E Main St Flushing, Mi 48433",,,\x,43.06337329999999,-83.8530799,Beacon & Bridge Market #12,,,695,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_695.png
+"4019 N State Rd Davison, Mi 48423",,,\x,43.0641138,-83.51888339999999,Speedway #8389,,,697,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_697.png
+"9523 S Saginaw Grand Blanc, Mi 48439",,,\x,42.8879274,-83.5986447,Warwick Party Shoppe,,,1099,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1099.png
+"8147 S State St Goodrich, Mi 48438",,,\x,42.913639,-83.500789,Dollar General Store # 13754,,,707,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_707.png
+"15286 Silver Pkwy Fenton, Mi 48430",,,\x,42.8011456,-83.7349246,Dollar Tree #3906,,,711,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_711.png
+"5452 S Saginaw Flint, Mi 48507",,,\x,42.9507776,-83.65759349999999,Dollar General #11013,,,717,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_717.png
+"11276 Vienna Rd Montrose, Mi 48457",,,\x,43.1765426,-83.90469929999999,Dollar General Store #10194,,,721,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_721.png
+"6000 Lapeer Rd Burton, Mi 48509",,,\x,43.0100003,-83.5943439,Family Dollar Stores Of Mich #4548,,,727,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_727.png
+"550 S Mill St Clio, Mi 48420",,,\x,43.1727567,-83.73526129999999,Family Dollar Stores Of Mich #2603,,,731,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_731.png
+"5340 Pierson Rd Flushing, Mi 48433",,,\x,43.0610843,-83.7858795,Aldi #82,,,739,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_739.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Michigan Nut Company Llc,,,743,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_743.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Rebecca'S Bakery,,,749,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_749.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Bonnie Lass Products,,,753,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_753.png
+"1539 N Leroy Fenton, Mi 48430",,,\x,42.819321,-83.70814899999999,Fun With Frosting,,,755,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_755.png
+"8572 Silver Lake Rd Linden, Mi 48451",,,\x,42.79180849999999,-83.8441945,Keepers Of Eden Organics,,,759,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_759.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Crust,,,761,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_761.png
+"6429 W Pierson Rd Flushing, Mi 48433",,,\x,43.0597733,-83.80839139999999,Tcb Sweets  Treats Llc,,,765,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_765.png
+"11100 Bendix Dr Goodrich, Mi 48438",,,\x,42.8990575,-83.4870662,The Healthy Treats Factory,,,769,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_769.png
+"9010 Miller Rd Swartz Creek, Mi 48473",,,\x,42.95741719999999,-83.85076029999999,Creeks Convenience Store,,,779,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_779.png
+"11901 N Saginaw Mount Morris, Mi 48458",,,\x,43.1207444,-83.6948932,Mt Morris Quick Stop,,,783,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_783.png
+"7070 N Saginaw St Mount Morris, Mi 48458",,,\x,43.1068851,-83.6943726,Short Horn Meats Of Mt Morris,,,787,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_787.png
+"1413 Flushing Rd Flushing, Mi 48433",,,\x,43.05977,-83.82200000000002,1413 Flushing Inc,,,789,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_789.png
+"11529 S Saginaw St Grand Blanc, Mi 48439",,,\x,42.9272019,-83.6283964,Michigans Greatest Fudge,,,793,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_793.png
+"118055 Silver Pkwy Fenton, Mi 48430",,,\x,42.7994675,-83.7359694,Kmart #4700,,,799,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_799.png
+"12278 Clio Rd Clio, Mi 48420",,,\x,43.18519939999999,-83.7343781,Mustang Marathon Inc,,,803,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_803.png
+"8110 E Court Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Penzien Produce,,,807,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_807.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Living Water Ltd,,,809,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_809.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,The Egg Basket,,,813,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_813.png
+"8110 East Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Diva Licious Fudge Co,,,817,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_817.png
+"8110 E Court Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Bon Appetit Catering - J Deans,,,819,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_819.png
+"11701 Union St Mount Morris, Mi 48458",,,\x,43.1186161,-83.6933145,Farmer Frank'S Produce,,,823,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_823.png
+"105 W Shiawassee Fenton, Mi 48430",,,\x,42.7927594,-83.7055702,Fentons Open Book,,,827,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_827.png
+"8010 N Dort Hwy Mount Morris, Mi 48458",,,\x,43.1202769,-83.675752,N Dort Express Stop #134 Llc,,,829,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_829.png
+"4141 W Vienna Rd Clio, Mi 48420",,,\x,43.1771086,-83.75923399999999,Clio Investment Inc,,,833,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_833.png
+"2181 W Vienna Rd Clio, Mi 48420",,,\x,43.1768516,-83.7204325,Clio Liquor Inc,,,839,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_839.png
+"7110 N Saginaw Rd Mount Morris, Mi 48458",,,\x,43.1077542,-83.6938048,G.A.S.H. Of Mt Morris Inc,,,843,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_843.png
+"1375 N Leroy St Fenton, Mi 48430",,,\x,42.8146539,-83.70841419999999,Enmar Fuel Stop One Inc,,,847,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_847.png
+"409 S Leroy St Fenton, Mi 48430",,,\x,42.793029,-83.7049474,Round Town Cupcakes,,,849,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_849.png
+"2215 E Hill Rd Grand Blanc, Mi 48439",,,\x,42.9450821,-83.6640791,Edible Arrangements,,,853,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_853.png
+"9515 Vienna Rd Otisville, Mi 48463",,,\x,43.1817596,-83.5206712,Vienna Mini Mart,,,857,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_857.png
+"11018 Davison Rd Davison, Mi 48423",,,\x,43.0347543,-83.4976679,Davison Liquor,,,859,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_859.png
+"3238 Owen Rd Fenton, Mi 48430",,,\x,42.790124,-83.736224,Owen Road Fuel Llc,,,863,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_863.png
+"106 S Leroy St Fenton, Mi 48430",,,\x,42.7962461,-83.70509270000001,Marjie'S Gluten Free Pantry,,,867,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_867.png
+"11225 N Saginaw Mount Morris, Mi 48458",,,\x,43.1141814,-83.6947015,Racer Drive Thru,,,869,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_869.png
+"12450 Vienna Rd Montrose, Mi 48457",,,\x,43.1764839,-83.9293484,Montrose Mini Mart One Inc,,,873,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_873.png
+"226 E Main St Flushing, Mi 48433",,,\x,43.0627976,-83.8529142,Fuel & Tobacco Stop Inc,,,877,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_877.png
+"2242 N Long Lake Fenton, Mi 48430",,,\x,42.8569671,-83.716053,Lakeside Market,,,879,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_879.png
+"8572 Silver Lake Rd Linden, Mi 48451",,,\x,42.79180849999999,-83.8441945,Dales Cheesecake Shoppe,,,883,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_883.png
+"3346 W Vienna Rd Clio, Mi 48420",,,\x,43.1778685,-83.7479268,C & S Fuel Mart,,,887,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_887.png
+"7410 E Court St Davison, Mi 48423",,,\x,43.0182789,-83.5599783,Menards,,,889,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_889.png
+"5342 Corunna Flint, Mi 48532",,,\x,43.002405,-83.78531799999999,Sindbad,,,897,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_897.png
+"8463 Davison Rd Davison, Mi 48423",,,\x,43.035535,-83.53947699999999,A & B Of Davison,,,899,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_899.png
+"8399 Bristol Rd Davison, Mi 48423",,,\x,42.9803205,-83.5397455,Conquest Scents Inc,,,903,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_903.png
+"11121 Fenton Fenton, Mi 48430",,,\x,42.86774279999999,-83.69647669999999,Fenton Market,,,905,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_905.png
+"1372 East Lake Street Clio, Mi 48420",,,\x,43.2072651,-83.68946869999999,Lake Market,,,909,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_909.png
+"7302 W Mt Morris Rd Flushing, Mi 48433",,,\x,43.118235,-83.82515889999999,M & S Party Store Inc,,,913,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_913.png
+"517 E Broad St Linden, Mi 48451",,,\x,42.8151219,-83.7753048,Calabria Village Llc,,,917,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_917.png
+"7515 Clio Rd Mount Morris, Mi 48458",,,\x,43.1180988,-83.73425010000001,Twin Clio Inc,,,919,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_919.png
+"4314 W Mt Morris Mount Morris, Mi 48458",,,\x,43.1193224,-83.76606389999999,R D R Oil Inc,,,923,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_923.png
+"431 W Vienna Rd Clio, Mi 48420",,,\x,43.1777566,-83.7262665,Clio Bp,,,925,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_925.png
+"254 W State St Montrose, Mi 48457",,,\x,43.1766207,-83.8988408,Montrose Express,,,929,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_929.png
+"2330 Grand Blanc Rd Grand Blanc, Mi 48439",,,\x,42.9149469,-83.6589979,Grand Blanc Road Business Corp Dba Us 23 Bp,,,937,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_937.png
+"2461 North Rd Fenton, Mi 48430",,,\x,42.8041094,-83.7252796,Smittys Exit 80,,,939,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_939.png
+"2514 S Belsay Rd Burton, Mi 48519",,,\x,42.990499,-83.59493900000001,Bill Llc,,,943,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_943.png
+"441 W Main St Flushing, Mi 48433",,,\x,43.0625955,-83.8621711,Marthas Quik Stop Inc,,,949,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_949.png
+"3235 Thompson Rd Fenton, Mi 48430",,,\x,42.86224259999999,-83.7382583,Party Tyme Deli & Spirits,,,953,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_953.png
+"110 E State St Montrose, Mi 48457",,,\x,43.175994,-83.89245969999999,Conlee Oil Mart,,,955,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_955.png
+"7226 N Genesee Genesee, Mi 48437",,,\x,43.112282,-83.617302,Johns Marathon,,,963,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_963.png
+"9291 Holly Rd Grand Blanc, Mi 48439",,,\x,42.8938265,-83.63184059999999,Holly Road Bp,,,965,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_965.png
+"10001 N State Rd Otisville, Mi 48463",,,\x,43.152027,-83.5209777,Sams Korners,,,969,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_969.png
+"10211 Clio Rd Clio, Mi 48420",,,\x,43.1540596,-83.7347309,Vics Grocery,,,1067,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1067.png
+"2525 E Mt Morris Rd Mt Morris, Mi 48458",,,\x,43.1205405,-83.6583653,Tony R'S Market,,,1069,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1069.png
+"13257 Jennings Rd Linden, Mi 48451",,,\x,42.8340915,-83.74554069999999,Hayloft The,,,1071,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1071.png
+"6036 Lobdell Rd Linden, Mi 48451",,,\x,42.7870772,-83.788704,"Muellers Orchards, Seasonal",,,1075,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1075.png
+"1545 N Leroy St Fenton, Mi 48430",,,\x,42.8196153,-83.7082066,50 Sips Wine Llc,,,1077,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1077.png
+"331 N Main Street Davison, Mi 48423",,,\x,43.03249100000001,-83.517093,Davison Home Bakery,,,1081,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1081.png
+"3255 Owen Rd Fenton, Mi 48430",,,\x,42.7867122,-83.7373897,Target Store T-2105,,,1085,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1085.png
+"16177 Seymour Rd Linden, Mi 48451",,,\x,42.79112,-83.84543099999999,Northshore Market,,,1087,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1087.png
+"252 Perry Rd Ste C Grand Blanc, Mi 48439",,,\x,42.92409989999999,-83.6236347,Great Harvest Bread Company,,,1091,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1091.png
+"8039 State Road Goodrich, Mi 48438",,,\x,42.9174503,-83.50139709999999,Church & Son'S Auto Center,,,1095,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1095.png
+"1553 E Hill Rd Grand Blanc, Mi 48439",,,\x,42.94482250000001,-83.67149400000001,Oliver Ts,,,1097,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1097.png
+"420 E Blvd Dr Flint, Mi 48503",,,\x,43.0251446,-83.68516,Soozie Qs,,,1103,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1103.png
+"5279 W Pierson Rd Flushing, Mi 48433",,,\x,43.05995619999999,-83.7832504,Mattis Auto Wash Inc,,,1107,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1107.png
+"8592 N Seymour Rd Flushing, Mi 48433",,,\x,43.132774,-83.877723,Vics Market,,,1111,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1111.png
+"3103 Silver Lake Rd Fenton, Mi 48430",,,\x,42.8038722,-83.73219209999999,Silver Pte Shell,,,987,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_987.png
+"1509 S State Rd Davison, Mi 48423",,,\x,43.0091908,-83.51725309999999,1 Stop Food Store #30,,,991,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_991.png
+"12018 Liberty Clio, Mi 48420",,,\x,43.178088,-83.715648,Aldrichs Citgo,,,997,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_997.png
+"1014 Grand Blanc Rd Grand Blanc, Mi 48439",,,\x,42.9150728,-83.6916428,E Z Run Of Grand Blanc,,,1001,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1001.png
+"10013 E Mt Morris Rd Davison, Mi 48423",,,\x,43.1259351,-83.51839,Parkway Food Store,,,1005,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1005.png
+"3041 Grand Blanc Rd Grand Blanc, Mi 48439",,,\x,42.9166288,-83.6503156,Grand Castle Mart Inc,,,1009,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1009.png
+"118 E Main Flushing, Mi 48433",,,\x,43.0628,-83.8550681,Main Street Treasures,,,1011,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1011.png
+"11566 N Saginaw Clio, Mi 48420",,,\x,43.1769869,-83.7137978,Tonys Inc,,,1015,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1015.png
+"4006 N Irish Rd Davison, Mi 48423",,,\x,43.063272,-83.557164,Bakers Market,,,1017,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1017.png
+"5124 E Hill Rd Grand Blanc, Mi 48439",,,\x,42.9446921,-83.6085257,Tonys Kwik Mart,,,1021,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1021.png
+"5545 S State Rd Goodrich, Mi 48438",,,\x,42.947639,-83.504226,Last Chance Party Store,,,1029,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1029.png
+"101 W Shiawassee Ave Fenton, Mi 48430",,,\x,42.7927526,-83.70544559999999,Sweet Variations Inc,,,1031,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1031.png
+"402 Silver Lake Rd Fenton, Mi 48430",,,\x,42.7985383,-83.7091408,Revana Gas Station,,,1039,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1039.png
+"7010 W Frances Rd Flushing, Mi 48433",,,\x,43.133834,-83.81439499999999,Hoagies Party Store,,,1043,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1043.png
+"5519 N Elms Rd Flushing, Mi 48433",,,\x,43.08896,-83.81393899999999,Bears Corner Party Shop Inc,,,1045,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1045.png
+"213 N State Otisville, Mi 48463",,,\x,43.1677963,-83.5249795,Conlee Oil Co,,,1049,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1049.png
+"9144 N Dort Hwy Mt Morris, Mi 48458",,,\x,43.1380399,-83.683973,Pony Keg,,,1051,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1051.png
+"11230 S Saginaw Grand Blanc, Mi 48439",,,\x,42.9302171,-83.6338246,Aremia International Party Shoppe,,,1055,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1055.png
+"8464 W Mt Morris Rd Flushing, Mi 48433",,,\x,43.1181312,-83.8513195,Ginos Quik Stop,,,1059,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1059.png
+"5522 N State Rd Davison, Mi 48423",,,\x,43.0923933,-83.51780699999999,Heidi'S Market,,,1061,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1061.png
+"3838 Richfield Rd Flint, Mi 48506",,Sun - Sat: 6 AM - Midnight,\x,43.0510374,-83.6368359,Kroger Store #115,(810) 736-0320,,23,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_23.png
+"2002 W Pierson Rd Flint, Mi 48504",,"Mon - Sat, 9am - 8pm; Sun, 9am - 6pm",\x,43.0612186,-83.7299582,Shorthorn Meat Market,(810) 820 - 4910,,27,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_27.png
+"5018 Clio Rd Flint, Mi 48504",,"Mon - Sun, 8am -10pm",\x,43.0601697,-83.7327786,Rite Aid #4310,(810) 787-2232,,33,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_33.png
+"1810 Maplewood Ave Flint, Mi 48506",,"Mon - Sun, 8am - 8pm",\x,43.0326045,-83.66351739999999,Rite Aid Disc Pharmacy #3780,(810) 232-6423,,39,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_39.png
+"2407 Mlk Street Flint, Mi 48505",,"Mon - Sun, 8am - 2am",\x,43.0383258,-83.70484359999999,Liquor Plus Mini Mart,(810) 232-1990,,45,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_45.png
+"645 W Pierson Flint, Mi 48505",,,\x,43.0606424,-83.7134792,Z'S Liquor Corner,(810) 787-4340,,51,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_51.png
+"1520 W Pasadena Flint, Mi 48504",,"Mon - Sun, 8 am - 2 am",\x,43.0465189,-83.72292300000001,Paradise House Of Liquor,(810) 785-0216,,55,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_55.png
+"2816 Richfield Rd Flint, Mi 48506",,Sun - Th: 7am - 11:30pm; Fri + Sat: 7am - 1am,\x,43.0506216,-83.65457719999999,Cabs Party Store,(810) 407-7177,,61,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_61.png
+"3917 W Court St Flint, Mi 48532",,,\x,43.0065903,-83.7369719,Flint Lucky Star,810-767-2470,,69,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_69.png
+"2500 Clio Rd Flint, Mi 48504",,"Mon - Sun, 7am - 2am",\x,43.0387759,-83.7319711,Clio Road Market,(810) 233-0582,,75,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_75.png
+"808 S Center St Flint, Mi 48506",,"Mon - Th, 10am - 11pm; Fri-Sat, 10am - 12am; Sun: 12pm -10pm",\x,43.0192935,-83.6353309,Royal Liquor Store #3 Llc,(810) 715-3007,,79,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_79.png
+"3009 N Saginaw St Flint, Mi 48505",,Mon - Sun: 9am - 2am,\x,43.0435685,-83.694302,Liquor Corner Inc,(810) 787-4040,,87,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_87.png
+"2638 Flushing Rd Flint, Mi 48504",,"Mon - Sat, 9am - 2am; Sun - 11am - 12am",\x,43.0229749,-83.72543420000001,K & J Market,(810) 767-7005,,93,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_93.png
+"4412 Fenton Rd Flint, Mi 48507",,,\x,42.9833715,-83.693294,Fenton Road Quik Stop,810-234-8003,,99,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_99.png
+"773 Wager St Flint, Mi 48505",,,\x,43.0577874,-83.6907875,Sams Liquor Market,(810) 785-5718,,105,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_105.png
+"843 S Stevenson Flint, Mi 48506",,"Mon - Sat, 8am -12am; Sun - 9am - 11pm",\x,43.018934,-83.7084886,Farahs Food Market,(810) 239-8225,,109,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_109.png
+"2702 N Franklin Ave Flint, Mi 48506",,Mon - Sat: 10am - 12am; Sun: 10am - 11pm,\x,43.0399319,-83.6649612,Franklin St Mini Mart,(810) 232-5830,,115,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_115.png
+"2743 Corunna Rd Flint, Mi 48503",,Monday - Sat: 10am - 1am; Sun: 10am - 12am,\x,43.0023396,-83.7248012,Sami Quik Stop,(810) 235-7803,,129,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_129.png
+"3001 N Dort Hwy Flint, Mi 48506",,"Mon - Sun, 10am - 10pm (ish - see note)",\x,43.0421755,-83.6565162,Dort Party Store,(810) 234-7818,,137,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_137.png
+"3239 Davison Flint, Mi 48506",,,\x,43.0332476,-83.6458722,Khouris Market,(810) 736-0340,,151,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_151.png
+"3605 Fenton Rd Flint, Mi 48507",,24/7,\x,42.9899134,-83.69277319999999,Swak Inc,(810) 767-2764,,155,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_155.png
+"510 Leta St Flint, Mi 48507",,Mon - Th: 10am - 9pm; Fri: 10am - 10pm; Sat: 11am - 10pm; Sun - 11am - 9pm,\x,42.9863906,-83.6644938,Dons Market,(810) 743-5449,,159,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_159.png
+"6509 N Saginaw St Flint, Mi 48505",,Monday - Saturday: 9:00 AM to 8:00 PM; Sunday: 9:00 AM - 5:00 PM,\x,43.0711906,-83.6944212,Hutchinson Food & Drug Inc,810-787-1869,,171,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_171.png
+"2510 Fenton Rd Flint, Mi 48507",,Mon - Sat 8am - 9pm; Sun - 9am - 7pm,\x,42.9973611,-83.6935906,Mr Bs Market Inc,(810) 238-6916,,179,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_179.png
+"206 W Pierson Rd Flint, Mi 48505",,"Mon-Sat, 8am-9pm; Sun, 8am - 7pm",\x,43.06222289999999,-83.70639070000001,Landmark Food Center,(810) 789 7311,,185,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_185.png
+"822 S Dort Hwy Flint, Mi 48503",,"Mon - Sun, 8am - Midnight",\x,43.0187298,-83.6549788,Bp Future Plus Inc,810-239-3941,,193,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_193.png
+"2726 W Court St Flint, Mi 48503",,24/7,\x,43.0071642,-83.725704,Marathon - Algoda Gas Inc,810-232-5430,,199,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_199.png
+"527 N Grand Traverse St Flint, Mi 48503",,24/7,\x,43.0186537,-83.6997379,Sunoco Gas Station,(810) 239-4092,,205,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_205.png
+"4006 Clio Rd Flint, Mi 48504",,Mostly 24/7  [Clerk wasn't sure closing hours],\x,43.0507235,-83.73240679999999,Clio Petroleum Llc,(810) 787 2209,,209,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_209.png
+"3841 S Saginaw Flint, Mi 48507",,24/7,\x,42.9883061,-83.6755235,Saginaw Fuel North Llc,(810) 742-1720,,217,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_217.png
+"1960 W Atherton Rd Flint, Mi 48507",,24/7,\x,42.988671,-83.71291240000001,Flint Petro Mart Inc,(810) 235-2300,,223,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_223.png
+"4111 N Dort Hwy Flint, Mi 48505",,24/7,\x,43.0536177,-83.67139019999999,Singhs Stop,(810) 787-6510,,227,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_227.png
+"1680 Chevrolet Flint, Mi 48504",,24/7,\x,43.0313525,-83.71555289999999,V & T Enterprises Inc,810-232-0149,,233,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_233.png
+"1670 Dupont St Flint, Mi 48504",,"Mon - Sat, 6am -11pm; Sun, 8am - 10pm",\x,43.0314156,-83.7128772,S & E Gas Station,(810) 232-3020,,237,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_237.png
+"509 S Dort Hwy Flint, Mi 48503",,24/7,\x,43.0220689,-83.654381,Speedway #8748 Good Customer Service,(810) 239-0883,,243,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_243.png
+"300 E First St Flint, Mi 48502",,"1st 2 Saturdays,May - August,  8AM-5PM",\x,43.0170525,-83.6871951,Fresh Lake Whitefish Co,(906) 322-5928,,249,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_249.png
+"4519 Richfield Rd Flint, Mi 48505",,Mon - Sat 9am - 7pm; Sun - 10am - 6pm,\x,43.051924,-83.61662419999999,Ritas Dollar Giant,(810) 787-8000,,253,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_253.png
+"709 E Pierson Rd Flint, Mi 48505",,Monday - Sunday : 08:00 AM-10:00 PM,\x,43.0614561,-83.69325839999999,Family Dollar Store #1273,8107854091,,261,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_261.png
+"4416 S Dort Hwy Flint, Mi 48507",,"Mon - Sun , 8am - 9pm",\x,42.9840166,-83.6540854,Dollar General Store #8288,(810) 743-1135,,267,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_267.png
+"2702 Fenton Rd Flint, Mi 48507",,Monday - Sunday : 08:00 AM-08:00 PM,\x,42.9958383,-83.69341159999999,Family Dollar Store #7673,8103411781,,273,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_273.png
+"3513 Richfield Rd Flint, Mi 48506",,Monday - Sunday : 08:00 AM-10:00 PM,\x,43.05150769999999,-83.63642250000001,Family Dollar Stores Of Mich #2088,8104075850,,279,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_279.png
+"1918 N Dort Hwy Flint, Mi 48506",,"Mon - Sat, 8am - 9pm; Sun, 9am - 8pm",\x,43.0340689,-83.6545404,Save A Lot #308,(810) 238-1972,,285,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_285.png
+"4311 N Saginaw St Flint, Mi 48505",,"Mon-Wed, 8am - 12am; Th - Sat, 8am - 2am; Sun, 11am - 12am",\x,43.0547413,-83.69413050000001,Brothers Food Center,(810) 789-2541,,291,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_291.png
+"1716 Dupont St Flint, Mi 48504",,"Mon - Sat, 9am - 10pm; Sun, 10am - 10pm",\x,43.0322673,-83.7130009,K Cs Market,(810) 239-8077,,303,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_303.png
+"3271 S Dort Hwy Burtion, Mi 48529",,,\x,42.9816581,-83.6531996,Corner Stop,(810) 742-5464,,339,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_339.png
+"1313 W Coldwater Rd Flint, Mi 48505",,"Mon - Sun, 9am - 11pm",\x,43.0900737,-83.7060892,Seasons C Store,810-785-0810,,347,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_347.png
+"4507 S Center Rd Burton, Mi 48519",,"Mon - Sat, 10am - 11pm; Sun, 10am - 10pm",\x,42.96083309999999,-83.6322034,Bg'S Party Store,(810) 742-6170,,349,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_349.png
+"3386 Lippincott Blvd Burton, Mi 48519",,"Mon - Wed, 8:30 -1am; Th - Sat, 8:30am - 2am; Sun, 10am - 1am",\x,43.0037892,-83.63932190000001,Tariks Market,(810) 742-5320,,355,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_355.png
+"5237 Detroit St Flint, Mi 48505",,"Mon - Sat, 8am - 10pm; Sun: 8am - 9pm",\x,43.0817845,-83.7065466,Big Star Market,(810) 789-0970,,363,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_363.png
+"3138 W Pierson Rd Flint, Mi 48504",,,\x,43.06109,-83.7386052,Quick Pick Party Store Ii,(810) 787-4120,,371,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_371.png
+"3433 N Genesee Flint, Mi 48506",,Mon - Wed: 9am - 11pm; Th - Sat: 9am -12am; Sun - 10am - 10pm,\x,43.0593659,-83.6167588,Genesee Liquor Market Inc,(810) 736-4060,,375,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_375.png
+"5016 Richfield Rd Flint, Mi 48506",,Mon - Sun: 9am - 10pm,\x,43.0509682,-83.61542089999999,Sams Food Market,(810) 736-5900,,383,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_383.png
+"1229 N Ballenger Hwy Flint, Mi 48504",,Mon - Sat: 10am - 12am; Sun: 12pm - 10pm,\x,43.0204988,-83.73420019999999,777 Party Store,(810) 234-7134,,389,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_389.png
+"1052 E Maple Rd Flint, Mi 48507",,Mon - Sun: 8am - 12am,\x,42.9592444,-83.69064209999999,Food Plus Party Store Inc,(810) 234-7571,,395,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_395.png
+"3137 Brown St Flint, Mi 48532",,"Mon - Sun, 10am - 9pm",\x,43.0004407,-83.73853609999999,Brown Street Market,(810) 767-6550,,401,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_401.png
+"2480 S Center Rd Burton, Mi 48519",,Mon - Sat: 10am - 7pm; Closed Sun,\x,42.9908314,-83.63467899999999,Wild Farm Foods,810-744-4226,,407,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_407.png
+"5272 N Genesee Rd Flint, Mi 48506",,"Mon - Sun, 6am- 11pm",\x,43.0844679,-83.6165802,C G Station Inc,(810) 736-7707,,413,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_413.png
+"1205 N Ballenger Hwy Flint, Mi 48504",,24/7,\x,43.0225394,-83.73300859999999,Ballenger Service Station Llc,810-234-8679,,419,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_419.png
+"4508 Fenton Rd Flint, Mi 48507",,"Mon - Th, 5am - 11pm; Fri, 5am - 12am; Sat , 6am - 11pm; Sun, 7am - 10pm",\x,42.9599324,-83.6928984,Marathon Future Plus 1 Inc,810-232-2361,,425,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_425.png
+"3930 Corunna Rd Flint, Mi 48532",,24/7,\x,43.0025035,-83.738588,Corunna Express Stop #22 Llc,810-232-4201,,431,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_431.png
+"3311 S Saginaw St Burton, Mi 48529",,24/7,\x,42.980411,-83.6736957,Marathon Gas - Abeer Fuel Ii Inc,810-743-0580,,437,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_437.png
+"3509 S Dort Hwy Burton, Mi 48529",,24/7,\x,42.9751352,-83.6525686,Reliance Petroleum Llc,(810) 715-1767,,443,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_443.png
+"4513 W Pasadena Flint, Mi 48504",,"Mon-Sun, 7am - 10pm",\x,43.0450367,-83.7721483,Sunoco,(810) 720-1770,,449,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_449.png
+"3215 Flushing Rd Flint, Mi 48504",,,\x,43.026451,-83.73944929999999,Flushing Quick Stop,(810) 767-1402,,451,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_451.png
+"2474 W Hill Rd Flint, Mi 48507",,24/7,\x,42.94393789999999,-83.7299571,Meijer Gas Station #44,(810) 235-2700,,455,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_455.png
+"4006 Richfield Rd Flint, Mi 48506",,24/7,\x,43.050732,-83.6351059,Admiral Petroleum Co #31,(810) 736-8354,,471,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_471.png
+"4232 S Saginaw St Burton, Mi 48529",,24/7,\x,42.9680712,-83.6725025,Admiral Petroleum Co #36,(810) 715-9066,,481,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_481.png
+"1174 W Hill Rd Flint, Mi 48507",,"Mon-Fri, 10am - 7:30pm; Sat 10am - 5pm; closed Sun",\x,42.9449209,-83.6987832,Oasis Market,(810) 407-7133,,487,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_487.png
+"5076 Richfield Rd Flint, Mi 48506",,"Mon - Sun , 8am - 10pm",\x,43.0501476,-83.6167588,Dollar General Store #6020,(810) 743-4476,,499,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_499.png
+"3280 East Lippincott Blvd Burton, Mi 48519",,"Mon - Sat, 8am - 10pm; Sun, 10am - 9am",\x,43.00361119999999,-83.6431893,H & N Market,(810) 742-4718,,523,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_523.png
+"5452 N Dort Hwy Flint, Mi 48505",,"Mon - Sun, 12pm - 3pm & 6pm-11pm",\x,43.0881842,-83.6739116,Gourmet Foods Outlet,Jim's number: (810) 250 3290; Toll Free number (for customers): 877- Outlet9,,529,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_529.png
+"1542 E Pierson Rd Flushing, Mi 48433",,,\x,43.0590528,-83.8155156,Kroger Store #419,,,559,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_559.png
+"18005 Silver Parkway Fenton, Mi 48430",,,\x,42.7929998,-83.7379825,Vgs Food #1921,,,565,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_565.png
+"12731 S Saginaw Grand Blanc, Mi 48439",,,\x,42.9201374,-83.61888429999999,Kroger Store #409,,,573,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_573.png
+"8360 S Saginaw St Grand Blanc, Mi 48439",,,\x,42.9095071,-83.60582269999999,Rite Aid #4319,,,579,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_579.png
+"2506 E Hill Rd Grand Blanc, Mi 48439",,,\x,42.9439676,-83.6533582,Rite Aid #7733,,,587,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_587.png
+"1570 E Pierson Flushing, Mi 48433",,,\x,43.0595714,-83.8137383,Walgreens #6054,,,593,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_593.png
+"337 N State Otisville, Mi 48463",,,\x,43.1690423,-83.52506989999999,Rite Aid Discount Pharmacy #3510,,,603,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_603.png
+"6026 Lapeer Rd Burton, Mi 48509",,,\x,43.0104802,-83.59413599999999,Rite Aide Discount Pharmacy #4806,,,613,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_613.png
+"12821 South Saginaw St Grand Blanc, Mi 48439",,,\x,42.9188717,-83.61770609999999,General Nutrition Center,,,619,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_619.png
+"10236 W Vienna Rd Montrose, Mi 48457",,,\x,43.1766158,-83.8765512,Riverside Market,,,623,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_623.png
+"4278 Morrish Rd Swartz Creek, Mi 48473",,,\x,42.964115,-83.83135089999999,Morrish Fuel Llc,,,633,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_633.png
+"7510 N Genesee Rd Genesee, Mi 48437",,,\x,43.1201719,-83.61713999999999,Admiral Petroleum Co #180,,,639,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_639.png
+"11481 Linden Rd Clio, Mi 48420",,,\x,43.1761602,-83.7747327,Murphy Usa #7387,,,643,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_643.png
+"8546 Miller Rd Swartz Creek, Mi 48473",,,\x,42.9574573,-83.8497455,Speedway #8862,,,649,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_649.png
+"2456 W Grand Blanc Rd Grand Blanc, Mi 48439",,,\x,42.9152235,-83.72760579999999,Speedway #8591,,,653,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_653.png
+"3340 Owen Road Fenton, Mi 48430",,,\x,42.790076,-83.7407896,Speedway #5509,,,659,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_659.png
+"3238 W Thompson Rd Fenton, Mi 48430",,,\x,42.863331,-83.73812600000001,Shell Thompson Exit,,,663,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_663.png
+"1491 N Leroy St Fenton, Mi 48430",,,\x,42.8176657,-83.7080707,One Stop Foods #4,,,669,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_669.png
+"110 E Broad St Linden, Mi 48451",,,\x,42.8144374,-83.78191939999999,Beacon & Bridge Market #8,,,673,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_673.png
+"6526 Corunna Rd Flint, Mi 48532",,,\x,43.0017084,-83.8115607,Speedway #2210,,,679,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_679.png
+"11500 Sheridan Montrose, Mi 48457",,,\x,43.17498579999999,-83.92980539999999,Beacon & Bridge Market #5,,,683,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_683.png
+"7561 Miller Rd Swartz Creek, Mi 48473",,,\x,42.9569792,-83.8292584,Admiral Petroleum Co #42,,,689,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_689.png
+"4514 W Grand Blanc Rd Swartz Creek, Mi 48473",,,\x,42.9141219,-83.7692402,Beacon & Bridge Market #1,,,693,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_693.png
+"5015 E Vienna Rd Clio, Mi 48420",,,\x,43.18013939999999,-83.6196901,Beacon & Bridge Market #2,,,699,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_699.png
+"7381 N Genesee Rd Genesee, Mi 48437",,,\x,43.1166768,-83.6187525,Family Dollar Store #1862,,,701,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_701.png
+"11925 N Saginaw Mount Morris, Mi 48458",,,\x,43.1210967,-83.69504409999999,Dollar General Store #13748,,,703,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_703.png
+"11307 Linden Rd Clio, Mi 48420",,,\x,43.1729138,-83.77480709999999,Dollar Tree #3724,,,709,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_709.png
+"8144 S Silver Lake Dr Linden, Mi 48451",,,\x,42.7987584,-83.8307708,Dollar General Store #10929,,,713,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_713.png
+"410 N State Rd Otisville, Mi 48463",,,\x,43.1720478,-83.5224537,Family Dollar Store #7290,,,719,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_719.png
+"11966 N Saginaw St Mount Morris, Mi 48458",,,\x,43.1222147,-83.6929775,Family Dollar Stores Of Mich #4673,,,725,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_725.png
+"9102 Miller Rd Swartz Creek, Mi 48473",,,\x,42.95831039999999,-83.8538817,Family Dollar Stores Of Mich #3029,,,729,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_729.png
+"1260 N Leroy St Fenton, Mi 48430",,,\x,42.8118178,-83.7065401,Dollar General Store #8819,,,737,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_737.png
+"11972 N Saginaw St Mt Morris, Mi 48458",,,\x,43.1225211,-83.6931135,Beverage Mart #80/Save A Lot #304,,,741,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_741.png
+"1228 N Leroy Fenton, Mi 48430",,,\x,42.8113081,-83.7064231,Locke'S Party Store,,,751,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_751.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Fun With Frosting,,,757,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_757.png
+"502 Silver Lake Fenton, Mi 48430",,,\x,42.7985797,-83.710241,Fenton Party Shop,,,763,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_763.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Lj'S Farm Market Inc,,,771,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_771.png
+"12473 Seymour Rd Montrose, Mi 48457",,,\x,43.1892462,-83.88117749999999,Junes Floral Company,,,775,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_775.png
+"1104 S Elms Flint, Mi 48532",,,\x,43.01255039999999,-83.81296929999999,Jimmys Short Stop,,,781,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_781.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Great Harvest Bread Co,,,785,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_785.png
+"1314 N Leroy St Fenton, Mi 48430",,,\x,42.81298870000001,-83.7069999,Rsvk Investment Llc,,,791,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_791.png
+"103 N Bridge St Linden, Mi 48451",,,\x,42.81487300000001,-83.782569,The French Confection Cakery Llc,,,797,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_797.png
+"1180 S State St Davison, Mi 48423",,,\x,43.0149705,-83.5181401,Davison Gas Llc,,,805,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_805.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Knob Hill Meats,,,811,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_811.png
+"8110 E Court Street Davison, Mi 48423",,,\x,43.0184027,-83.5512835,Hills Home Cured Cheese,,,815,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_815.png
+"8110 E Court St Davison, Mi 48423",,,\x,43.0184027,-83.5512835,R.R. Porter Llc,,,821,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_821.png
+"8474 W Mt Morris Rd Flushing, Mi 48433",,,\x,43.1182763,-83.8517127,Eli'S Smokehouse Deli,,,825,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_825.png
+"11804 S Saginaw St Grand Blanc, Mi 48439",,,\x,42.92462769999999,-83.6276515,Lee Ays,,,831,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_831.png
+"5454 Perry Rd Grand Blanc, Mi 48439",,,\x,42.9300713,-83.59800109999999,Perry Grocery Llc,,,835,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_835.png
+"500 S Mill St Clio, Mi 48420",,,\x,43.173628,-83.73543599999999,A & M Oriental Grocery,,,837,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_837.png
+"7539 Grand Blanc Rd Swartz Creek, Mi 48473",,,\x,42.9125223,-83.8299923,Isaac'S Grocery,,,841,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_841.png
+"9052 N Saginaw St Mount Morris, Mi 48458",,,\x,43.1357155,-83.69443419999999,Luckys Liquorland,,,845,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_845.png
+"1220 N Leroy Fenton, Mi 48430",,,\x,42.8111559,-83.706645,Lester Lee'S,,,851,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_851.png
+"123 E Broad St Linden, Mi 48451",,,\x,42.8156109,-83.77370479999999,Linden Mercantile & Artisan Market,,,855,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_855.png
+"11741 N Saginaw Mount Morris, Mi 48458",,,\x,43.1192886,-83.6947251,Valley Liquor,,,861,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_861.png
+"10293 S Saginaw St Grand Blanc, Mi 48439",,,\x,42.9322267,-83.6356251,R & W Food Castle,,,865,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_865.png
+"3355 S State Rd Davison, Mi 48423",,,\x,42.981389,-83.5061456,Zips Party Store,,,871,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_871.png
+"8030 Duffield Gaines, Mi 48436",,,\x,42.911899,-83.91004099999999,K & M Party Store,,,875,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_875.png
+"3500 State Rd Davison, Mi 48423",,,\x,43.0628991,-83.5170574,Asf Of Flint Inc,,,881,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_881.png
+"524 N State Davison, Mi 48423",,,\x,43.0342582,-83.5176419,Kroger Fuel Station #714,,,885,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_885.png
+"1086 N Irish Rd Davison, Mi 48423",,,\x,43.0222671,-83.5550434,Green Earth Grocery Llc,,,891,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_891.png
+"18001 Silver Pkwy Fenton, Mi 48430",,,\x,42.7942592,-83.7391505,Vg'S Quick Stop #774,,,895,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_895.png
+"11289 Silver Lake Rd Byron, Mi 48418",,,\x,42.81121,-83.89334889999999,Beards Party Store,,,901,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_901.png
+"225 E State Street Montrose, Mi 48457",,,\x,43.17681,-83.8882982,Sav-On Montrose Family Pharmacy,,,911,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_911.png
+"6039 S Dort Hwy Grand Blanc, Mi 48439",,,\x,42.9437083,-83.6519744,Whigville Market,,,915,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_915.png
+"11357 Linden Rd Clio, Mi 48420",,,\x,43.1710534,-83.7773369,Menards,,,921,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_921.png
+"604 W Broad St Linden, Mi 48451",,,\x,42.8133865,-83.7894869,Yono Alpine Foods Inc,,,927,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_927.png
+"14483 N Bray Clio, Mi 48420",,,\x,43.2214466,-83.6613361,County Line Party Shop Inc,,,931,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_931.png
+"627 N State Davison, Mi 48423",,,\x,43.0359877,-83.5183179,Diehls Party Store,,,935,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_935.png
+"6010 S Saginaw Rd Grand Blanc, Mi 48439",,,\x,42.8868803,-83.5997191,D & N Food & Gas,,,941,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_941.png
+"12060 Hegel Rd Goodrich, Mi 48438",,,\x,42.9190248,-83.472355,"Porters Orchard & Cider Mill, Seasonal",,,945,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_945.png
+"311 E Grand Blanc Rd Grand Blanc, Mi 48439",,,\x,42.9252796,-83.6325567,Colonys Quality Meats,,,957,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_957.png
+"10156 N Saginaw Rd Clio, Mi 48420",,,\x,43.1529021,-83.6952471,North Point Marathon,,,961,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_961.png
+"2372 E Hill Rd Grand Blanc, Mi 48439",,,\x,42.9442207,-83.65857299999999,The Liquor Carousel,,,971,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_971.png
+"2459 North Rd Fenton, Mi 48430",,,\x,42.8042908,-83.724355,Matt & Terrys Market,,,975,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_975.png
+"111 Genesee St Gaines, Mi 48436",,,\x,42.872554,-83.91324279999999,Gaines Superette,,,979,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_979.png
+"5277 Corunna Rd Flint, Mi 48532",,,\x,43.0016924,-83.7831012,S & A Petro Inc,,,983,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_983.png
+"8020 Fenton Rd Grand Blanc, Mi 48439",,,\x,42.9144461,-83.6913896,Georgies Corner,,,989,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_989.png
+"6010 Fenton Rd Flint, Mi 48507",,,\x,42.9438993,-83.69259869999999,Kajy Hill Inc,,,993,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_993.png
+"4290 W Vienna Rd Clio, Mi 48420",,,\x,43.1797501,-83.7649424,Kmart #9385,,,999,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_999.png
+"3909 Owen Road Fenton, Mi 48430",,,\x,42.7890613,-83.74585189999999,Merchant'S Gourmet Wine Shop,,,1007,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1007.png
+"8365 Silver Lake Rd Argentine, Mi 48451",,,\x,42.7947426,-83.8373476,Rpf Oil #34,,,1013,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1013.png
+"815 S Mill St Clio, Mi 48420",,,\x,43.170639,-83.73315389999999,Conlee Oil Co,,,1019,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1019.png
+"9056 Silver Lake Rd Linden, Mi 48451",,,\x,42.791749,-83.8464589,Nasser Inc,,,1023,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1023.png
+"5589 S Saginaw Flint, Mi 48507",,,\x,42.9475346,-83.6534051,Craigs Food Stores #344,,,1027,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1027.png
+"12366 N Vassar Rd Millington, Mi 48746",,,\x,43.1893924,-83.5786629,Smith Meats Inc,,,1033,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1033.png
+"4514 W Vienna Rd Clio, Mi 48420",,,\x,43.1779363,-83.77290789999999,Conlee Country Store,,,1037,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1037.png
+"8055 Miller Rd Swartz Creek, Mi 48473",,,\x,42.9569441,-83.83282179999999,Lovegroves Cake & Candy Center,,,1041,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1041.png
+"6069 Lapeer Rd Burton, Mi 48509",,,\x,43.0112011,-83.59249299999999,Friendly Market,,,1047,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1047.png
+"12473 Seymour Rd Montrose, Mi 48457",,,\x,43.1892462,-83.88117749999999,Montrose Orchards Inc,,,1053,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1053.png
+"8024 Miller Rd Swartz Creek, Mi 48473",,,\x,42.957474,-83.83176519999999,Fortinos Food Market Inc,,,1057,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1057.png
+"5225 Flushinrd Flushing, Mi 48433",,,\x,43.03857,-83.78208099999999,Jims Party Store Inc,,,1063,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1063.png
+"13167 N Saginaw Rd Clio, Mi 48420",,,\x,43.1958943,-83.7290866,Ernies Beer & Wine,,,1065,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1065.png
+"9490 S Saginaw Rd Grand Blanc, Mi 48439",,,\x,42.888138,-83.59979249999999,Sean Enterprises Co Inc,,,1105,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1105.png
+"5518 E Atherton Rd Burton, Mi 48519",,,\x,42.9897968,-83.5948847,J B C Enterprises Inc,,,1109,https://flinteats.nyc3.digitaloceanspaces.com/prod/market_1109.png

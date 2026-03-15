@@ -25,6 +25,17 @@
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
+    },
+    {
+      "name": "data",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/data/food_resources.json",
+          "/assets/data/markets.csv"
+        ]
+      }
     }
   ]
 }

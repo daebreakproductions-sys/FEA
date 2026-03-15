@@ -1,0 +1,62 @@
+.modal-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--ion-color-primary);
+}
+
+.form-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 16px;
+}
+
+ion-label {
+  font-weight: 500;
+}
+
+ion-input, ion-textarea, ion-select {
+  --background: var(--ion-color-light);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.toggle-item {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.category-list {
+  margin-top: 16px;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.add-category-btn {
+  margin-top: 16px;
+  --border-color: var(--ion-color-primary);
+}
+
+.modal-footer {
+  --padding-start: 16px;
+  --padding-end: 16px;
+}

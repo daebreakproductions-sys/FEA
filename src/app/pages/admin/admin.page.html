@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Admin Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="exportData()">
+        <ion-icon name="download-outline"></ion-icon>
+        Export
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar 
+      [(ngModel)]="searchTerm" 
+      (ionChange)="filterLocations()"
+      placeholder="Search locations...">
+    </ion-searchbar>
+    <ion-segment [(ngModel)]="selectedType" (ionChange)="filterLocations()">
+      <ion-segment-button value="all">All</ion-segment-button>
+      <ion-segment-button value="FarmersMarket">Farmers Market</ion-segment-button>
+      <ion-segment-button value="FoodRetailer">Grocery</ion-segment-button>
+      <ion-segment-button value="FoodPantry">Pantry</ion-segment-button>
+      <ion-segment-button value="MealSite">Meal Site</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addLocation()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-item *ngFor="let location of filteredLocations">
+      <ion-avatar slot="start">
+        <ion-icon 
+          [name]="getProviderIcon(location.provider_type)"
+          [color]="getProviderTypeColor(location.provider_type)">
+        </ion-icon>
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>{{ location.name }}</h2>
+        <p>{{ location.address }}</p>
+        <p>
+          <ion-badge [color]="location.ebt_accepted ? 'success' : 'medium'">EBT</ion-badge>
+          <ion-badge [color]="location.dufb_offered ? 'success' : 'medium'">DUFB</ion-badge>
+          <ion-badge [color]="location.wic_accepted ? 'success' : 'medium'">WIC</ion-badge>
+        </p>
+      </ion-label>
+      
+      <ion-buttons slot="end">
+        <ion-button (click)="editLocation(location)" color="primary">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteLocation(location)" color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngIf="filteredLocations.length === 0">
+    <ion-card-content>
+      <ion-text color="medium">
+        <h3>No locations found</h3>
+        <p>Try adjusting your search or filters</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

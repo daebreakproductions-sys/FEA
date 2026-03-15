@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "FlintEatsServer",
+			"path": "../../../FlintEatsServer"
+		},
+		{
+			"path": "../../../scripts"
+		},
+		{
+			"path": "../../../data"
+		},
+		{
+			"path": "../../../docs"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isNew ? 'Add Location' : 'Edit Location' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Name *</ion-label>
+        <ion-input [(ngModel)]="editedLocation.name" name="name" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Address *</ion-label>
+        <ion-input [(ngModel)]="editedLocation.address" name="address" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Latitude *</ion-label>
+        <ion-input type="number" [(ngModel)]="editedLocation.lat" name="lat" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Longitude *</ion-label>
+        <ion-input type="number" [(ngModel)]="editedLocation.lng" name="lng" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Type *</ion-label>
+        <ion-select [(ngModel)]="editedLocation.provider_type" name="provider_type">
+          <ion-select-option *ngFor="let type of getProviderTypes()" [value]="type">
+            {{ type }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Phone</ion-label>
+        <ion-input [(ngModel)]="editedLocation.phone" name="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Website</ion-label>
+        <ion-input [(ngModel)]="editedLocation.url" name="url"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Hours</ion-label>
+        <ion-textarea [(ngModel)]="editedLocation.hours" name="hours"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Notes</ion-label>
+        <ion-textarea [(ngModel)]="editedLocation.notes" name="notes"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>EBT Accepted</ion-label>
+        <ion-toggle [(ngModel)]="editedLocation.ebt_accepted" name="ebt_accepted"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>DUFB Offered</ion-label>
+        <ion-toggle [(ngModel)]="editedLocation.dufb_offered" name="dufb_offered"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>WIC Accepted</ion-label>
+        <ion-toggle [(ngModel)]="editedLocation.wic_accepted" name="wic_accepted"></ion-toggle>
+      </ion-item>
+
+      <ion-item-divider>
+        <ion-label>Food Categories</ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let category of editedLocation.food_categories_list; let i = index">
+        <ion-input 
+          [(ngModel)]="editedLocation.food_categories_list[i]" 
+          [name]="'category' + i"
+          placeholder="Enter food category">
+        </ion-input>
+        <ion-button fill="clear" (click)="removeFoodCategory(i)" color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-button expand="block" fill="outline" (click)="addFoodCategory()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Add Food Category
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()" color="primary">
+        {{ isNew ? 'Add' : 'Save' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -18,7 +18,7 @@ import { OSM } from 'ol/source';
 import TileLayer from 'ol/layer/Tile';
 import { Vector as LayerVector } from 'ol/layer';
 import { Vector as SourceVector } from 'ol/source';
-import { Fill, Icon, Style, Text } from 'ol/style';
+import { Fill, Icon, Style, Text, Circle, Stroke } from 'ol/style';
 import { Point } from 'ol/geom';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import Feature from 'ol/Feature';
@@ -40,10 +40,25 @@ export class NearbyPage {
   private markersLayer: LayerVector;
   private currentLocationLayer: LayerVector;
   private overlayId;
-  // private cluster: L.MarkerClusterGroup;
-  private iconMarket: Style;
+  
+  // Color-coded icon styles per documentation
+  // Green = Farmers Markets (permanent)
+  private iconFarmersMarket: Style;
+  // Blue = Grocery/Food Retailers (traditional stores)
+  private iconGrocery: Style;
+  // Purple = Food Pantries (canned goods symbol)
+  private iconFoodPantry: Style;
+  // Purple = Meal Sites (fork/spoon symbol)
+  private iconMealSite: Style;
+  // Purple = Mobile Markets (seasonal)
+  private iconMobileMarket: Style;
+  // Blue = Current location
   private iconBlue: Style;
+  
+  // Legacy icons for backward compatibility
+  private iconMarket: Style;
   private iconPantry: Style;
+  
   readonly resize: number = 0.65;
   readonly iconHeight: number = 98 * this.resize;
   readonly iconWidth: number = 90 * this.resize;
@@ -61,6 +76,12 @@ export class NearbyPage {
     class: 'market'
   };
 
+  // Search and filter state
+  private currentSearchTerm: string = '';
+  private filterEBT: boolean = false;
+  private filterDUFB: boolean = false;
+  private filterOpenNow: boolean = false;
+
   private container: HTMLElement;
   private content: HTMLElement;
   private closer: HTMLElement;
@@ -74,7 +95,7 @@ export class NearbyPage {
     public viewContainerRef: ViewContainerRef,
     private initService: InitService,
   ) { 
-    // https://mapicons.mapsmarker.com/markers/restaurants-bars/wi-fi/?custom_color=223cd1
+    // Current location icon (blue WiFi-style marker)
     this.iconBlue = new Style({
       image: new Icon({
         anchor: [0.5, 1],
@@ -83,7 +104,8 @@ export class NearbyPage {
         src: 'assets/images/wi-fi-2.png',
       }),
     });
-    // https://mapicons.mapsmarker.com/markers/stores/general-merchandise/supermarket/?custom_color=20d44d
+    
+    // Legacy icons for backward compatibility
     this.iconMarket = new Style({
       image: new Icon({
         anchor: [0.5, 1],
@@ -92,13 +114,59 @@ export class NearbyPage {
         src: 'assets/images/marker-supermarket.png',
       }),
     });
-    // https://mapicons.mapsmarker.com/markers/stores/food-drink/grocery/?custom_color=a522d4
+    
     this.iconPantry = new Style({
       image: new Icon({
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         src: 'assets/images/marker-foodpantry.png',
+      }),
+    });
+    
+    // Color-coded icons per documentation requirements
+    // Green for Farmers Markets - using a green circle marker
+    this.iconFarmersMarket = new Style({
+      image: new Circle({
+        radius: 12,
+        fill: new Fill({ color: '#22c55e' }), // Green-500
+        stroke: new Stroke({ color: '#ffffff', width: 2 }),
+      }),
+    });
+    
+    // Blue for Grocery/Food Retailers
+    this.iconGrocery = new Style({
+      image: new Circle({
+        radius: 10,
+        fill: new Fill({ color: '#3b82f6' }), // Blue-500
+        stroke: new Stroke({ color: '#ffffff', width: 2 }),
+      }),
+    });
+    
+    // Purple for Food Pantries
+    this.iconFoodPantry = new Style({
+      image: new Circle({
+        radius: 12,
+        fill: new Fill({ color: '#a855f7' }), // Purple-500
+        stroke: new Stroke({ color: '#ffffff', width: 2 }),
+      }),
+    });
+    
+    // Purple for Meal Sites
+    this.iconMealSite = new Style({
+      image: new Circle({
+        radius: 12,
+        fill: new Fill({ color: '#9333ea' }), // Purple-600
+        stroke: new Stroke({ color: '#ffffff', width: 2 }),
+      }),
+    });
+    
+    // Purple for Mobile Markets
+    this.iconMobileMarket = new Style({
+      image: new Circle({
+        radius: 11,
+        fill: new Fill({ color: '#c084fc' }), // Purple-400
+        stroke: new Stroke({ color: '#ffffff', width: 2 }),
       }),
     });
     
@@ -177,28 +245,42 @@ export class NearbyPage {
     };
 
     this.map.on('singleclick', (evt) => this.handleClick(evt, this.eatsLocationsService, overlay));
-    // this.map.on('singleclick', function (evt) {
-    //   console.log(evt)
-    //   const coordinate = evt.coordinate;
-    //   let lonLat = toLonLat(coordinate);
-    //   const lon = lonLat[0];
-    //   const lat = lonLat[1];
-      
-    //   const hdms = toStringHDMS(toLonLat(coordinate));
-    
-    //   content.innerHTML = '<p style="color: black">You clicked here:</p><code>' + hdms + '</code>';
-    //   overlay.setPosition(coordinate);
-    // });
 
-    // tiles.addTo(this.map);
-
-    // this.cluster = L.markerClusterGroup({
-    //   showCoverageOnHover: false,
-    //   // disableClusteringAtZoom: 16
-    // });
-    // this.cluster.addTo(this.map);
-
+    // Initialize the new data service
+    this.eatsLocationsService.init();
     this.showAllEatsLocations();
+  }
+
+  /**
+   * Get the appropriate icon style based on provider type
+   * Implements color-coded icon logic from documentation:
+   * - Green = Farmers Markets
+   * - Blue = Grocery/Food Retailers
+   * - Purple = Food Pantries, Meal Sites, Mobile Markets
+   */
+  private getIconForLocation(eatsLoc: EatsLocation): Style {
+    // Use provider_type if available (from new data)
+    if (eatsLoc.provider_type) {
+      switch (eatsLoc.provider_type) {
+        case 'FarmersMarket':
+          return this.iconFarmersMarket;
+        case 'FoodPantry':
+          return this.iconFoodPantry;
+        case 'MealSite':
+          return this.iconMealSite;
+        case 'MobileMarket':
+          return this.iconMobileMarket;
+        case 'FoodRetailer':
+        default:
+          return this.iconGrocery;
+      }
+    }
+    
+    // Fall back to legacy class-based logic
+    if (eatsLoc.class?.includes('Pantry')) {
+      return this.iconPantry;
+    }
+    return this.iconMarket;
   }
 
   handleClick(evt: MapBrowserEvent<any>, eatsService: EatsLocationsService, overlay: Overlay) {
@@ -209,13 +291,15 @@ export class NearbyPage {
         longitude: lonLat[0]
       }
     }, 1)[0];
-    this.popupContent = {
-      title: result.eatsLocation.name,
-      id: result.eatsLocation.id,
-      rating: result.eatsLocation.reviewsRating,
-      class: result.eatsLocation.class
+    if (result) {
+      this.popupContent = {
+        title: result.eatsLocation.name,
+        id: result.eatsLocation.id,
+        rating: result.eatsLocation.reviewsRating,
+        class: result.eatsLocation.class
+      };
+      overlay.setPosition(fromLonLat([result.eatsLocation.lng, result.eatsLocation.lat]));
     }
-    overlay.setPosition(fromLonLat([result.eatsLocation.lng, result.eatsLocation.lat]));
   }
 
   ionViewWillEnter() {
@@ -223,7 +307,6 @@ export class NearbyPage {
   }
 
   showAllEatsLocations() {
-    // this.cluster.clearLayers();
     Geolocation.getCurrentPosition().then(locationData => {
       if(this.isLocationOutsideGeneseeCounty(locationData)) {
         this.currentLocation = this.getFakeGeneseeCountyCoords();
@@ -249,7 +332,7 @@ export class NearbyPage {
         this.eatsLocationsService.notifier.subscribe(myObserver);
       }
     }).catch(err => {
-      console.log(err)
+      console.log(err);
       setTimeout(() => {
         this.showAllEatsLocations();
       }, 1000);
@@ -257,47 +340,55 @@ export class NearbyPage {
   }
   
   addMarkers(eatsLocations: EatsLocation[]) {
+    this.currentMarkers = [];
     eatsLocations.forEach( eatsLoc => {
       if(eatsLoc.lat && eatsLoc.lng) {
-        const component = this.viewContainerRef.createComponent(MapPopupComponent);
-        component.instance.eatsLocation = eatsLoc;
-        component.changeDetectorRef.detectChanges();
-
         let m = new Feature(new Point(fromLonLat([eatsLoc.lng, eatsLoc.lat])));
-        m.setStyle(eatsLoc.class?.includes('Market') ? this.iconMarket : this.iconPantry);
-        m.addEventListener('singleclick', (evt) => {
-
-        })
-        //.bindPopup(component.location.nativeElement);
-
+        
+        // Use color-coded icon based on provider type
+        m.setStyle(this.getIconForLocation(eatsLoc));
+        
+        // Store the eatsLocation data with the feature for click handling
+        m.setProperties({
+          eatsLocation: eatsLoc
+        });
+        
         this.currentMarkers.push(m);
-        // this.cluster.addLayer(m);
       }
     });
     this.markersLayer.getSource().clear();
     this.markersLayer.getSource().addFeatures(this.currentMarkers);
-    
   }
+  
   addCurrentLocationMarker() {
+    this.currentLocationLayer.getSource().clear();
     let m = new Feature(new Point(fromLonLat([this.currentLocation.coords.longitude, this.currentLocation.coords.latitude])));
     m.setStyle(this.iconBlue);
     this.currentLocationLayer.getSource().addFeature(m);
   }
+  
   zoomToData(dataset: EatsLocation[], location: Position = this.currentLocation) {
-    let minLat = Math.min(dataset.sort((a, b) => a.lat - b.lat)[0].lat, location.coords.latitude);
-    let maxLat = Math.max(dataset.sort((a, b) => b.lat - a.lat)[0].lat, location.coords.latitude);
-    let minLng = Math.min(dataset.sort((a, b) => a.lng - b.lng)[0].lng, location.coords.longitude);
-    let maxLng = Math.max(dataset.sort((a, b) => b.lng - a.lng)[0].lng, location.coords.longitude);
-    // TODO: Calculate bounds/zoom from data set
-
-    this.flyTo(fromLonLat([location.coords.longitude, location.coords.latitude]), 13, () => {});
+    if (dataset.length === 0) return;
+    
+    let minLat = Math.min(...dataset.map(d => d.lat), location.coords.latitude);
+    let maxLat = Math.max(...dataset.map(d => d.lat), location.coords.latitude);
+    let minLng = Math.min(...dataset.map(d => d.lng), location.coords.longitude);
+    let maxLng = Math.max(...dataset.map(d => d.lng), location.coords.longitude);
+    
+    // Center on the data
+    const centerLat = (minLat + maxLat) / 2;
+    const centerLng = (minLng + maxLng) / 2;
+    
+    this.flyTo(fromLonLat([centerLng, centerLat]), 13, () => {});
   }
+  
   setMapZoom(location: Position) {
     let nearby = this.eatsLocationsService.getNearby(location, 5).map(result => {
       return result.eatsLocation;
     });
     this.zoomToData(nearby, location);
   }
+  
   isLocationOutsideGeneseeCounty(location: Position): boolean {
     let top: number = 43.253205;
     let left: number = -84.173757;
@@ -309,6 +400,7 @@ export class NearbyPage {
       location.coords.longitude > right ||
       location.coords.longitude < left;
   }
+  
   getFakeGeneseeCountyCoords(): Position {
     return {
       coords: {
@@ -324,34 +416,73 @@ export class NearbyPage {
     };
   }
 
+  /**
+   * Live-Filtering Search implementation
+   * Searches inventory items (food categories) as per documentation
+   */
   search(searchTerm: any) {
-    if(searchTerm) {
-      this.feedService.setTypes(["deal"]);
-      this.feedService.setSearchTerm(searchTerm).then(() => {
-        this.currentMarkers.forEach(m => {
-          // this.cluster.removeLayer(m);
-        });
-        let ids = new Set<number>();
-        this.feedService.results.forEach(ugc => {
-          if(ugc.deal) {
-            ids.add(ugc.deal.market.id);
-          }
-        });
-        let mkts = Array.from(ids).map(id => {
-          return this.marketService.byIdFromCache(id);
-        })
-        .filter(mkt => {
-          return mkt.lat != 0 && mkt.lng !=0;
-        });
-        this.addMarkers(mkts);
-        this.zoomToData(mkts);
-      });
+    const term = searchTerm?.toString() || '';
+    this.currentSearchTerm = term;
+    
+    if(term) {
+      // Use the new inventory-based search from eatsLocationsService
+      const filteredLocations = this.eatsLocationsService.searchByInventory(term);
+      
+      // Apply additional program filters if active
+      const finalResults = this.applyProgramFilters(filteredLocations);
+      
+      this.addMarkers(finalResults);
+      if (finalResults.length > 0) {
+        this.zoomToData(finalResults);
+      }
     } else {
-      this.feedService.reset();
-      this.feedService.freshQuery();
+      this.currentSearchTerm = '';
       this.showAllEatsLocations();
     }
   }
+  
+  /**
+   * Apply program filters (EBT, DUFB, Open Now)
+   */
+  applyProgramFilters(locations: EatsLocation[]): EatsLocation[] {
+    return locations.filter(loc => {
+      if (this.filterEBT && !loc.ebt_accepted) return false;
+      if (this.filterDUFB && !loc.dufb_offered) return false;
+      // TODO: Implement Open Now filter based on hours parsing
+      // if (this.filterOpenNow && !this.isLocationOpenNow(loc)) return false;
+      return true;
+    });
+  }
+  
+  /**
+   * Toggle EBT/SNAP filter
+   */
+  toggleEBTFilter() {
+    this.filterEBT = !this.filterEBT;
+    this.refreshMarkers();
+  }
+  
+  /**
+   * Toggle DUFB (Double Up Food Bucks) filter
+   */
+  toggleDUFBFilter() {
+    this.filterDUFB = !this.filterDUFB;
+    this.refreshMarkers();
+  }
+  
+  /**
+   * Refresh markers based on current filters
+   */
+  refreshMarkers() {
+    if (this.currentSearchTerm) {
+      this.search(this.currentSearchTerm);
+    } else {
+      const allLocations = this.eatsLocationsService.eatsLocations;
+      const filtered = this.applyProgramFilters(allLocations);
+      this.addMarkers(filtered);
+    }
+  }
+
   ngAfterViewChecked() {
     // Set height of map so it is just below the search bar
     let height = this.searchBar.el.offsetHeight;
@@ -397,5 +528,3 @@ export class NearbyPage {
     );
   }
 }
-
-  
