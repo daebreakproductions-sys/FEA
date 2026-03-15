@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { InitService } from './services/init-service.service';
 import { register } from 'swiper/element/bundle';
+import { VitalityUpdateModalComponent } from './components/vitality-update-modal/vitality-update-modal.component';
 
 register();
 
@@ -15,17 +16,28 @@ register();
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private initService: InitService
+    private initService: InitService,
+    private modalCtrl: ModalController
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
+  async initializeApp() {
     this.initService.initializeServicesOnce();
     
-    this.platform.ready().then(() => {
-      //StatusBar.styleDefault();
+    this.platform.ready().then(async () => {
       SplashScreen.hide();
+      
+      // Show vitality update modal
+      await this.showVitalityUpdateModal();
     });
+  }
+
+  async showVitalityUpdateModal() {
+    const modal = await this.modalCtrl.create({
+      component: VitalityUpdateModalComponent,
+      cssClass: 'vitality-update-modal'
+    });
+    await modal.present();
   }
 }
