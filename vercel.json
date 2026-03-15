@@ -1,8 +1,8 @@
 {
   "version": 2,
   "framework": "angular",
-  "buildCommand": "npm run build",
-  "outputDirectory": "www",
+  "buildCommand": "npx ng build --configuration production",
+  "outputDirectory": "www/browser",
   "routes": [
     {
       "src": "/(.*)",
